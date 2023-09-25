@@ -1,6 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-
+import{}from 'firebase/firestore';
+import{} from ' firebase/app'
+import{} from 'firebase/auth'
+import{} from 'firebase/analytics'
 export default function App() {
   return (
     <View style={styles.container}>
