@@ -1,9 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import{}from 'firebase/firestore';
-import{} from ' firebase/app'
-import{} from 'firebase/auth'
-import{} from 'firebase/analytics'
+import * as firebase from "firebase/app";
+import 'firebase/firestore';
+
+const firebaseConfig = {
+    apiKey: "AIzaSyAqGfFX7gXRGBtidctQjIJ4NC0FA6YxeOQ",
+    authDomain: "removed for post",
+    databaseURL: "removed for post",
+    projectId: "goalsdev-7eb67",
+    storageBucket: "goalsdev-7eb67.appspot.com",
+    messagingSenderId: "362368452051",
+    appId: "removed for post",
+    measurementId: "G-CNRGY3FTLE"
+};
+
+firebase.initializeApp(firebaseConfig);
+
 export default function App() {
   return (
     <View style={styles.container}>
