@@ -10,10 +10,10 @@ export default function App() {
           // Try setting `flexDirection` to `"row"`.
           flexDirection: 'column',
         },
-      ]}> //T D: add cmpnets!
-      <View style={{flex: 1, styles.backgroundBlack}} /> //fix this!!
-      <View style={{flex: 2, backgroundColor: 'darkorange'}} />
-      <View style={{flex: 3, backgroundColor: 'green'}} />
+      ]}> //To Do: add cmpnets!
+      <View style={{flex: 1, backgroundColor: styles.backgroundBlack}} /> //fix this!!
+      <View style={{flex: 2, backgroundColor: styles.mainRed}} />
+      <View style={{flex: 3, backgroundColor: styles.secondaryGray}} />
     </View>
   );
 }
