@@ -30,6 +30,14 @@ function ProfileScreen() {
   );
 }
 
+function HolderScreen() {
+  return (
+    <View style={styles.container}>
+      <Text>Holder Screen</Text>
+    </View>
+  );
+}
+
 export default function App() {
   return (
     <NavigationContainer>
@@ -37,7 +45,7 @@ export default function App() {
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Explore" component={ExploreScreen} />
         <Tab.Screen name="Profile" component={ProfileScreen} />
-        <Tab.Screen name="Holder" component={ProfileScreen} />
+        <Tab.Screen name="Holder" component={HolderScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
