@@ -11,14 +11,18 @@ const Box = () => {
       snapToInterval={150} // Set the interval to the height of a single rectangle
       >
      
-      <RectangleInfo title="Rectangle 1" description="This is the first rectangle." />
-      
-      <RectangleInfo title="Rectangle 2" description="This is the second rectangle." />
-      <RectangleInfo title="Rectangle 3" description="This is the second rectangle." />
-      <RectangleInfo title="Rectangle 4" description="This is the second rectangle." />
-      <RectangleInfo title="Rectangle 5" description="This is the second rectangle." />
-      <RectangleInfo title="Rectangle 6" description="This is the second rectangle." />
-      <RectangleInfo title="Rectangle 7" description="This is the second rectangle." />
+      <RectangleInfo title="Workshop_title" time="Time Unknon" location="Location Unknon" 
+      description="This is not important at all." />
+      <RectangleInfo title="Workshop_title" time="Time Unknon" location="Location Unknon" 
+      description="This is not important at all." />
+      <RectangleInfo title="Workshop_title" time="Time Unknon" location="Location Unknon" 
+      description="This is not important at all." />
+      <RectangleInfo title="Workshop_title" time="Time Unknon" location="Location Unknon" 
+      description="This is not important at all." />
+      <RectangleInfo title="Workshop_title" time="Time Unknon" location="Location Unknon" 
+      description="This is not important at all." />
+      <RectangleInfo title="Workshop_title" time="Time Unknon" location="Location Unknon" 
+      description="This is not important at all." />
       
     </ScrollView>
   </View>

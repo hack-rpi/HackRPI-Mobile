@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-const RectangleInfo = ({ title, description }) => {
+const RectangleInfo = ({ title, time, location, description }) => {
   const [expanded, setExpanded] = useState(false);
 
   const toggleExpansion = () => {
@@ -12,6 +12,8 @@ const RectangleInfo = ({ title, description }) => {
     <TouchableOpacity onPress={toggleExpansion}>
       <View style={[styles.rectangle, expanded ? styles.expanded : null]}>
         <Text style={styles.title}>{title}</Text>
+        <Text style={styles.time}>{time}</Text>
+        <Text style={styles.location}>{location}</Text>
         {expanded && <Text style={styles.description}>{description}</Text>}
       </View>
     </TouchableOpacity>
@@ -37,6 +39,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  time:{
+    fontSize: 14,
+  },
+  location:{
+    fontSize: 14,
   },
   description: {
     marginTop: 10,
