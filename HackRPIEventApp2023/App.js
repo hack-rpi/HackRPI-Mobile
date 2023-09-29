@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View, Text } from 'react-native';
 
-const Timer = ({ percentage, circleWidth, circleHeight, timeUnit, timeRemaining }) => {
-  const circleSize = { width: circleWidth, height: circleHeight };
-
+const Timer = ({ percentage, circleSize, timeUnit, timeRemaining }) => {
   return (
-    <View style={[circleSize, styles.circle]}>
+    <View style={[styles.circle, { width: circleSize, height: circleSize, borderRadius: circleSize / 2 }]}>
       <Text style={styles.timerText}>{timeRemaining}</Text>
     </View>
   );
 };
+
+
 
 
 export default function App() {
@@ -41,34 +41,38 @@ export default function App() {
   return (
     <View style={styles.container}>
       <View style={styles.circleContainer}>
-        <Timer
-          percentage={((totalSeconds - secondsRemaining) / totalSeconds) * 100}
-          circleWidth="200"
-          circleHeight="200"
-          timeUnit="days"
-          timeRemaining={days}
-        />
-        <Timer
-          percentage={((totalSeconds - secondsRemaining) / totalSeconds) * 100}
-          circleWidth="200"
-          circleHeight="200"
-          timeUnit="hours"
-          timeRemaining={hours}
-        />
-        <Timer
-          percentage={((totalSeconds - secondsRemaining) / totalSeconds) * 100}
-          circleWidth="200"
-          circleHeight="200"
-          timeUnit="minutes"
-          timeRemaining={minutes}
-        />
-        <Timer
-          percentage={((totalSeconds - secondsRemaining) / totalSeconds) * 100}
-          circleWidth="200"
-          circleHeight="200"
-          timeUnit="seconds"
-          timeRemaining={remainingSeconds}
-        />
+        <View style={styles.circleWrapper}>
+          <Timer
+            percentage={((totalSeconds - secondsRemaining) / totalSeconds) * 100}
+            circleSize={200}
+            timeUnit="days"
+            timeRemaining={days}
+          />
+        </View>
+        <View style={styles.circleWrapper}>
+          <Timer
+            percentage={((totalSeconds - secondsRemaining) / totalSeconds) * 100}
+            circleSize={200}
+            timeUnit="hours"
+            timeRemaining={hours}
+          />
+        </View>
+        <View style={styles.circleWrapper}>
+          <Timer
+            percentage={((totalSeconds - secondsRemaining) / totalSeconds) * 100}
+            circleSize={200}
+            timeUnit="minutes"
+            timeRemaining={minutes}
+          />
+        </View>
+        <View style={styles.circleWrapper}>
+          <Timer
+            percentage={((totalSeconds - secondsRemaining) / totalSeconds) * 100}
+            circleSize={200}
+            timeUnit="seconds"
+            timeRemaining={remainingSeconds}
+          />
+        </View>
       </View>
       <StatusBar style="auto" />
     </View>
@@ -103,4 +107,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
   },
+  circleWrapper: {
+    marginHorizontal: 20, // Adjust this value to increase or decrease the space between circles
+  },
 });
+
