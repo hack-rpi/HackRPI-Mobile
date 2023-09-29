@@ -95,12 +95,9 @@ const styles = StyleSheet.create({
   circle: {
     width: '100%',
     height: '100%',
-    borderRadius: 100 / 2,
     backgroundColor: 'black',
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 1,
-    borderColor: 'red', // Border color for the circle
   },
   timerText: {
     fontSize: 20,
@@ -111,4 +108,3 @@ const styles = StyleSheet.create({
     marginHorizontal: 20, // Adjust this value to increase or decrease the space between circles
   },
 });
-
