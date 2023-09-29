@@ -1,14 +1,14 @@
 import React from 'react';
-import { View, ScrollView,StyleSheet } from 'react-native';
+import {SafeAreaView, ScrollView,StyleSheet } from 'react-native';
 import RectangleInfo from './RectangleInfo';
 
 const Box = () => {
   return (
-    <View style={styles.container}>
-    <ScrollView contentContainerStyle={styles.container}  
+    <SafeAreaView style={styles.container}>
+    <ScrollView style={styles.ScrollView}  
       //showsVerticalScrollIndicator={true}
-      pagingEnabled={true} // Enable paging
-      snapToInterval={150} // Set the interval to the height of a single rectangle
+      //pagingEnabled={true} // Enable paging
+      //snapToInterval={150} // Set the interval to the height of a single rectangle
       >
      
       <RectangleInfo title="Workshop_title" time="Time Unknon" location="Location Unknon" 
@@ -25,7 +25,7 @@ const Box = () => {
       description="This is not important at all." />
       
     </ScrollView>
-  </View>
+  </SafeAreaView>
   );
 };
 
