@@ -1,5 +1,6 @@
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TextInput } from 'react-native';
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -17,6 +18,7 @@ const firebaseConfig = {
   measurementId: "G-NJ5ZBXKBX3"
 };
 
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export default function App() {
@@ -24,6 +26,14 @@ export default function App() {
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
       <StatusBar style="auto" />
+      <TextInput
+        style={styles.input}
+        placeholder="Email"
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Password"
+      />
     </View>
   );
 }
@@ -34,5 +44,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  input: {
+    width: '80%',
+    height: 40,
+    borderWidth: 1,
+    borderColor: 'gray',
+    marginBottom: 10,
+    paddingHorizontal: 10,
   },
 });
