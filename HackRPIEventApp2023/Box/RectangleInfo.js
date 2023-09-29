@@ -20,15 +20,15 @@ const RectangleInfo = ({ title, description }) => {
 
 const styles = StyleSheet.create({
   rectangle: {
-    width: 200,
-    height: 100,
+    width: 250,
+    height: 150,
     borderWidth: 1,
     borderColor: '#000',
-    borderRadius: 5,
+    borderRadius: 20,
     padding: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 10,
+    marginBottom: 20,
     backgroundColor: '#fff',
   },
   expanded: {
