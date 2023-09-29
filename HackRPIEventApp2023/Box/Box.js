@@ -11,18 +11,18 @@ const Box = () => {
       //snapToInterval={150} // Set the interval to the height of a single rectangle
       >
      
-      <RectangleInfo title="Workshop_title" time="Time Unknon" location="Location Unknon" 
-      description="This is not important at all." />
-      <RectangleInfo title="Workshop_title" time="Time Unknon" location="Location Unknon" 
-      description="This is not important at all." />
-      <RectangleInfo title="Workshop_title" time="Time Unknon" location="Location Unknon" 
-      description="This is not important at all." />
-      <RectangleInfo title="Workshop_title" time="Time Unknon" location="Location Unknon" 
-      description="This is not important at all." />
-      <RectangleInfo title="Workshop_title" time="Time Unknon" location="Location Unknon" 
-      description="This is not important at all." />
-      <RectangleInfo title="Workshop_title" time="Time Unknon" location="Location Unknon" 
-      description="This is not important at all." />
+      <RectangleInfo workshop_title="Workshop_title" time="Time Unknon" 
+      location="Location Unknon" description="This is not important at all." />
+      <RectangleInfo workshop_title="Workshop_title" time="Time Unknon" 
+      location="Location Unknon" description="This is not important at all." />
+      <RectangleInfo workshop_title="Workshop_title" time="Time Unknon" 
+      location="Location Unknon" description="This is not important at all." />
+      <RectangleInfo workshop_title="Workshop_title" time="Time Unknon" 
+      location="Location Unknon" description="This is not important at all." />
+      <RectangleInfo workshop_title="Workshop_title" time="Time Unknon" 
+      location="Location Unknon" description="This is not important at all." />
+      <RectangleInfo workshop_title="Workshop_title" time="Time Unknon" 
+      location="Location Unknon" description="This is not important at all." />
       
     </ScrollView>
   </SafeAreaView>

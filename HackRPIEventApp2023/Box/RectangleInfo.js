@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Icon } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
 
-const RectangleInfo = ({ title, time, location, description }) => {
+const RectangleInfo = ({ workshop_title, time, location, description }) => {
   const [expanded, setExpanded] = useState(false);
 
   const toggleExpansion = () => {
@@ -11,9 +12,10 @@ const RectangleInfo = ({ title, time, location, description }) => {
   return (
     <TouchableOpacity onPress={toggleExpansion}>
       <View style={[styles.rectangle, expanded ? styles.expanded : null]}>
-        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.workshop_title}>{workshop_title}</Text>
         <Text style={styles.time}>{time}</Text>
         <Text style={styles.location}>{location}</Text>
+        <AntDesign name="down" size={24} color="black" />
         {expanded && <Text style={styles.description}>{description}</Text>}
       </View>
     </TouchableOpacity>
@@ -36,7 +38,7 @@ const styles = StyleSheet.create({
   expanded: {
     height: 200, // Adjust the height as needed
   },
-  title: {
+  workshop_title: {
     fontSize: 16,
     fontWeight: 'bold',
   },
