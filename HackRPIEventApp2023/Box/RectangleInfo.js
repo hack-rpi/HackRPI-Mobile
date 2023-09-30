@@ -17,6 +17,7 @@ const RectangleInfo = ({ workshop_title, time, location, description }) => {
         <Text style={styles.location}>{location}</Text>
         <AntDesign name="down" size={24} color="black" />
         {expanded && <Text style={styles.description}>{description}</Text>}
+      
       </View>
     </TouchableOpacity>
   );
@@ -25,7 +26,7 @@ const RectangleInfo = ({ workshop_title, time, location, description }) => {
 const styles = StyleSheet.create({
   rectangle: {
     width: 250,
-    height: 150,
+    height: 100,
     borderWidth: 1,
     borderColor: '#000',
     borderRadius: 20,

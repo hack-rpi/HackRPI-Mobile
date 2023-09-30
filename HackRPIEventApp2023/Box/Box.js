@@ -1,6 +1,7 @@
 import React from 'react';
 import {SafeAreaView, ScrollView,StyleSheet } from 'react-native';
 import RectangleInfo from './RectangleInfo';
+import { Feather } from '@expo/vector-icons'; 
 
 const Box = () => {
   return (
@@ -10,19 +11,25 @@ const Box = () => {
       //pagingEnabled={true} // Enable paging
       //snapToInterval={150} // Set the interval to the height of a single rectangle
       >
-     
+        
       <RectangleInfo workshop_title="Workshop_title" time="Time Unknon" 
       location="Location Unknon" description="This is not important at all." />
+      <Feather name="bell" size={24} color="white" />
       <RectangleInfo workshop_title="Workshop_title" time="Time Unknon" 
       location="Location Unknon" description="This is not important at all." />
+      <Feather name="bell" size={24} color="white" />
       <RectangleInfo workshop_title="Workshop_title" time="Time Unknon" 
       location="Location Unknon" description="This is not important at all." />
+      <Feather name="bell" size={24} color="white" />
       <RectangleInfo workshop_title="Workshop_title" time="Time Unknon" 
       location="Location Unknon" description="This is not important at all." />
+      <Feather name="bell" size={24} color="white" />
       <RectangleInfo workshop_title="Workshop_title" time="Time Unknon" 
       location="Location Unknon" description="This is not important at all." />
+      <Feather name="bell" size={24} color="white" />
       <RectangleInfo workshop_title="Workshop_title" time="Time Unknon" 
       location="Location Unknon" description="This is not important at all." />
+      <Feather name="bell" size={24} color="white" />
       
     </ScrollView>
   </SafeAreaView>
