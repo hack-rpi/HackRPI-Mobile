@@ -11,7 +11,7 @@ const Timer = ({ percentage, circleSize, timeUnit, timeRemaining }) => {
       </View>
       <View style={styles.progressBarContainer}>
         <ProgressBar
-          progress={timeRemaining  / 60} // Set progress based on percentage
+          progress={timeRemaining / 60} // Set progress based on percentage
           width={circleSize}
           height={10}
           color={'#00FF00'}
@@ -24,10 +24,9 @@ const Timer = ({ percentage, circleSize, timeUnit, timeRemaining }) => {
   );
 };
 
-
 export default function App() {
-  // Calculate the target date (November 4)
-  const targetDate = new Date('2023-11-04T00:00:00Z');
+  // Calculate the target date (November 4) in EDT
+  const targetDate = new Date('2023-11-04T12:00:00');
   const currentDate = new Date();
   const totalSeconds = Math.max(Math.floor((targetDate - currentDate) / 1000), 0);
 
@@ -38,7 +37,7 @@ export default function App() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setSecondsRemaining(prevSeconds => {
+      setSecondsRemaining((prevSeconds) => {
         if (prevSeconds > 0) {
           return prevSeconds - 1;
         } else {
@@ -165,4 +164,3 @@ const styles = StyleSheet.create({
     marginTop: 10, // Adjust marginTop as needed to control the space between the circle and progress bar
   },
 });
-
