@@ -21,10 +21,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundBlack: '#191919', //the team can c these and use them
-    mainRed: '#910307' ,
-    secondaryGray: '#9E9E9E' , //reguar back and white are cnstant anyway
-    alignItems: 'center',
+    flexDirection: 'column',
     justifyContent: 'center',
   },
 });
