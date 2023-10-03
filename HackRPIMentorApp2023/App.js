@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput , TouchableOpacity} from 'react-native';
+import { StyleSheet, Button, View, Text, TextInput } from 'react-native';
+
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -22,27 +23,66 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
+
 export default function App() {
-  
-    const handlePress = () => {
-      // Your button press logic goes here
-      console.log('Button Pressed');
-    };
-    return (
+  const [formData, setFormData] = useState({
+    tableNumber: '1',
+    myCheckbox: false,
+    helpType: 'Python',
+  });
+
+  const handleSubmit = () => {
+    // Handle form submission here, e.g., send data to your API
+    console.log(formData);
+  };
+
+  return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <Text>Number input:</Text>
       <TextInput
-        style={styles.input}
-        placeholder="Email"
+        style={styles.textBox}
+        keyboardType="numeric" // Set the keyboardType to 'numeric' for a number input
+        value={formData.tableNumber}
+        onChangeText={(text) => setFormData({ ...formData, tableNumber: text })}
       />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-      />
-      <TouchableOpacity onPress={handlePress} style={styles.button}>
-        <Text style={styles.buttonText}>Login</Text>
-      </TouchableOpacity>
+
+      <View style={styles.checkboxContainer}>
+        <Text>Checkbox:</Text>
+        <View style={styles.checkbox}>
+          <Button
+            title={formData.myCheckbox ? 'Checked' : 'Unchecked'}
+            onPress={() => setFormData({ ...formData, myCheckbox: !formData.myCheckbox })}
+          />
+        </View>
+      </View>
+
+      <Text>Help type:</Text>
+      <View style={styles.radioContainer}>
+        <Text>Python</Text>
+        <Button
+          title={formData.helpType === 'Python' ? 'Selected' : 'Select'}
+          onPress={() => setFormData({ ...formData, helpType: 'Python' })}
+        />
+      </View>
+      <View style={styles.radioContainer}>
+        <Text>C++</Text>
+        <Button
+          title={formData.helpType === 'C++' ? 'Selected' : 'Select'}
+          onPress={() => setFormData({ ...formData, helpType: 'C++' })}
+        />
+      </View>
+      <View style={styles.radioContainer}>
+        <Text>Java</Text>
+        <Button
+          title={formData.helpType === 'Java' ? 'Selected' : 'Select'}
+          onPress={() => setFormData({ ...formData, helpType: 'Java' })}
+        />
+      </View>
+
+      <View style={styles.buttonContainer}>
+        <Button title="Reset form" onPress={() => setFormData({ tableNumber: '', myCheckbox: false, helpType: 'Python' })} />
+        <Button title="Submit form" onPress={handleSubmit} />
+      </View>
     </View>
   );
 }
@@ -50,11 +90,10 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
   },
-  input: {
+  textBox: {
     width: '80%',
     height: 40,
     borderWidth: 1,
@@ -62,13 +101,28 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     paddingHorizontal: 10,
   },
-  button: {
-    backgroundColor: 'blue',
-    padding: 10,
-    borderRadius: 5,
+  checkboxContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
-  buttonText: {
-    color: 'white',
-    fontSize: 16,
+  checkbox: {
+    borderWidth: 1,
+    borderColor: 'gray',
+    width: 20,
+    height: 20,
+    marginLeft: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  radioContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '80%',
+    marginTop: 20,
   },
 });
