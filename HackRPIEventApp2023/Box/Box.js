@@ -1,7 +1,6 @@
 import React from 'react';
 import {SafeAreaView, ScrollView,StyleSheet } from 'react-native';
-import RectangleInfo from './RectangleInfo';
-import { Feather } from '@expo/vector-icons'; 
+import Container from './Container';
 
 const Box = () => {
   return (
@@ -12,24 +11,16 @@ const Box = () => {
       //snapToInterval={150} // Set the interval to the height of a single rectangle
       >
         
-      <RectangleInfo workshop_title="Workshop_title" time="Time Unknon" 
-      location="Location Unknon" description="This is not important at all." />
-      <Feather name="bell" size={24} color="white" />
-      <RectangleInfo workshop_title="Workshop_title" time="Time Unknon" 
-      location="Location Unknon" description="This is not important at all." />
-      <Feather name="bell" size={24} color="white" />
-      <RectangleInfo workshop_title="Workshop_title" time="Time Unknon" 
-      location="Location Unknon" description="This is not important at all." />
-      <Feather name="bell" size={24} color="white" />
-      <RectangleInfo workshop_title="Workshop_title" time="Time Unknon" 
-      location="Location Unknon" description="This is not important at all." />
-      <Feather name="bell" size={24} color="white" />
-      <RectangleInfo workshop_title="Workshop_title" time="Time Unknon" 
-      location="Location Unknon" description="This is not important at all." />
-      <Feather name="bell" size={24} color="white" />
-      <RectangleInfo workshop_title="Workshop_title" time="Time Unknon" 
-      location="Location Unknon" description="This is not important at all." />
-      <Feather name="bell" size={24} color="white" />
+      <Container workshop_Title="Workshop_title" Time="Time Unknon" 
+      Location="Location Unknon" Description="This is not important at all." />
+      <Container workshop_Title="Workshop_title" Time="Time Unknon" 
+      Location="Location Unknon" Description="This is not important at all." />
+      <Container workshop_Title="Workshop_title" Time="Time Unknon" 
+      Location="Location Unknon" Description="This is not important at all." />
+      <Container workshop_Title="Workshop_title" Time="Time Unknon" 
+      Location="Location Unknon" Description="This is not important at all." />
+      <Container workshop_Title="Workshop_title" Time="Time Unknon" 
+      Location="Location Unknon" Description="This is not important at all." />
       
     </ScrollView>
   </SafeAreaView>
@@ -42,7 +33,7 @@ const styles = StyleSheet.create({
     //paddingBottom: 200,
     marginTop: 40,
     marginBottom: 40,
-    
+    backgroundColor: 'black',
     flex: 1,
     justifyContent: 'start',
     alignItems: 'center',

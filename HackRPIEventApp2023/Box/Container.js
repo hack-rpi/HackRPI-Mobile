@@ -1,0 +1,31 @@
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
+import { Feather } from '@expo/vector-icons';
+import RectangleInfo from './RectangleInfo'; // Import the RectangleInfo component
+
+const Container = ({ workshop_Title, Time, Location, Description}) => {
+  return (
+    <View style={styles.container}>
+      <RectangleInfo
+        workshop_title={workshop_Title}
+        time={Time}
+        location={Location}
+        description={Description}
+      />
+      <Feather name="bell" size={24} color="white" />
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row', // Arrange children horizontally
+    alignItems: 'center', // Center children vertically
+    backgroundColor: 'black', // Replace with your desired background color
+    padding: 10,
+    borderRadius: 10,
+    marginBottom: 10,
+  },
+});
+
+export default Container;
