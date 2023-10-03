@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar, Dimensions } from 'react-native';
 import { StyleSheet, View, Text } from 'react-native';
-import ProgressBar from 'react-native-progress/Bar';
+import { Bar as ProgressBar } from 'react-native-progress';
 
 const Timer = ({ percentage, circleSize, timeUnit, timeRemaining }) => {
   return (
