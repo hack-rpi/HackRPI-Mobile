@@ -12,12 +12,15 @@ const RectangleInfo = ({ workshop_title, time, location, description }) => {
   return (
     <TouchableOpacity onPress={toggleExpansion}>
       <View style={[styles.rectangle, expanded ? styles.expanded : null]}>
-        <Text style={styles.workshop_title}>{workshop_title}</Text>
-        <Text style={styles.time}>{time}</Text>
-        <Text style={styles.location}>{location}</Text>
-        <AntDesign name="down" size={24} color="black" />
-        {expanded && <Text style={styles.description}>{description}</Text>}
-      
+        <View>
+          <Text style={styles.workshop_title}>{workshop_title}</Text>
+          <Text style={styles.time}>{time}</Text>
+          <Text style={styles.location}>{location}</Text>
+          {expanded && <Text style={styles.description}>{description}</Text>}
+        </View>
+        <View style={styles.iconContainer}>
+          <AntDesign name={expanded ? "up" : "down"} size={24} color="black" />
+        </View>
       </View>
     </TouchableOpacity>
   );
