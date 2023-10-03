@@ -11,7 +11,11 @@ const Timer = ({ percentage, circleSize, timeUnit, timeRemaining }) => {
 };
 
 export default function App() {
-  const totalSeconds = 6048000; // 1 hour in seconds
+  // Calculate the target date (November 4)
+  const targetDate = new Date('2023-11-04T00:00:00Z');
+  const currentDate = new Date();
+  const totalSeconds = Math.max(Math.floor((targetDate - currentDate) / 1000), 0);
+
   const [secondsRemaining, setSecondsRemaining] = useState(totalSeconds);
 
   // Get screen dimensions
@@ -38,6 +42,12 @@ export default function App() {
   const minutes = Math.floor((secondsRemaining % 3600) / 60);
   const remainingSeconds = secondsRemaining % 60;
 
+  // Format the countdown timer values according to the system timezone
+  const formattedDays = new Intl.NumberFormat([], { minimumIntegerDigits: 1 }).format(days);
+  const formattedHours = new Intl.NumberFormat([], { minimumIntegerDigits: 1 }).format(hours);
+  const formattedMinutes = new Intl.NumberFormat([], { minimumIntegerDigits: 1 }).format(minutes);
+  const formattedSeconds = new Intl.NumberFormat([], { minimumIntegerDigits: 1 }).format(remainingSeconds);
+
   // Calculate the circle size based on screen width
   const circleSize = width * 0.2; // Adjust the multiplier as needed
 
@@ -57,7 +67,7 @@ export default function App() {
             percentage={((totalSeconds - secondsRemaining) / totalSeconds) * 100}
             circleSize={circleSize}
             timeUnit="days"
-            timeRemaining={days}
+            timeRemaining={formattedDays}
           />
         </View>
         <View style={styles.circleWrapper}>
@@ -65,7 +75,7 @@ export default function App() {
             percentage={((totalSeconds - secondsRemaining) / totalSeconds) * 100}
             circleSize={circleSize}
             timeUnit="hours"
-            timeRemaining={hours}
+            timeRemaining={formattedHours}
           />
         </View>
         <View style={styles.circleWrapper}>
@@ -73,7 +83,7 @@ export default function App() {
             percentage={((totalSeconds - secondsRemaining) / totalSeconds) * 100}
             circleSize={circleSize}
             timeUnit="minutes"
-            timeRemaining={minutes}
+            timeRemaining={formattedMinutes}
           />
         </View>
         <View style={styles.circleWrapper}>
@@ -81,7 +91,7 @@ export default function App() {
             percentage={((totalSeconds - secondsRemaining) / totalSeconds) * 100}
             circleSize={circleSize}
             timeUnit="seconds"
-            timeRemaining={remainingSeconds}
+            timeRemaining={formattedSeconds}
           />
         </View>
       </View>
