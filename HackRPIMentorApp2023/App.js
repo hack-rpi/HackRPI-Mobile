@@ -1,8 +1,10 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
+import { initializeApp } from "firebase/app";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { FieldValue, getFirestore, addDoc, Collection } from "firebase/firestore";
 import { StyleSheet, Text, View, TextInput , TouchableOpacity} from 'react-native';
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -21,28 +23,59 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
-export default function App() {
-  
-    const handlePress = () => {
-      // Your button press logic goes here
-      console.log('Button Pressed');
-    };
-    return (
+function App() {
+  let name = '';
+  let email = '';
+  let password = '';
+
+  const registerWithEmailAndPassword = async () => {
+    try {
+      const res = await createUserWithEmailAndPassword(auth, email, password);
+      const user = res.user;
+      await addDoc(collection(db, "users"), {
+        uid: user.uid,
+        name,
+        authProvider: "local",
+        email,
+      });
+      // Clear the input fields after successful registration
+      name = '';
+      email = '';
+      password = '';
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
+    }
+  };
+
+  return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <TextInput
+        style={styles.input}
+        placeholder="Name"
+        onChangeText={(text) => name = text}
+      />
       <TextInput
         style={styles.input}
         placeholder="Email"
+        onChangeText={(text) => email = text}
       />
       <TextInput
         style={styles.input}
         placeholder="Password"
+        secureTextEntry
+        onChangeText={(text) => password = text}
       />
-      <TouchableOpacity onPress={handlePress} style={styles.button}>
-        <Text style={styles.buttonText}>Login</Text>
+      <TouchableOpacity
+        style={styles.loginButton}
+        onPress={registerWithEmailAndPassword}
+      >
+        <Text style={styles.buttonText}>Register</Text>
       </TouchableOpacity>
+      <StatusBar style="auto" />
     </View>
   );
 }
@@ -62,13 +95,16 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     paddingHorizontal: 10,
   },
-  button: {
-    backgroundColor: 'blue',
+  loginButton: {
+    backgroundColor: 'blue', // Change the color as desired
     padding: 10,
     borderRadius: 5,
   },
   buttonText: {
     color: 'white',
     fontSize: 16,
+    fontWeight: 'bold',
   },
 });
+
+export default App;
