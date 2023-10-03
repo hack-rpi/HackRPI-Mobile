@@ -1,14 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar, Dimensions } from 'react-native';
 import { StyleSheet, View, Text } from 'react-native';
+import ProgressBar from 'react-native-progress/Bar';
 
 const Timer = ({ percentage, circleSize, timeUnit, timeRemaining }) => {
   return (
-    <View style={[styles.circle, { width: circleSize, height: circleSize, borderRadius: circleSize / 2 }]}>
-      <Text style={styles.timerText}>{timeRemaining}</Text>
+    <View style={styles.timerContainer}>
+      <View style={[styles.circle, { width: circleSize, height: circleSize, borderRadius: circleSize / 2 }]}>
+        <Text style={styles.timerText}>{timeRemaining}</Text>
+      </View>
+      <View style={styles.progressBarContainer}>
+        <ProgressBar
+          progress={timeRemaining  / 60} // Set progress based on percentage
+          width={circleSize}
+          height={10}
+          color={'#00FF00'}
+          borderColor={'#FFFFFF'}
+          unfilledColor={'#808080'}
+          borderRadius={0}
+        />
+      </View>
     </View>
   );
 };
+
 
 export default function App() {
   // Calculate the target date (November 4)
@@ -118,12 +133,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
   },
   circle: {
+    width: '100%',
+    height: '100%',
     borderRadius: 100 / 2,
     backgroundColor: 'black',
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 1,
-    borderColor: 'red', // Border color for the circle
   },
   timerText: {
     fontSize: 20,
@@ -143,4 +158,11 @@ const styles = StyleSheet.create({
     fontSize: 18, // Adjust the font size as needed
     color: 'white',
   },
+  timerContainer: {
+    alignItems: 'center',
+  },
+  progressBarContainer: {
+    marginTop: 10, // Adjust marginTop as needed to control the space between the circle and progress bar
+  },
 });
+
