@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import RectangleInfo from './RectangleInfo'; // Import the RectangleInfo component
 
 const Container = ({ workshop_Title, Time, Location, Description}) => {
+  const [isActive, setIsActive] = useState(false); // Define isActive state
+
+  const handleClick = () => {
+    setIsActive(!isActive);
+  };
+
   return (
     <View style={styles.container}>
       <RectangleInfo
@@ -12,10 +18,17 @@ const Container = ({ workshop_Title, Time, Location, Description}) => {
         location={Location}
         description={Description}
       />
-      <Feather name="bell" size={24} color="white" />
+      <Feather
+          name={isActive ? "bell-off" : "bell"}
+          size={24}
+          color="white"
+          onPress={handleClick} // Add onPress to handle click
+        />
     </View>
   );
 };
+
+
 
 const styles = StyleSheet.create({
   container: {
