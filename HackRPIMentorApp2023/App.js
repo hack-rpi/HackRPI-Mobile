@@ -2,7 +2,7 @@ import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { FieldValue, getFirestore, addDoc, Collection } from "firebase/firestore";
+import { FieldValue, getFirestore, addDoc, collection } from "firebase/firestore";
 import { StyleSheet, Text, View, TextInput , TouchableOpacity} from 'react-native';
 // Import the functions you need from the SDKs you need
 // TODO: Add SDKs for Firebase products that you want to use
@@ -27,7 +27,6 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 function App() {
-  let name = '';
   let email = '';
   let password = '';
 
@@ -37,12 +36,10 @@ function App() {
       const user = res.user;
       await addDoc(collection(db, "users"), {
         uid: user.uid,
-        name,
         authProvider: "local",
         email,
       });
       // Clear the input fields after successful registration
-      name = '';
       email = '';
       password = '';
     } catch (err) {
@@ -53,11 +50,6 @@ function App() {
 
   return (
     <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        placeholder="Name"
-        onChangeText={(text) => name = text}
-      />
       <TextInput
         style={styles.input}
         placeholder="Email"
