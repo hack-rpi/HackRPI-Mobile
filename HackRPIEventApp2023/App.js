@@ -70,7 +70,7 @@ export default function App() {
       <View style={styles.circleContainer}>
         <View style={styles.circleWrapper}>
           <Timer
-            percentage={days}
+            percentage={days / 60 * 100}
             circleSize={circleSize}
             timeUnit="days"
             timeRemaining={formattedDays}
@@ -79,7 +79,7 @@ export default function App() {
         </View>
         <View style={styles.circleWrapper}>
           <Timer
-            percentage={hours}
+            percentage={hours / 60 * 100}
             circleSize={circleSize}
             timeUnit="hours"
             timeRemaining={formattedHours}
@@ -87,7 +87,7 @@ export default function App() {
         </View>
         <View style={styles.circleWrapper}>
           <Timer
-            percentage={minutes}
+            percentage={minutes / 60 * 100}
             circleSize={circleSize}
             timeUnit="minutes"
             timeRemaining={formattedMinutes}
@@ -95,7 +95,7 @@ export default function App() {
         </View>
         <View style={styles.circleWrapper}>
           <Timer
-            percentage={remainingSeconds}
+            percentage={remainingSeconds / 60 * 100}
             circleSize={circleSize}
             timeUnit="seconds"
             timeRemaining={formattedSeconds}
