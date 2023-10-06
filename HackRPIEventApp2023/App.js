@@ -50,8 +50,11 @@ export default function App() {
         // }}
         screenOptions={{
           tabBarStyle: {
-            backgroundColor: '#191919', // Set the background color of the navigation container to black
+            backgroundColor: 'Transparent', // Set the background color of the navigation container to black
+            //tabBarActiveTintColor: 'red', // Set the active tab icon color to red
+          
           },
+          tabBarInactiveTintColor: '#910307',
         }}
       >
         <Tab.Screen name="Home" component={HomeScreen} />
@@ -77,5 +80,5 @@ const styles = StyleSheet.create({
 //colors of the app
 //the gray line
 
-
+//910307
 
