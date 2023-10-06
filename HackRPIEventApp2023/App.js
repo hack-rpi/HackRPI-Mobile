@@ -1,14 +1,12 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import Calander from './Calander/Calander';
-import Box from './Box/Box';
-import Container  from './Box/Container';
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View } from "react-native";
+import Calander from "./Box/Calander";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Box/>
-      
+      <Calander />
+
       <StatusBar style="auto" />
     </View>
   );
@@ -17,8 +15,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#202020',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#202020",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
