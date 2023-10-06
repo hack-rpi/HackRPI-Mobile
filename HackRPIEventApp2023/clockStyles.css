@@ -1,0 +1,65 @@
+/* styles.css */
+
+.container {
+    flex: 1;
+    background-color: #191919;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 80px;
+  }
+  
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .circleContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  }
+  
+  .circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .timerText {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+  }
+  
+  .circleWrapper {
+    margin-right: 20px; /* Adjust this value to increase or decrease the space between circles */
+    margin-top: 10px; /* Adjust the marginTop to control the space between circles and header */
+  }
+  
+  .title {
+    font-size: 36px; /* Adjust the font size as needed */
+    font-weight: bold;
+    color: white;
+  }
+  
+  .subtitle {
+    font-size: 18px; /* Adjust the font size as needed */
+    color: white;
+  }
+  
+  .timerContainer {
+    display: flex;
+    align-items: center;
+  }
+  
+  .progressBarContainer {
+    margin-top: 10px; /* Adjust marginTop as needed to control the space between the circle and progress bar */
+  }
