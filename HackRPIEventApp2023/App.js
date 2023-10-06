@@ -41,21 +41,41 @@ function HolderScreen() {
 export default function App() {
   return (
     <NavigationContainer>
-      <Tab.Navigator>
+      <Tab.Navigator
+        // tabBarOption={{
+        //   style: {
+        //     //borderTopWidth: 0, // Remove the top border (gray line) of the tab bar
+        //     backgroundColor: '#191919', // Set the background color of the tab bar to black
+        //   },
+        // }}
+        screenOptions={{
+          tabBarStyle: {
+            backgroundColor: '#191919', // Set the background color of the navigation container to black
+          },
+        }}
+      >
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Explore" component={ExploreScreen} />
         <Tab.Screen name="Profile" component={ProfileScreen} />
         <Tab.Screen name="Holder" component={HolderScreen} />
       </Tab.Navigator>
     </NavigationContainer>
+
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#191919',
     alignItems: 'center',
     justifyContent: 'center',
   },
 });
+
+//colors of the app
+//the gray line
+
+
+
