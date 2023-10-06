@@ -8,7 +8,7 @@ const Calander = () => {
     <SafeAreaView style={styles.CalanderStyle}>
       <ScrollView
         style={styles.ScrollView}
-        //showsVerticalScrollIndicator={true}
+        showsVerticalScrollIndicator={true}
         //pagingEnabled={true} // Enable paging
         //snapToInterval={150} // Set the interval to the height of a single rectangle
       >

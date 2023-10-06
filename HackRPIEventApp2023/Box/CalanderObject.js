@@ -17,10 +17,10 @@ const CalanderObject = ({
     setIsActive(!isActive);
   };
 
-  const checkCondition = () => {
-    // Implement later, if the event is currently happening, return true.
-    return true;
-  };
+  // const checkCondition = () => {
+  //   // Implement later, if the event is currently happening, return true.
+  //   return true;
+  // };
 
   return (
     <View style={styles.container}>
@@ -32,12 +32,19 @@ const CalanderObject = ({
         isRed={isRed} //this line is use for hardcode
         //isRed={checkCondition()} -> This line will be use instead if we implement checkCondition() function
       />
-      <Feather
-        name={isActive ? "bell-off" : "bell"}
-        size={24}
-        color="white"
-        onPress={handleClick} // Add onPress to handle click
-      />
+      <View
+        style={styles.notifBox}
+        backgroundColor={isRed ? "black" : isActive ? "black" : "white"}
+        borderColor={isRed ? "red" : "white"}>
+        <Feather
+          name={isActive ? "bell-off" : "bell"}
+          size={30}
+          color={isRed ? "red" : isActive ? "white" : "black"}
+          onPress={handleClick}
+          zIndex={2}
+          // Add onPress to handle click
+        />
+      </View>
     </View>
   );
 };
@@ -50,6 +57,18 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     marginBottom: 10,
+  },
+  notifBox: {
+    width: 60,
+    height: 100,
+    borderWidth: 3,
+    borderRadius: 20,
+    padding: 10,
+    marginLeft: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 20,
+    zIndex: 1,
   },
 });
 
