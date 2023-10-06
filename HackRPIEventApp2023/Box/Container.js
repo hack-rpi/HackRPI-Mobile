@@ -3,11 +3,18 @@ import { View, StyleSheet } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import RectangleInfo from './RectangleInfo'; // Import the RectangleInfo component
 
-const Container = ({ workshop_Title, Time, Location, Description}) => {
+
+const Container = ({ workshop_Title, Time, Location, Description,isRed}) => {
   const [isActive, setIsActive] = useState(false); // Define isActive state
 
   const handleClick = () => {
     setIsActive(!isActive);
+    
+  };
+
+  const checkCondition = () => {
+    // Implement later, if the event is currently happening, return true.
+    return true;
   };
 
   return (
@@ -17,6 +24,9 @@ const Container = ({ workshop_Title, Time, Location, Description}) => {
         time={Time}
         location={Location}
         description={Description}
+        isRed = {isRed} //this line is use for hardcode
+        //isRed={checkCondition()} -> This line will be use instead if we implement checkCondition() function
+         
       />
       <Feather
           name={isActive ? "bell-off" : "bell"}

@@ -3,6 +3,7 @@ import {SafeAreaView, ScrollView,StyleSheet } from 'react-native';
 import Container from './Container';
 
 const Box = () => {
+  
   return (
     <SafeAreaView style={styles.container}>
     <ScrollView style={styles.ScrollView}  
@@ -11,16 +12,24 @@ const Box = () => {
       //snapToInterval={150} // Set the interval to the height of a single rectangle
       >
         
-      <Container workshop_Title="Workshop_title" Time="Time Unknon" 
-      Location="Location Unknon" Description="This is not important at all." />
-      <Container workshop_Title="Workshop_title" Time="Time Unknon" 
-      Location="Location Unknon" Description="This is not important at all." />
-      <Container workshop_Title="Workshop_title" Time="Time Unknon" 
-      Location="Location Unknon" Description="This is not important at all." />
-      <Container workshop_Title="Workshop_title" Time="Time Unknon" 
-      Location="Location Unknon" Description="This is not important at all." />
-      <Container workshop_Title="Workshop_title" Time="Time Unknon" 
-      Location="Location Unknon" Description="This is not important at all." />
+      <Container workshop_Title="Workshop_title" Time="Time Unknown" 
+      Location="Location Unknown" Description="This is not important at all." isRed = {true}/>
+      <Container workshop_Title="Workshop_title" Time="Time Unknown" 
+      Location="Location Unknown" Description="This is not important at all." isRed = {false}/>
+      <Container workshop_Title="Workshop_title" Time="Time Unknown" 
+      Location="Location Unknown" Description="This is not important at all." isRed = {false}/>
+      <Container workshop_Title="Workshop_title" Time="Time Unknown" 
+      Location="Location Unknown" Description="This is not important at all." isRed = {false}/>
+      <Container workshop_Title="Workshop_title" Time="Time Unknown" 
+      Location="Location Unknown" Description="This is not important at all." isRed = {false}/>
+      <Container workshop_Title="Workshop_title" Time="Time Unknown" 
+      Location="Location Unknown" Description="This is not important at all." isRed = {false}/>
+      <Container workshop_Title="Workshop_title" Time="Time Unknown" 
+      Location="Location Unknown" Description="This is not important at all." isRed = {false}/>
+      <Container workshop_Title="Workshop_title" Time="Time Unknown" 
+      Location="Location Unknown" Description="This is not important at all." isRed = {false}/>
+      <Container workshop_Title="Workshop_title" Time="Time Unknown" 
+      Location="Location Unknown" Description="This is not important at all." isRed = {false}/> 
       
     </ScrollView>
   </SafeAreaView>
