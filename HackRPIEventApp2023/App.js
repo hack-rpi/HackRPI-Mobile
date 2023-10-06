@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar, Dimensions } from 'react-native';
 import { StyleSheet, View, Text } from 'react-native';
+import { Bar as ProgressBar } from 'react-native-progress';
 import './App.css';
 import CircleProgress from './CircleProgress';
 
@@ -15,9 +16,12 @@ const Timer = ({ percentage, circleSize, timeUnit, timeRemaining }) => {
   );
 };
 
-
 export default function App() {
-  const totalSeconds = 6048000; // 1 hour in seconds
+  // Calculate the target date (November 4) in EDT
+  const targetDate = new Date('2023-11-04T12:00:00');
+  const currentDate = new Date();
+  const totalSeconds = Math.max(Math.floor((targetDate - currentDate) / 1000), 0);
+
   const [secondsRemaining, setSecondsRemaining] = useState(totalSeconds);
 
   // Get screen dimensions
@@ -25,7 +29,7 @@ export default function App() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setSecondsRemaining(prevSeconds => {
+      setSecondsRemaining((prevSeconds) => {
         if (prevSeconds > 0) {
           return prevSeconds - 1;
         } else {
@@ -43,6 +47,12 @@ export default function App() {
   const hours = Math.floor((secondsRemaining % (3600 * 24)) / 3600);
   const minutes = Math.floor((secondsRemaining % 3600) / 60);
   const remainingSeconds = secondsRemaining % 60;
+
+  // Format the countdown timer values according to the system timezone
+  const formattedDays = new Intl.NumberFormat([], { minimumIntegerDigits: 1 }).format(days);
+  const formattedHours = new Intl.NumberFormat([], { minimumIntegerDigits: 1 }).format(hours);
+  const formattedMinutes = new Intl.NumberFormat([], { minimumIntegerDigits: 1 }).format(minutes);
+  const formattedSeconds = new Intl.NumberFormat([], { minimumIntegerDigits: 1 }).format(remainingSeconds);
 
   // Calculate the circle size based on screen width
   const circleSize = width * 0.2; // Adjust the multiplier as needed
@@ -63,7 +73,7 @@ export default function App() {
             percentage={days}
             circleSize={circleSize}
             timeUnit="days"
-            timeRemaining={days}
+            timeRemaining={formattedDays}
           />
           
         </View>
@@ -72,7 +82,7 @@ export default function App() {
             percentage={hours}
             circleSize={circleSize}
             timeUnit="hours"
-            timeRemaining={hours}
+            timeRemaining={formattedHours}
           />
         </View>
         <View style={styles.circleWrapper}>
@@ -80,7 +90,7 @@ export default function App() {
             percentage={minutes}
             circleSize={circleSize}
             timeUnit="minutes"
-            timeRemaining={minutes}
+            timeRemaining={formattedMinutes}
           />
         </View>
         <View style={styles.circleWrapper}>
@@ -88,7 +98,7 @@ export default function App() {
             percentage={remainingSeconds}
             circleSize={circleSize}
             timeUnit="seconds"
-            timeRemaining={remainingSeconds}
+            timeRemaining={formattedSeconds}
           />
         </View>
       </View>

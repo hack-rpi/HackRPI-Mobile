@@ -14,7 +14,7 @@ const CircleProgress = ({percentage, circleWidth}) => {
                 <circle
                     cx={circleWidth / 2}
                     cy={circleWidth / 2}
-                    strokeWidth="20px"
+                    strokeWidth="21px"
                     r={radius}
                     className="circle-background"
                 />
