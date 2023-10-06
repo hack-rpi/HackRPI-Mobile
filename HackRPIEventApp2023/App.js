@@ -54,7 +54,7 @@ export default function App() {
             //tabBarActiveTintColor: 'red', // Set the active tab icon color to red
           
           },
-          tabBarInactiveTintColor: '#910307',
+          tabBarActiveTintColor: '#910307',
         }}
       >
         <Tab.Screen name="Home" component={HomeScreen} />
