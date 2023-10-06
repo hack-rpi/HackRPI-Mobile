@@ -1,0 +1,15 @@
+:root {
+    --color1: #610505;
+    --color2: #c471ed;
+    --color3: #f64f59;
+}
+
+.circle-background {
+    fill: none;
+    stroke: rgb(235, 227, 227);
+}
+
+.circle-progress {
+    fill: none;
+    stroke: var(--color1)
+}
