@@ -34,11 +34,11 @@ function App() {
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
       const user = res.user;
-      await addDoc(collection(db, "users"), {
-        uid: user.uid,
-        authProvider: "local",
-        email,
-      });
+      // await addDoc(collection(db, "users"), {
+      //   // uid: user.uid,
+      //   // // authProvider: "local",
+      //   // email,
+      // });
       // Clear the input fields after successful registration
       email = '';
       password = '';
