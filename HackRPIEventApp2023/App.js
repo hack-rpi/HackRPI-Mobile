@@ -53,17 +53,8 @@ export default function App() {
   
   return (
     <View style={[styles.container]}>
-       <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <View style={[styles.container]}>
-          <View style={[styles.floatingBox]} ><Text>Input text here about Event 1</Text></View>
-          <View style={[styles.notifBox]} ><Text>Bell for Event 1</Text></View>
-        </View>
-        
-        <View style={[styles.floatingBox]} ><Text>Input text here about Event 2</Text></View>
-        <View style={[styles.floatingBox]} ><Text>Input text here about Event 3</Text></View>
-        <View style={[styles.floatingBox]} ><Text>Input text here about Event 4</Text></View>
-        <View style={[styles.floatingBox]} ><Text>Input text here about Event 5</Text></View>
-      </ScrollView>
+    //CONTENT GOES HERE
+    //calendar ppl, do ur thing
     </View>
   );
 }
