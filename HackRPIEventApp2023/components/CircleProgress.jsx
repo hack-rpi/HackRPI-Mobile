@@ -1,17 +1,20 @@
 import React from 'react';
+import { View } from 'react-native';
+import { Svg, Circle } from 'react-native-svg';
+
 
 const CircleProgress = ({percentage, circleWidth}) => {
     const radius = circleWidth / 2 - 10;
     const dashArray = radius * Math.PI * 2;
     const dashOffset = dashArray - (dashArray * percentage) / 100;
     return (
-        <div>
-            <svg
+        <View>
+            <Svg
                 width={circleWidth}
                 height={circleWidth}
                 viewBox={`0 0 ${circleWidth} ${circleWidth}`}
             >
-                <circle
+                <Circle
                     cx={circleWidth / 2}
                     cy={circleWidth / 2}
                     strokeWidth="19px"
@@ -19,7 +22,7 @@ const CircleProgress = ({percentage, circleWidth}) => {
                     className="circle-background"
                 />
 
-                <circle
+                <Circle
                     cx={circleWidth / 2}
                     cy={circleWidth / 2}
                     strokeWidth="20px"
@@ -31,8 +34,8 @@ const CircleProgress = ({percentage, circleWidth}) => {
                     }}
                     transform={`rotate(-90 ${circleWidth / 2} ${circleWidth / 2})`}
                 />                
-            </svg>
-        </div>
+            </Svg>
+        </View>
     );
 };
 
