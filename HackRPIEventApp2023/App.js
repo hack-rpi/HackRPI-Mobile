@@ -42,17 +42,10 @@ export default function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator
-        // tabBarOption={{
-        //   style: {
-        //     //borderTopWidth: 0, // Remove the top border (gray line) of the tab bar
-        //     backgroundColor: '#191919', // Set the background color of the tab bar to black
-        //   },
-        // }}
         screenOptions={{
           tabBarStyle: {
-            backgroundColor: 'Transparent', // Set the background color of the navigation container to black
-            //tabBarActiveTintColor: 'red', // Set the active tab icon color to red
-          
+            backgroundColor: 'rgba(0, 0, 0, 0.5)', // Set a semi-transparent black background color
+            borderTopWidth: 0, // Hide top border of the tab bar
           },
           tabBarActiveTintColor: '#910307',
         }}
@@ -77,8 +70,4 @@ const styles = StyleSheet.create({
   },
 });
 
-//colors of the app
-//the gray line
-
-//910307
 
