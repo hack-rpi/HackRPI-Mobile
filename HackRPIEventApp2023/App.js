@@ -5,6 +5,8 @@ import Calander from "./Box/Calander";
 export default function App() {
   return (
     <View style={styles.container}>
+      <Calander />
+
       <StatusBar style="auto" />
     </View>
   );
