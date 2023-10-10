@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent", // Replace with your desired background color
     padding: 10,
     borderRadius: 10,
-    marginBottom: 10,
+    marginBottom: 0,
   },
   notifBox: {
     width: 60,
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 20,
+    marginBottom: 0,
     zIndex: 1,
   },
 });

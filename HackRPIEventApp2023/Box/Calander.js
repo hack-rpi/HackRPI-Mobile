@@ -82,10 +82,8 @@ const Calander = () => {
 
 const styles = StyleSheet.create({
   CalanderStyle: {
-    //paddingTop: 0,
-    //paddingBottom: 200,
-    marginTop: 40,
-    marginBottom: 40,
+    marginTop: 20,
+    marginBottom: 20,
     backgroundColor: "transparent",
     flex: 1,
     justifyContent: "start",
