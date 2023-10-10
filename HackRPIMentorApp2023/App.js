@@ -2,7 +2,7 @@ import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { FieldValue, getFirestore, addDoc, collection } from "firebase/firestore";
+import { FieldValue, getFirestore, addDoc, collection, getDocs } from "firebase/firestore";
 import { StyleSheet, Text, View, TextInput , TouchableOpacity} from 'react-native';
 // Import the functions you need from the SDKs you need
 // TODO: Add SDKs for Firebase products that you want to use
@@ -30,6 +30,23 @@ function App() {
   let email = '';
   let password = '';
 
+  const printRequestsData = async () => {
+    try {
+      const requestsCollection = collection(db, "requests");
+      const querySnapshot = await getDocs(requestsCollection);
+  
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        const tableNum = data.tablenum;
+        const type = data.type;
+  
+        console.log(`Table Number: ${tableNum}, Type: ${type}`);
+      });
+    } catch (error) {
+      console.error("Error retrieving data:", error);
+    }
+  };
+
   const registerWithEmailAndPassword = async () => {
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
@@ -47,7 +64,7 @@ function App() {
       alert(err.message);
     }
   };
-
+  printRequestsData();
   return (
     <View style={styles.container}>
       <TextInput
