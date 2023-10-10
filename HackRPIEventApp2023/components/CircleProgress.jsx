@@ -23,18 +23,18 @@ const CircleProgress = ({ percentage, circleWidth }) => {
         <Circle
           cx={circleWidth / 2}
           cy={circleWidth / 2}
-          strokeWidth="19px"
+          strokeWidth="10px"
           r={radius}
-          style={styles.circleBackground}
+          style={style.circleBackground}
         />
 
         <Circle
           cx={circleWidth / 2}
           cy={circleWidth / 2}
-          strokeWidth="20px"
+          strokeWidth="11px"
           r={radius}
           style={[
-            styles.circleProgress,
+            style.circleProgress,
             {
               strokeDasharray: dashArray,
               strokeDashoffset: dashOffset,
