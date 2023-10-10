@@ -39,7 +39,7 @@ function App() {
         const data = doc.data();
         const tableNum = data.tablenum;
         const type = data.type;
-  
+         
         console.log(`Table Number: ${tableNum}, Type: ${type}`);
       });
     } catch (error) {
