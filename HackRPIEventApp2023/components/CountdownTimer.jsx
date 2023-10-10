@@ -10,6 +10,7 @@ const Timer = ({ percentage, circleSize, timeUnit, timeRemaining }) => {
       <CircleProgress percentage={percentage} circleWidth={circleSize} />
       <View style={styles.timerContainer}>
         <Text style={styles.timerText}>{timeRemaining}</Text>
+        <Text style={styles.timerText}>{timeUnit}</Text>
       </View>
     </View>
   );
@@ -71,24 +72,25 @@ export default function CountdownTimer() {
           <Timer
             percentage={days / 60 * 100}
             circleSize={circleSize}
-            timeUnit="days"
+            timeUnit="D"
             timeRemaining={formattedDays}
+            
           />
-          
         </View>
         <View style={styles.circleWrapper}>
           <Timer
             percentage={hours / 60 * 100}
             circleSize={circleSize}
-            timeUnit="hours"
+            timeUnit="H"
             timeRemaining={formattedHours}
           />
+          
         </View>
         <View style={styles.circleWrapper}>
           <Timer
             percentage={minutes / 60 * 100}
             circleSize={circleSize}
-            timeUnit="minutes"
+            timeUnit="M"
             timeRemaining={formattedMinutes}
           />
         </View>
@@ -96,7 +98,7 @@ export default function CountdownTimer() {
           <Timer
             percentage={remainingSeconds / 60 * 100}
             circleSize={circleSize}
-            timeUnit="seconds"
+            timeUnit="S"
             timeRemaining={formattedSeconds}
           />
         </View>
