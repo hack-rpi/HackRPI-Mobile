@@ -4,18 +4,7 @@ import { StyleSheet, View, Text } from 'react-native';
 import { Bar as ProgressBar } from 'react-native-progress';
 import CircleProgress from './components/CircleProgress';
 
-const Timer = ({ percentage, circleSize, timeUnit, timeRemaining }) => {
-  return (
-    <View style={[styles.circle, { width: circleSize, height: circleSize, borderRadius: circleSize / 2 }]}>
-      <CircleProgress percentage={percentage} circleWidth={circleSize} />
-      <View style={styles.timerContainer}>
-        <Text style={styles.timerText}>{timeRemaining}</Text>
-      </View>
-    </View>
-  );
-};
-
-export default function () {
+export default function Timer() {
   // Calculate the target date (November 4) in EDT
   const targetDate = new Date('2023-11-04T12:00:00');
   const currentDate = new Date();
