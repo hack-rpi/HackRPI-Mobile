@@ -1,5 +1,6 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
+import { colors } from './colors';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 
 export default function App() {
@@ -9,14 +10,25 @@ export default function App() {
       flex: 1,
       flexDirection: 'column',
       justifyContent: 'center',
-      backgroundColor: '#191919', //the name of this must be background color!!
-      mainRed: '#910307' ,
-      secondaryGray: '#9E9E9E' , //reguar back and white are cnstant anyway
+      backgroundColor: colors.backgroundBlack,
       alignItems: 'center',
-      marginBottom: 49,
     },
     
     floatingBox: {
+      //flex: 1,
+      //flexDirection: 'column'
+      //^^ no bc then the floatingBox requires text inside of it and changes to fit the text width
+
+      width: '80%',
+      height: '15%',
+      justifyContent: 'center',
+      backgroundColor: colors.mainGray, //the name of this must be background color!!
+      alignItems: 'center',
+      margin: 15,
+      borderRadius: 10
+    },
+
+    notifBox: {
       //flex: 1,
       //flexDirection: 'column'
       //^^ no bc then the floatingBox requires text inside of it and changes to fit the text width
@@ -42,7 +54,11 @@ export default function App() {
   return (
     <View style={[styles.container]}>
        <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <View style={[styles.floatingBox]} ><Text>Input text here about Event 1</Text></View>
+        <View style={[styles.container]}>
+          <View style={[styles.floatingBox]} ><Text>Input text here about Event 1</Text></View>
+          <View style={[styles.notifBox]} ><Text>Bell for Event 1</Text></View>
+        </View>
+        
         <View style={[styles.floatingBox]} ><Text>Input text here about Event 2</Text></View>
         <View style={[styles.floatingBox]} ><Text>Input text here about Event 3</Text></View>
         <View style={[styles.floatingBox]} ><Text>Input text here about Event 4</Text></View>
