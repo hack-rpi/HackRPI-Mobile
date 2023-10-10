@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Svg, Circle } from 'react-native-svg';
 
-const clockStyles = StyleSheet.create({
+const style = StyleSheet.create({
   circleBackground: {
     fill: 'none',
     stroke: 'rgb(235, 227, 227)',
