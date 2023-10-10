@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     top: 10,
   },
   expanded: {
-    height: 200, // Adjust the height as needed
+    height: 120, // Adjust the height as needed
   },
   redBackground: {
     backgroundColor: "red",
