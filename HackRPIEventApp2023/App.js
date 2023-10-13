@@ -1,8 +1,16 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { colors } from './colors';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+export default function App() {
+
+  return (
+    <View style={[styles.container]}>
+    //CONTENT GOES HERE
+    //calendar ppl, do ur thing
 
 const Tab = createBottomTabNavigator();
 
@@ -69,5 +77,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-
 
