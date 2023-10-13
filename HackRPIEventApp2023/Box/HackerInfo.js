@@ -8,6 +8,7 @@ const HackerInfo = ({
   Hacker_Name,
   Table,
   Description,
+  isRed
 }) => {
   const [isActive, setIsActive] = useState(false); // Define isActive state
 
@@ -26,6 +27,7 @@ const HackerInfo = ({
         hacker_name={Hacker_Name}
         table={Table}
         description={Description}
+        isRed={isRed}
       />
       <View
         style={styles.notifBox}

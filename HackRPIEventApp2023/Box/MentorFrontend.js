@@ -16,36 +16,43 @@ const MentorFrontend = () => {
           Hacker_Name = "Thomas 1"
           Table = "Table #1"
           Description = "Java is a silly language and I need help asap"
+          isRed = {false}
         />
         <HackerInfo
           Hacker_Name = "Thomas 2"
           Table = "Table #2"
           Description = "Java is a silly language and I need help asap"
+          isRed = {false}
         />
         <HackerInfo
           Hacker_Name = "Thomas 3"
           Table = "Table #3"
           Description = "Java is a silly language and I need help asap"
+          isRed = {false}
         />
         <HackerInfo
           Hacker_Name = "Thomas 4"
           Table = "Table #4"
           Description = "Java is a silly language and I need help asap"
+          isRed = {false}
         />
         <HackerInfo
           Hacker_Name = "Thomas 5"
           Table = "Table #5"
           Description = "Java is a silly language and I need help asap"
+          isRed = {false}
         />
         <HackerInfo
           Hacker_Name = "Thomas 6"
           Table = "Table #6"
           Description = "Java is a silly language and I need help asap"
+          isRed = {false}
         />
         <HackerInfo
           Hacker_Name = "Thomas 7"
           Table = "Table #7"
           Description = "Java is a silly language and I need help asap"
+          isRed = {false}
         />
 
       </ScrollView>

@@ -6,7 +6,8 @@ import { AntDesign } from "@expo/vector-icons";
 const EventObject = ({
   Hacker_Name,
   Table,
-  Description
+  Description,
+  isRed 
 }) => {
   const [expanded, setExpanded] = useState(false);
 
@@ -65,10 +66,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
   },
-  time: {
-    fontSize: 14,
-  },
-  location: {
+  table: {
     fontSize: 14,
   },
   description: {
