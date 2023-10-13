@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import MentorFrontend from "./MentorFrontend.js"
+import MentorFrontend from "./Box/MentorFrontend.js"
 
 export default function App() {
   return (
