@@ -69,7 +69,7 @@ export default function CountdownTimer() {
       <View style={styles.circleContainer}>
         <View style={styles.circleWrapper}>
           <Timer
-            percentage={days / 60 * 100}
+            percentage={days / 30 * 100}
             circleSize={circleSize}
             timeUnit="D"
             timeRemaining={formattedDays}
