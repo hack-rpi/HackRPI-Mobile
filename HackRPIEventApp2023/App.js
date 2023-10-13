@@ -1,23 +1,19 @@
 import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { colors } from './colors';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-export default function App() {
-
-  return (
-    <View style={[styles.container]}>
-    //CONTENT GOES HERE
-    //calendar ppl, do ur thing
+import { StatusBar } from "expo-status-bar";
+import Calander from "./Box/Calander";
+// import { colors } from './colors';
 
 const Tab = createBottomTabNavigator();
 
 function HomeScreen() {
   return (
     <View style={styles.container}>
-      <Text>Home Screen</Text>
+      <Calander />
+
+      <StatusBar style="auto" />
     </View>
   );
 }
@@ -45,6 +41,7 @@ function HolderScreen() {
     </View>
   );
 }
+
 
 export default function App() {
   return (
