@@ -14,7 +14,7 @@ const style = StyleSheet.create({
 });
 
 const CircleProgress = ({ percentage, circleWidth }) => {
-  const radius = circleWidth / 2 - 10;
+  const radius = circleWidth / 2 - 4;
   const dashArray = radius * Math.PI * 2;
   const dashOffset = dashArray - (dashArray * percentage) / 100;
   return (

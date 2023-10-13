@@ -19,7 +19,7 @@ export default function CountdownTimer() {
   // Calculate the target date (November 4) in EDT
   const targetDate = new Date('2023-11-04T12:00:00');
   const currentDate = new Date();
-  const totalSeconds = Math.max(Math.floor((targetDate - currentDate) / 1000), 0);
+  const totalSeconds = Math.max(Math.floor((targetDate - currentDate) / 20), 0);
 
   const [secondsRemaining, setSecondsRemaining] = useState(totalSeconds);
 
@@ -36,22 +36,23 @@ export default function CountdownTimer() {
           return 0;
         }
       });
-    }, 1000);
+    }, 20);
 
     // Clear the interval when the component is unmounted
     return () => clearInterval(interval);
   }, []);
 
-  const days = Math.floor(secondsRemaining / (3600 * 24));
-  const hours = Math.floor((secondsRemaining % (3600 * 24)) / 3600);
-  const minutes = Math.floor((secondsRemaining % 3600) / 60);
-  const remainingSeconds = secondsRemaining % 60;
+  const days = Math.floor((secondsRemaining / 50) / (3600 * 24));
+  const hours = Math.floor(((secondsRemaining / 50) % (3600 * 24)) / 3600);
+  const minutes = Math.floor(((secondsRemaining / 50) % 3600) / 60);
+  const remainingSeconds = (secondsRemaining / 50) % 60;
 
   // Format the countdown timer values according to the system timezone
   const formattedDays = new Intl.NumberFormat([], { minimumIntegerDigits: 1 }).format(days);
   const formattedHours = new Intl.NumberFormat([], { minimumIntegerDigits: 1 }).format(hours);
   const formattedMinutes = new Intl.NumberFormat([], { minimumIntegerDigits: 1 }).format(minutes);
-  const formattedSeconds = new Intl.NumberFormat([], { minimumIntegerDigits: 1 }).format(remainingSeconds);
+  const formattedSeconds = new Intl.NumberFormat([], { maximumIntegerDigits: 2 }).format(Math.round(remainingSeconds));
+
 
   // Calculate the circle size based on screen width
   const circleSize = width * 0.2; // Adjust the multiplier as needed
@@ -77,7 +78,7 @@ export default function CountdownTimer() {
         </View>
         <View style={styles.circleWrapper}>
           <Timer
-            percentage={hours / 60 * 100}
+            percentage={hours / 24 * 100}
             circleSize={circleSize}
             timeUnit="Hours"
             timeRemaining={formattedHours}
