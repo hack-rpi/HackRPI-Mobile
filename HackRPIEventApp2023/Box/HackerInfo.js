@@ -4,12 +4,10 @@ import { Feather } from "@expo/vector-icons";
 import EventObject from "./EventObject"; // Import the EventObject component
 
 //reusable component that ties an event object to it's notification bell
-const CalanderObject = ({
-  workshop_Title,
-  Time,
-  Location,
+const HackerInfo = ({
+  Hacker_Name,
+  Table,
   Description,
-  isRed,
 }) => {
   const [isActive, setIsActive] = useState(false); // Define isActive state
 
@@ -25,12 +23,9 @@ const CalanderObject = ({
   return (
     <View style={styles.container}>
       <EventObject
-        workshop_title={workshop_Title}
-        time={Time}
-        location={Location}
+        hacker_name={Hacker_Name}
+        table={Table}
         description={Description}
-        isRed={isRed} //this line is use for hardcode
-        //isRed={checkCondition()} -> This line will be use instead if we implement checkCondition() function
       />
       <View
         style={styles.notifBox}
@@ -72,4 +67,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CalanderObject;
+export default HackerInfo;

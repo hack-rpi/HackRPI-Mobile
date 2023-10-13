@@ -4,11 +4,9 @@ import { AntDesign } from "@expo/vector-icons";
 
 // Reusable component that that creates the main content box
 const EventObject = ({
-  workshop_title,
-  time,
-  location,
-  description,
-  isRed,
+  Hacker_Name,
+  Table,
+  Description
 }) => {
   const [expanded, setExpanded] = useState(false);
 
@@ -25,10 +23,9 @@ const EventObject = ({
           isRed ? styles.redBackground : null,
         ]}>
         <View>
-          <Text style={styles.workshop_title}>{"  " + workshop_title}</Text>
-          <Text style={styles.time}>{"  " +time}</Text>
-          <Text style={styles.location}>{"  " +location}</Text>
-          {expanded && <Text style={styles.description}>{"  " + description}</Text>}
+          <Text style={styles.hacker_name}>{"  " + Hacker_Name}</Text>
+          <Text style={styles.table}>{"  " + Table}</Text>
+          {expanded && <Text style={styles.description}>{"  " + Description}</Text>}
         </View>
         <View style={styles.iconContainer}>
           <AntDesign name={expanded ? "up" : "down"} size={24} color="black" />
@@ -64,7 +61,7 @@ const styles = StyleSheet.create({
     backgroundColor: "red",
   },
 
-  workshop_title: {
+  hacker_name: {
     fontSize: 18,
     fontWeight: "bold",
   },
