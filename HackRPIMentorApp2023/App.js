@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { FieldValue, getFirestore, addDoc, collection, getDocs } from "firebase/firestore";
 import { StyleSheet, Text, View, TextInput , TouchableOpacity} from 'react-native';
+
 // Import the functions you need from the SDKs you need
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -22,28 +23,29 @@ const firebaseConfig = {
 
 
 // Initialize Firebase
+
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
 function App() {
-  let email = '';
-  let password = '';
+  const [email, setEmail] = useState(''); // Use state to manage email input
+  const [password, setPassword] = useState(''); // Use state to manage password input
 
   const printRequestsData = async () => {
     try {
-      const requestsCollection = collection(db, "requests");
+      const requestsCollection = collection(db, 'requests');
       const querySnapshot = await getDocs(requestsCollection);
-  
+
       querySnapshot.forEach((doc) => {
         const data = doc.data();
         const tableNum = data.tablenum;
         const type = data.type;
-         
+
         console.log(`Table Number: ${tableNum}, Type: ${type}`);
       });
     } catch (error) {
-      console.error("Error retrieving data:", error);
+      console.error('Error retrieving data:', error);
     }
   };
 
@@ -51,38 +53,52 @@ function App() {
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
       const user = res.user;
-      // await addDoc(collection(db, "users"), {
-      //   // uid: user.uid,
-      //   // // authProvider: "local",
-      //   // email,
-      // });
-      // Clear the input fields after successful registration
-      email = '';
-      password = '';
+      setEmail(''); // Clear email input
+      setPassword(''); // Clear password input
     } catch (err) {
       console.error(err);
       alert(err.message);
     }
   };
+
+  const loginWithEmailAndPassword = async () => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      console.log('Account detected');
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
+    }
+  };
+
   printRequestsData();
+
   return (
     <View style={styles.container}>
       <TextInput
         style={styles.input}
         placeholder="Email"
-        onChangeText={(text) => email = text}
+        onChangeText={(text) => setEmail(text)} // Update email state
+        value={email} // Set the value to the email state
       />
       <TextInput
         style={styles.input}
         placeholder="Password"
         secureTextEntry
-        onChangeText={(text) => password = text}
+        onChangeText={(text) => setPassword(text)} // Update password state
+        value={password} // Set the value to the password state
       />
       <TouchableOpacity
-        style={styles.loginButton}
+        style={styles.registerButton}
         onPress={registerWithEmailAndPassword}
       >
         <Text style={styles.buttonText}>Register</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.loginButton}
+        onPress={loginWithEmailAndPassword}
+      >
+        <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
       <StatusBar style="auto" />
     </View>
@@ -104,8 +120,13 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     paddingHorizontal: 10,
   },
-  loginButton: {
+  registerButton: {
     backgroundColor: 'blue', // Change the color as desired
+    padding: 10,
+    borderRadius: 5,
+  },
+  loginButton: {
+    backgroundColor: 'green', // Change the color as desired
     padding: 10,
     borderRadius: 5,
   },
