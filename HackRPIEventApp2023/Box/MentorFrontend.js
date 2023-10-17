@@ -1,67 +1,47 @@
-import React from "react";
+
+import React, { useState } from "react";
 import { SafeAreaView, ScrollView, StyleSheet } from "react-native";
 import HackerInfo from "./HackerInfo.js";
 
 // calander object that holds all events and handles which are visable, which are active, and which are upcoming.
 const MentorFrontend = () => {
+
+  // Define a state variable to store the data entered by the user
+  const [hackerData, setHackerData] = useState([]);
+
+  const addHackerInfo = (hackerName, table, description) => {
+    setHackerData([...hackerData, { hackerName, table, description }]);
+  };
+
+  const hackerInfoData = [
+    {
+      Hacker_Name: "Thomas 1",
+      Table: "Table #1",
+      Description: "Java is a silly language and I need help asap",
+      isRed: false,
+    },
+    {
+      Hacker_Name: "Thomas 2",
+      Table: "Table #2",
+      Description: "Java is a silly language and I need help asap",
+      isRed: false,
+    },
+
+    {
+      Hacker_Name: "Thomas 3",
+      Table: "Table #2",
+      Description: "Java is a silly language and I need help asap",
+      isRed: false,
+    },
+    // Add more objects as needed
+  ];
+
   return (
     <SafeAreaView style={styles.CalanderStyle}>
-      <ScrollView
-        style={styles.ScrollView}
-        showsVerticalScrollIndicator={true}
-        //pagingEnabled={true} // Enable paging
-        //snapToInterval={150} // Set the interval to the height of a single rectangle
-      >
-        <HackerInfo
-          Hacker_Name="Thomas 1"
-          Table="Table #1"
-          BriefDescription = "Java Help"
-          Description="Java is a silly language and I need help asap"
-          isRed={false}
-        />
-        <HackerInfo
-          Hacker_Name = "Thomas 2"
-          Table = "Table #2"
-          BriefDescription = "Python Help"
-          Description = "Python is a silly language and I need help asap"
-          isRed = {false}
-        />
-        <HackerInfo
-          Hacker_Name = "Thomas 3"
-          Table = "Table #3"
-          BriefDescription = "Java Help"
-          Description = "Java is a silly language and I need help asap"
-          isRed = {false}
-        />
-        <HackerInfo
-          Hacker_Name = "Thomas 4"
-          Table = "Table #4"
-          BriefDescription = "Java Help"
-          Description = "Java is a silly language and I need help asap"
-          isRed = {false}
-        />
-        <HackerInfo
-          Hacker_Name = "Thomas 5"
-          Table = "Table #5"
-          BriefDescription = "Java Help"
-          Description = "Java is a silly language and I need help asap"
-          isRed = {false}
-        />
-        <HackerInfo
-          Hacker_Name = "Thomas 6"
-          Table = "Table #6"
-          BriefDescription = "Java Help"
-          Description = "Java is a silly language and I need help asap"
-          isRed = {false}
-        />
-        <HackerInfo
-          Hacker_Name = "Thomas 7"
-          Table = "Table #7"
-          BriefDescription = "Java Help"
-          Description = "Java is a silly language and I need help asap"
-          isRed = {false}
-        />
-
+      <ScrollView style={styles.ScrollView} showsVerticalScrollIndicator={true}>
+        {hackerInfoData.map((data, index) => (
+          <HackerInfo key={index} {...data} />
+        ))}
       </ScrollView>
     </SafeAreaView>
   );
