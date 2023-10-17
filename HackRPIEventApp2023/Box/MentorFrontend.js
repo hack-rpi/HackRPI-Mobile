@@ -15,42 +15,49 @@ const MentorFrontend = () => {
         <HackerInfo
           Hacker_Name="Thomas 1"
           Table="Table #1"
+          BriefDescription = "Java Help"
           Description="Java is a silly language and I need help asap"
           isRed={false}
         />
         <HackerInfo
           Hacker_Name = "Thomas 2"
           Table = "Table #2"
-          Description = "Java is a silly language and I need help asap"
+          BriefDescription = "Python Help"
+          Description = "Python is a silly language and I need help asap"
           isRed = {false}
         />
         <HackerInfo
           Hacker_Name = "Thomas 3"
           Table = "Table #3"
+          BriefDescription = "Java Help"
           Description = "Java is a silly language and I need help asap"
           isRed = {false}
         />
         <HackerInfo
           Hacker_Name = "Thomas 4"
           Table = "Table #4"
+          BriefDescription = "Java Help"
           Description = "Java is a silly language and I need help asap"
           isRed = {false}
         />
         <HackerInfo
           Hacker_Name = "Thomas 5"
           Table = "Table #5"
+          BriefDescription = "Java Help"
           Description = "Java is a silly language and I need help asap"
           isRed = {false}
         />
         <HackerInfo
           Hacker_Name = "Thomas 6"
           Table = "Table #6"
+          BriefDescription = "Java Help"
           Description = "Java is a silly language and I need help asap"
           isRed = {false}
         />
         <HackerInfo
           Hacker_Name = "Thomas 7"
           Table = "Table #7"
+          BriefDescription = "Java Help"
           Description = "Java is a silly language and I need help asap"
           isRed = {false}
         />

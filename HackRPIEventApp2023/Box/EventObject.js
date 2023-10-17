@@ -6,6 +6,7 @@ import { AntDesign } from "@expo/vector-icons";
 const EventObject = ({
   Hacker_Name,
   Table,
+  BriefDescription,
   Description,
   isRed 
 }) => {
@@ -26,6 +27,7 @@ const EventObject = ({
         <View>
           <Text style={styles.hacker_name}>{"  " + Hacker_Name}</Text>
           <Text style={styles.table}>{"  " + Table}</Text>
+          <Text style={styles.table}>{"  " + BriefDescription}</Text>
           {expanded && <Text style={styles.description}>{"  " + Description}</Text>}
         </View>
         <View style={styles.iconContainer}>

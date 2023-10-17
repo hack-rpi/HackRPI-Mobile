@@ -7,6 +7,7 @@ import EventObject from "./EventObject"; // Import the EventObject component
 const HackerInfo = ({
   Hacker_Name,
   Table,
+  BriefDescription,
   Description,
   isRed
 }) => {
@@ -26,6 +27,7 @@ const HackerInfo = ({
       <EventObject
         Hacker_Name={Hacker_Name}
         Table={Table}
+        BriefDescription={BriefDescription}
         Description={Description}
         isRed={isRed}
       />
@@ -34,10 +36,10 @@ const HackerInfo = ({
         backgroundColor={isRed ? "black" : isActive ? "black" : "white"}
         borderColor={isRed ? "red" : "white"}>
         <Feather
-          name={isActive ? "bell-off" : "bell"}
-          size={30}
-          color={isRed ? "red" : isActive ? "white" : "black"}
-          onPress={handleClick}
+          name="check"
+          size = {30}
+          color={isRed ? "red" : "green"}
+        
           zIndex={2}
           // Add onPress to handle click
         />
