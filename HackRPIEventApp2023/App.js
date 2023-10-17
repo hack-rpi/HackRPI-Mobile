@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StatusBar } from "expo-status-bar";
 import Calander from "./Box/Calander";
+import ImageSlideshow from './map/image_slideshow';
 // import { colors } from './colors';
 
 const Tab = createBottomTabNavigator();
@@ -11,7 +12,7 @@ const Tab = createBottomTabNavigator();
 function InfoScreen() {
   return (
     <View style={styles.container}>
-      <Text>Explore Screen</Text>
+      <ImageSlideshow />
     </View>
   );
 }
