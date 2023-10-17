@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StatusBar } from "expo-status-bar";
 import Calander from "./Box/Calander";
-// import { colors } from './colors';
+import { colors } from './colors';
 
 const Tab = createBottomTabNavigator();
 
@@ -49,16 +49,16 @@ export default function App() {
       <Tab.Navigator
         screenOptions={{
           tabBarStyle: {
-            backgroundColor: 'rgba(0, 0, 0, 0.5)', // Set a semi-transparent black background color
+            backgroundColor: colors.backgroundBlack, // shud this b transparent?
             borderTopWidth: 0, // Hide top border of the tab bar
           },
-          tabBarActiveTintColor: '#910307',
+          tabBarActiveTintColor: colors.mainRed,
         }}
       >
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Explore" component={ExploreScreen} />
-        <Tab.Screen name="Profile" component={ProfileScreen} />
-        <Tab.Screen name="Holder" component={HolderScreen} />
+        <Tab.Screen name="Home" component={HomeScreen} options={{ headerShown: false }}/>
+        <Tab.Screen name="Explore" component={ExploreScreen} options={{ headerShown: false }}/>
+        <Tab.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }}/>
+        <Tab.Screen name="Holder" component={HolderScreen} options={{ headerShown: false }}s/>
       </Tab.Navigator>
     </NavigationContainer>
 
@@ -69,7 +69,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#191919',
+    backgroundColor: colors.backgroundBlack,
     alignItems: 'center',
     justifyContent: 'center',
   },
