@@ -11,9 +11,7 @@ const Tab = createBottomTabNavigator();
 function InfoScreen() {
   return (
     <View style={styles.container}>
-      <Calander />
-
-      <StatusBar style="auto" />
+      <Text>Explore Screen</Text>
     </View>
   );
 }
@@ -21,7 +19,9 @@ function InfoScreen() {
 function HomeScreen() {
   return (
     <View style={styles.container}>
-      <Text>Explore Screen</Text>
+      <Calander />
+
+      <StatusBar style="auto" />
     </View>
   );
 }
