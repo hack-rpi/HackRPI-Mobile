@@ -8,7 +8,7 @@ function Active_Check(date, StartTime, EndTime) {
         // Get the current date in ISO 8601 format
         const currentDate = currentDateTime.toISOString().split('T')[0];
         const currentTime = currentDateTime.toLocaleTimeString([], 
-            { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            { hour: '2-digit', minute: '2-digit'});
         if (currentDate === date && currentTime >= StartTime && currentTime <= EndTime) {
         setIsInTimeRange(true);
         } else {
