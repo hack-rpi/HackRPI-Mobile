@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import EventObject from "./EventObject"; // Import the EventObject component
+import { useNavigation } from '@react-navigation/native';
 
 //reusable component that ties an event object to it's notification bell
 const HackerInfo = ({
@@ -12,6 +13,13 @@ const HackerInfo = ({
   isRed
 }) => {
   const [isActive, setIsActive] = useState(false); // Define isActive state
+
+  const navigation = useNavigation();
+
+  const handleCheckmarkClick = () => {
+    // Navigate to AnotherPage component
+    navigation.navigate('AnotherPage');
+  }
 
   const handleClick = () => {
     setIsActive(!isActive);
@@ -38,8 +46,8 @@ const HackerInfo = ({
         <Feather
           name="check"
           size = {30}
-          color={isRed ? "red" : "green"}
-        
+          color={"red"}
+          onPress={handleCheckmarkClick}
           zIndex={2}
           // Add onPress to handle click
         />
