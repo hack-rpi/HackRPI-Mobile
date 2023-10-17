@@ -13,10 +13,10 @@ const MentorFrontend = () => {
         //snapToInterval={150} // Set the interval to the height of a single rectangle
       >
         <HackerInfo
-          Hacker_Name = "Thomas 1"
-          Table = "Table #1"
-          Description = "Java is a silly language and I need help asap"
-          isRed = {false}
+          Hacker_Name="Thomas 1"
+          Table="Table #1"
+          Description="Java is a silly language and I need help asap"
+          isRed={false}
         />
         <HackerInfo
           Hacker_Name = "Thomas 2"

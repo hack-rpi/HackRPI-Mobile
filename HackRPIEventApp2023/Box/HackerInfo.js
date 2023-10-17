@@ -24,9 +24,9 @@ const HackerInfo = ({
   return (
     <View style={styles.container}>
       <EventObject
-        hacker_name={Hacker_Name}
-        table={Table}
-        description={Description}
+        Hacker_Name={Hacker_Name}
+        Table={Table}
+        Description={Description}
         isRed={isRed}
       />
       <View
