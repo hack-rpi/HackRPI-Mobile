@@ -8,7 +8,7 @@ import Calander from "./Box/Calander";
 
 const Tab = createBottomTabNavigator();
 
-function HomeScreen() {
+function InfoScreen() {
   return (
     <View style={styles.container}>
       <Calander />
@@ -18,7 +18,7 @@ function HomeScreen() {
   );
 }
 
-function ExploreScreen() {
+function HomeScreen() {
   return (
     <View style={styles.container}>
       <Text>Explore Screen</Text>
@@ -26,18 +26,10 @@ function ExploreScreen() {
   );
 }
 
-function ProfileScreen() {
+function QueueScreen() {
   return (
     <View style={styles.container}>
       <Text>Profile Screen</Text>
-    </View>
-  );
-}
-
-function HolderScreen() {
-  return (
-    <View style={styles.container}>
-      <Text>Holder Screen</Text>
     </View>
   );
 }
@@ -55,10 +47,9 @@ export default function App() {
           tabBarActiveTintColor: '#910307',
         }}
       >
+        <Tab.Screen name="Info" component={InfoScreen} />
         <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Explore" component={ExploreScreen} />
-        <Tab.Screen name="Profile" component={ProfileScreen} />
-        <Tab.Screen name="Holder" component={HolderScreen} />
+        <Tab.Screen name="Queue" component={QueueScreen} />
       </Tab.Navigator>
     </NavigationContainer>
 
