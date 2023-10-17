@@ -3,6 +3,7 @@ import { SafeAreaView, ScrollView, StyleSheet } from "react-native";
 import CalanderObject from "./CalanderObject";
 import WorkShops from "./WorkShops.json";
 import Active_Check from "./Active_Check";
+import Past_Check from "./Past_Check";
 
 
 // calander object that holds all events and handles which are visable, which are active, and which are upcoming.
@@ -19,6 +20,11 @@ const Calander = () => {
       {WorkShops.map((event, index) => {
         const Active = Active_Check(event.WorkShop_Date, event.WorkShop_StartTime, 
         event.WorkShop_EndTime);
+        const Past = Past_Check(event.WorkShop_Date, event.WorkShop_StartTime,
+        event.WorkShop_EndTime);
+        if(Past){
+          return null; //if the event is in the past, don't display it
+        }
         return (
           <CalanderObject
             key={index}
