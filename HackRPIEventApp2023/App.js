@@ -1,19 +1,17 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Feather } from '@expo/vector-icons';
 import { StatusBar } from "expo-status-bar";
 import Calander from "./Box/Calander";
-// import { colors } from './colors';
 
 const Tab = createBottomTabNavigator();
 
 function InfoScreen() {
   return (
     <View style={styles.container}>
-      <Calander />
-
-      <StatusBar style="auto" />
+   <Calander/>
     </View>
   );
 }
@@ -21,7 +19,8 @@ function InfoScreen() {
 function HomeScreen() {
   return (
     <View style={styles.container}>
-      <Text>Explore Screen</Text>
+    <Feather name="user" size={24} color="white" />
+      <Text style={styles.text}>No one home gotcha! haha</Text>
     </View>
   );
 }
@@ -29,33 +28,46 @@ function HomeScreen() {
 function QueueScreen() {
   return (
     <View style={styles.container}>
-      <Text>Profile Screen</Text>
+      <Feather name="user" size={24} color="white" />
+      <Text style={styles.text}>Put something useful lol</Text>
     </View>
   );
 }
-
 
 export default function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator
-        screenOptions={{
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
+            if (route.name === 'Info') {
+              iconName = 'info';
+            } else if (route.name === 'Home') {
+              iconName = 'home';
+            } else if (route.name === 'Queue') {
+              iconName = 'user';
+            }
+            return <Feather name={iconName} size={size} color={focused ? 'red' : 'white'} />;
+          },
+          tabBarLabelStyle: {
+            fontSize: 12,
+          },
           tabBarStyle: {
-            backgroundColor: 'rgba(0, 0, 0, 0.5)', // Set a semi-transparent black background color
-            borderTopWidth: 0, // Hide top border of the tab bar
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            borderTopWidth: 0,
           },
           tabBarActiveTintColor: '#910307',
-        }}
+          tabBarInactiveTintColor: 'white',
+        })}
       >
         <Tab.Screen name="Info" component={InfoScreen} />
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Queue" component={QueueScreen} />
       </Tab.Navigator>
     </NavigationContainer>
-
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {
@@ -64,5 +76,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  text: {
+    color: 'white',
+  },
 });
-
