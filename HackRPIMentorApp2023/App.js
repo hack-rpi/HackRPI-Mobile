@@ -49,10 +49,25 @@ function App() {
       console.error('Error retrieving data:', error);
     }
   };
+  
+  const inQueue = async() => {
+    try{
+      const docRef = db.collection('requests').doc(docKey);
+      const ans = await docRef.get();
+      if (!doc.exists) {
+        console.log('No such document!');
+      } else {
+        console.log('Document data:', doc.data());
+        return doc.data().helped;
+      }
+    }catch(error){
+      console.error('error retrieving document:', error);
+    }
+  };
 
   const fetchDoc = async() => {
     try{
-      const ans = await db.collection('request').doc(docKey);
+      const ans = await db.collection('requests').doc(docKey);
       console.log(ans.data());
       return ans.data();
     }catch(error){
@@ -62,7 +77,7 @@ function App() {
 
   const queueOut = async () => {
     try{
-      const docRef = db.collection('request').doc(docKey);
+      const docRef = db.collection('requests').doc(docKey);
       const ans = await docRef.set({
         helped: true
       })
