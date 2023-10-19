@@ -49,6 +49,17 @@ function App() {
       console.error('Error retrieving data:', error);
     }
   };
+
+  const fetchDoc = async() => {
+    try{
+      const ans = await db.collection('request').doc(docKey);
+      console.log(ans.data());
+      return ans.data();
+    }catch(error){
+      console.error('error retrieving individual doc:', error);
+    }
+  };
+
   const queueOut = async () => {
     try{
       const docRef = db.collection('request').doc(docKey);
