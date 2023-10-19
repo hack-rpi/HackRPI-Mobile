@@ -32,11 +32,19 @@ function App() {
   const [email, setEmail] = useState(''); // Use state to manage email input
   const [password, setPassword] = useState(''); // Use state to manage password input
 
-  const printRequestsData = async () => {
+  // sends the set of documents that are inside of requests. Basically returns the entire queue.
+  const sendRequestsData = async () => {
     try {
       const requestsCollection = collection(db, 'requests');
       const querySnapshot = await getDocs(requestsCollection);
+      let index = 0;
+      const docIDs = [];
+      querySnapshot.forEach((doc) => {
+        docIDs[index] = doc.id
+        index += 1;
+      });
       return querySnapshot;
+      // the below is how you iterate through and grab each docment
       // querySnapshot.forEach((doc) => {
       //   const data = doc.data();
       //   const tableNum = data.tablenum;
@@ -50,13 +58,18 @@ function App() {
     }
   };
   
+  // this takes in a dockey and returns whether the student has been helped or not
   const inQueue = async() => {
     try{
+      // grabs the document
       const docRef = db.collection('requests').doc(docKey);
-      const ans = await docRef.get();
+      // gets the data from the doc
+      const doc = await docRef.get();
+      // ensures that the document is retrieved properly
       if (!doc.exists) {
         console.log('No such document!');
       } else {
+        // logs the data to error cehck then returns the helped status
         console.log('Document data:', doc.data());
         return doc.data().helped;
       }
@@ -65,21 +78,37 @@ function App() {
     }
   };
 
+  // a fetchdoc function to return the data of a document, aka the student in queue takes in a dockey
   const fetchDoc = async() => {
     try{
+      // grabs the document
       const ans = await db.collection('requests').doc(docKey);
       console.log(ans.data());
+      // returns the data of that document
       return ans.data();
     }catch(error){
       console.error('error retrieving individual doc:', error);
     }
   };
 
+  // makes the students help status true takes in a doc key to access the student
   const queueOut = async () => {
     try{
       const docRef = db.collection('requests').doc(docKey);
       const ans = await docRef.set({
         helped: true
+      })
+    }catch(error){
+      console.error('Error claiming queue:', error);
+    }
+  };
+
+  // takes in a document key and does the opposite of queueout
+  const unHelp = async () => {
+    try{
+      const docRef = db.collection('requests').doc(docKey);
+      const ans = await docRef.set({
+        helped: false
       })
     }catch(error){
       console.error('Error claiming queue:', error);
@@ -101,8 +130,10 @@ function App() {
       tablenum: tblN,
       type: helpType
     };
+    // has to make UID unique and time based because sorting in the database.
+    const uID = Date.now();
     try{
-      const ans = await db.collection('requests').doc().set(data);
+      const ans = await db.collection('requests').doc(uId).set(data);
     }catch(error){
       console.error('Error adding to queue:', error);
     }
@@ -111,10 +142,16 @@ function App() {
 
   const registerWithEmailAndPassword = async () => {
     try {
-      const res = await createUserWithEmailAndPassword(auth, email, password);
-      const user = res.user;
-      setEmail(''); // Clear email input
-      setPassword(''); // Clear password input
+      const vericode = '';
+      if(!checker.localeCompare(vericode)){
+        alert("wrong verificationcode")
+      }
+      else{
+        const res = await createUserWithEmailAndPassword(auth, email, password);
+        const user = res.user;
+        setEmail(''); // Clear email input
+        setPassword(''); // Clear password input
+      }
     } catch (err) {
       console.error(err);
       alert(err.message);
@@ -131,7 +168,6 @@ function App() {
     }
   };
 
-  printRequestsData();
 
   return (
     <View style={styles.container}>
@@ -152,8 +188,8 @@ function App() {
         style={styles.input}
         placeholder="Password"
         secureTextEntry
-        onChangeText={(text) => setPassword(text)} // Update password state
-        value={password} // Set the value to the password state
+        onChangeText={(text) => setChecker(text)} // Update password state
+        value={checker} // Set the value to the password state
       />
       <TouchableOpacity
         style={styles.registerButton}
