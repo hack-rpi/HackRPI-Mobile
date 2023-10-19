@@ -68,6 +68,20 @@ function App() {
     }
   };
 
+  const addQueue = async() => {
+    const data = {
+      Name: student,
+      helped: false,
+      tablenum: tblN,
+      type: helpType
+    };
+    try{
+      const ans = await db.collection('requests').doc().set(data);
+    }catch(error){
+      console.error('Error adding to queue:', error);
+    }
+  }
+
 
   const registerWithEmailAndPassword = async () => {
     try {
