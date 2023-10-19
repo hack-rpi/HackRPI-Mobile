@@ -36,14 +36,15 @@ function App() {
     try {
       const requestsCollection = collection(db, 'requests');
       const querySnapshot = await getDocs(requestsCollection);
+      return querySnapshot;
+      // querySnapshot.forEach((doc) => {
+      //   const data = doc.data();
+      //   const tableNum = data.tablenum;
+      //   const type = data.type;
+      //   const name = data.name;
 
-      querySnapshot.forEach((doc) => {
-        const data = doc.data();
-        const tableNum = data.tablenum;
-        const type = data.type;
-
-        console.log(`Table Number: ${tableNum}, Type: ${type}`);
-      });
+      //   console.log(`Table Number: ${tableNum}, Type: ${type}`);
+      // });
     } catch (error) {
       console.error('Error retrieving data:', error);
     }
@@ -80,6 +81,13 @@ function App() {
         placeholder="Email"
         onChangeText={(text) => setEmail(text)} // Update email state
         value={email} // Set the value to the email state
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Password"
+        secureTextEntry
+        onChangeText={(text) => setPassword(text)} // Update password state
+        value={password} // Set the value to the password state
       />
       <TextInput
         style={styles.input}
