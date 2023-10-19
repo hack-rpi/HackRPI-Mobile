@@ -60,6 +60,13 @@ function App() {
     }
   };
 
+  const popQueue = async()=>{
+    try{
+      const ans = await db.collection('requests').doc(docKey).delete();
+    }catch(error){
+      console.error('Error deleting student from queue:', error);
+    }
+  };
 
 
   const registerWithEmailAndPassword = async () => {
