@@ -49,6 +49,18 @@ function App() {
       console.error('Error retrieving data:', error);
     }
   };
+  const queueOut = async () => {
+    try{
+      const docRef = db.collection('request').doc(docKey);
+      const ans = await docRef.set({
+        helped: true
+      })
+    }catch(error){
+      console.error('Error claiming queue:', error);
+    }
+  };
+
+
 
   const registerWithEmailAndPassword = async () => {
     try {
