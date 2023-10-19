@@ -25,12 +25,44 @@ const Calander = () => {
         if(Past){
           return null; //if the event is in the past, don't display it
         }
+        start_hour = parseInt(event.WorkShop_StartTime.split(":")[0]);
+        start_minute = event.WorkShop_StartTime.split(":")[1];
+        end_hour = parseInt(event.WorkShop_EndTime.split(":")[0]);
+        end_minute = event.WorkShop_EndTime.split(":")[1];
+        if(start_hour > 12){
+          start_hour = start_hour - 12;
+          event.WorkShop_StartTime = start_hour.toString() + ":" + start_minute + " PM";
+        }
+        else if(start_hour == 12){
+          event.WorkShop_StartTime = start_hour.toString() + ":" + start_minute + " PM";
+        }
+        else if(start_hour == 0){
+          event.WorkShop_StartTime = "12:" + start_minute + " AM";
+        }
+        else{
+          event.WorkShop_StartTime = start_hour.toString() + ":" + start_minute + " AM";
+        }
+        
+        if(end_hour > 12){
+          end_hour = end_hour - 12;
+          event.WorkShop_EndTime = end_hour.toString() + ":" + end_minute + " PM";
+        }
+        else if(end_hour == 12){
+          event.WorkShop_EndTime = end_hour.toString() + ":" + end_minute + " PM";
+        }
+        else if(end_hour == 0){
+          event.WorkShop_EndTime = "12:" + end_minute + " AM";
+        }
+        else{
+          event.WorkShop_EndTime = end_hour.toString() + ":" + end_minute + " AM";
+        }
         return (
           <CalanderObject
             key={index}
             workshop_Title={event.WorkShop_Title}
             Time={event.WorkShop_Date + ": " + event.WorkShop_StartTime + " - " + 
             event.WorkShop_EndTime}
+            Presenter={event.WorkShop_Presenter}
             Location={event.WorkShop_Location}
             Description={event.WorkShop_Description}
             isRed={Active}

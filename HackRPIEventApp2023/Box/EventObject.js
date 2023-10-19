@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Icon } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet} from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
 // Reusable component that that creates the main content box
@@ -7,6 +7,7 @@ const EventObject = ({
   workshop_title,
   time,
   location,
+  presenter,
   description,
   isRed,
 }) => {
@@ -27,7 +28,8 @@ const EventObject = ({
         <View>
           <Text style={styles.workshop_title}>{"  " + workshop_title}</Text>
           <Text style={styles.time}>{"  " +time}</Text>
-          <Text style={styles.location}>{"  " +location}</Text>
+          <Text style={styles.location}>{"  Location: " +location}</Text>
+          <Text style={styles.presenter}>{"  Presenter: " +presenter}</Text>
           {expanded && <Text style={styles.description}>{"  " + description}</Text>}
         </View>
         <View style={styles.iconContainer}>
@@ -40,8 +42,8 @@ const EventObject = ({
 
 const styles = StyleSheet.create({
   rectangle: {
-    width: 250,
-    height: 100,
+    width: 300,
+    height: 150,
     borderWidth: 1,
     borderColor: "#000",
     borderRadius: 20,
@@ -58,7 +60,7 @@ const styles = StyleSheet.create({
     top: 10,
   },
   expanded: {
-    height: 120, // Adjust the height as needed
+    height: 300, // Adjust the height as needed
   },
   redBackground: {
     backgroundColor: "red",
@@ -72,6 +74,9 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   location: {
+    fontSize: 14,
+  },
+  presenter: {
     fontSize: 14,
   },
   description: {
