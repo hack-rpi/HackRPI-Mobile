@@ -59,7 +59,7 @@ function App() {
   };
   
   // this takes in a dockey and returns whether the student has been helped or not
-  const inQueue = async() => {
+  const inQueue = async(docKey) => {
     try{
       // grabs the document
       const docRef = db.collection('requests').doc(docKey);
@@ -79,7 +79,7 @@ function App() {
   };
 
   // a fetchdoc function to return the data of a document, aka the student in queue takes in a dockey
-  const fetchDoc = async() => {
+  const fetchDoc = async(docKey) => {
     try{
       // grabs the document
       const ans = await db.collection('requests').doc(docKey);
@@ -92,7 +92,7 @@ function App() {
   };
 
   // makes the students help status true takes in a doc key to access the student
-  const queueOut = async () => {
+  const queueOut = async (docKey) => {
     try{
       const docRef = db.collection('requests').doc(docKey);
       const ans = await docRef.set({
@@ -104,7 +104,7 @@ function App() {
   };
 
   // takes in a document key and does the opposite of queueout
-  const unHelp = async () => {
+  const unHelp = async (docKey) => {
     try{
       const docRef = db.collection('requests').doc(docKey);
       const ans = await docRef.set({
@@ -117,7 +117,7 @@ function App() {
   };
 
   // takes in the document key and pops it from the database
-  const popQueue = async()=>{
+  const popQueue = async(docKey)=>{
     try{
       const ans = await db.collection('requests').doc(docKey).delete();
     }catch(error){
@@ -126,7 +126,7 @@ function App() {
   };
 
   // adds someone into the queue  takes in student name, tabke number, and help type
-  const addQueue = async() => {
+  const addQueue = async(student, tblN,helpType) => {
     const data = {
       Name: student,
       helped: false,
