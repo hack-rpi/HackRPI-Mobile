@@ -20,7 +20,7 @@ const Food = () => {
           Time="Time Unknown"
           Location="Location Unknown"
           Description="This is not important at all."
-          //ImageSource={require("./HackRPIEventApp2023/assets/breakfast.jpg")}
+          imageSource = {require('./breakfast.jpg')}
            
        />
         <FoodObject
@@ -28,6 +28,7 @@ const Food = () => {
           Time="Time Unknown"
           Location="Location Unknown"
           Description="This is not important at all."
+          imageSource = {require('./lunch.webp')}
           
         />
         <FoodObject
@@ -35,6 +36,7 @@ const Food = () => {
           Time="Time Unknown"
           Location="Location Unknown"
           Description="This is not important at all."
+          imageSource = {require('./dinner.jpeg')}
           
         />
         
