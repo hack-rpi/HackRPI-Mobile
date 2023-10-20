@@ -5,9 +5,11 @@ import {
   StyleSheet,
   Dimensions,
   FlatList,
+  Text,
   Modal,
   TouchableOpacity,
 } from 'react-native';
+import ImageZoom from 'react-native-image-pan-zoom'; // Import the zoom library
 
 // Array of image references
 const images = [
@@ -93,14 +95,26 @@ const ImageSlideshow = () => {
         }}
       >
         <TouchableOpacity
-          style={styles.modalContainer}
-          activeOpacity={1}
-          onPress={() => {
-            setModalVisible(false);
-          }}
-        >
-          <Image source={images[currentIndex]} style={styles.modalImage} />
-        </TouchableOpacity>
+            style={styles.exitButton}
+            activeOpacity={1}
+            onPress={() => {
+              setModalVisible(false);
+            }}
+          >
+            <Text style={styles.exitButtonText}>X</Text>
+          </TouchableOpacity>
+          
+          {/* Use ImageZoom to enable zooming and rotating */}
+          <ImageZoom
+            cropWidth={Dimensions.get('window').width}
+            cropHeight={Dimensions.get('window').height}
+            imageWidth={Dimensions.get('window').width}
+            imageHeight={Dimensions.get('window').height}
+          >
+            <Image source={images[currentIndex]} style={styles.modalImage} />
+          </ImageZoom>
+          
+        
       </Modal>
     </View>
   );
@@ -142,9 +156,9 @@ const styles = StyleSheet.create({
   },
   // Style for active preview indicator
   activePreview: {
-    backgroundColor: 'blue', // Change to your desired active preview color
+    backgroundColor: 'red', // Change to your desired active preview color
     borderWidth: 4, // Border width for the active preview indicator
-    borderColor: 'blue', // Border color for the active preview indicator
+    borderColor: 'red', // Border color for the active preview indicator
   },
   // Style for the modal container
   modalContainer: {
@@ -158,6 +172,23 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
     resizeMode: 'contain',
+  },
+  exitButton: {
+    position: 'absolute',
+    top: 40,
+    right: 20,
+    backgroundColor: 'red',
+    borderRadius: 20,
+    width: 40,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 1,
+  },
+  exitButtonText: {
+    color: 'white',
+    fontSize: 20,
+    fontWeight: 'bold',
   },
 });
 
