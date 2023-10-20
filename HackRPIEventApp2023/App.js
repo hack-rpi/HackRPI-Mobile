@@ -40,6 +40,7 @@ export default function App() {
       <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
+            //adding icons
             let iconName;
             if (route.name === 'Info') {
               iconName = 'info';
