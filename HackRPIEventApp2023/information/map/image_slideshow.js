@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 50,
+    marginTop: 30,
   },
   // Style for individual image container
   imageContainer: {
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
   previewContainer: {
     flexDirection: 'row',
     marginTop: 20,
-    bottom: 250,
+    bottom: 10,
   },
   // Style for individual preview indicator
   preview: {

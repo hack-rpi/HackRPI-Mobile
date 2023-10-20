@@ -1,7 +1,7 @@
 import React from "react";
 import { SafeAreaView, ScrollView, StyleSheet,Text,View } from "react-native";
 import FoodObject from "./FoodObject";
-
+import ImageSlideshow from './map/image_slideshow';
 
 const Food = () => {
   return (
@@ -14,6 +14,7 @@ const Food = () => {
         style={styles.ScrollView}
         showsVerticalScrollIndicator={true}
       >
+        <ImageSlideshow />
         <FoodObject
           food_Title="Breakfast"
           Time="Time Unknown"

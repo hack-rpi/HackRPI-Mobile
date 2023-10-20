@@ -5,7 +5,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StatusBar } from "expo-status-bar";
 import Calander from "./Box/Calander";
 import Food from "./information/Food";
-// import ImageSlideshow from './map/image_slideshow';
 // import { colors } from './colors';
 
 const Tab = createBottomTabNavigator();
