@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   View,
   Image,
@@ -7,10 +7,9 @@ import {
   FlatList,
   Modal,
   TouchableOpacity,
-  Text,
-  ScrollView,
 } from 'react-native';
 
+// Array of image references
 const images = [
   require('./1.jpg'),
   require('./2.jpg'),
@@ -18,22 +17,29 @@ const images = [
 ];
 
 const ImageSlideshow = () => {
+  // State variables for current image index and modal visibility
   const [currentIndex, setCurrentIndex] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
-  const [scale, setScale] = useState(1);
+  
+  // Ref for FlatList component
+  const flatListRef = useRef(null);
 
-  const handlePinch = (gestureState) => {
-    const newScale = gestureState.scale * scale;
-    setScale(newScale < 1 ? 1 : newScale); // Ensure minimum scale is 1
+  // Callback function to handle scroll end and update the current image index
+  const handleMomentumScrollEnd = (event) => {
+    const contentOffset = event.nativeEvent.contentOffset.x;
+    const index = Math.floor(contentOffset / Dimensions.get('window').width);
+    setCurrentIndex(index);
   };
 
-  const resetScale = () => {
-    setScale(1);
-  };
+  // Get the screen width
+  const screenWidth = Dimensions.get('window').width;
 
+  // Render the component
   return (
     <View style={styles.container}>
+      {/* FlatList to display images horizontally */}
       <FlatList
+        ref={flatListRef}
         data={images}
         horizontal
         pagingEnabled
@@ -47,18 +53,37 @@ const ImageSlideshow = () => {
             }}
           >
             <View style={styles.imageContainer}>
-              <Image source={item} style={[styles.image, { transform: [{ scale }] }]} />
+              <Image source={item} style={styles.image} />
             </View>
           </TouchableOpacity>
         )}
-        onMomentumScrollEnd={(event) => {
-          const contentOffset = event.nativeEvent.contentOffset.x;
-          const index = Math.floor(contentOffset / Dimensions.get('window').width);
-          setCurrentIndex(index);
-          resetScale();
-        }}
+        onMomentumScrollEnd={handleMomentumScrollEnd}
       />
+      
+      {/* Preview indicators for images */}
+      <View style={styles.previewContainer}>
+        {images.map((image, index) => (
+          <TouchableOpacity
+            key={index}
+            onPress={() => {
+              flatListRef.current.scrollToIndex({ animated: true, index });
+              setCurrentIndex(index);
+            }}
+          >
+            <Image
+              source={image}
+              style={[
+                styles.preview,
+                index === currentIndex ? styles.activePreview : null,
+              ]}
+            />
+          </TouchableOpacity>
+        ))}
+      </View>
 
+
+
+      {/* Modal for displaying enlarged image */}
       <Modal
         animationType="slide"
         transparent={false}
@@ -67,73 +92,74 @@ const ImageSlideshow = () => {
           setModalVisible(false);
         }}
       >
-        <View style={styles.modalContainer}>
-          <TouchableOpacity
-            style={styles.exitButton}
-            onPress={() => {
-              setModalVisible(false);
-            }}
-          >
-            <Text style={styles.exitButtonText}>X</Text>
-          </TouchableOpacity>
-          <ScrollView
-            style={styles.scrollView}
-            pinchGestureEnabled
-            maximumZoomScale={3} // Set the maximum zoom scale as per your requirement
-          >
-            <Image source={images[currentIndex]} style={[styles.modalImage, { transform: [{ scale }] }]} />
-          </ScrollView>
-        </View>
+        <TouchableOpacity
+          style={styles.modalContainer}
+          activeOpacity={1}
+          onPress={() => {
+            setModalVisible(false);
+          }}
+        >
+          <Image source={images[currentIndex]} style={styles.modalImage} />
+        </TouchableOpacity>
       </Modal>
     </View>
   );
 };
 
+// Styles for the components
 const styles = StyleSheet.create({
+  // Container style
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 50,
   },
+  // Style for individual image container
   imageContainer: {
     width: Dimensions.get('window').width,
     justifyContent: 'center',
     alignItems: 'center',
   },
+  // Style for the images
   image: {
     width: 300,
     height: 300,
   },
+  // Style for the preview indicators container
+  previewContainer: {
+    flexDirection: 'row',
+    marginTop: 20,
+    bottom: 250,
+  },
+  // Style for individual preview indicator
+  preview: {
+    width: 50,
+    height: 50,
+    borderRadius: 10,
+    backgroundColor: 'gray',
+    margin: 5,
+  },
+  // Style for active preview indicator
+  activePreview: {
+    backgroundColor: 'blue', // Change to your desired active preview color
+    borderWidth: 4, // Border width for the active preview indicator
+    borderColor: 'blue', // Border color for the active preview indicator
+  },
+  // Style for the modal container
   modalContainer: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: 'black',
   },
-  scrollView: {
-    flex: 1,
-  },
+  // Style for the modal image
   modalImage: {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
     resizeMode: 'contain',
   },
-  exitButton: {
-    position: 'absolute',
-    top: 20,
-    right: 20,
-    backgroundColor: 'red',
-    borderRadius: 20,
-    width: 40,
-    height: 40,
-    justifyContent: 'center',
-    alignItems: 'center',
-    zIndex: 1,
-  },
-  exitButtonText: {
-    color: 'white',
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
 });
 
+// Export the component
 export default ImageSlideshow;
