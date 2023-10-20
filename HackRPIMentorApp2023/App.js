@@ -110,11 +110,13 @@ function App() {
       const ans = await docRef.set({
         helped: false
       })
+      // catches the error 
     }catch(error){
       console.error('Error claiming queue:', error);
     }
   };
 
+  // takes in the document key and pops it from the database
   const popQueue = async()=>{
     try{
       const ans = await db.collection('requests').doc(docKey).delete();
@@ -123,6 +125,7 @@ function App() {
     }
   };
 
+  // adds someone into the queue  takes in student name, tabke number, and help type
   const addQueue = async() => {
     const data = {
       Name: student,
@@ -140,9 +143,16 @@ function App() {
   }
 
 
+  // takes in email, password, and verification code named checker
   const registerWithEmailAndPassword = async () => {
     try {
+
+
+      /* !!!!! MAKE SURE VERICODE IS FILLED OUT !!! */
       const vericode = '';
+
+
+      // checks vericode with the checker code
       if(!checker.localeCompare(vericode)){
         alert("wrong verificationcode")
       }
@@ -152,12 +162,14 @@ function App() {
         setEmail(''); // Clear email input
         setPassword(''); // Clear password input
       }
+      // error catching
     } catch (err) {
       console.error(err);
       alert(err.message);
     }
   };
 
+  // logs in the user after the account has bee ncreated
   const loginWithEmailAndPassword = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
@@ -170,6 +182,7 @@ function App() {
 
 
   return (
+    // used for testing
     <View style={styles.container}>
       <TextInput
         style={styles.input}
