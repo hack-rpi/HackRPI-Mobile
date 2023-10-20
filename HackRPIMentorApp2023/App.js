@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
+<<<<<<< Updated upstream
 import { StyleSheet, Button, View, Text, TextInput } from 'react-native';
 
 // Import the functions you need from the SDKs you need
@@ -9,6 +10,13 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+=======
+import { initializeApp } from "firebase/app";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { FieldValue, getFirestore, addDoc, collection, getDocs, documentId } from "firebase/firestore";
+import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+
+>>>>>>> Stashed changes
 const firebaseConfig = {
   apiKey: "AIzaSyAqGfFX7gXRGBtidctQjIJ4NC0FA6YxeOQ",
   authDomain: "mentor-queue-c01a3.firebaseapp.com",
@@ -19,10 +27,14 @@ const firebaseConfig = {
   measurementId: "G-NJ5ZBXKBX3"
 };
 
+<<<<<<< Updated upstream
 
 // Initialize Firebase
+=======
+>>>>>>> Stashed changes
 const app = initializeApp(firebaseConfig);
 
+<<<<<<< Updated upstream
 
 export default function App() {
   const [formData, setFormData] = useState({
@@ -35,11 +47,67 @@ export default function App() {
     // Handle form submission here, e.g., send data to your API
     console.log(formData);
   };
+=======
+export default function App() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const printRequestsData = async () => {
+    try {
+      const requestsCollection = collection(db, 'requests');
+      const querySnapshot = await getDocs(requestsCollection);
+
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        const tableNum = data.tablenum;
+        const type = data.type;
+
+        console.log(`Table Number: ${tableNum}, Type: ${type}`);
+      });
+    } catch (error) {
+      console.error("Error retrieving data:", error);
+    }
+  };
+
+  const registerWithEmailAndPassword = async () => {
+    try {
+      const res = await createUserWithEmailAndPassword(auth, email, password);
+      const user = res.user;
+      setEmail(''); // Clear email input
+      setPassword(''); // Clear password input
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
+    }
+  };
+
+  const loginWithEmailAndPassword = async () => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      console.log('Account detected');
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
+    }
+  };
+
+  const deleteDocument = async (documentId) => {
+    try {
+      const docRef = doc(db, 'requests', documentId);
+      await deleteDoc(docRef);
+      console.log('Document deleted successfully');
+    } catch (error) {
+      console.error('Error deleting document:', error);
+    }
+  };
+
+>>>>>>> Stashed changes
 
   return (
     <View style={styles.container}>
       <Text>Number input:</Text>
       <TextInput
+<<<<<<< Updated upstream
         style={styles.textBox}
         keyboardType="numeric" // Set the keyboardType to 'numeric' for a number input
         value={formData.tableNumber}
@@ -83,6 +151,39 @@ export default function App() {
         <Button title="Reset form" onPress={() => setFormData({ tableNumber: '', myCheckbox: false, helpType: 'Python' })} />
         <Button title="Submit form" onPress={handleSubmit} />
       </View>
+=======
+        style={styles.input}
+        placeholder="Email"
+        onChangeText={(text) => setEmail(text)}
+        value={email}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Password"
+        secureTextEntry
+        onChangeText={(text) => setPassword(text)}
+        value={password}
+      />
+      <TouchableOpacity
+        style={styles.registerButton}
+        onPress={registerWithEmailAndPassword}
+      >
+        <Text style={styles.buttonText}>Register</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.loginButton}
+        onPress={loginWithEmailAndPassword}
+      >
+        <Text style={styles.buttonText}>Login</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.deleteButton}
+        onPress={() => deleteDocument(documentId)}
+      >
+        <Text style={styles.buttonText}>Delete Document</Text>
+      </TouchableOpacity>
+      <StatusBar style="auto" />
+>>>>>>> Stashed changes
     </View>
   );
 }
@@ -93,6 +194,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+<<<<<<< Updated upstream
   textBox: {
     width: '80%',
     height: 40,
@@ -126,3 +228,24 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
 });
+=======
+  input: {
+    marginBottom: 10,
+    paddingHorizontal: 10,
+  },
+  registerButton: {
+    backgroundColor: 'blue',
+    padding: 10,
+    borderRadius: 5,
+  },
+  loginButton: {
+    backgroundColor: 'green',
+    padding: 10,
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+  },
+});
+>>>>>>> Stashed changes
