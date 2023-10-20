@@ -13,7 +13,7 @@ const Tab = createBottomTabNavigator();
 function InfoScreen() {
   return (
     <View style={styles.container}>
-    <Food />
+      <Food />
     </View>
   );
 }

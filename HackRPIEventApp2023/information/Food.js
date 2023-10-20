@@ -1,19 +1,32 @@
 import React from "react";
-import { SafeAreaView, ScrollView, StyleSheet } from "react-native";
+import { SafeAreaView, ScrollView, StyleSheet,Text,View } from "react-native";
 import FoodObject from "./FoodObject";
 
-// calander object that holds all events and handles which are visable, which are active, and which are upcoming.
 const Food = () => {
   return (
     <SafeAreaView style={styles.FoodStyle}>
+        <View style={styles.headerContainer}>
+            <Text style={styles.header}>Info</Text>
+            <Text style={styles.subheader}>Maps</Text>
+        </View>
       <ScrollView
         style={styles.ScrollView}
         showsVerticalScrollIndicator={true}
-        //pagingEnabled={true} // Enable paging
-        //snapToInterval={150} // Set the interval to the height of a single rectangle
       >
         <FoodObject
           food_Title="Breakfast"
+          Time="Time Unknown"
+          Location="Location Unknown"
+          Description="This is not important at all."
+        />
+        <FoodObject
+          food_Title="Lunch"
+          Time="Time Unknown"
+          Location="Location Unknown"
+          Description="This is not important at all."
+        />
+        <FoodObject
+          food_Title="Dinner"
           Time="Time Unknown"
           Location="Location Unknown"
           Description="This is not important at all."
@@ -24,8 +37,28 @@ const Food = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create ({
     FoodStyle: {
+        flex: 1,
+    },
+    headerContainer: {
+        alignItems: 'left',
+        marginBottom: 20, // Adjust as needed
+        marginTop: 10,
+    },
+    header: {
+        fontSize: 36,
+        fontWeight: 'bold',
+        marginBottom: 10,
+        
+        color:'white'
+
+    },
+    subheader: {
+        fontSize: 18,
+        ontStyle: 'italic',
+        color:'white'
+    },
     marginTop: 20,
     marginBottom: 20,
     backgroundColor: "transparent",
@@ -33,7 +66,9 @@ const styles = StyleSheet.create({
     justifyContent: "start",
     alignItems: "center",
     padding: 16,
-  },
+
 });
+
+
 
 export default Food;

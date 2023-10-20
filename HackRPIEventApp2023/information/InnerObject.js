@@ -4,7 +4,7 @@ import { AntDesign } from "@expo/vector-icons";
 
 // Reusable component that that creates the main content box
 const InnerObject = ({
-  workshop_title,
+  food_title,
   time,
   location,
   description,
@@ -23,7 +23,7 @@ const InnerObject = ({
           expanded ? styles.expanded : null
         ]}>
         <View>
-          <Text style={styles.workshop_title}>{"  " + workshop_title}</Text>
+          <Text style={styles.food_title}>{"  " + food_title}</Text>
           <Text style={styles.time}>{"  " +time}</Text>
           <Text style={styles.location}>{"  " +location}</Text>
           {expanded && <Text style={styles.description}>{"  " + description}</Text>}
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     backgroundColor: "red",
   },
 
-  workshop_title: {
+  food_title: {
     fontSize: 18,
     fontWeight: "bold",
   },

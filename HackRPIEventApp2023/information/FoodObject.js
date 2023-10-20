@@ -5,7 +5,7 @@ import InnerObject from "./InnerObject"; // Import the InnerObject component
 
 //reusable component that ties an event object to it's notification bell
 const FoodObject = ({
-  workshop_Title,
+  food_Title,
   Time,
   Location,
   Description,
@@ -13,7 +13,7 @@ const FoodObject = ({
   return (
     <View style={styles.container}>
       <InnerObject
-        workshop_title={workshop_Title}
+        food_title={food_Title}
         time={Time}
         location={Location}
         description={Description}
