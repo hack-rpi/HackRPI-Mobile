@@ -14,7 +14,6 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } f
 import { FieldValue, getFirestore, addDoc, collection, getDocs, documentId } from "firebase/firestore";
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 
-
 const firebaseConfig = {
   apiKey: "AIzaSyAqGfFX7gXRGBtidctQjIJ4NC0FA6YxeOQ",
   authDomain: "mentor-queue-c01a3.firebaseapp.com",
