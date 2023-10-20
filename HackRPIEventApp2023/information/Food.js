@@ -2,6 +2,7 @@ import React from "react";
 import { SafeAreaView, ScrollView, StyleSheet,Text,View } from "react-native";
 import FoodObject from "./FoodObject";
 
+
 const Food = () => {
   return (
     <SafeAreaView style={styles.FoodStyle}>
@@ -18,18 +19,22 @@ const Food = () => {
           Time="Time Unknown"
           Location="Location Unknown"
           Description="This is not important at all."
-        />
+          //ImageSource={require("./HackRPIEventApp2023/assets/breakfast.jpg")}
+           
+       />
         <FoodObject
           food_Title="Lunch"
           Time="Time Unknown"
           Location="Location Unknown"
           Description="This is not important at all."
+          
         />
         <FoodObject
           food_Title="Dinner"
           Time="Time Unknown"
           Location="Location Unknown"
           Description="This is not important at all."
+          
         />
         
       </ScrollView>
@@ -56,7 +61,6 @@ const styles = StyleSheet.create ({
     },
     subheader: {
         fontSize: 18,
-        ontStyle: 'italic',
         color:'white'
     },
     marginTop: 20,

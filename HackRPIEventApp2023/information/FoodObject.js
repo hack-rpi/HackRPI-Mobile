@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
-//import { Feather } from "@expo/vector-icons";
+import { View, StyleSheet, Image} from "react-native";
 import InnerObject from "./InnerObject"; // Import the InnerObject component
 
 //reusable component that ties an event object to it's notification bell
@@ -9,6 +8,7 @@ const FoodObject = ({
   Time,
   Location,
   Description,
+  imageSource,
 }) => {
   return (
     <View style={styles.container}>
@@ -17,6 +17,7 @@ const FoodObject = ({
         time={Time}
         location={Location}
         description={Description}
+        imageSource={imageSource}
       />
     </View>
   );
@@ -31,6 +32,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginBottom: 0,
   },
+ 
 });
 
 export default FoodObject;

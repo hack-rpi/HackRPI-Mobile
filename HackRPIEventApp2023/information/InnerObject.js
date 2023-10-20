@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Icon } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
 // Reusable component that that creates the main content box
@@ -8,6 +8,7 @@ const InnerObject = ({
   time,
   location,
   description,
+  imageSource,
 }) => {
   const [expanded, setExpanded] = useState(false);
 
@@ -26,10 +27,13 @@ const InnerObject = ({
           <Text style={styles.food_title}>{"  " + food_title}</Text>
           <Text style={styles.time}>{"  " +time}</Text>
           <Text style={styles.location}>{"  " +location}</Text>
+          <Image source={imageSource} style={styles.image} />
           {expanded && <Text style={styles.description}>{"  " + description}</Text>}
+          
         </View>
         <View style={styles.iconContainer}>
           <AntDesign name={expanded ? "up" : "down"} size={24} color="black" />
+        
         </View>
       </View>
     </TouchableOpacity>
@@ -39,7 +43,7 @@ const InnerObject = ({
 const styles = StyleSheet.create({
   rectangle: {
     width: 250,
-    height: 100,
+    height: 200,
     borderWidth: 1,
     borderColor: "#000",
     borderRadius: 20,
@@ -56,7 +60,7 @@ const styles = StyleSheet.create({
     top: 10,
   },
   expanded: {
-    height: 120, // Adjust the height as needed
+    height: 200, // Adjust the height as needed
   },
   redBackground: {
     backgroundColor: "red",
@@ -74,6 +78,11 @@ const styles = StyleSheet.create({
   },
   description: {
     marginTop: 10,
+  },
+  image: {
+    width: 100, // Adjust as needed
+    height: 50, // Adjust as needed
+    alignSelf: "center", // Center the image within the view
   },
 });
 
