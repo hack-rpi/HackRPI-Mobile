@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-<<<<<<< Updated upstream
 import { StyleSheet, Button, View, Text, TextInput } from 'react-native';
 
 // Import the functions you need from the SDKs you need
@@ -10,13 +9,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-=======
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { FieldValue, getFirestore, addDoc, collection, getDocs, documentId } from "firebase/firestore";
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 
->>>>>>> Stashed changes
+
 const firebaseConfig = {
   apiKey: "AIzaSyAqGfFX7gXRGBtidctQjIJ4NC0FA6YxeOQ",
   authDomain: "mentor-queue-c01a3.firebaseapp.com",
@@ -27,27 +25,8 @@ const firebaseConfig = {
   measurementId: "G-NJ5ZBXKBX3"
 };
 
-<<<<<<< Updated upstream
-
-// Initialize Firebase
-=======
->>>>>>> Stashed changes
 const app = initializeApp(firebaseConfig);
 
-<<<<<<< Updated upstream
-
-export default function App() {
-  const [formData, setFormData] = useState({
-    tableNumber: '1',
-    myCheckbox: false,
-    helpType: 'Python',
-  });
-
-  const handleSubmit = () => {
-    // Handle form submission here, e.g., send data to your API
-    console.log(formData);
-  };
-=======
 export default function App() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -93,65 +72,18 @@ export default function App() {
 
   const deleteDocument = async (documentId) => {
     try {
-      const docRef = doc(db, 'requests', documentId);
-      await deleteDoc(docRef);
+      const docRef = doc(db, 'requests', documentId).delete();
       console.log('Document deleted successfully');
     } catch (error) {
       console.error('Error deleting document:', error);
     }
   };
 
->>>>>>> Stashed changes
 
   return (
     <View style={styles.container}>
       <Text>Number input:</Text>
       <TextInput
-<<<<<<< Updated upstream
-        style={styles.textBox}
-        keyboardType="numeric" // Set the keyboardType to 'numeric' for a number input
-        value={formData.tableNumber}
-        onChangeText={(text) => setFormData({ ...formData, tableNumber: text })}
-      />
-
-      <View style={styles.checkboxContainer}>
-        <Text>Checkbox:</Text>
-        <View style={styles.checkbox}>
-          <Button
-            title={formData.myCheckbox ? 'Checked' : 'Unchecked'}
-            onPress={() => setFormData({ ...formData, myCheckbox: !formData.myCheckbox })}
-          />
-        </View>
-      </View>
-
-      <Text>Help type:</Text>
-      <View style={styles.radioContainer}>
-        <Text>Python</Text>
-        <Button
-          title={formData.helpType === 'Python' ? 'Selected' : 'Select'}
-          onPress={() => setFormData({ ...formData, helpType: 'Python' })}
-        />
-      </View>
-      <View style={styles.radioContainer}>
-        <Text>C++</Text>
-        <Button
-          title={formData.helpType === 'C++' ? 'Selected' : 'Select'}
-          onPress={() => setFormData({ ...formData, helpType: 'C++' })}
-        />
-      </View>
-      <View style={styles.radioContainer}>
-        <Text>Java</Text>
-        <Button
-          title={formData.helpType === 'Java' ? 'Selected' : 'Select'}
-          onPress={() => setFormData({ ...formData, helpType: 'Java' })}
-        />
-      </View>
-
-      <View style={styles.buttonContainer}>
-        <Button title="Reset form" onPress={() => setFormData({ tableNumber: '', myCheckbox: false, helpType: 'Python' })} />
-        <Button title="Submit form" onPress={handleSubmit} />
-      </View>
-=======
         style={styles.input}
         placeholder="Email"
         onChangeText={(text) => setEmail(text)}
@@ -183,7 +115,6 @@ export default function App() {
         <Text style={styles.buttonText}>Delete Document</Text>
       </TouchableOpacity>
       <StatusBar style="auto" />
->>>>>>> Stashed changes
     </View>
   );
 }
@@ -194,7 +125,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-<<<<<<< Updated upstream
+
   textBox: {
     width: '80%',
     height: 40,
@@ -228,24 +159,5 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
 });
-=======
-  input: {
-    marginBottom: 10,
-    paddingHorizontal: 10,
-  },
-  registerButton: {
-    backgroundColor: 'blue',
-    padding: 10,
-    borderRadius: 5,
-  },
-  loginButton: {
-    backgroundColor: 'green',
-    padding: 10,
-    borderRadius: 5,
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 16,
-  },
-});
->>>>>>> Stashed changes
+
+
