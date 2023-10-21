@@ -24,13 +24,15 @@ const EventObject = ({
           styles.rectangle,
           expanded ? styles.expanded : null,
           isRed ? styles.redBackground : null,
+          expanded && { height: description.length/2 + 170 },
         ]}>
         <View>
           <Text style={styles.workshop_title}>{"  " + workshop_title}</Text>
           <Text style={styles.time}>{"  " +time}</Text>
           <Text style={styles.location}>{"  Location: " +location}</Text>
           <Text style={styles.presenter}>{"  Presenter: " +presenter}</Text>
-          {expanded && <Text style={styles.description}>{"  " + description}</Text>}
+          {expanded && <Text style={styles.description}>{"  description: " + 
+          description}</Text>}
         </View>
         <View style={styles.iconContainer}>
           <AntDesign name={expanded ? "up" : "down"} size={24} color="black" />
@@ -80,6 +82,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   description: {
+    fontSize: 14,
     marginTop: 10,
   },
 });
