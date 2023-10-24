@@ -1,68 +1,80 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { View, Text, TextInput, StyleSheet } from "react-native";
 import SwipeButton from "rn-swipe-button";
-import customThumbIcon from "../assets/check.svg";
+import customThumbIcon from "../assets/check.png";
 
-class QueEntry extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: "",
-      roomNumber: "",
-      problemType: "",
-    };
-  }
+const QueEntry = ({ name, roomNumber, problemType }) => {
+  const [inQue, setQue] = useState(false);
+  const [stateName, setName] = useState("");
+  const [stateRoomNumber, setRoomNumber] = useState("");
+  const [stateProblemType, setProblemType] = useState("");
 
-  handleNameChange = (name) => {
-    this.setState({ name });
+  const toggleQue = () => {
+    setQue(!inQue);
   };
 
-  handleRoomNumberChange = (roomNumber) => {
-    this.setState({ roomNumber });
+  const handleNameChange = (name) => {
+    setName(name);
   };
 
-  handleProblemTypeChange = (problemType) => {
-    this.setState({ problemType });
+  const handleRoomNumberChange = (roomNumber) => {
+    setRoomNumber(roomNumber);
   };
 
-  submitForm = () => {
+  const handleProblemTypeChange = (problemType) => {
+    setProblemType(problemType);
+  };
+
+  const submitForm = () => {
     // You can perform actions with the entered data here.
     // For example, send the data to a server or perform local processing.
-    console.log("Name:", this.state.name);
-    console.log("Room Number:", this.state.roomNumber);
-    console.log("Problem Type:", this.state.problemType);
+    toggleQue();
+    // add error checking for vals
+    console.log("Name:", stateName);
+    console.log("Room Number:", stateRoomNumber);
+    console.log("Problem Type:", stateProblemType);
+
+    // jump to other page
   };
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Name:</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={this.handleNameChange}
-          value={this.state.name}
-        />
-        <Text>Room Number:</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={this.handleRoomNumberChange}
-          value={this.state.roomNumber}
-        />
-        <Text>Type of Problem:</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={this.handleProblemTypeChange}
-          value={this.state.problemType}
-        />
-        <SwipeButton
-          title="Join Queue"
-          onSwipeSuccess={this.submitForm}
-          containerStyles={styles.buttonContainer}
-        />
-      </View>
-    );
-  }
-}
+  return (
+    <View style={styles.container}>
+      <Text style={styles.text}>Name:</Text>
+      <TextInput
+        style={styles.input}
+        onChangeText={handleNameChange}
+        value={stateName}
+      />
+      <Text style={styles.text}>Room Number:</Text>
+      <TextInput
+        style={styles.input}
+        onChangeText={handleRoomNumberChange}
+        value={stateRoomNumber}
+      />
+      <Text style={styles.text}>Type of Problem:</Text>
+      <TextInput
+        style={styles.input}
+        onChangeText={handleProblemTypeChange}
+        value={stateProblemType}
+      />
+
+      <SwipeButton
+        title={inQue ? "Currently in Queue" : "Join Queue"}
+        onSwipeSuccess={submitForm}
+        railBackgroundColor="transparent"
+        thumbIconBackgroundColor="#910307"
+        railFillBackgroundColor="rgba(145, 3, 7, 0.5)"
+        thumbIconBorderColor="#FFFFFF"
+        titleColor="#FFFFFF"
+        disableResetOnTap={true}
+        containerStyles={styles.buttonContainer}
+        railStyles={styles.rail}
+        thumbIconStyles={styles.thumbIcon}
+        thumbIconImageSource={customThumbIcon}
+      />
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -77,19 +89,29 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: 8,
   },
+  text: {
+    color: "#ffffff",
+    fontSize: 15,
+    padding: 5,
+  },
   buttonContainer: {
-    backgroundColor: "#3498db", // Background color of the entire button
-    railBorderColor: "#ff0000",
-    borderRadius: 10,
-    padding: 10,
+    backgroundColor: "#910307",
+    borderWidth: 0,
+    borderRadius: 100,
+  },
+  rail: {
+    borderRadius: 100,
+    borderWidth: 2,
+    borderColor: "#000000",
+  },
+
+  thumbIcon: {
+    borderRadius: 100,
+    borderWidth: 2,
+    borderColor: "#FFFFFF",
+    height: 20,
+    width: 20,
   },
 });
 
-// export const colors = {
-//     backgroundBlack: '#191919',
-//     mainRed: '#910307',
-//     mainGray: '#9E9E9E',
-//     white: '#FFFFFF',
-//     black: '#000000'
-//   };
 export default QueEntry;
