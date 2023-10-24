@@ -91,30 +91,51 @@ function App() {
     }
   };
 
-  // makes the students help status true takes in a doc key to access the student
   const queueOut = async (docKey) => {
-    try{
+    try {
+      // Create a reference to the student's document using the provided docKey
       const docRef = db.collection('requests').doc(docKey);
-      const ans = await docRef.set({
-        helped: true
-      })
-    }catch(error){
+  
+      // Check if the "helped" field is already true
+      const docSnapshot = await docRef.get();
+      const data = docSnapshot.data();
+  
+      if (data && data.helped) {
+        alert('This student has already been helped.');
+      } else {
+        // Set the "helped" field to true
+        await docRef.set({
+          helped: true
+        });
+      }
+    } catch (error) {
       console.error('Error claiming queue:', error);
     }
   };
+  
 
-  // takes in a document key and does the opposite of queueout
   const unHelp = async (docKey) => {
-    try{
+    try {
+      // Create a reference to the student's document using the provided docKey
       const docRef = db.collection('requests').doc(docKey);
-      const ans = await docRef.set({
-        helped: false
-      })
-      // catches the error 
-    }catch(error){
-      console.error('Error claiming queue:', error);
+  
+      // Check if the "helped" field is already false
+      const docSnapshot = await docRef.get();
+      const data = docSnapshot.data();
+  
+      if (data && !data.helped) {
+        alert('This student is already marked as not helped.');
+      } else {
+        // Set the "helped" field to false
+        await docRef.set({
+          helped: false
+        });
+      }
+    } catch (error) {
+      console.error('Error unmarking queue:', error);
     }
   };
+  
 
   // takes in the document key and pops it from the database
   const popQueue = async(docKey)=>{
