@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, StyleSheet } from "react-native";
 import SwipeButton from "rn-swipe-button";
-import customThumbIcon from "../assets/check.png";
+import checkIcon from "../assets/check.png";
+import slideIcon from "../assets/chevron-right.png";
 
 const QueEntry = ({ name, roomNumber, problemType }) => {
   const [inQue, setQue] = useState(false);
@@ -61,16 +62,18 @@ const QueEntry = ({ name, roomNumber, problemType }) => {
       <SwipeButton
         title={inQue ? "Currently in Queue" : "Join Queue"}
         onSwipeSuccess={submitForm}
-        railBackgroundColor="transparent"
-        thumbIconBackgroundColor="#910307"
+        railBackgroundColor="#191919"
+        railBorderColor="#FFFFFF"
+        thumbIconBackgroundColor="rgba(145, 3, 7,1)"
         railFillBackgroundColor="rgba(145, 3, 7, 0.5)"
+        railFillBorderColor="rgba(145, 3, 7, 0.5)"
         thumbIconBorderColor="#FFFFFF"
         titleColor="#FFFFFF"
         disableResetOnTap={true}
         containerStyles={styles.buttonContainer}
         railStyles={styles.rail}
         thumbIconStyles={styles.thumbIcon}
-        thumbIconImageSource={customThumbIcon}
+        thumbIconImageSource={inQue ? checkIcon : slideIcon}
       />
     </View>
   );
@@ -96,13 +99,12 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     backgroundColor: "#910307",
-    borderWidth: 0,
+    borderWidth: 2,
     borderRadius: 100,
   },
   rail: {
     borderRadius: 100,
-    borderWidth: 2,
-    borderColor: "#000000",
+    borderWidth: 3,
   },
 
   thumbIcon: {
