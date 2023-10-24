@@ -28,11 +28,17 @@ const Calander = () => {
         if(Past){
           return null; //if the event is in the past, don't display it
         }
+        if(event.WorkShop_Title == "2023-11-04"){
+          day = "Saturday";
+        }
+        else{
+          day = "Sunday";
+        }
         return (
           <CalanderObject
             key={index}
             workshop_Title={event.WorkShop_Title}
-            Time={event.WorkShop_Date + ": " + Start_Time + " - " + End_Time}
+            Time={day + ": " + Start_Time + " - " + End_Time}
             Presenter={event.WorkShop_Presenter}
             Location={event.WorkShop_Location}
             Description={event.WorkShop_Description}

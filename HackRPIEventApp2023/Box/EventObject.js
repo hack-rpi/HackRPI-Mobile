@@ -27,15 +27,14 @@ const EventObject = ({
           expanded && { height: description.length/2 + 170 },
         ]}>
         <View>
-          <Text style={styles.workshop_title}>{"  " + workshop_title}</Text>
-          <Text style={styles.time}>{"  " +time}</Text>
-          <Text style={styles.location}>{"  Location: " +location}</Text>
-          <Text style={styles.presenter}>{"  Presenter: " +presenter}</Text>
-          {expanded && <Text style={styles.description}>{"  description: " + 
-          description}</Text>}
+        <Text style={styles.workshop_title}>{workshop_title}</Text>
+          <Text style={styles.time}>{time}</Text>
+          <Text style={styles.location}>{"Location: " +location}</Text>
+          <Text style={styles.presenter}>{"Presenter: " +presenter}</Text>
+          {expanded && <Text style={styles.description}>{"\t" + description}</Text>}
         </View>
-        <View style={styles.iconContainer}>
-          <AntDesign name={expanded ? "up" : "down"} size={24} color="black" />
+        <View style={[styles.iconContainer, expanded &&{top: 15}]}>
+          <AntDesign name={expanded ? "up" : "down"} size={24} color="black"/>
         </View>
       </View>
     </TouchableOpacity>
@@ -58,8 +57,8 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   iconContainer: {
-    left: 100,
-    top: 10,
+    left: 130,
+    top: 5,
   },
   expanded: {
     height: 300, // Adjust the height as needed
@@ -69,21 +68,27 @@ const styles = StyleSheet.create({
   },
 
   workshop_title: {
+    left:10,
     fontSize: 18,
     fontWeight: "bold",
   },
   time: {
+    left:10,
     fontSize: 14,
   },
   location: {
+    left:10,
     fontSize: 14,
   },
   presenter: {
+    left:10,
     fontSize: 14,
   },
   description: {
+    left:10,
     fontSize: 14,
     marginTop: 10,
+    marginRight: 10,
   },
 });
 
