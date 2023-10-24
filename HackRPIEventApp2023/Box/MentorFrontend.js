@@ -32,6 +32,7 @@ const MentorFrontend = () => {
       Table: "Table #2",
       Description: "Java is a silly language and I need help asap",
       isRed: false,
+      Shown: true
     },
     // Add more objects as needed
   ];
@@ -41,6 +42,7 @@ const MentorFrontend = () => {
       <ScrollView style={styles.ScrollView} showsVerticalScrollIndicator={true}>
         {hackerInfoData.map((data, index) => (
           <HackerInfo key={index} {...data} />
+  
         ))}
       </ScrollView>
     </SafeAreaView>

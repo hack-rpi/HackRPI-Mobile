@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigation } from '@react-navigation/native';
 import { View, StyleSheet } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import EventObject from "./EventObject"; // Import the EventObject component
@@ -14,16 +15,13 @@ const HackerInfo = ({
 }) => {
   const [isActive, setIsActive] = useState(false); // Define isActive state
 
-  //const navigation = useNavigation();
-  /*
+  const navigation = useNavigation();
+  
   const handleCheckmarkClick = () => {
     // Navigate to AnotherPage component
     navigation.navigate('AnotherPage');
   }
-  */
-  const handleClick = () => {
-    setIsActive(!isActive);
-  };
+  
 
   // const checkCondition = () => {
   //   // Implement later, if the event is currently happening, return true.
@@ -47,7 +45,7 @@ const HackerInfo = ({
           name="check"
           size = {30}
           color={"red"}
-          //onPress={handleCheckmarkClick}
+          onPress={handleCheckmarkClick}
           zIndex={2}
           // Add onPress to handle click
         />

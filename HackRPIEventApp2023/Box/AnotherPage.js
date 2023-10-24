@@ -4,8 +4,8 @@ import { View, Text } from 'react-native';
 
 const AnotherPage = () => {
   return (
-    <View>
-      <Text>This is another page</Text>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>This is another page!</Text>
     </View>
   );
 };
