@@ -19,7 +19,13 @@ const FoodObject = ({
         description={Description}
         imageSource={imageSource}
       />
+      {/* <View
+        style={styles.notifBox}
+        backgroundColor={"red"}
+        borderColor={ "red"}>
+      </View> */}
     </View>
+    
   );
 };
 
@@ -32,6 +38,20 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginBottom: 0,
   },
+
+  notifBox: {
+    width: 60,
+    height: 100,
+    borderWidth: 3,
+    borderRadius: 20,
+    padding: 10,
+    marginLeft: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 0,
+    zIndex: 1,
+  },
+  
  
 });
 

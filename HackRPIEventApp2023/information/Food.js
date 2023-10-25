@@ -15,6 +15,7 @@ const Food = () => {
         showsVerticalScrollIndicator={true}
       >
         <ImageSlideshow />
+        <View style={styles.container}>
         <FoodObject
           food_Title="Breakfast"
           Time="Time Unknown"
@@ -39,7 +40,7 @@ const Food = () => {
           imageSource = {require('./dinner.jpeg')}
           
         />
-        
+      </View>  
       </ScrollView>
     </SafeAreaView>
   );
@@ -58,7 +59,6 @@ const styles = StyleSheet.create ({
         fontSize: 36,
         fontWeight: 'bold',
         marginBottom: 10,
-        
         color:'white'
 
     },
@@ -66,6 +66,12 @@ const styles = StyleSheet.create ({
         fontSize: 18,
         color:'white'
     },
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+
     marginTop: 20,
     marginBottom: 20,
     backgroundColor: "transparent",

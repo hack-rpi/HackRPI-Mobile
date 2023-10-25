@@ -23,18 +23,23 @@ const InnerObject = ({
           styles.rectangle,
           expanded ? styles.expanded : null
         ]}>
-        <View>
+        <View style={styles.textContainer}>
           <Text style={styles.food_title}>{"  " + food_title}</Text>
           <Text style={styles.time}>{"  " +time}</Text>
           <Text style={styles.location}>{"  " +location}</Text>
-          <Image source={imageSource} style={styles.image} />
+          {/* <Image source={imageSource} style={styles.image} /> */}
           {expanded && <Text style={styles.description}>{"  " + description}</Text>}
-          
-        </View>
-        <View style={styles.iconContainer}>
+          <View style={styles.iconContainer}>
           <AntDesign name={expanded ? "up" : "down"} size={24} color="black" />
         
         </View>
+        </View>
+
+        <View style={styles.imageContainer}>
+          <Image source={imageSource} style={styles.image} />
+        </View>
+
+        
       </View>
     </TouchableOpacity>
   );
@@ -42,8 +47,8 @@ const InnerObject = ({
 
 const styles = StyleSheet.create({
   rectangle: {
-    width: 250,
-    height: 200,
+    width: 300,
+    height: 120,
     borderWidth: 1,
     borderColor: "#000",
     borderRadius: 20,
@@ -51,19 +56,20 @@ const styles = StyleSheet.create({
     left: 10,
     justifyContent: "center",
     alignItems: "left",
-
     marginBottom: 0,
     backgroundColor: "white",
+    flexDirection: 'row',
   },
   iconContainer: {
     left: 100,
     top: 10,
   },
   expanded: {
-    height: 200, // Adjust the height as needed
+    height: 150, // Adjust the height as needed
   },
-  redBackground: {
-    backgroundColor: "red",
+
+  textContainer: {
+    flex: 1, // Take up remaining space
   },
 
   food_title: {
@@ -78,11 +84,15 @@ const styles = StyleSheet.create({
   },
   description: {
     marginTop: 10,
+
   },
   image: {
     width: 100, // Adjust as needed
-    height: 50, // Adjust as needed
+    height: 100, // Adjust as needed
     alignSelf: "center", // Center the image within the view
+  },
+  imageContainer: {
+    marginLeft: 10, // Add some space between text and image
   },
 });
 
