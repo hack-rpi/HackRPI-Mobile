@@ -1,4 +1,3 @@
-import CountdownTimer from './components/CountdownTimer';
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -20,7 +19,6 @@ function InfoScreen() {
 function HomeScreen() {
   return (
     <View style={styles.container}>
-      <CountdownTimer />
     <Feather name="user" size={24} color="white" />
       <Text style={styles.text}>No one home gotcha! haha</Text>
     </View>
