@@ -18,26 +18,51 @@ const Food = () => {
         <View style={styles.container}>
         <FoodObject
           food_Title="Breakfast"
-          Time="Time Unknown"
-          Location="Location Unknown"
-          Description="This is not important at all."
-          imageSource = {require('./breakfast.jpg')}
-           
+          Store ="Bagels, Donuts, Coffee"
+          Time="Time"
+          Location="Location"
+          Description=""
+          imageSource = {require('./bagels.png')}
+    
        />
         <FoodObject
-          food_Title="Lunch"
-          Time="Time Unknown"
-          Location="Location Unknown"
-          Description="This is not important at all."
-          imageSource = {require('./lunch.webp')}
+          food_Title="Lunch 1"
+          Store ="Big Apple Pizzeria"
+          Time="Time"
+          Location="Location"
+          Description=""
+          imageSource = {require('./big_apple.jpg')}
+       
           
         />
-        <FoodObject
-          food_Title="Dinner"
+         <FoodObject
+          food_Title="Lunch 2"
+          Store ="DeFazio's Pizzeria"
           Time="Time Unknown"
           Location="Location Unknown"
-          Description="This is not important at all."
-          imageSource = {require('./dinner.jpeg')}
+          Description=""
+          imageSource = {require('./DeFazio_pizza.jpg')}
+        
+        />
+
+        <FoodObject
+          food_Title="Dinner"
+          Store ="Di Bella's Old Fashioned Subs"
+          Time="Time Unknown"
+          Location="Location Unknown"
+          Description=""
+          imageSource = {require('./DiBella_Subs.jpg')}
+         
+        />
+        
+         <FoodObject
+          food_Title="Midnight Snack"
+          Store ="Tai Chi Bubble Tea"
+          Time="Time Unknown"
+          Location="Location Unknown"
+          Description=""
+          imageSource = {require('./Bubble_Tea.jpg')}
+        
           
         />
       </View>  
