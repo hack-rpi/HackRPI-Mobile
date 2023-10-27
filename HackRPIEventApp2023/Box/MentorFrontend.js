@@ -27,7 +27,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-  const sendRequestsData = async () => {
+const sendRequestsData = async () => {
     try {
       const requestsCollection = collection(db, 'requests');
       const querySnapshot = await getDocs(requestsCollection);
@@ -83,7 +83,7 @@ const MentorFrontend = () => {
       } catch (error) {
         console.error('Error fetching data:', error);
     }
-    };
+  };
 
   useEffect(() => {
     populateHackerData();

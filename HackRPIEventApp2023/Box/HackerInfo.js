@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import { useNavigation } from '@react-navigation/native';
 import { View, StyleSheet } from "react-native";
 import { Feather } from "@expo/vector-icons";
-import EventObject from "./EventObject"; // Import the EventObject component
-//import { useNavigation } from '@react-navigation/native';
+import EventObject from "./EventObject";
 
-//reusable component that ties an event object to it's notification bell
 const HackerInfo = ({
   Hacker_Name,
   Table,
@@ -13,20 +11,19 @@ const HackerInfo = ({
   Description,
   isRed
 }) => {
-  const [isActive, setIsActive] = useState(false); // Define isActive state
-
+  const [isActive, setIsActive] = useState(false);
   const navigation = useNavigation();
-  
+  const hackerData = {
+      Hacker_Name,
+      Table,
+      BriefDescription,
+      Description,
+      isRed,
+  };
   const handleCheckmarkClick = () => {
-    // Navigate to AnotherPage component
-    navigation.navigate('AnotherPage');
+    // Pass the hacker information to AnotherPage
+    navigation.navigate('AnotherPage', {hackerData: hackerData});
   }
-  
-
-  // const checkCondition = () => {
-  //   // Implement later, if the event is currently happening, return true.
-  //   return true;
-  // };
 
   return (
     <View style={styles.container}>
@@ -43,11 +40,10 @@ const HackerInfo = ({
         borderColor={isRed ? "red" : "white"}>
         <Feather
           name="check"
-          size = {30}
+          size={30}
           color={"red"}
           onPress={handleCheckmarkClick}
           zIndex={2}
-          // Add onPress to handle click
         />
       </View>
     </View>
@@ -56,9 +52,9 @@ const HackerInfo = ({
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row", // Arrange children horizontally
-    alignItems: "center", // Center children vertically
-    backgroundColor: "transparent", // Replace with your desired background color
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "transparent",
     padding: 10,
     borderRadius: 10,
     marginBottom: 0,
