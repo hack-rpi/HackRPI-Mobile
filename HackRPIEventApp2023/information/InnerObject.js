@@ -23,7 +23,7 @@ const InnerObject = ({
           <Text style={styles.food_title}>{food_title}</Text>
           <Text style={styles.store}>{store}</Text>
           <Text style={styles.description}>{description}</Text>
-          {/* <Text style={styles.time}>{time}</Text> */}
+          <Text style={styles.time}>{time}</Text> 
           {/* <Text style={styles.location}>{location}</Text> */}
           <View style={styles.iconContainer}>
         </View>
@@ -66,8 +66,6 @@ const styles = StyleSheet.create({
     top: 10,
     flex: 1,
     left: 12, 
-    
-    
   },
 
   food_title: {
@@ -77,10 +75,12 @@ const styles = StyleSheet.create({
   store:{
     marginTop: 14,
     fontSize: 15,
+    
   },
   time: {
-    marginTop: 14,
+    marginTop: 12,
     fontSize: 14,
+   // marginBottom: 14,
   },
   location: {
     fontSize: 14,
@@ -90,15 +90,15 @@ const styles = StyleSheet.create({
 
   },
   image: {
-    width: 100, // Adjust as needed
-    height: 100, // Adjust as needed
+    width: 120, // Adjust as needed
+    height: 120, // Adjust as needed
     alignSelf: "center", // Center the image within the view
     borderRadius: 20,
-    marginTop: 12,
+    marginTop: 6,
   },
   imageContainer: {
     marginLeft: 10, // Add some space between text and image
-    marginRight: 20,
+    marginRight: 10,
   },
 });
 

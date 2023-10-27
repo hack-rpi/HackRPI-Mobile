@@ -19,7 +19,7 @@ const Food = () => {
         <FoodObject
           food_Title="Breakfast"
           Store ="Bagels, Donuts, Coffee"
-          Time="Time"
+          Time="Time: TBA"
           Location="Location"
           Description=""
           imageSource = {require('./bagels.png')}
@@ -28,7 +28,7 @@ const Food = () => {
         <FoodObject
           food_Title="Lunch 1"
           Store ="Big Apple Pizzeria"
-          Time="Time"
+          Time="Time: TBA"
           Location="Location"
           Description=""
           imageSource = {require('./big_apple.jpg')}
@@ -38,7 +38,7 @@ const Food = () => {
          <FoodObject
           food_Title="Lunch 2"
           Store ="DeFazio's Pizzeria"
-          Time="Time Unknown"
+          Time="Time: TBA"
           Location="Location Unknown"
           Description=""
           imageSource = {require('./DeFazio_pizza.jpg')}
@@ -48,7 +48,7 @@ const Food = () => {
         <FoodObject
           food_Title="Dinner"
           Store ="Di Bella's Old Fashioned Subs"
-          Time="Time Unknown"
+          Time="Time: TBA"
           Location="Location Unknown"
           Description=""
           imageSource = {require('./DiBella_Subs.jpg')}
@@ -58,7 +58,7 @@ const Food = () => {
          <FoodObject
           food_Title="Midnight Snack"
           Store ="Tai Chi Bubble Tea"
-          Time="Time Unknown"
+          Time="Time: TBA"
           Location="Location Unknown"
           Description=""
           imageSource = {require('./Bubble_Tea.jpg')}
