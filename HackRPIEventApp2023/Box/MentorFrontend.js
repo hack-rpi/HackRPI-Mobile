@@ -24,15 +24,14 @@ const firebaseConfig = {
   measurementId: "G-NJ5ZBXKBX3"
 }
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
 const db = getFirestore(app);
+const docIDs = [];
 
 const sendRequestsData = async () => {
     try {
       const requestsCollection = collection(db, 'requests');
       const querySnapshot = await getDocs(requestsCollection);
       let index = 0;
-      const docIDs = [];
       querySnapshot.forEach((doc) => {
         docIDs[index] = doc.id
         index += 1;
@@ -44,8 +43,7 @@ const sendRequestsData = async () => {
       //   const tableNum = data.tablenum;
       //   const type = data.type;
       //   const name = data.name;
-
-      //   console.log(`Table Number: ${tableNum}, Type: ${type}`);
+      // console.log(`Table Number: ${tableNum}, Type: ${type}`);
       // });
     } catch (error) {
       console.error('Error retrieving data:', error);
@@ -90,6 +88,7 @@ const MentorFrontend = () => {
   }, []); // Run once when the component mounts
 
   return (
+    <View style={styles.pageContainer}>
     <SafeAreaView style={styles.CalanderStyle}>
       <ScrollView style={styles.ScrollView} showsVerticalScrollIndicator={true}>
         {hackerData.length === 0 ? (
@@ -98,15 +97,20 @@ const MentorFrontend = () => {
           </View>
         ) : (
           hackerData.map((data, index) => (
-            <HackerInfo key={index} {...data} />
+            <HackerInfo key={index} {...data} Id={docIDs[index]} />
           ))
         )}
       </ScrollView>
     </SafeAreaView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  pageContainer: {
+    flex: 1,
+    backgroundColor: "#191919", // Background color for the entire page
+  },
   CalanderStyle: {
     marginTop: 20,
     marginBottom: 20,
