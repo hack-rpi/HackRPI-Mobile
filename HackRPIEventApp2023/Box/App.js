@@ -80,10 +80,9 @@ function App() {
   };
 
   // a fetchdoc function to return the data of a document, aka the student in queue takes in a dockey
-  const fetchDoc = async(docKey) => {
-    try{
-      // grabs the document
-      const ans = await db.collection('requests').doc(docKey);
+  async function fetchDoc(docKey) {
+    const ans = doc(db, 'requests', docKey)
+    try{   
       console.log(ans.data());
       // returns the data of that document
       return ans.data();
