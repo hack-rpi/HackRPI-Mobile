@@ -4,7 +4,7 @@ import { View, StyleSheet } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import EventObject from "./EventObject";
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection } from "firebase/firestore";
+import {doc, getFirestore, getDoc} from "firebase/firestore";
 
 // firebase
 
@@ -26,20 +26,17 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-
-const inQueue = async(docKey) => {
-    try{
-      // grabs the document
-      const colRef = await db.collection('requests')
-      const docRef = await colRef.doc(docKey)
-      // gets the data from the doc
-      const doc = await docRef.get();
+async function inQueue(docKey) {
+    const docRef = doc(db, 'requests', docKey)
+      console.log(docRef);
+    try{      // rabs the document
+      console.log(docKey);
+      const doc = await getDoc(docRef);
       // ensures that the document is retrieved properly
       if (!doc.exists) {
         console.log('No such document!');
       } else {
         // logs the data to error cehck then returns the helped status
-        console.log('Document data:', doc.data());
         return doc.data().helped;
       }
     }catch(error){
@@ -68,9 +65,9 @@ const HackerInfo = ({
   const handleCheckmarkClick = async () => {
     // check if person has been helped
     // TODO: inQueue throws an error, helped is undefined
-    // const helped = await inQueue(Id);
+    const helped = await inQueue(Id);
+    console.log(helped)
     
-    let helped = false;
     if (!helped) {
         // Pass the hacker information to AnotherPage
         navigation.navigate('AnotherPage', {hackerData: hackerData});
