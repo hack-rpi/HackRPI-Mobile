@@ -92,13 +92,11 @@ function App() {
     }
   };
 
-  const queueOut = async (docKey) => {
+  async function queueOut(docKey) {
+    const docRef = doc(db, 'requests', docKey)
     try {
-      // Create a reference to the student's document using the provided docKey
-      const docRef = db.collection('requests').doc(docKey);
-  
       // Check if the "helped" field is already true
-      const docSnapshot = await docRef.get();
+      const docSnapshot = await getDoc(docRef);
       const data = docSnapshot.data();
   
       if (data && data.helped) {
