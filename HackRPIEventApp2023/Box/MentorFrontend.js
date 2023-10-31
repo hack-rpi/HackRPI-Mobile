@@ -6,7 +6,6 @@ import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { FieldValue, getFirestore, addDoc, doc, collection, getDocs } from "firebase/firestore";
 
-doc()
 // firebase
 
 // Import the functions you need from the SDKs you need

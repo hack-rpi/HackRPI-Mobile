@@ -28,9 +28,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 async function inQueue(docKey) {
     const docRef = doc(db, 'requests', docKey)
-      console.log(docRef);
     try{      // rabs the document
-      console.log(docKey);
       const doc = await getDoc(docRef);
       // ensures that the document is retrieved properly
       if (!doc.exists) {
