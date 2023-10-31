@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { FieldValue, getFirestore, addDoc, collection, getDocs } from "firebase/firestore";
+import { FieldValue, getFirestore, addDoc, collection, getDoc } from "firebase/firestore";
 import { StyleSheet, Text, View, TextInput , TouchableOpacity} from 'react-native';
 
 // Import the functions you need from the SDKs you need
@@ -115,13 +115,11 @@ function App() {
   };
   
 
-  const unHelp = async (docKey) => {
+  async function unHelp(docKey) {
+    const docRef = doc(db,'requests', docKey);
     try {
-      // Create a reference to the student's document using the provided docKey
-      const docRef = db.collection('requests').doc(docKey);
-  
       // Check if the "helped" field is already false
-      const docSnapshot = await docRef.get();
+      const docSnapshot = await getDoc(docRef);
       const data = docSnapshot.data();
   
       if (data && !data.helped) {
