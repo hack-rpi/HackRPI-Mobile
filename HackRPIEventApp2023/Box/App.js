@@ -60,12 +60,11 @@ function App() {
   };
   
   // this takes in a dockey and returns whether the student has been helped or not
-  const inQueue = async(docKey) => {
+  async function inQueue(docKey) {
+    const docRef = doc(db, 'requests', docKey);
     try{
-      // grabs the document
-      const docRef = db.collection('requests').doc(docKey);
       // gets the data from the doc
-      const doc = await docRef.get();
+      const doc = await getDoc(docRef);
       // ensures that the document is retrieved properly
       if (!doc.exists) {
         console.log('No such document!');
