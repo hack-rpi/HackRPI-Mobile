@@ -209,12 +209,55 @@ function App() {
       console.error('Error calculating total students in queue:', error);
     }
   };
+  const getAverageWaitTime = async () => {
+    try {
+      const requestsCollection = collection(db, 'requests');
+      const querySnapshot = await getDocs(requestsCollection);
+  
+      let totalWaitTime = 0;
+      let totalStudents = 0;
+  
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        const addedTimestamp = data.addedTimestamp; // Timestamp when student was added to the queue
+        const helpedTimestamp = data.helpedTimestamp; // Timestamp when student was helped
+  
+        if (addedTimestamp && helpedTimestamp) {
+          // Calculate the time spent in the queue in milliseconds
+          const waitTime = helpedTimestamp - addedTimestamp;
+  
+          // Add the wait time to the total
+          totalWaitTime += waitTime;
+          totalStudents++;
+        }
+      });
+  
+      if (totalStudents === 0) {
+        console.log('No data available to calculate average wait time.');
+        return;
+      }
+  
+      // Calculate the average wait time in minutes
+      const averageWaitTime = totalWaitTime / (totalStudents * 60000); // Convert milliseconds to minutes
+      console.log(`Average Wait Time: ${averageWaitTime.toFixed(2)} minutes`);
+    } catch (error) {
+      console.error('Error calculating average wait time:', error);
+    }
+  };
+  
   const getQueueStatistics = async () => {
     const totalStudents = await getTotalStudentsInQueue();
     console.log(`Total Students in Queue: ${totalStudents}`);
   
-    // Calculate average wait time and number of students helped per day here
+    const averageWaitTime = await getAverageWaitTime();
+  
+    // Calculate the number of students helped per day here
+    // You will need to implement this calculation based on your data structure
+  
+    // Display the results
+    console.log(`Average Wait Time: ${averageWaitTime.toFixed(2)} minutes`);
   };
+  
   
 
   return (
