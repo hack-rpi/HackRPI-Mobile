@@ -34,11 +34,22 @@ function QueueScreen() {
   );
 }
 
+function SettingsScreen() {
+  return (
+    <View style={styles.container}>
+      <Feather name="settings" size={24} color="white" />
+      <Text style={styles.text}>Put something useful lol</Text>
+    </View>
+  );
+}
+
 export default function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator
+        initialRouteName="Home"
         screenOptions={({ route }) => ({
+          
           tabBarIcon: ({ focused, color, size }) => {
             //adding icons
             let iconName;
@@ -48,6 +59,8 @@ export default function App() {
               iconName = 'home';
             } else if (route.name === 'Queue') {
               iconName = 'user';
+            } else if (route.name == 'Settings'){
+              iconName = 'settings';
             }
             return <Feather name={iconName} size={size} color={focused ? 'red' : 'white'} />;
           },
@@ -65,6 +78,7 @@ export default function App() {
         <Tab.Screen name="Info" component={InfoScreen} />
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Queue" component={QueueScreen} />
+        <Tab.Screen name="Settings" component={SettingsScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
