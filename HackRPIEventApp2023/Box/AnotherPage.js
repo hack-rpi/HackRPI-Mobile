@@ -1,12 +1,81 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { initializeApp } from "firebase/app";
+import { doc, getFirestore, getDoc, setDoc } from "firebase/firestore";
+
+// firebase
+
+// Import the functions you need from the SDKs you need
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyAqGfFX7gXRGBtidctQjIJ4NC0FA6YxeOQ",
+  authDomain: "mentor-queue-c01a3.firebaseapp.com",
+  projectId: "mentor-queue-c01a3",
+  storageBucket: "mentor-queue-c01a3.appspot.com",
+  messagingSenderId: "117425105410",
+  appId: "1:117425105410:web:60fa2b3e348b489b37551b",
+  measurementId: "G-NJ5ZBXKBX3"
+}
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+async function unHelp(docKey) {
+    const docRef = doc(db,'requests', docKey);
+    try {
+      // Check if the "helped" field is already false
+      const docSnapshot = await getDoc(docRef);
+      const data = docSnapshot.data();
+  
+      if (data && !data.helped) {
+        alert('This student is already marked as not helped.');
+      } else {
+        // Set the "helped" field to false
+        await setDoc(docRef, {
+          helped: false
+        });
+      }
+    } catch (error) {
+      console.error('Error unmarking queue:', error);
+    }
+}
+
+async function queueOut(docKey) {
+  const docRef = doc(db, 'requests', docKey)
+
+  try {
+    // Check if the "helped" field is already true
+    const docSnapshot = await getDoc(docRef);
+    const data = docSnapshot.data();
+
+    if (data && data.helped) {
+      alert('This student has already been helped.');
+    } else {
+      // Set the "helped" field to true
+      await setDoc(docRef, {
+         helped: true
+      });
+    }
+  } catch (error) {
+    console.error('Error claiming queue:', error);
+  }
+};
+
+const popQueue = async(docKey)=>{
+  ans = doc(db, 'requests', docKey)
+  try{
+      ans.delete();
+  }catch(error){
+    console.error('Error deleting student from queue:', error);
+  }
+}
 
 const AnotherPage = ({ route }) => {
   const { hackerData } = route.params;
-  const handleCheckOff = () => {
-    // Add your logic for handling the "Check off" button click here.
-    // You can toggle the checkmark state or perform any other action.
-  };
 
   return (
     <View style={styles.container}>
@@ -37,12 +106,20 @@ const AnotherPage = ({ route }) => {
         ) : (
           <Text style={styles.centeredText}>Nothing to display</Text>
         )}
-        <TouchableOpacity
-          onPress={handleCheckOff}
-          style={styles.buttonStyle}
-        >
-          <Text style={styles.buttonText}>Check off</Text>
-        </TouchableOpacity>
+        <View style={{ flexDirection: 'row' }}>
+          <TouchableOpacity
+            onPress={() => queueOut(hackerData.Id)}
+            style={[styles.buttonStyle, { backgroundColor: 'green' }]}
+          >
+            <Text style={styles.buttonText}>Check off</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => unHelp(hackerData.Id)}
+            style={[styles.buttonStyle, { backgroundColor: '#910307', marginLeft: 10 }]}
+          >
+            <Text style={styles.buttonText}>Unhelp</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -80,7 +157,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   buttonStyle: {
-    backgroundColor: 'green',
     padding: 10,
     marginTop: 20,
     borderRadius: 5,

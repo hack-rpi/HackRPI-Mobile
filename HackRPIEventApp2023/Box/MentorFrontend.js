@@ -71,7 +71,6 @@ const MentorFrontend = () => {
                 Table: docData.tablenum,
                 Description: docData.type,
                 isRed: docData.helped,
-                Shown: true, // You can set this as needed
             };
 
             hackerDataArray.push(hackerInfo);
