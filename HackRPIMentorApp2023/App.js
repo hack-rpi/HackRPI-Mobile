@@ -244,19 +244,41 @@ function App() {
       console.error('Error calculating average wait time:', error);
     }
   };
+  const getTotalStudentsHelped = async () => {
+    try {
+      const requestsCollection = collection(db, 'requests');
+      const querySnapshot = await getDocs(requestsCollection);
+  
+      let totalHelpedStudents = 0;
+  
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        const helped = data.helped; // Boolean field indicating if the student has been helped
+  
+        if (helped) {
+          totalHelpedStudents++;
+        }
+      });
+  
+      console.log(`Total Students Helped: ${totalHelpedStudents}`);
+      return totalHelpedStudents;
+    } catch (error) {
+      console.error('Error calculating total students helped:', error);
+      return 0; // Return 0 in case of an error
+    }
+  };
   
   const getQueueStatistics = async () => {
     const totalStudents = await getTotalStudentsInQueue();
-    console.log(`Total Students in Queue: ${totalStudents}`);
-  
     const averageWaitTime = await getAverageWaitTime();
-  
-    // Calculate the number of students helped per day here
-    // You will need to implement this calculation based on your data structure
+    const totalHelpedStudents = await getTotalStudentsHelped();
   
     // Display the results
+    console.log(`Total Students in Queue: ${totalStudents}`);
     console.log(`Average Wait Time: ${averageWaitTime.toFixed(2)} minutes`);
+    console.log(`Total Students Helped: ${totalHelpedStudents}`);
   };
+  
   
   
 
