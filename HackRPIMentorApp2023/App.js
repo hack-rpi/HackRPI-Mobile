@@ -200,7 +200,22 @@ function App() {
       alert(err.message);
     }
   };
-
+  const getTotalStudentsInQueue = async () => {
+    try {
+      const requestsCollection = collection(db, 'requests');
+      const querySnapshot = await getDocs(requestsCollection);
+      return querySnapshot.size; // Number of documents in the collection
+    } catch (error) {
+      console.error('Error calculating total students in queue:', error);
+    }
+  };
+  const getQueueStatistics = async () => {
+    const totalStudents = await getTotalStudentsInQueue();
+    console.log(`Total Students in Queue: ${totalStudents}`);
+  
+    // Calculate average wait time and number of students helped per day here
+  };
+  
 
   return (
     // used for testing
