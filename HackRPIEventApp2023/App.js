@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Feather } from '@expo/vector-icons';
 import { StatusBar } from "expo-status-bar";
 import Calander from "./Box/Calander";
+import HackathonScreen from './Box/prizes';
 
 const Tab = createBottomTabNavigator();
 
@@ -63,7 +64,7 @@ export default function App() {
         })}
       >
         <Tab.Screen name="Info" component={InfoScreen} />
-        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Home" component={HackathonScreen} />
         <Tab.Screen name="Queue" component={QueueScreen} />
       </Tab.Navigator>
     </NavigationContainer>
