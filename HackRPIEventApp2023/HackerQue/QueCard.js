@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import CircleProgress from "../Components/CircleProgress";
 
 function QueCard() {
   return (
@@ -10,7 +11,7 @@ function QueCard() {
       </View>
       <View style={styles.row}>
         <View style={styles.subBox}>
-          <View style={styles.circleTemp}></View>
+          <CircleProgress percentage={100} circleWidth={130} />
           <Text style={styles.textBody}> Que </Text>
         </View>
         <View style={styles.subBox}>
