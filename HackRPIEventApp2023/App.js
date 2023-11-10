@@ -1,13 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+//import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+//import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StatusBar } from "expo-status-bar";
 import Calander from "./Box/Calander";
-import { colors } from './colors';
+import { globalStyles } from './styles';
 
 const Tab = createBottomTabNavigator();
-
 function HomeScreen() {
   return (
     <View style={styles.container}>
@@ -15,6 +16,7 @@ function HomeScreen() {
 
       <StatusBar style="auto" />
     </View>
+    //line 16: StatusBar style ^^ can we customize this while still keeping it general?
   );
 }
 
@@ -48,11 +50,12 @@ export default function App() {
     <NavigationContainer>
       <Tab.Navigator
         screenOptions={{
+          swipeEnabled : true,
           tabBarStyle: {
-            backgroundColor: colors.backgroundBlack, // shud this b transparent?
+            backgroundColor: globalStyles.primary, // should this be transparent?
             borderTopWidth: 0, // Hide top border of the tab bar
           },
-          tabBarActiveTintColor: colors.mainRed,
+          tabBarActiveTintColor: globalStyles.accent,
         }}
       >
         <Tab.Screen name="Home" component={HomeScreen} options={{ headerShown: false }}/>
@@ -69,9 +72,14 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.backgroundBlack,
+    backgroundColor: globalStyles.primary,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  text: {
+    fontSize: globalStyles.fontSize,
+    fontWeight: globalStyles.fontWeight,
+    color: globalStyles.text,
   },
 });
 
