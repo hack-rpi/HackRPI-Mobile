@@ -1,8 +1,25 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import CircleProgress from "../Components/CircleProgress";
+import calculateTimeDifference from "../HackerQue/Time_Dif";
+import { useState, useEffect } from "react";
 
 function QueCard() {
+  const Start_Time = "2023-11-10T10:00:00Z";
+  const Position = 20;
+  const Total = 100;
+  const [Time_In_Queue, setTimeInQueueHours] = useState(calculateTimeDifference(Start_Time));
+
+  useEffect(() => {
+    // Update the time difference every second
+    const intervalId = setInterval(() => {
+      setTimeInQueueHours(calculateTimeDifference(Start_Time));
+    }, 1000);
+
+    // Cleanup the interval when the component is unmounted
+    return () => clearInterval(intervalId);
+  }, []);
+
   return (
     <View style={styles.box}>
       {/* Inner View for heading */}
@@ -11,11 +28,10 @@ function QueCard() {
       </View>
       <View style={styles.row}>
         <View style={styles.subBox}>
-          <CircleProgress percentage={100} circleWidth={130} />
-          <Text style={styles.textBody}> Que </Text>
+          <CircleProgress percentage={Position/Total * 100} circleWidth={130} />
         </View>
         <View style={styles.subBox}>
-          <Text style={styles.textHeader}> TIQ </Text>
+          <Text style={styles.textHeader}> TIQ: {Time_In_Queue}</Text>
         </View>
       </View>
       <View style={styles.row}>
@@ -23,7 +39,8 @@ function QueCard() {
           <Text style={styles.textBody}> wojfwoaiejf:</Text>
         </View>
         <View style={styles.subBox}>
-          <Text style={styles.textBody}> Position:</Text>
+          <Text style={styles.textBody}> Position: {Position}</Text>
+
         </View>
       </View>
     </View>
