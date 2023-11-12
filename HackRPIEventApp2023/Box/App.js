@@ -160,7 +160,10 @@ function App() {
     }
   }
 
-  
+  const handleFirebaseError = (error) => {
+    console.error(error);
+    alert("An error occurred: " + error.message);
+  };
 
   // takes in email, password, and verification code named checker
   const registerWithEmailAndPassword = async () => {
@@ -183,8 +186,7 @@ function App() {
       }
       // error catching
     } catch (err) {
-      console.error(err);
-      alert(err.message);
+      handleFirebaseError(err);
     }
   };
 
