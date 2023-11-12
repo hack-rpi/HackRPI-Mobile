@@ -149,15 +149,18 @@ function App() {
       tablenum: tblN,
       type: helpType
     };
+    //checker state management
+    const [checker, setChecker] = useState('');
     // has to make UID unique and time based because sorting in the database.
     const uID = Date.now();
     try{
-      const ans = await db.collection('requests').doc(uId).set(data);
+      const ans = await db.collection('requests').doc(uID).set(data);
     }catch(error){
       console.error('Error adding to queue:', error);
     }
   }
 
+  
 
   // takes in email, password, and verification code named checker
   const registerWithEmailAndPassword = async () => {
