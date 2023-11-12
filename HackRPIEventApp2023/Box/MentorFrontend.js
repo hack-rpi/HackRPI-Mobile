@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { SafeAreaView, ScrollView, StyleSheet, View, Text } from "react-native";
+import { SafeAreaView, ScrollView, StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import HackerInfo from "./HackerInfo.js";
 import { StatusBar } from 'expo-status-bar';
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { FieldValue, getFirestore, addDoc, doc, collection, getDocs } from "firebase/firestore";
+import { getFirestore, doc, collection, getDocs, updateDoc } from "firebase/firestore";
 
 // firebase
 
@@ -49,6 +48,34 @@ const sendRequestsData = async () => {
       console.error('Error retrieving data:', error);
     }
 };
+
+
+const unHelp = async (docKey) => {
+    const requestDocRef = doc(db, 'requests', docKey);
+    try {
+        await updateDoc(requestDocRef, {
+            helped: false,
+        });
+    } catch(error) {
+        console.error('Error in marking document: ', error);
+    }
+};
+
+/**
+  * Debug function to set helped values for everyone in the db to "false"
+  * Can delete once finished with debugging
+  */ 
+const debugUnHelpAll = async () => {
+    try {
+      const requestsCollection = collection(db, 'requests');
+      const querySnapshot = await getDocs(requestsCollection);
+      querySnapshot.forEach((doc) => {
+        unHelp(doc.id);
+      }) 
+    } catch(error) {
+        console.error('Error: ', error)
+    }
+}
 
 const MentorFrontend = () => {
   const [hackerData, setHackerData] = useState([]);
@@ -100,6 +127,14 @@ const MentorFrontend = () => {
           ))
         )}
       </ScrollView>
+        <View style={{ flexDirection: 'row' }}>
+            <TouchableOpacity
+                onPress={debugUnHelpAll}
+                style={styles.debugButton}
+            >
+                <Text style={styles.buttonText}>Debug Unhelp All</Text>
+            </TouchableOpacity>
+        </View>
     </SafeAreaView>
     </View>
   );
@@ -128,6 +163,15 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "gray",
   },
+  // can delete after
+  debugButton: {
+    backgroundColor: 'red',
+    padding: 10,
+    borderRadius: 5,
+    margin: 5,
+    alignItems: "center",
+    justifyContent: "center",
+  }
 });
 
 export default MentorFrontend;
