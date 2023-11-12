@@ -64,7 +64,6 @@ const HackerInfo = ({
     // check if person has been helped
     // TODO: inQueue throws an error, helped is undefined
     const helped = await inQueue(Id);
-    console.log(helped)
     
     if (!helped) {
         // Pass the hacker information to AnotherPage
