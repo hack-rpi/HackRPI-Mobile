@@ -6,7 +6,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Feather } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
 import Calander from "./Box/Calander";
-import { colors } from './colors';
+import { globalStyles } from './styles';
 
 const Tab = createBottomTabNavigator();
 
@@ -15,6 +15,7 @@ function InfoScreen() {
     <View style={styles.container}>
       <Calander />
     </View>
+    //line 16: StatusBar style ^^ can we customize this while still keeping it general?
   );
 }
 
@@ -64,15 +65,17 @@ export default function App() {
             fontSize: 12,
           },
           tabBarStyle: {
-            backgroundColor: colors.backgroundBlack, // shud this b transparent?
+            backgroundColor: globalStyles.primary, // should this be transparent?
             borderTopWidth: 0, // Hide top border of the tab bar
           },
-          tabBarActiveTintColor: "#910307",
+          tabBarActiveTintColor: globalStyles.accent,
           tabBarInactiveTintColor: "white",
-        })}>
-        <Tab.Screen name="Info" component={InfoScreen} />
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Queue" component={QueueScreen} />
+        })}
+      >
+        <Tab.Screen name="Home" component={HomeScreen} options={{ headerShown: false }}/>
+        <Tab.Screen name="Explore" component={ExploreScreen} options={{ headerShown: false }}/>
+        <Tab.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }}/>
+        <Tab.Screen name="Holder" component={HolderScreen} options={{ headerShown: false }}s/>
       </Tab.Navigator>
     </NavigationContainer>
   );
@@ -81,8 +84,13 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.backgroundBlack,
+    backgroundColor: globalStyles.primary,
     alignItems: "center",
     justifyContent: "center",
+  },
+  text: {
+    fontSize: globalStyles.fontSize,
+    fontWeight: globalStyles.fontWeight,
+    color: globalStyles.text,
   },
 });
