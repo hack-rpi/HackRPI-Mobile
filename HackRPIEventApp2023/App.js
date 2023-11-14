@@ -72,10 +72,11 @@ export default function App() {
           tabBarInactiveTintColor: "white",
         })}
       >
-        <Tab.Screen name="Home" component={HomeScreen} options={{ headerShown: false }}/>
-        <Tab.Screen name="Explore" component={ExploreScreen} options={{ headerShown: false }}/>
-        <Tab.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }}/>
-        <Tab.Screen name="Holder" component={HolderScreen} options={{ headerShown: false }}s/>
+
+      <Tab.Screen name="Info" component={InfoScreen} />
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Queue" component={QueueScreen} />
+      
       </Tab.Navigator>
     </NavigationContainer>
   );
