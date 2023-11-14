@@ -4,6 +4,7 @@ import HackerInfo from "./HackerInfo.js";
 import { StatusBar } from 'expo-status-bar';
 import { initializeApp } from "firebase/app";
 import { getFirestore, doc, collection, getDocs, updateDoc } from "firebase/firestore";
+import { AntDesign } from '@expo/vector-icons';
 
 // firebase
 
@@ -127,7 +128,15 @@ const MentorFrontend = () => {
           ))
         )}
       </ScrollView>
-        <View style={{ flexDirection: 'row' }}>
+      <View style={styles.refreshButtonContainer}>
+        <TouchableOpacity
+            onPress={populateHackerData}
+            style={styles.refreshButton}
+        >
+            <AntDesign name="reload1" size={24} color="white" /> 
+        </TouchableOpacity>
+      </View>
+      <View style={{ flexDirection: 'row' }}>
             <TouchableOpacity
                 onPress={debugUnHelpAll}
                 style={styles.debugButton}
@@ -162,6 +171,18 @@ const styles = StyleSheet.create({
   noDataText: {
     fontSize: 16,
     color: "gray",
+  },
+  refreshButtonContainer: {
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+  },
+  refreshButton: {
+    backgroundColor: '#0babd4',
+    borderRadius: 50,
+    padding: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   // can delete after
   debugButton: {
