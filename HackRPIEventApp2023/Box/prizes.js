@@ -1,10 +1,34 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Modal, FlatList, StyleSheet, Animated } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Modal,
+  FlatList,
+  StyleSheet,
+  Animated,
+  Image,
+} from 'react-native';
 
 const data = [
-  { category: 'Best Mobile App', prize: '$1000', details: 'Details about the Best Mobile App category.' },
-  { category: 'Best Web App', prize: '$800', details: 'Details about the Best Web App category.' },
-  { category: 'Best UI/UX Design', prize: '$500', details: 'Details about the Best UI/UX Design category.' },
+  {
+    category: 'Best Mobile App',
+    prize: '$1000',
+    details: 'Details about the Best Mobile App category.',
+    requirements: 'Add your specific requirements here',
+  },
+  {
+    category: 'Best Web App',
+    prize: '$800',
+    details: 'Details about the Best Web App category.',
+    requirements: 'Add your specific requirements here',
+  },
+  {
+    category: 'Best UI/UX Design',
+    prize: '$500',
+    details: 'Details about the Best UI/UX Design category.',
+    requirements: 'Add your specific requirements here',
+  },
   // Add more categories and prizes as needed
 ];
 
@@ -37,36 +61,53 @@ const HackathonScreen = () => {
     setSelectedCategory(category);
   };
 
+  const theme = {
+    primaryColor: 'blue',
+    secondaryColor: 'white',
+    textColor: 'black',
+  };
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={toggleModal} style={styles.button}>
-        <Text style={styles.buttonText}>View Categories and Prizes</Text>
+      <TouchableOpacity onPress={toggleModal} style={[styles.button, { backgroundColor: theme.primaryColor }]}>
+        <Text style={[styles.buttonText, { color: theme.textColor }]}>View Categories and Prizes</Text>
       </TouchableOpacity>
       <Modal transparent visible={isModalVisible} animationType="slide">
         <View style={styles.modalContainer}>
           {selectedCategory ? (
-            <Animated.View style={[styles.modalContent, { opacity: modalOpacity }]}>
-              <Text style={styles.selectedCategory}>{selectedCategory}</Text>
-              <Text style={styles.details}>{data.find((item) => item.category === selectedCategory).details}</Text>
+            <Animated.View style={[styles.modalContent, { opacity: modalOpacity, flex: 1 }]}>
+              {/* Inner modal content */}
+              <Text style={[styles.selectedCategory, { textAlign: 'center', color: 'orange' }]}>
+                {selectedCategory}
+              </Text>
+              <Text style={[styles.details, { textAlign: 'center' }]}>
+                {data.find((item) => item.category === selectedCategory).details}
+              </Text>
+              <Text style={[styles.details, { textAlign: 'center', marginTop: 10 }]}>
+                Prize: {data.find((item) => item.category === selectedCategory).prize}
+              </Text>
+              <Text style={[styles.details, { textAlign: 'center', marginTop: 10 }]}>
+                Requirements: {data.find((item) => item.category === selectedCategory).requirements}
+              </Text>
             </Animated.View>
           ) : (
             <FlatList
-                data={data}
-                renderItem={({ item }) => (
-                  <TouchableOpacity
-                    onPress={() => selectCategory(item.category)}
-                    style={styles.modalItem}
-                  >
+              data={data}
+              renderItem={({ item }) => (
+                <TouchableOpacity onPress={() => selectCategory(item.category)} style={styles.modalItem}>
+                  <Image source={require('./kuromi.jpg')} style={styles.categoryIcon} />
+                  <View>
                     <Text style={styles.category}>{item.category}</Text>
                     <Text style={styles.prize}>{item.prize}</Text>
-                  </TouchableOpacity>
-                )}
-                keyExtractor={(item) => item.category}
-                contentContainerStyle={styles.flatListContainer}
-              />
+                  </View>
+                </TouchableOpacity>
+              )}
+              keyExtractor={(item) => item.category}
+              contentContainerStyle={styles.flatListContainer}
+            />
           )}
-          <TouchableOpacity onPress={toggleModal} style={styles.closeButton}>
-            <Text style={styles.closeButtonText}>Close</Text>
+          <TouchableOpacity onPress={toggleModal} style={[styles.closeButton, { backgroundColor: theme.primaryColor }]}>
+            <Text style={[styles.closeButtonText, { color: theme.textColor }]}>Close &#10006;</Text>
           </TouchableOpacity>
         </View>
       </Modal>
@@ -96,6 +137,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
+  categoryIcon: {
+    width: 24,
+    height: 24,
+    marginRight: 10,
+  },
   modalContent: {
     flex: 1,
     justifyContent: 'center',
@@ -124,7 +170,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     justifyContent: 'center',
     marginTop: 50,
-  },
+  },  
   innerModalContent: {
     alignItems: 'center',
   },
@@ -146,6 +192,21 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
   },
+  innerModalContent: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalContent: {
+    flex: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 10,
+    width: '80%',
+  },
+  
 });
 
 export default HackathonScreen;
