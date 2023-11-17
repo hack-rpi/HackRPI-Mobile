@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from 'react-native';
 const AccessibilityOptions = () => {
   return (
     <View style={styles.container}>
-      <Text>Accessibility Options</Text>
+      <Text>Profile Customization Options</Text>
       {/* Suboptions and functionality here */}
     </View>
   );

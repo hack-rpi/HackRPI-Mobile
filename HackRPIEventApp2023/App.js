@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Feather } from '@expo/vector-icons';
 import { StatusBar } from "expo-status-bar";
 import Calander from "./Box/Calander";
-import Settings from "./Box/Settings"
+import Settings from "./SettingsOptions/LanguageSettings"
 
 const Tab = createBottomTabNavigator();
 
