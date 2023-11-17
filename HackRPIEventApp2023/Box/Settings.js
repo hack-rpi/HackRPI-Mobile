@@ -1,10 +1,24 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, Switch, StyleSheet } from 'react-native';
 
-const App = () => {
+const SettingsPage = () => {
+  // State for the switch (example for a dark mode toggle)
+  const [isDarkMode, setIsDarkMode] = React.useState(false);
+
   return (
     <View style={styles.container}>
-      <Text>Welcome to My React Native App!</Text>
+      <Text style={styles.title}>Settings</Text>
+
+      {/* Example setting: Dark Mode Toggle */}
+      <View style={styles.setting}>
+        <Text>Dark Mode</Text>
+        <Switch
+          value={isDarkMode}
+          onValueChange={() => setIsDarkMode(previousState => !previousState)}
+        />
+      </View>
+
+      {/* Add more settings options here */}
     </View>
   );
 };
@@ -15,7 +29,21 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+    padding: 20,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
+  setting: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
+    marginBottom: 10,
+    paddingHorizontal: 10,
   },
 });
 
-export default App;
+export default SettingsPage;
