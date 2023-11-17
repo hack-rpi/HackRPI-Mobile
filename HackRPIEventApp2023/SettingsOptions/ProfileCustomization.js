@@ -10,7 +10,6 @@ const AccessibilityOptions = () => {
   );
 };
 
-// Repeat for ProfileCustomization, PrivacySettings, etc.
 
 const styles = StyleSheet.create({
   container: {
