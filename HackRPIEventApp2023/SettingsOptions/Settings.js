@@ -1,27 +1,33 @@
 import React from 'react';
-import { View, Text, Switch, StyleSheet } from 'react-native';
+import { View, Button, StyleSheet } from 'react-native';
 
-const SettingsPage = () => {
-  // State for the switch (example for a dark mode toggle)
-  const [isDarkMode, setIsDarkMode] = React.useState(false);
-
+const SettingsPage = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Settings</Text>
-
-      {/* Example setting: Dark Mode Toggle */}
-      <View style={styles.setting}>
-        <Text>Dark Mode</Text>
-        <Switch
-          value={isDarkMode}
-          onValueChange={() => setIsDarkMode(previousState => !previousState)}
-        />
-      </View>
-
-      {/* Add more settings options here */}
+      <Button
+        title="Accessibility Settings"
+        onPress={() => navigation.navigate('AccessibilitySettings')}
+      />
+      <Button
+        title="Profile Customization"
+        onPress={() => navigation.navigate('ProfileCustomization')}
+      />
+      <Button
+        title="Language Settings"
+        onPress={() => navigation.navigate('LanguageSettings')}
+      />
+      <Button
+        title="Report a Bug "
+        onPress={() => navigation.navigate('Report')}
+      />
+      <Button
+        title="Acessability Settings"
+        onPress={() => navigation.navigate('AcessibilitySettings')}
+      />
     </View>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {
