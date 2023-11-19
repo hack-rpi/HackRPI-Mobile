@@ -80,6 +80,7 @@ const debugUnHelpAll = async () => {
 
 const MentorFrontend = () => {
   const [hackerData, setHackerData] = useState([]);
+  const [refreshCooldown, setRefreshCooldown] = useState(false);
 
   // Call sendRequestsData to fetch data from the backend and update hackerData
   const populateHackerData = async () => {
@@ -110,6 +111,19 @@ const MentorFrontend = () => {
     }
   };
 
+  const handleRefresh = async () => {
+    if (!refreshCooldown) {
+        populateHackerData();
+        setRefreshCooldown(true);
+
+        setTimeout(() => {
+            setRefreshCooldown(false);
+        }, 30000);
+    } else {
+        alert('Please wait 30 seconds before refreshing.');
+    }
+  };
+
   useEffect(() => {
     populateHackerData();
   }, []); // Run once when the component mounts
@@ -120,7 +134,7 @@ const MentorFrontend = () => {
       <ScrollView style={styles.ScrollView} showsVerticalScrollIndicator={true}>
         {hackerData.length === 0 ? (
           <View style={styles.noDataContainer}>
-            <Text style={styles.noDataText}>No data to display</Text>
+            <Text style={styles.noDataText}>Queue is Empty!</Text>
           </View>
         ) : (
           hackerData.map((data, index) => (
@@ -130,7 +144,7 @@ const MentorFrontend = () => {
       </ScrollView>
       <View style={styles.refreshButtonContainer}>
         <TouchableOpacity
-            onPress={populateHackerData}
+            onPress={handleRefresh}
             style={styles.refreshButton}
         >
             <AntDesign name="reload1" size={24} color="white" /> 
