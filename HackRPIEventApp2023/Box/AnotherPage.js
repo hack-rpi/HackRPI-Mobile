@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { initializeApp } from "firebase/app";
-import { doc, getFirestore, getDoc, setDoc } from "firebase/firestore";
+import { doc, getFirestore, getDoc, setDoc, deleteDoc } from "firebase/firestore";
 
 // firebase
 
@@ -59,20 +59,13 @@ async function queueOut(docKey) {
       await setDoc(docRef, {
          helped: true
       });
+      // popQueue
+      await deleteDoc(docRef);
     }
   } catch (error) {
     console.error('Error claiming queue:', error);
   }
 };
-
-const popQueue = async(docKey)=>{
-  ans = doc(db, 'requests', docKey)
-  try{
-      ans.delete();
-  }catch(error){
-    console.error('Error deleting student from queue:', error);
-  }
-}
 
 const AnotherPage = ({ route }) => {
   const { hackerData } = route.params;
