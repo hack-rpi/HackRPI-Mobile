@@ -9,6 +9,7 @@ import {
   Animated,
   Image,
 } from 'react-native';
+import Swiper from 'react-native-swiper';
 
 const data = [
   {
@@ -35,6 +36,8 @@ const data = [
 const HackathonScreen = () => {
   const [isModalVisible, setModalVisible] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [isPrizeIdeaFormOpen, setPrizeIdeaFormOpen] = useState(false);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0); // New state variable
   const modalOpacity = new Animated.Value(0);
 
   const toggleModal = () => {
@@ -46,9 +49,11 @@ const HackathonScreen = () => {
       }).start(() => {
         setModalVisible(false);
         setSelectedCategory(null);
+        setSelectedImageIndex(0);
       });
     } else {
       setSelectedCategory(null);
+      setSelectedImageIndex(0);
       Animated.timing(modalOpacity, {
         toValue: 1,
         duration: 300,
@@ -61,10 +66,8 @@ const HackathonScreen = () => {
     setSelectedCategory(category);
   };
 
-  const theme = {
-    primaryColor: 'blue',
-    secondaryColor: 'white',
-    textColor: 'black',
+  const togglePrizeIdeaForm = () => {
+    setPrizeIdeaFormOpen(!isPrizeIdeaFormOpen);
   };
 
   return (
@@ -77,6 +80,20 @@ const HackathonScreen = () => {
           {selectedCategory ? (
             <Animated.View style={[styles.modalContent, { opacity: modalOpacity, flex: 1 }]}>
               {/* Inner modal content */}
+              <Swiper
+                loop={false}
+                index={selectedImageIndex}
+                onIndexChanged={(index) => setSelectedImageIndex(index)}
+              >
+                {data
+                  .filter((item) => item.category === selectedCategory)
+                  .map((item, index) => (
+                    <View key={index} style={styles.imageContainer}>
+                      <Image source={require('./kuromi.jpg')} style={styles.categoryImage} />
+                      {/* You can replace the above line with your actual image source */}
+                    </View>
+                  ))}
+              </Swiper>
               <Text style={[styles.selectedCategory, { textAlign: 'center', color: 'orange' }]}>
                 {selectedCategory}
               </Text>
@@ -89,6 +106,12 @@ const HackathonScreen = () => {
               <Text style={[styles.details, { textAlign: 'center', marginTop: 10 }]}>
                 Requirements: {data.find((item) => item.category === selectedCategory).requirements}
               </Text>
+              <TouchableOpacity
+                onPress={togglePrizeIdeaForm}
+                style={[styles.submitButton, { backgroundColor: theme.primaryColor }]}
+              >
+                <Text style={[styles.submitButtonText, { color: theme.textColor }]}>Submit Prize Idea</Text>
+              </TouchableOpacity>
             </Animated.View>
           ) : (
             <FlatList
@@ -111,8 +134,54 @@ const HackathonScreen = () => {
           </TouchableOpacity>
         </View>
       </Modal>
+      {isPrizeIdeaFormOpen ? (
+        <PrizeIdeaForm onClose={togglePrizeIdeaForm} />
+      ) : null}
     </View>
   );
+};
+
+const PrizeIdeaForm = ({ onClose }) => {
+  const [idea, setIdea] = useState('');
+
+  const submitIdea = () => {
+    // Here, you can implement the logic to handle the submission of the prize idea
+    // For example, you might want to send the idea to a server or store it locally.
+
+    // For now, let's just log the idea to the console.
+    console.log('Submitted Prize Idea:', idea);
+
+    // Clear the input field
+    setIdea('');
+
+    // Close the form
+    onClose();
+  };
+
+  return (
+    <View style={styles.submissionFormContainer}>
+      <Text style={styles.formTitle}>Submit Your Prize Idea</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Enter your prize idea"
+        value={idea}
+        onChangeText={(text) => setIdea(text)}
+        multiline
+      />
+      <TouchableOpacity onPress={submitIdea} style={styles.submitButton}>
+        <Text style={styles.submitButtonText}>Submit</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={onClose} style={styles.closeButton}>
+        <Text style={styles.closeButtonText}>&#10006; Close</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
+
+const theme = {
+  primaryColor: 'blue',
+  secondaryColor: 'white',
+  textColor: 'black',
 };
 
 const styles = StyleSheet.create({
@@ -198,15 +267,41 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   modalContent: {
-    flex: 0,
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
-    padding: 20,
     borderRadius: 10,
     width: '80%',
   },
-  
+  imageContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  categoryImage: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
+  },
+  submissionFormContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    borderRadius: 10,
+    padding: 20,
+    width: '80%',
+  },
+  submitButton: {
+    marginTop: 15,
+    padding: 15,
+    borderRadius: 8,
+  },
+  submitButtonText: {
+    fontSize: 16,
+    textAlign: 'center',
+  },
 });
 
 export default HackathonScreen;

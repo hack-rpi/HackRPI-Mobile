@@ -63,7 +63,6 @@ const styles = StyleSheet.create({
   redBackground: {
     backgroundColor: "red",
   },
-
   workshop_title: {
     fontSize: 18,
     fontWeight: "bold",
