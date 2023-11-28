@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { gapi } from 'gapi-script';
 import { StatusBar } from 'expo-status-bar';
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
@@ -6,6 +7,8 @@ import { FieldValue, getFirestore, addDoc, collection, getDocs } from "firebase/
 import { StyleSheet, Text, View, TextInput , TouchableOpacity} from 'react-native';
 import LoginButton from "./components/login";
 import LogoutButton from "./components/logout";
+
+const clientId = "117425105410-7f2ebr1hvv8k8dd5sm94flr8rrue992j.apps.googleusercontent.com";
 
 // Import the functions you need from the SDKs you need
 // TODO: Add SDKs for Firebase products that you want to use
@@ -31,6 +34,17 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 function App() {
+  useEffect(() => {
+    function start() {
+      gapi.client.init({
+        clientId: clientId,
+        scope: ""
+      })
+    };
+
+    gapi.load('client:auth2', start);
+  });
+  
   const [email, setEmail] = useState(''); // Use state to manage email input
   const [password, setPassword] = useState(''); // Use state to manage password input
 
