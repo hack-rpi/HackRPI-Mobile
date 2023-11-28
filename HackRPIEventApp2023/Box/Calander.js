@@ -28,7 +28,7 @@ const Calander = () => {
         if(Past){
           return null; //if the event is in the past, don't display it
         }
-        if(event.WorkShop_Title == "2023-11-04"){
+        if(event.WorkShop_Title == "2023-12-04"){
           day = "Saturday";
         }
         else{

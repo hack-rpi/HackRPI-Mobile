@@ -2,16 +2,16 @@
     {
         "WorkShop_Title": "Participant Check-In",
         "WorkShop_Presenter": "TBD",
-        "WorkShop_Date": "2023-11-04",
+        "WorkShop_Date": "2023-11-28",
         "WorkShop_StartTime": "10:00",
-        "WorkShop_EndTime": "11:00",
+        "WorkShop_EndTime": "18:00",
         "WorkShop_Location": "DCC Lobby",
         "WorkShop_Description": "TBD"
     },
     {
         "WorkShop_Title": "Opening Ceremony begins",
         "WorkShop_Presenter": "TBD",
-        "WorkShop_Date": "2023-11-04",
+        "WorkShop_Date": "2023-12-04",
         "WorkShop_StartTime": "11:00",
         "WorkShop_EndTime": "11:30",
         "WorkShop_Location": "TBD",
@@ -20,16 +20,16 @@
     {
         "WorkShop_Title": "Opening Ceremony",
         "WorkShop_Presenter": "TBD",
-        "WorkShop_Date": "2023-11-04",
+        "WorkShop_Date": "2023-12-04",
         "WorkShop_StartTime": "11:00",
         "WorkShop_EndTime": "12:00",
         "WorkShop_Location": "DCC 308",
-        "WorkShop_Description": "TBD"
+        "WorkShop_Description": "This is here just for presentation purposes. \n\tThis is here just for presentation purposes."
     },
     {
         "WorkShop_Title": "API demos",
         "WorkShop_Presenter": "TBD",
-        "WorkShop_Date": "2023-11-04",
+        "WorkShop_Date": "2023-12-04",
         "WorkShop_StartTime": "11:30",
         "WorkShop_EndTime": "12:00",
         "WorkShop_Location": "TBD",
@@ -38,7 +38,7 @@
     {
         "WorkShop_Title": "Hacking Begins @ 12",
         "WorkShop_Presenter": "TBD",
-        "WorkShop_Date": "2023-11-04",
+        "WorkShop_Date": "2023-12-04",
         "WorkShop_StartTime": "12:00",
         "WorkShop_EndTime": "12:30",
         "WorkShop_Location": "TBD",
@@ -47,7 +47,7 @@
     {
         "WorkShop_Title": "Team Pairing",
         "WorkShop_Presenter": "TBD",
-        "WorkShop_Date": "2023-11-04",
+        "WorkShop_Date": "2023-12-04",
         "WorkShop_StartTime": "12:00",
         "WorkShop_EndTime": "12:30",
         "WorkShop_Location": "TBD",
@@ -56,7 +56,7 @@
     {
         "WorkShop_Title":"Patient Safety",
         "WorkShop_Presenter":"TBD",
-        "WorkShop_Date":"2023-11-04",
+        "WorkShop_Date":"2023-12-04",
         "WorkShop_StartTime":"12:00",
         "WorkShop_EndTime":"12:30",
         "WorkShop_Location":"DCC 318",
@@ -65,7 +65,7 @@
     {
         "WorkShop_Title": "Intro to Tech Stack Workshop",
         "WorkShop_Presenter": "TBD",
-        "WorkShop_Date": "2023-11-04",
+        "WorkShop_Date": "2023-12-04",
         "WorkShop_StartTime": "12:30",
         "WorkShop_EndTime": "13:30",
         "WorkShop_Location": "DCC 308",
@@ -74,7 +74,7 @@
     {
         "WorkShop_Title": "Lunch",
         "WorkShop_Presenter": "TBD",
-        "WorkShop_Date": "2023-11-04",
+        "WorkShop_Date": "2023-12-04",
         "WorkShop_StartTime": "13:00",
         "WorkShop_EndTime": "14:00",
         "WorkShop_Location": "DCC Lounge",
@@ -83,7 +83,7 @@
     {
         "WorkShop_Title": "MERN Web Dev Workshop",
         "WorkShop_Presenter": "Yash Kaul",
-        "WorkShop_Date": "2023-11-04",
+        "WorkShop_Date": "2023-12-04",
         "WorkShop_StartTime": "13:30",
         "WorkShop_EndTime": "14:30",
         "WorkShop_Location": "DCC 308",
@@ -92,7 +92,7 @@
     {
         "WorkShop_Title": "Mobile DevWorkshop",
         "WorkShop_Presenter": "TBD",
-        "WorkShop_Date": "2023-11-04",
+        "WorkShop_Date": "2023-12-04",
         "WorkShop_StartTime": "13:30",
         "WorkShop_EndTime": "14:30",
         "WorkShop_Location": "DCC 318",
@@ -101,7 +101,7 @@
     {
         "WorkShop_Title": "Quantum",
         "WorkShop_Presenter": "TBD",
-        "WorkShop_Date": "2023-11-04",
+        "WorkShop_Date": "2023-12-04",
         "WorkShop_StartTime": "14:30",
         "WorkShop_EndTime": "15:30",
         "WorkShop_Location": "DCC 308",
@@ -110,7 +110,7 @@
     {
         "WorkShop_Title": "Scrum Workshop",
         "WorkShop_Presenter": "TBD",
-        "WorkShop_Date": "2023-11-04",
+        "WorkShop_Date": "2023-12-04",
         "WorkShop_StartTime": "15:30",
         "WorkShop_EndTime": "16:30",
         "WorkShop_Location": "DCC 318",
@@ -119,7 +119,7 @@
     {
         "WorkShop_Title": "Hacking the Machine for Fun (and sometimes profit)",
         "WorkShop_Presenter": "Dr. Brian Callahan (w/ Ayah Tharwat )",
-        "WorkShop_Date": "2023-11-04",
+        "WorkShop_Date": "2023-12-04",
         "WorkShop_StartTime": "16:30",
         "WorkShop_EndTime": "17:30",
         "WorkShop_Location": "DCC 318",
@@ -128,7 +128,7 @@
     {
         "WorkShop_Title": "Design, Thinking, and Technical Innovation",
         "WorkShop_Presenter": "Kylinn Askew",
-        "WorkShop_Date": "2023-11-04",
+        "WorkShop_Date": "2023-12-04",
         "WorkShop_StartTime": "16:30",
         "WorkShop_EndTime": "17:30",
         "WorkShop_Location": "DCC 308",
@@ -137,7 +137,7 @@
     {
         "WorkShop_Title": "Password Exploitation - FBI Albany",
         "WorkShop_Presenter": "Alex Vargas & Ryan Gallagher",
-        "WorkShop_Date": "2023-11-04",
+        "WorkShop_Date": "2023-12-04",
         "WorkShop_StartTime": "17:30",
         "WorkShop_EndTime": "18:30",
         "WorkShop_Location": "DCC 318",
@@ -146,7 +146,7 @@
     {
         "WorkShop_Title": "Global Foundries",
         "WorkShop_Presenter": "TBD",
-        "WorkShop_Date": "2023-11-04",
+        "WorkShop_Date": "2023-12-04",
         "WorkShop_StartTime": "17:30",
         "WorkShop_EndTime": "18:30",
         "WorkShop_Location": "DCC 327",
@@ -155,7 +155,7 @@
     {
         "WorkShop_Title": "Hugging Face",
         "WorkShop_Presenter": "Raven Levitt",
-        "WorkShop_Date": "2023-11-04",
+        "WorkShop_Date": "2023-12-04",
         "WorkShop_StartTime": "18:30",
         "WorkShop_EndTime": "19:30",
         "WorkShop_Location": "DCC 327",
@@ -164,7 +164,7 @@
     {
         "WorkShop_Title": "Small Club",
         "WorkShop_Presenter": "TBD",
-        "WorkShop_Date": "2023-11-04",
+        "WorkShop_Date": "2023-12-04",
         "WorkShop_StartTime": "18:30",
         "WorkShop_EndTime": "23:00",
         "WorkShop_Location": "DCC 318",
@@ -173,7 +173,7 @@
     {
         "WorkShop_Title": "Dinner",
         "WorkShop_Presenter": "TBD",
-        "WorkShop_Date": "2023-11-04",
+        "WorkShop_Date": "2023-12-04",
         "WorkShop_StartTime": "19:00",
         "WorkShop_EndTime": "20:00",
         "WorkShop_Location": "DCC Lounge",
@@ -182,7 +182,7 @@
     {
         "WorkShop_Title": "Title to come",
         "WorkShop_Presenter": "TBD",
-        "WorkShop_Date": "2023-11-04",
+        "WorkShop_Date": "2023-12-04",
         "WorkShop_StartTime": "19:30",
         "WorkShop_EndTime": "20:30",
         "WorkShop_Location": "Forge",
@@ -191,7 +191,7 @@
     {
         "WorkShop_Title": "!Light MLH Event",
         "WorkShop_Presenter": "TBD",
-        "WorkShop_Date": "2023-11-04",
+        "WorkShop_Date": "2023-12-04",
         "WorkShop_StartTime": "21:00",
         "WorkShop_EndTime": "22:00",
         "WorkShop_Location": "DCC 308",
@@ -200,7 +200,7 @@
     {
         "WorkShop_Title": "Ugliest Code Competition",
         "WorkShop_Presenter": "TBD",
-        "WorkShop_Date": "2023-11-04",
+        "WorkShop_Date": "2023-12-04",
         "WorkShop_StartTime": "22:00",
         "WorkShop_EndTime": "23:00",
         "WorkShop_Location": "DCC 308",
@@ -209,7 +209,7 @@
     {
         "WorkShop_Title": "Boba",
         "WorkShop_Presenter": "TBD",
-        "WorkShop_Date": "2023-11-04",
+        "WorkShop_Date": "2023-12-04",
         "WorkShop_StartTime": "23:00",
         "WorkShop_EndTime": "23:30",
         "WorkShop_Location": "DCC Lounge",
@@ -218,7 +218,7 @@
     {
         "WorkShop_Title": "Movie Starts",
         "WorkShop_Presenter": "TBD",
-        "WorkShop_Date": "2023-11-04",
+        "WorkShop_Date": "2023-12-04",
         "WorkShop_StartTime": "23:00",
         "WorkShop_EndTime": "24:00",
         "WorkShop_Location": "DCC 324",
@@ -227,7 +227,7 @@
     {
         "WorkShop_Title": "Midnight Snacks",
         "WorkShop_Presenter": "TBD",
-        "WorkShop_Date": "2023-11-05",
+        "WorkShop_Date": "2023-12-05",
         "WorkShop_StartTime": "00:00",
         "WorkShop_EndTime": "02:00",
         "WorkShop_Location": "DCC Lounge",
@@ -236,7 +236,7 @@
     {
         "WorkShop_Title": "Daylight Savings Party",
         "WorkShop_Presenter": "TBD",
-        "WorkShop_Date": "2023-11-05",
+        "WorkShop_Date": "2023-12-05",
         "WorkShop_StartTime": "01:00",
         "WorkShop_EndTime": "02:00",
         "WorkShop_Location": "DCC Lounge",
@@ -245,7 +245,7 @@
     {
         "WorkShop_Title": "Breakfast",
         "WorkShop_Presenter": "TBD",
-        "WorkShop_Date": "2023-11-05",
+        "WorkShop_Date": "2023-12-05",
         "WorkShop_StartTime": "07:00",
         "WorkShop_EndTime": "09:00",
         "WorkShop_Location": "DCC Lounge",
@@ -254,7 +254,7 @@
     {
         "WorkShop_Title": "Submissions Due",
         "WorkShop_Presenter": "TBD",
-        "WorkShop_Date": "2023-11-05",
+        "WorkShop_Date": "2023-12-05",
         "WorkShop_StartTime": "10:00",
         "WorkShop_EndTime": "11:00",
         "WorkShop_Location": "TBD",
@@ -263,7 +263,7 @@
     {
         "WorkShop_Title": "Hacking Ends @ 12",
         "WorkShop_Presenter": "TBD",
-        "WorkShop_Date": "2023-11-05",
+        "WorkShop_Date": "2023-12-05",
         "WorkShop_StartTime": "11:30",
         "WorkShop_EndTime": "12:00",
         "WorkShop_Location": "TBD",
@@ -272,7 +272,7 @@
     {
         "WorkShop_Title": "Showcase",
         "WorkShop_Presenter": "TBD",
-        "WorkShop_Date": "2023-11-05",
+        "WorkShop_Date": "2023-12-05",
         "WorkShop_StartTime": "12:00",
         "WorkShop_EndTime": "15:00",
         "WorkShop_Location": "DCC 308",
@@ -281,7 +281,7 @@
     {
         "WorkShop_Title": "Lunch",
         "WorkShop_Presenter": "TBD",
-        "WorkShop_Date": "2023-11-05",
+        "WorkShop_Date": "2023-12-05",
         "WorkShop_StartTime": "13:00",
         "WorkShop_EndTime": "14:00",
         "WorkShop_Location": "DCC Lounge",
@@ -290,7 +290,7 @@
     {
         "WorkShop_Title": "Closing Ceremony",
         "WorkShop_Presenter": "TBD",
-        "WorkShop_Date": "2023-11-05",
+        "WorkShop_Date": "2023-12-05",
         "WorkShop_StartTime": "15:00",
         "WorkShop_EndTime": "16:00",
         "WorkShop_Location": "DCC 308",
@@ -299,7 +299,7 @@
     {
         "WorkShop_Title": "Event Closes",
         "WorkShop_Presenter": "TBD",
-        "WorkShop_Date": "2023-11-05",
+        "WorkShop_Date": "2023-12-05",
         "WorkShop_StartTime": "16:00",
         "WorkShop_EndTime": "16:30",
         "WorkShop_Location": "TBD",
