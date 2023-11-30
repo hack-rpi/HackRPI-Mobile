@@ -21,8 +21,8 @@ const SettingsPage = ({ navigation }) => {
         onPress={() => navigation.navigate('Report')}
       />
       <Button
-        title="Acessability Settings"
-        onPress={() => navigation.navigate('AcessibilitySettings')}
+        title="Notification Settings"
+        onPress={() => navigation.navigate('NotificationSettings')}
       />
     </View>
   );
@@ -36,19 +36,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
     padding: 20,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-  },
-  setting: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    width: '100%',
-    marginBottom: 10,
-    paddingHorizontal: 10,
   },
 });
 

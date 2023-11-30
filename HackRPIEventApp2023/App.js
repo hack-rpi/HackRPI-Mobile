@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Feather } from '@expo/vector-icons';
 import { StatusBar } from "expo-status-bar";
 import Calander from "./Box/Calander";
-import Settings from "./SettingsOptions/LanguageSettings"
+import Settings from "./SettingsOptions/Settings"
 
 const Tab = createBottomTabNavigator();
 
@@ -40,7 +40,6 @@ function SettingsScreen() {
     <View style={styles.container}>
       <Feather name="settings" size={24} color="white" />
       <Settings/>
-      <Text style={styles.text}>Put something useful lol</Text>
     </View>
   );
 }
