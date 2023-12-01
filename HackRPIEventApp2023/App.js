@@ -5,15 +5,17 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Feather } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
 import Calander from "./Box/Calander";
+import Food from "./information/Food";
+// import { colors } from './colors';
 import { globalStyles } from "./styles";
 
 const Tab = createBottomTabNavigator();
 
 function InfoScreen() {
   return (
-    <View style={styles.container}></View>
-
-    //line 16: StatusBar style ^^ can we customize this while still keeping it general?
+    <View style={styles.container}>
+      <Food />
+    </View>
   );
 }
 
@@ -21,6 +23,8 @@ function HomeScreen() {
   return (
     <View style={styles.container}>
       <Calander />
+
+      <StatusBar style="auto" />
     </View>
   );
 }
