@@ -1,77 +1,90 @@
-import React from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import React from "react";
+import { StyleSheet, View, Text } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Feather } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
 import Calander from "./Box/Calander";
-// import { colors } from './colors';
+import { globalStyles } from "./styles";
 
 const Tab = createBottomTabNavigator();
+
+function InfoScreen() {
+  return (
+    <View style={styles.container}></View>
+
+    //line 16: StatusBar style ^^ can we customize this while still keeping it general?
+  );
+}
 
 function HomeScreen() {
   return (
     <View style={styles.container}>
       <Calander />
-
-      <StatusBar style="auto" />
     </View>
   );
 }
 
-function ExploreScreen() {
+function QueueScreen() {
   return (
     <View style={styles.container}>
-      <Text>Explore Screen</Text>
+      <Feather name="user" size={24} color="white" />
+      <Text style={styles.text}>Put something useful lol</Text>
     </View>
   );
 }
-
-function ProfileScreen() {
-  return (
-    <View style={styles.container}>
-      <Text>Profile Screen</Text>
-    </View>
-  );
-}
-
-function HolderScreen() {
-  return (
-    <View style={styles.container}>
-      <Text>Holder Screen</Text>
-    </View>
-  );
-}
-
 
 export default function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator
-        screenOptions={{
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            //adding icons
+            let iconName;
+            if (route.name === "Info") {
+              iconName = "info";
+            } else if (route.name === "Home") {
+              iconName = "home";
+            } else if (route.name === "Queue") {
+              iconName = "user";
+            }
+            return (
+              <Feather
+                name={iconName}
+                size={size}
+                color={focused ? "red" : "white"}
+              />
+            );
+          },
+          tabBarLabelStyle: {
+            fontSize: 12,
+          },
           tabBarStyle: {
-            backgroundColor: 'rgba(0, 0, 0, 0.5)', // Set a semi-transparent black background color
+            backgroundColor: globalStyles.primary, // should this be transparent?
             borderTopWidth: 0, // Hide top border of the tab bar
           },
-          tabBarActiveTintColor: '#910307',
-        }}
-      >
+          tabBarActiveTintColor: globalStyles.accent,
+          tabBarInactiveTintColor: "white",
+        })}>
+        <Tab.Screen name="Info" component={InfoScreen} />
         <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Explore" component={ExploreScreen} />
-        <Tab.Screen name="Profile" component={ProfileScreen} />
-        <Tab.Screen name="Holder" component={HolderScreen} />
+        <Tab.Screen name="Queue" component={QueueScreen} />
       </Tab.Navigator>
     </NavigationContainer>
-
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#191919',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: globalStyles.primary,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  text: {
+    fontSize: globalStyles.fontSize,
+    fontWeight: globalStyles.fontWeight,
+    color: globalStyles.text,
   },
 });
-
