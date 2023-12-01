@@ -1,4 +1,3 @@
-import CountdownTimer from "./Components/CountdownTimer";
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
@@ -6,15 +5,14 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Feather } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
 import Calander from "./Box/Calander";
-import { globalStyles } from './styles';
+import { globalStyles } from "./styles";
 
 const Tab = createBottomTabNavigator();
 
 function InfoScreen() {
   return (
-    <View style={styles.container}>
-      <Calander />
-    </View>
+    <View style={styles.container}></View>
+
     //line 16: StatusBar style ^^ can we customize this while still keeping it general?
   );
 }
@@ -22,9 +20,7 @@ function InfoScreen() {
 function HomeScreen() {
   return (
     <View style={styles.container}>
-      <CountdownTimer />
-      <Feather name="user" size={24} color="white" />
-      <Text style={styles.text}>No one home gotcha! haha</Text>
+      <Calander />
     </View>
   );
 }
@@ -70,13 +66,10 @@ export default function App() {
           },
           tabBarActiveTintColor: globalStyles.accent,
           tabBarInactiveTintColor: "white",
-        })}
-      >
-
-      <Tab.Screen name="Info" component={InfoScreen} />
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Queue" component={QueueScreen} />
-      
+        })}>
+        <Tab.Screen name="Info" component={InfoScreen} />
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Queue" component={QueueScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );

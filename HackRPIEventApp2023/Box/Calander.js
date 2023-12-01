@@ -1,6 +1,7 @@
 import React from "react";
 import { SafeAreaView, ScrollView, StyleSheet } from "react-native";
 import CalanderObject from "./CalanderObject";
+import CountdownTimer from "../Components/CountdownTimer";
 
 // calander object that holds all events and handles which are visable, which are active, and which are upcoming.
 const Calander = () => {
@@ -12,6 +13,7 @@ const Calander = () => {
         //pagingEnabled={true} // Enable paging
         //snapToInterval={150} // Set the interval to the height of a single rectangle
       >
+        <CountdownTimer />
         <CalanderObject
           workshop_Title="Workshop_title"
           Time="Time Unknown"
