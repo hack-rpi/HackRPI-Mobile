@@ -5,14 +5,16 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Feather } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
 import Calander from "./Box/Calander";
-import QueEntry from "./HackerQue/QueEntry";
+import Food from "./information/Food";
+// import { colors } from './colors';
+import { globalStyles } from "./styles";
 
 const Tab = createBottomTabNavigator();
 
 function InfoScreen() {
   return (
     <View style={styles.container}>
-      <Calander />
+      <Food />
     </View>
   );
 }
@@ -20,8 +22,9 @@ function InfoScreen() {
 function HomeScreen() {
   return (
     <View style={styles.container}>
-      <Feather name="user" size={24} color="white" />
-      <Text style={styles.text}>No one home gotcha! haha</Text>
+      <Calander />
+
+      <StatusBar style="auto" />
     </View>
   );
 }
@@ -30,8 +33,7 @@ function QueueScreen() {
   return (
     <View style={styles.container}>
       <Feather name="user" size={24} color="white" />
-      {/* need to add swap between mentor and non-mentor viewr */}
-      <QueEntry></QueEntry>
+      <Text style={styles.text}>Put something useful lol</Text>
     </View>
   );
 }
@@ -63,10 +65,10 @@ export default function App() {
             fontSize: 12,
           },
           tabBarStyle: {
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
-            borderTopWidth: 0,
+            backgroundColor: globalStyles.primary, // should this be transparent?
+            borderTopWidth: 0, // Hide top border of the tab bar
           },
-          tabBarActiveTintColor: "#910307",
+          tabBarActiveTintColor: globalStyles.accent,
           tabBarInactiveTintColor: "white",
         })}>
         <Tab.Screen name="Info" component={InfoScreen} />
@@ -80,11 +82,13 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#191919",
+    backgroundColor: globalStyles.primary,
     alignItems: "center",
     justifyContent: "center",
   },
   text: {
-    color: "white",
+    fontSize: globalStyles.fontSize,
+    fontWeight: globalStyles.fontWeight,
+    color: globalStyles.text,
   },
 });
