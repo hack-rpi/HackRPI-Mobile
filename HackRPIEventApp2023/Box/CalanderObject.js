@@ -8,6 +8,7 @@ const CalanderObject = ({
   workshop_Title,
   Time,
   Location,
+  Presenter,
   Description,
   isRed,
 }) => {
@@ -17,17 +18,13 @@ const CalanderObject = ({
     setIsActive(!isActive);
   };
 
-  // const checkCondition = () => {
-  //   // Implement later, if the event is currently happening, return true.
-  //   return true;
-  // };
-
   return (
     <View style={styles.container}>
       <EventObject
         workshop_title={workshop_Title}
         time={Time}
         location={Location}
+        presenter={Presenter}
         description={Description}
         isRed={isRed} //this line is use for hardcode
         //isRed={checkCondition()} -> This line will be use instead if we implement checkCondition() function
@@ -60,7 +57,7 @@ const styles = StyleSheet.create({
   },
   notifBox: {
     width: 60,
-    height: 100,
+    height: 150,
     borderWidth: 3,
     borderRadius: 20,
     padding: 10,
