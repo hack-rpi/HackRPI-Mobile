@@ -5,6 +5,7 @@ import{} from ' firebase/app'
 import{} from 'firebase/auth'
 import{} from 'firebase/analytics'
 import LoginButton from "./components/login"
+import LogoutButton from "./components/signout"
 export default function App() {
   return (
     <View style={styles.container}>
