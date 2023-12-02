@@ -4,6 +4,7 @@ import{}from 'firebase/firestore';
 import{} from ' firebase/app'
 import{} from 'firebase/auth'
 import{} from 'firebase/analytics'
+import LoginButton from "./components/login"
 export default function App() {
   return (
     <View style={styles.container}>
