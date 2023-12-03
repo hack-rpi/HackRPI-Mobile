@@ -6,8 +6,11 @@ import { Feather } from '@expo/vector-icons';
 import { StatusBar } from "expo-status-bar";
 import Calander from "./Box/Calander";
 import Settings from "./SettingsOptions/Settings"
+import { createStackNavigator } from '@react-navigation/stack';
+import AccessibilitySettingsScreen from "./SettingsOptions/AccessibilitySettings"
 
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
 function InfoScreen() {
   return (
@@ -35,14 +38,45 @@ function QueueScreen() {
   );
 }
 
+// function SettingsScreen() {
+//   return (
+//     <View style={styles.container}>
+//       <Feather name="settings" size={24} color="white" />
+//       <Settings/>
+//     </View>
+//   );
+// }
+
+/**SettingsStackNavigator is a separate function that defines a stack navigator (StackNavigator) 
+ * managing screens related to settings (SettingsPage in this case). Within the SettingsScreen component, 
+ * the SettingsStackNavigator is included to handle navigation within the Settings tab. */
+
+function SettingsStackNavigator() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={{
+          headerShown: false // If you want to hide the header for this stack
+        }}
+      />
+      {/* Add more screens within this Stack.Navigator if needed */}
+    </Stack.Navigator>
+  );
+}
+
 function SettingsScreen() {
   return (
-    <View style={styles.container}>
-      <Feather name="settings" size={24} color="white" />
-      <Settings/>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Feather name="settings" size={24} color="black" />
+      <Text><Settings/></Text>
+      {/* Include the SettingsStackNavigator here */}
+      <SettingsStackNavigator />
     </View>
   );
 }
+
 
 export default function App() {
   return (

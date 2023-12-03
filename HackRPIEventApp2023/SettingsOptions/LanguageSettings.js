@@ -1,9 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-const AccessibilityOptions = () => {
+const LanguageSettings = () => {
   return (
     <View style={styles.container}>
+      <Text style={styles.option}>Language Settings</Text>
       <Text style={styles.option}>Language Options:</Text>
       <Text style={styles.language}>English</Text>
       <Text style={styles.language}>Spanish</Text>
@@ -18,6 +19,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+    padding: 20,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
   },
   option: {
     fontSize: 20,
@@ -30,4 +37,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AccessibilityOptions;
+export default LanguageSettings;
