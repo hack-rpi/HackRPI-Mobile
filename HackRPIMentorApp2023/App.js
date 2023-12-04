@@ -327,7 +327,47 @@ const getTimeSinceLastHelped = async (studentId) => {
   }
 };
 
+const db = getFirestore(app); // Initialize Firestore
 
+// Function to balance the queue
+const balanceQueue = async () => {
+  try {
+    // Get all mentors
+    const mentorsSnapshot = await db.collection('mentors').get();
+
+    // Create an array to hold mentor availability and expertise
+    let mentors = [];
+    mentorsSnapshot.forEach(doc => {
+      mentors.push({ id: doc.id, ...doc.data() });
+    });
+
+    // Sort mentors by their current load (ascending)
+    mentors.sort((a, b) => a.currentLoad - b.currentLoad);
+
+    // Get unassigned student requests
+    const requestsSnapshot = await db.collection('requests').where('assignedTo', '==', null).get();
+    requestsSnapshot.forEach(async (requestDoc) => {
+      const requestData = requestDoc.data();
+
+      // Find the most suitable mentor for each request
+      for (let mentor of mentors) {
+        if (mentor.expertise.includes(requestData.subject)) {
+          // Assign this request to the mentor
+          await db.collection('requests').doc(requestDoc.id).update({ assignedTo: mentor.id });
+          
+          // Update mentor's current load
+          await db.collection('mentors').doc(mentor.id).update({ currentLoad: mentor.currentLoad + 1 });
+          
+          // Break the loop once assigned
+          break;
+        }
+      }
+    });
+
+  } catch (error) {
+    console.error('Error in balancing the queue:', error);
+  }
+};
   
   
 
