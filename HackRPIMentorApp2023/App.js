@@ -1,18 +1,36 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Linking, StyleSheet, Text, View } from 'react-native';
 import{}from 'firebase/firestore';
 import{} from ' firebase/app'
 import{} from 'firebase/auth'
 import{} from 'firebase/analytics'
 import LoginButton from "./components/login"
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import LogoutButton from "./components/signout"
+import signUp from "./components/signup"
 import {gapi} from 'gapi-script'
 import {globalStyles} from "./styles";
 import { Feather } from "@expo/vector-icons";
 
+// the following is work in progress
 const tab = createBottomTabNavigator();
+const navigation = useNavigation();
+
+const loginPress = async() => {
+  const result = await WebBrowser.openAutSessionAsync(
+    'need a redirect url here for now it will be localhost 3000'
+  ); 
+  if (result.type === "success"){
+    const params = Linking.parse(result.url);
+    const {email, name,picture} = params.queryParams;
+
+    const user = {
+      email, name, picture,
+    };
+    navigation.navigate("HomeScreen", {user});
+  }
+}
 
 function loginScreen(){
   // a nav page for login
