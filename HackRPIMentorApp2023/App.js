@@ -62,7 +62,7 @@ export default function App() {
             borderTopWidth: 0, // Hide top border of the tab bar
           },
           tabBarActiveTintColor: globalStyles.accent,
-          tabBarInactiveTintColor: "white",
+          tabBarInactiveTintColor: "white", //matches the names to the components
         })}>
         <Tab.Screen name="login" component={loginScreen} />
         <Tab.Screen name="logout" component={logoutScreen} />
@@ -88,8 +88,13 @@ function App(){
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: globalStyles.primary,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  text: {
+    fontSize: globalStyles.fontSize,
+    fontWeight: globalStyles.fontWeight,
+    color: globalStyles.text,
   },
 });
