@@ -1,58 +1,47 @@
 import React from 'react';
-import { View, Button, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
-const SettingsPage = ({ navigation }) => {
+import AccessibilitySettings from "./AccessibilitySettings";
+import LanguageSettings from "./LanguageSettings";
+import NotificationSettings from "./NotificationSettings";
+import ProfileCustomization from "./ProfileCustomization";
+import Report from "./Report";
+
+
+const CustomButton = ({ title, onPress }) => (
+  <TouchableOpacity onPress={onPress} style={styles.button}>
+    <Text style={styles.buttonText}>{title}</Text>
+    <Feather name="arrow-right" size={24} color="white" />
+  </TouchableOpacity>
+);
+
+const Settings = ({ navigation }) => {
   return (
     <View style={styles.container}>
-       <View style={styles.buttonContainer}>
-        <Button
-          title="Accessibility Settings"
-          color = "white"
-          onPress={() => navigation.navigate('AccessibilitySettings')}
-        />
-        <Feather name="arrow-right" size={24} color="white" style={styles.icon} />
-      </View>
-
-      <View style={styles.buttonContainer}>
-        <Button
-          title="Profile Customization"
-          color = "white"
-          onPress={() => navigation.navigate('ProfileCustomization')}
-        />
-        <Feather name="arrow-right" size={24} color="white" style={styles.icon} />
-      </View>
-
-      <View style={styles.buttonContainer}>
-        <Button
-          title="Language Settings"
-          color = "white"
-          onPress={() => navigation.navigate('LanguageSettings')}
-        />
-        <Feather name="arrow-right" size={24} color="white" style={styles.icon} />
-      </View>
-
-      <View style={styles.buttonContainer}>
-        <Button
-          title="Report a Bug "
-          color = "white"
-          onPress={() => navigation.navigate('Report')}
-        />
-        <Feather name="arrow-right" size={24} color="white" style={styles.icon} />
-      </View>
-
-      <View style={styles.buttonContainer}>
-        <Button
-          title="Notification Settings"
-          color = "white"
-          onPress={() => navigation.navigate('NotificationSettings')}
-        />
-        <Feather name="arrow-right" size={24} color="white" style={styles.icon} />
-      </View>
+      <CustomButton
+        title="Accessibility Settings"
+        onPress={() => navigation.navigate('AccessibilitySettings')}
+      />
+      <CustomButton
+        title="Profile Customization"
+        onPress={() => navigation.navigate('ProfileCustomization')}
+      />
+      <CustomButton
+        title="Language Settings"
+        onPress={() => navigation.navigate('LanguageSettings')}
+      />
+      <CustomButton
+        title="Report a Bug"
+        onPress={() => navigation.navigate('Report')}
+      />
+      <CustomButton
+        title="Notification Settings"
+        onPress={() => navigation.navigate('NotificationSettings')}
+      />
     </View>
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {
@@ -62,14 +51,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#191919',
     padding: 20,
   },
-  buttonContainer: {
+  button: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 10,
   },
-  icon: {
-    marginLeft: 10,
+  buttonText: {
+    color: 'white',
+    marginRight: 10,
   },
 });
 
-export default SettingsPage;
+export default Settings;

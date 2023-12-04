@@ -1,21 +1,12 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text } from 'react-native';
 
-const AccessibilityOptions = () => {
+const Report = () => {
   return (
-    <View style={styles.container}>
-      <Text>Accessibility Options</Text>
-      {/* Suboptions and functionality here */}
+    <View>
+      <Text>Notification Settings Screen</Text>
     </View>
   );
 };
 
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-});
+export default Report;

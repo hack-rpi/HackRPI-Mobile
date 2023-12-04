@@ -6,10 +6,16 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Feather } from '@expo/vector-icons';
 import Calander from "./Box/Calander";
 import Settings from "./SettingsOptions/Settings";
+import AccessibilitySettings from "./SettingsOptions/AccessibilitySettings";
+import LanguageSettings from "./SettingsOptions/LanguageSettings";
+import NotificationSettings from "./SettingsOptions/NotificationSettings";
+import ProfileCustomization from "./SettingsOptions/ProfileCustomization";
+import Report from "./SettingsOptions/Report";
 import { StatusBar } from "expo-status-bar";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
+
 
 function InfoScreen() {
   return (
@@ -37,15 +43,35 @@ function QueueScreen() {
   );
 }
 
+// Define the Settings stack navigator with all the settings screens
 function SettingsStackNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Settings"
+        name="SettingsMain" // Rename this to avoid conflict with tab name
         component={Settings}
         options={{ headerShown: false }}
       />
-      {/* Add more screens for settings here if needed */}
+      <Stack.Screen
+        name="AccessibilitySettings"
+        component={AccessibilitySettings}
+      />
+      <Stack.Screen
+        name="LanguageSettings"
+        component={LanguageSettings}
+      />
+      <Stack.Screen
+        name="NotificationSettings"
+        component={NotificationSettings}
+      />
+      <Stack.Screen
+        name="ProfileCustomization"
+        component={ProfileCustomization}
+      />
+      <Stack.Screen
+        name="Report"
+        component={Report}
+      />
     </Stack.Navigator>
   );
 }
