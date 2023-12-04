@@ -9,10 +9,10 @@ import LogoutButton from "./components/signout"
 import {gapi} from 'gapi-script'
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <div className='App'>
+      <LoginButton/>
+      <LogoutButton/>
+    </div>
   );
 }
 
@@ -24,7 +24,7 @@ function App(){
         scope: ""
       })
     };
-    
+
     gapi.load('client:auth2', start);
 
   });
