@@ -5,8 +5,30 @@ import{} from ' firebase/app'
 import{} from 'firebase/auth'
 import{} from 'firebase/analytics'
 import LoginButton from "./components/login"
+import { NavigationContainer } from "@react-navigation/native";
 import LogoutButton from "./components/signout"
 import {gapi} from 'gapi-script'
+
+
+function loginScreen(){
+  // a nav page for login
+  return(
+    <view style = {styles.container}> 
+      <LoginButton/>
+    </view>
+  );
+}
+
+//nav page for logout
+function logoutScreen(){
+  return(
+    <view style = {styles.container}>
+      <LogoutButto/>
+    </view>
+  );
+}
+
+
 export default function App() {
   return (
     <div className='App'>
