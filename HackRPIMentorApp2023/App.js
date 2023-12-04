@@ -368,6 +368,46 @@ const balanceQueue = async () => {
     console.error('Error in balancing the queue:', error);
   }
 };
+
+// Function to find peak hours
+const findPeakHours = async () => {
+  try {
+    // Define an object to hold the count of requests per hour
+    let hourCounts = {};
+
+    // Get all requests
+    const requestsSnapshot = await db.collection('requests').get();
+
+    requestsSnapshot.forEach(doc => {
+      const requestData = doc.data();
+      const requestTimestamp = requestData.timestamp; // assuming 'timestamp' field exists
+
+      // Extract hour from timestamp
+      const hour = requestTimestamp.toDate().getHours(); // convert Firestore timestamp to Date and get hour
+
+      // Increment the count for this hour
+      hourCounts[hour] = (hourCounts[hour] || 0) + 1;
+    });
+
+    // Find the hour(s) with the maximum requests
+    let maxRequests = 0;
+    let peakHours = [];
+    for (const [hour, count] of Object.entries(hourCounts)) {
+      if (count > maxRequests) {
+        maxRequests = count;
+        peakHours = [hour];
+      } else if (count === maxRequests) {
+        peakHours.push(hour);
+      }
+    }
+
+    console.log(`Peak Hours: ${peakHours.join(', ')} with ${maxRequests} requests each.`);
+    return peakHours; // Returns an array of peak hours
+  } catch (error) {
+    console.error('Error in finding peak hours:', error);
+  }
+};
+
   
   
 
