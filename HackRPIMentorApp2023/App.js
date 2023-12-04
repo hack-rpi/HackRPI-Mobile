@@ -295,6 +295,39 @@ function App() {
     console.log(`Total Students Helped: ${totalHelpedStudents}`);
   };
   
+  // This function calculates the time since the student was last helped
+const getTimeSinceLastHelped = async (studentId) => {
+  try {
+    // Fetch the student's document using the studentId
+    const studentDoc = await db.collection('students').doc(studentId).get();
+
+    if (!studentDoc.exists) {
+      console.log('No such student found!');
+      return;
+    }
+
+    const studentData = studentDoc.data();
+    const lastHelpedTimestamp = studentData.lastHelpedTimestamp; // Assuming this is the field where the last helped timestamp is stored
+
+    if (!lastHelpedTimestamp) {
+      console.log('This student has not been helped before.');
+      return;
+    }
+
+    // Current timestamp
+    const now = new Date().getTime();
+
+    // Calculate the time since the student was last helped in minutes
+    const timeSinceLastHelped = (now - lastHelpedTimestamp.toMillis()) / 60000; // Convert from milliseconds to minutes
+
+    console.log(`Time since last helped: ${timeSinceLastHelped.toFixed(2)} minutes`);
+    return timeSinceLastHelped.toFixed(2); // Return the time in minutes, rounded to 2 decimal places
+  } catch (error) {
+    console.error('Error in getTimeSinceLastHelped:', error);
+  }
+};
+
+
   
   
 
