@@ -6,6 +6,7 @@ import{} from 'firebase/auth'
 import{} from 'firebase/analytics'
 import LoginButton from "./components/login"
 import LogoutButton from "./components/signout"
+import {gapi} from 'gapi-script'
 export default function App() {
   return (
     <View style={styles.container}>
@@ -13,6 +14,20 @@ export default function App() {
       <StatusBar style="auto" />
     </View>
   );
+}
+
+function App(){
+  useEffect(() => {
+    function start(){
+      gapi.client.init({
+        clientID: clientID,
+        scope: ""
+      })
+    };
+    
+    gapi.load('client:auth2', start);
+
+  });
 }
 
 const styles = StyleSheet.create({
