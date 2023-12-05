@@ -408,6 +408,16 @@ const findPeakHours = async () => {
   }
 };
 
+const logout = async () => {
+  try {
+    await signOut(auth);
+    console.log('User signed out');
+  } catch (error) {
+    console.error('Error signing out:', error);
+    alert('Error signing out');
+  }
+};
+
   
   
 
@@ -447,6 +457,12 @@ const findPeakHours = async () => {
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
       <StatusBar style="auto" />
+      <TouchableOpacity
+      style={styles.logoutButton}
+      onPress={logout}
+    >
+      <Text style={styles.buttonText}>Logout</Text>
+    </TouchableOpacity>
     </View>
   );
 }
@@ -480,6 +496,12 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  logoutButton: {
+    backgroundColor: 'red', // Change the color as desired
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 10, // Add some margin at the top
   },
 });
 
