@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { Linking, StyleSheet, Text, View } from 'react-native';
+import { Alert, Linking, StyleSheet, Text, View } from 'react-native';
 import{}from 'firebase/firestore';
 import{} from ' firebase/app'
 import{} from 'firebase/auth'
@@ -116,7 +116,24 @@ refresh = async() => {
       refreshTok: this.state.refreshTok
     });
   }catch (error){
-    alert.alert('failed to refresh tok', error.message);
+    Alert.alert('failed to refresh tok', error.message);
+  }
+}
+
+//revoke token
+revoke = async()=>{
+  try{
+    await revoke(config,{
+      tokenToRevoke: this.state.accessTok,
+      sendClientId: true
+    });
+    this.animateState({
+      accessTok: '',
+      accessTokExpire: '',
+      refreshTok: ''
+    });
+  }catch(error){
+    Alert.alert('failed to revoke tok', error.message);
   }
 }
 
