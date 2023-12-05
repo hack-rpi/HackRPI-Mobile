@@ -178,6 +178,17 @@ function App() {
       console.error('Error adding to queue:', error);
     }
   }
+  
+  const sendPasswordReset = async (email) => {
+    try {
+      await sendPasswordResetEmail(auth, email);
+      console.log('Password reset email sent!');
+      alert('Password reset email sent!');
+    } catch (error) {
+      console.error('Error sending password reset email:', error);
+      alert('Failed to send password reset email. Please check the email address and try again.');
+    }
+  };
 
 
   // takes in email, password, and verification code named checker
