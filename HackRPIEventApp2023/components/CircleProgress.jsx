@@ -9,7 +9,7 @@ const style = StyleSheet.create({
   },
   circleProgress: {
     fill: 'none',
-    stroke: '#910307', // You can use the variable here if needed
+    stroke: '#610505', // You can use the variable here if needed
   },
 });
 
