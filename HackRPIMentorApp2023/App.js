@@ -32,6 +32,19 @@ const loginPress = async() => {
   }
 }
 
+const config = {
+  issuer: 'need domain name',
+  clientId: '407760520560-119spl9r94p9k2dsvct2qf8fj5448fp6.apps.googleusercontent.com',
+  redirectURL: 'need url for login too',
+  scopes: ['openid', 'profile', 'email', 'offline_access']
+}
+
+function signupScreen(){
+  return(
+    <button>onPress={signUp()}</button>
+  )
+}
+
 function loginScreen(){
   // a nav page for login
   return(
@@ -89,19 +102,20 @@ export default function App() {
   );
 }
 
-function App(){
-  useEffect(() => {
-    function start(){
-      gapi.client.init({
-        clientID: clientID,
-        scope: ""
-      })
-    };
+//out dated
+// function App(){
+//   useEffect(() => { 
+//     function start(){
+//       gapi.client.init({
+//         clientID: clientID,
+//         scope: ""
+//       })
+//     };
 
-    gapi.load('client:auth2', start);
+//     gapi.load('client:auth2', start);
 
-  });
-}
+//   });
+// }
 
 const styles = StyleSheet.create({
   container: {
