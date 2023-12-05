@@ -5,11 +5,11 @@ import { Svg, Circle } from 'react-native-svg';
 const style = StyleSheet.create({
   circleBackground: {
     fill: 'none',
-    stroke: 'red',
+    stroke: '#191919',
   },
   circleProgress: {
     fill: 'none',
-    stroke: 'white', // You can use the variable here if needed
+    stroke: '#610505', // You can use the variable here if needed
   },
 });
 
@@ -23,7 +23,7 @@ const CircleProgress = ({ percentage, circleWidth }) => {
         <Circle
           cx={circleWidth / 2}
           cy={circleWidth / 2}
-          strokeWidth="10px"
+          strokeWidth="6px"
           r={radius}
           style={style.circleBackground}
         />
@@ -31,7 +31,7 @@ const CircleProgress = ({ percentage, circleWidth }) => {
         <Circle
           cx={circleWidth / 2}
           cy={circleWidth / 2}
-          strokeWidth="10px"
+          strokeWidth="6px"
           r={radius}
           style={[
             style.circleProgress,
