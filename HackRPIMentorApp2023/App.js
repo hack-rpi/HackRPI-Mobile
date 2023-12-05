@@ -32,12 +32,19 @@ const loginPress = async() => {
   }
 }
 
+type State = {
+  loggedInOnce: Boolean,
+  accessTok: ?String,
+  accessTokExpire: ?String,
+  refreshTok: ?String
+};
+
 const config = {
   issuer: 'need domain name',
   clientId: '407760520560-119spl9r94p9k2dsvct2qf8fj5448fp6.apps.googleusercontent.com',
   redirectURL: 'need url for login too',
   scopes: ['openid', 'profile', 'email', 'offline_access']
-}
+};
 
 function signupScreen(){
   return(
@@ -101,6 +108,18 @@ export default function App() {
     </NavigationContainer>
   );
 }
+
+//Refresh func
+refresh = async() => {
+  try{
+    const authState = await refresh(config, {
+      refreshTok: this.state.refreshTok
+    });
+  }catch (error){
+    alert.alert('failed to refresh tok', error.message);
+  }
+}
+
 
 //out dated
 // function App(){
