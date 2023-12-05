@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { gapi } from 'gapi-script';
 import { StatusBar } from 'expo-status-bar';
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import { FieldValue, getFirestore, addDoc, collection, getDocs } from "firebase/firestore";
 import { StyleSheet, Text, View, TextInput , TouchableOpacity} from 'react-native';
 import LoginButton from "./components/login";
@@ -178,7 +178,7 @@ function App() {
       console.error('Error adding to queue:', error);
     }
   }
-  
+
   const sendPasswordReset = async (email) => {
     try {
       await sendPasswordResetEmail(auth, email);
@@ -335,6 +335,17 @@ const getTimeSinceLastHelped = async (studentId) => {
     return timeSinceLastHelped.toFixed(2); // Return the time in minutes, rounded to 2 decimal places
   } catch (error) {
     console.error('Error in getTimeSinceLastHelped:', error);
+  }
+};
+
+const sendVerificationEmail = async (user) => {
+  try {
+    await sendEmailVerification(user);
+    console.log('Verification email sent!');
+    alert('A verification email has been sent. Please check your inbox.');
+  } catch (error) {
+    console.error('Error sending verification email:', error);
+    alert('Failed to send verification email. Please try again later.');
   }
 };
 
