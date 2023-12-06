@@ -276,29 +276,27 @@ function App() {
       console.error('Error calculating average wait time:', error);
     }
   };
-  const getTotalStudentsHelped = async () => {
-    try {
-      const requestsCollection = collection(db, 'requests');
-      const querySnapshot = await getDocs(requestsCollection);
-  
-      let totalHelpedStudents = 0;
-  
-      querySnapshot.forEach((doc) => {
-        const data = doc.data();
-        const helped = data.helped; // Boolean field indicating if the student has been helped
-  
-        if (helped) {
-          totalHelpedStudents++;
-        }
-      });
-  
-      console.log(`Total Students Helped: ${totalHelpedStudents}`);
-      return totalHelpedStudents;
-    } catch (error) {
-      console.error('Error calculating total students helped:', error);
-      return 0; // Return 0 in case of an error
-    }
-  };
+// Example optimized loop in a function
+const getTotalStudentsHelped = async () => {
+  try {
+    const requestsCollection = collection(db, 'requests');
+    const querySnapshot = await getDocs(requestsCollection);
+
+    let totalHelpedStudents = 0;
+
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      totalHelpedStudents += data.helped ? 1 : 0;
+    });
+
+    console.log(`Total Students Helped: ${totalHelpedStudents}`);
+    return totalHelpedStudents;
+  } catch (error) {
+    console.error('Error calculating total students helped:', error);
+    return 0;
+  }
+};
+
   
   const getQueueStatistics = async () => {
     try {
