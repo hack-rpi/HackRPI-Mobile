@@ -243,6 +243,16 @@ function App() {
       alert('Failed to send password reset email. Please check the email address and try again.');
     }
   };
+  // code to sort requests
+  const sortByTime = (queue) => {
+    // Logic to sort the queue by time
+    return queue.slice().sort((a, b) => a.timestamp.toMillis() - b.timestamp.toMillis());
+  };
+
+  const sortBySubject = (queue) => {
+    // Logic to sort the queue by subject
+    return queue.slice().sort((a, b) => a.subject.localeCompare(b.subject));
+  };
 
   // Registers a new user with email and password.
   const registerWithEmailAndPassword = async () => {
