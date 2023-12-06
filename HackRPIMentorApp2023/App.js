@@ -55,15 +55,24 @@ function App() {
       const querySnapshot = await getDocs(requestsCollection);
       let index = 0;
       const docIDs = [];
+      const visibleQueue = [];
+  
       querySnapshot.forEach((doc) => {
+        const data = doc.data();
         docIDs[index] = doc.id;
         index += 1;
+  
+        // Only include requests that are not paused
+        if (!data.paused) {
+          visibleQueue.push(data);
+        }
       });
-      return querySnapshot;
+  
+      return visibleQueue;
     } catch (error) {
       console.error('Error retrieving data:', error);
     }
-  };
+  }
 // This function checks whether a student is in the queue based on the document key.
   // It returns whether the student has been helped or not.
   const inQueue = async (docKey) => {
@@ -160,7 +169,8 @@ function App() {
       Name: student,
       helped: false,
       tablenum: tblN,
-      type: helpType
+      type: helpType,
+      paused: false,
     };
     // Makes UID unique and time-based for sorting in the database.
     const uID = Date.now();
@@ -170,7 +180,25 @@ function App() {
       console.error('Error adding to queue:', error);
     }
   }
-
+  const togglePause = async (docKey) => {
+    try {
+      const docRef = db.collection('requests').doc(docKey);
+      const docSnapshot = await docRef.get();
+      const data = docSnapshot.data();
+  
+      if (data && data.paused) {
+        // If already paused, unpause
+        await docRef.update({ paused: false });
+        console.log('Queue position unpaused.');
+      } else {
+        // If not paused, pause
+        await docRef.update({ paused: true });
+        console.log('Queue position paused.');
+      }
+    } catch (error) {
+      console.error('Error toggling pause:', error);
+    }
+  }  
   // Sends a password reset email to the provided email address.
   const sendPasswordReset = async (email) => {
     try {
