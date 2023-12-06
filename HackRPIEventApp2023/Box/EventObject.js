@@ -1,17 +1,19 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Icon } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
-// Reusable component that that creates the main content box
+// Reusable component that creates the main content box for an event
 const EventObject = ({
-  workshop_title,
+  workshopTitle,
   time,
   location,
   description,
-  isRed,
+  hasRedBackground,
 }) => {
+  // State to manage the expanded/collapsed state of the event box
   const [expanded, setExpanded] = useState(false);
 
+  // Function to toggle the expansion state on TouchableOpacity press
   const toggleExpansion = () => {
     setExpanded(!expanded);
   };
@@ -21,23 +23,34 @@ const EventObject = ({
       <View
         style={[
           styles.rectangle,
-          expanded ? styles.expanded : null,
-          isRed ? styles.redBackground : null,
-        ]}>
+          expanded && styles.expanded,
+          hasRedBackground && styles.redBackground,
+        ]}
+      >
+        {/* Content of the event box */}
         <View>
-          <Text style={styles.workshop_title}>{"  " + workshop_title}</Text>
-          <Text style={styles.time}>{"  " +time}</Text>
-          <Text style={styles.location}>{"  " +location}</Text>
-          {expanded && <Text style={styles.description}>{"  " + description}</Text>}
+          <Text style={styles.workshopTitle}>{"  " + workshopTitle}</Text>
+          <Text style={styles.time}>{"  " + time}</Text>
+          <Text style={styles.location}>{"  " + location}</Text>
+          {expanded && (
+            <Text style={styles.description}>{"  " + description}</Text>
+          )}
         </View>
+
+        {/* Icon container for the expand/collapse icon */}
         <View style={styles.iconContainer}>
-          <AntDesign name={expanded ? "up" : "down"} size={24} color="black" />
+          <AntDesign
+            name={expanded ? "up" : "down"}
+            size={24}
+            color="black"
+          />
         </View>
       </View>
     </TouchableOpacity>
   );
 };
 
+// Styles for the component
 const styles = StyleSheet.create({
   rectangle: {
     width: 250,
@@ -46,36 +59,38 @@ const styles = StyleSheet.create({
     borderColor: "#000",
     borderRadius: 20,
     padding: 10,
-    left: 10,
     justifyContent: "center",
     alignItems: "left",
-
     marginBottom: 0,
     backgroundColor: "white",
   },
   iconContainer: {
-    left: 100,
+    position: "absolute",
+    right: 10,
     top: 10,
   },
   expanded: {
-    height: 120, // Adjust the height as needed
+    height: 120,
   },
   redBackground: {
     backgroundColor: "red",
   },
-
-  workshop_title: {
+  workshopTitle: {
     fontSize: 18,
     fontWeight: "bold",
+    textAlign: "left",
   },
   time: {
     fontSize: 14,
+    textAlign: "left",
   },
   location: {
     fontSize: 14,
+    textAlign: "left",
   },
   description: {
     marginTop: 10,
+    textAlign: "left",
   },
 });
 
