@@ -85,32 +85,28 @@ const MentorFrontend = () => {
   // Call sendRequestsData to fetch data from the backend and update hackerData
   const populateHackerData = async () => {
     try {
-      const requestSnapshot = await sendRequestsData(); // Call the backend function
-      const hackerDataArray = [];
-
-      if (requestSnapshot) { 
-        requestSnapshot.forEach((doc) => {
-            const docData = doc.data();
+      const requestSnapshot = await sendRequestsData();
+      const hackerDataArray = requestSnapshot?.map((doc) => {
+        const { Name, tablenum, type, helped } = doc.data();
             // You can use fetchDoc to get additional data for each document if needed
             // const additionalData = await fetchDoc(doc.id); // Call the backend function
 
             // Create an object to represent the hacker info
-            const hackerInfo = {
-                Hacker_Name: docData.Name,
-                Table: docData.tablenum,
-                Description: docData.type,
-                isRed: docData.helped,
-            };
-
-            hackerDataArray.push(hackerInfo);
-        });
-      }
+        const hackerInfo = {
+          Hacker_Name: Name,
+          Table: tablenum,
+          Description: type,
+          isRed: helped,
+        };
+  
+        return hackerInfo;
+      }) || [];
+  
       setHackerData(hackerDataArray);
-      } catch (error) {
-        console.error('Error fetching data:', error);
+    } catch (error) {
+      console.error('Error fetching data:', error);
     }
   };
-
   const handleRefresh = async () => {
     if (!refreshCooldown) {
         populateHackerData();
