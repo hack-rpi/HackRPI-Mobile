@@ -154,13 +154,18 @@ function App() {
   
 
   // takes in the document key and pops it from the database
-  const popQueue = async(docKey)=>{
-    try{
-      const ans = await db.collection('requests').doc(docKey).delete();
-    }catch(error){
-      console.error('Error deleting student from queue:', error);
+  const popQueue = async (docKey) => {
+    try {
+      const batch = writeBatch(db);
+      const docRef = doc(db, 'requests', docKey);
+      batch.delete(docRef);
+      await commitBatch(batch);
+    } catch (error) {
+      console.error('Error in popQueue:', error);
+      throw error;
     }
   };
+  
 
   // adds someone into the queue  takes in student name, tabke number, and help type
   const addQueue = async(student, tblN,helpType) => {
@@ -296,15 +301,25 @@ function App() {
   };
   
   const getQueueStatistics = async () => {
-    const totalStudents = await getTotalStudentsInQueue();
-    const averageWaitTime = await getAverageWaitTime();
-    const totalHelpedStudents = await getTotalStudentsHelped();
+    try {
+      const totalStudentsPromise = getTotalStudentsInQueue();
+      const averageWaitTimePromise = getAverageWaitTime();
+      const totalHelpedStudentsPromise = getTotalStudentsHelped();
   
-    // Display the results
-    console.log(`Total Students in Queue: ${totalStudents}`);
-    console.log(`Average Wait Time: ${averageWaitTime.toFixed(2)} minutes`);
-    console.log(`Total Students Helped: ${totalHelpedStudents}`);
+      const [totalStudents, averageWaitTime, totalHelpedStudents] = await Promise.all([
+        totalStudentsPromise,
+        averageWaitTimePromise,
+        totalHelpedStudentsPromise
+      ]);
+  
+      console.log(`Total Students in Queue: ${totalStudents}`);
+      console.log(`Average Wait Time: ${averageWaitTime.toFixed(2)} minutes`);
+      console.log(`Total Students Helped: ${totalHelpedStudents}`);
+    } catch (error) {
+      console.error('Error in getQueueStatistics:', error);
+    }
   };
+  
   
   // This function calculates the time since the student was last helped
 const getTimeSinceLastHelped = async (studentId) => {
