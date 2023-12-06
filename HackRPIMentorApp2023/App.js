@@ -184,21 +184,54 @@ function App() {
     try {
       const docRef = db.collection('requests').doc(docKey);
       const docSnapshot = await docRef.get();
+  
+      if (!docSnapshot.exists) {
+        console.log('No such document!');
+        return;
+      }
+  
       const data = docSnapshot.data();
   
+      if (data && data.helped) {
+        alert('This student has already been helped.');
+        return;
+      }
+  
+      // Check if the student is already paused
       if (data && data.paused) {
-        // If already paused, unpause
-        await docRef.update({ paused: false });
-        console.log('Queue position unpaused.');
+        // Calculate the duration of the pause
+        const pauseStartTimestamp = data.pauseStartTimestamp.toMillis();
+        const now = new Date().getTime();
+        const pauseDuration = (now - pauseStartTimestamp) / 60000; // Convert from milliseconds to minutes
+  
+        // Check if the pause duration is longer than an hour
+        if (pauseDuration > 60) {
+          // Delete the help request if paused for more than an hour
+          await docRef.delete();
+          console.log('Help request deleted due to exceeding pause duration.');
+          return;
+        }
+  
+        // Unpause the student by removing the 'paused' field
+        await docRef.update({
+          paused: FieldValue.delete(),
+          pauseStartTimestamp: FieldValue.delete(),
+        });
+  
+        console.log('Student position in the queue unpause.');
       } else {
-        // If not paused, pause
-        await docRef.update({ paused: true });
-        console.log('Queue position paused.');
+        // Pause the student by adding the 'paused' field and setting the pause start timestamp
+        await docRef.update({
+          paused: true,
+          pauseStartTimestamp: FieldValue.serverTimestamp(),
+        });
+  
+        console.log('Student position in the queue paused.');
       }
     } catch (error) {
       console.error('Error toggling pause:', error);
     }
-  }  
+  };
   // Sends a password reset email to the provided email address.
   const sendPasswordReset = async (email) => {
     try {
@@ -311,7 +344,7 @@ const getTotalStudentsHelped = async () => {
   }
 };
 
-  
+  //calls functions to write statistics
   const getQueueStatistics = async () => {
     try {
       const totalStudentsPromise = getTotalStudentsInQueue();
