@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { gapi } from 'gapi-script';
 import { StatusBar } from 'expo-status-bar';
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification, updateProfile } from "firebase/auth";
 import { FieldValue, getFirestore, addDoc, collection, getDocs } from "firebase/firestore";
 import { StyleSheet, Text, View, TextInput , TouchableOpacity} from 'react-native';
 import LoginButton from "./components/login";
@@ -227,6 +227,21 @@ function App() {
       alert(err.message);
     }
   };
+
+  const updateUserProfile = async (user, newName, newPhotoURL) => {
+    try {
+      await updateProfile(user, {
+        displayName: newName,
+        photoURL: newPhotoURL,
+      });
+      console.log('User profile updated!');
+      alert('Your profile has been updated successfully.');
+    } catch (error) {
+      console.error('Error updating user profile:', error);
+      alert('Failed to update profile. Please try again later.');
+    }
+  };
+  
   const getTotalStudentsInQueue = async () => {
     try {
       const requestsCollection = collection(db, 'requests');
