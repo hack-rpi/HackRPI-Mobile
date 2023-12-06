@@ -1,21 +1,18 @@
+// Import necessary libraries and components
 import { useState, useEffect } from 'react';
 import { gapi } from 'gapi-script';
 import { StatusBar } from 'expo-status-bar';
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import { FieldValue, getFirestore, addDoc, collection, getDocs } from "firebase/firestore";
-import { StyleSheet, Text, View, TextInput , TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import LoginButton from "./components/login";
 import LogoutButton from "./components/logout";
 
+// Google API client ID
 const clientId = "117425105410-7f2ebr1hvv8k8dd5sm94flr8rrue992j.apps.googleusercontent.com";
 
-// Import the functions you need from the SDKs you need
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyAqGfFX7gXRGBtidctQjIJ4NC0FA6YxeOQ",
   authDomain: "mentor-queue-c01a3.firebaseapp.com",
@@ -26,29 +23,32 @@ const firebaseConfig = {
   measurementId: "G-NJ5ZBXKBX3"
 };
 
-
 // Initialize Firebase
-
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
+// Main App component
 function App() {
+  // Initialize Google API client
   useEffect(() => {
-    function start() {
+    const start = () => {
       gapi.client.init({
         clientId: clientId,
         scope: ""
-      })
+      });
     };
 
     gapi.load('client:auth2', start);
   });
-  
+
+  // State variables for email, password, and verification code
   const [email, setEmail] = useState(''); // Use state to manage email input
   const [password, setPassword] = useState(''); // Use state to manage password input
+  const [checker, setChecker] = useState(''); // Use state to manage verification code input
 
-  // sends the set of documents that are inside of requests. Basically returns the entire queue.
+  // Sends the set of documents that are inside the 'requests' collection.
+  // Basically returns the entire queue.
   const sendRequestsData = async () => {
     try {
       const requestsCollection = collection(db, 'requests');
@@ -56,57 +56,48 @@ function App() {
       let index = 0;
       const docIDs = [];
       querySnapshot.forEach((doc) => {
-        docIDs[index] = doc.id
+        docIDs[index] = doc.id;
         index += 1;
       });
       return querySnapshot;
-      // the below is how you iterate through and grab each docment
-      // querySnapshot.forEach((doc) => {
-      //   const data = doc.data();
-      //   const tableNum = data.tablenum;
-      //   const type = data.type;
-      //   const name = data.name;
-
-      //   console.log(`Table Number: ${tableNum}, Type: ${type}`);
-      // });
     } catch (error) {
       console.error('Error retrieving data:', error);
     }
   };
-  
-  // this takes in a dockey and returns whether the student has been helped or not
-  const inQueue = async(docKey) => {
-    try{
-      // grabs the document
+// This function checks whether a student is in the queue based on the document key.
+  // It returns whether the student has been helped or not.
+  const inQueue = async (docKey) => {
+    try {
+      // Grabs the document
       const docRef = db.collection('requests').doc(docKey);
-      // gets the data from the doc
+      // Gets the data from the doc
       const doc = await docRef.get();
-      // ensures that the document is retrieved properly
+      // Ensures that the document is retrieved properly
       if (!doc.exists) {
         console.log('No such document!');
       } else {
-        // logs the data to error cehck then returns the helped status
+        // Logs the data for error checking, then returns the helped status
         console.log('Document data:', doc.data());
         return doc.data().helped;
       }
-    }catch(error){
-      console.error('error retrieving document:', error);
+    } catch (error) {
+      console.error('Error retrieving document:', error);
     }
   };
 
-  // a fetchdoc function to return the data of a document, aka the student in queue takes in a dockey
-  const fetchDoc = async(docKey) => {
-    try{
-      // grabs the document
+  // A function to fetch the data of a document, i.e., the student in the queue.
+  // It takes in a document key.
+  const fetchDoc = async (docKey) => {
+    try {
+      // Grabs the document
       const ans = await db.collection('requests').doc(docKey);
       console.log(ans.data());
-      // returns the data of that document
+      // Returns the data of that document
       return ans.data();
-    }catch(error){
-      console.error('error retrieving individual doc:', error);
+    } catch (error) {
+      console.error('Error retrieving individual doc:', error);
     }
   };
-
   const queueOut = async (docKey) => {
     try {
       // Create a reference to the student's document using the provided docKey
@@ -128,8 +119,6 @@ function App() {
       console.error('Error claiming queue:', error);
     }
   };
-  
-
   const unHelp = async (docKey) => {
     try {
       // Create a reference to the student's document using the provided docKey
@@ -151,9 +140,7 @@ function App() {
       console.error('Error unmarking queue:', error);
     }
   };
-  
-
-  // takes in the document key and pops it from the database
+  // Removes a student from the queue based on the document key.
   const popQueue = async (docKey) => {
     try {
       const batch = writeBatch(db);
@@ -165,25 +152,26 @@ function App() {
       throw error;
     }
   };
-  
 
-  // adds someone into the queue  takes in student name, tabke number, and help type
-  const addQueue = async(student, tblN,helpType) => {
+  // Adds someone into the queue.
+  // It takes in student name, table number, and help type.
+  const addQueue = async (student, tblN, helpType) => {
     const data = {
       Name: student,
       helped: false,
       tablenum: tblN,
       type: helpType
     };
-    // has to make UID unique and time based because sorting in the database.
+    // Makes UID unique and time-based for sorting in the database.
     const uID = Date.now();
-    try{
+    try {
       const ans = await db.collection('requests').doc(uId).set(data);
-    }catch(error){
+    } catch (error) {
       console.error('Error adding to queue:', error);
     }
   }
 
+  // Sends a password reset email to the provided email address.
   const sendPasswordReset = async (email) => {
     try {
       await sendPasswordResetEmail(auth, email);
@@ -195,34 +183,27 @@ function App() {
     }
   };
 
-
-  // takes in email, password, and verification code named checker
+  // Registers a new user with email and password.
   const registerWithEmailAndPassword = async () => {
     try {
+      const vericode = ''; // Verification code (TODO: Fill this out)
 
-
-      /* !!!!! MAKE SURE VERICODE IS FILLED OUT !!! */
-      const vericode = '';
-
-
-      // checks vericode with the checker code
-      if(!checker.localeCompare(vericode)){
-        alert("wrong verificationcode")
-      }
-      else{
+      // Checks verification code with the provided code
+      if (!checker.localeCompare(vericode)) {
+        alert("Wrong verification code")
+      } else {
         const res = await createUserWithEmailAndPassword(auth, email, password);
         const user = res.user;
         setEmail(''); // Clear email input
         setPassword(''); // Clear password input
       }
-      // error catching
     } catch (err) {
       console.error(err);
       alert(err.message);
     }
   };
 
-  // logs in the user after the account has bee ncreated
+  // Logs in the user with the provided email and password.
   const loginWithEmailAndPassword = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
@@ -232,15 +213,20 @@ function App() {
       alert(err.message);
     }
   };
-  const getTotalStudentsInQueue = async () => {
-    try {
-      const requestsCollection = collection(db, 'requests');
-      const querySnapshot = await getDocs(requestsCollection);
-      return querySnapshot.size; // Number of documents in the collection
-    } catch (error) {
-      console.error('Error calculating total students in queue:', error);
-    }
-  };
+  // Gets the total number of students in the queue.
+const getTotalStudentsInQueue = async () => {
+  try {
+    const requestsCollection = collection(db, 'requests');
+    const querySnapshot = await getDocs(requestsCollection);
+    const totalStudents = querySnapshot.size;
+    console.log(`Total Students in Queue: ${totalStudents}`);
+    return totalStudents;
+  } catch (error) {
+    console.error('Error calculating total students in queue:', error);
+    return 0;
+  }
+};
+
   const getAverageWaitTime = async () => {
     try {
       const requestsCollection = collection(db, 'requests');
