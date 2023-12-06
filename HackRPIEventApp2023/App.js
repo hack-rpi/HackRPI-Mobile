@@ -90,37 +90,46 @@ import { Feather } from '@expo/vector-icons';
 import { StatusBar } from "expo-status-bar";
 import Calander from "./Box/Calander";
 
+// Create a material top tab navigator
 const Tab = createMaterialTopTabNavigator();
 
+// Screen component for the 'Info' tab
 function InfoScreen() {
   return (
     <View style={styles.container}>
+      {/* Render the 'Calander' component for displaying event information */}
       <Calander />
     </View>
   );
 }
 
+// Screen component for the 'Home' tab
 function HomeScreen() {
   return (
     <View style={styles.container}>
+      {/* Render a Feather icon and a text message */}
       <Feather name="user" size={24} color="white" />
       <Text style={styles.text}>No one home gotcha! haha</Text>
     </View>
   );
 }
 
+// Screen component for the 'Queue' tab
 function QueueScreen() {
   return (
     <View style={styles.container}>
+      {/* Render a Feather icon and a text message */}
       <Feather name="user" size={24} color="white" />
       <Text style={styles.text}>Put something useful lol</Text>
     </View>
   );
 }
 
+// Main component representing the entire app
 export default function App() {
   return (
     <NavigationContainer>
+      {/* Create a top tab navigator with custom styling */}
       <Tab.Navigator
         tabBarOptions={{
           labelStyle: { fontSize: 12 },
@@ -130,14 +139,18 @@ export default function App() {
         }}
         swipeEnabled
       >
+        {/* Define the 'Info' tab */}
         <Tab.Screen name="Info" component={InfoScreen} />
+        {/* Define the 'Home' tab */}
         <Tab.Screen name="Home" component={HomeScreen} />
+        {/* Define the 'Queue' tab */}
         <Tab.Screen name="Queue" component={QueueScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
 }
 
+// Stylesheet for styling the components
 const styles = StyleSheet.create({
   container: {
     flex: 1,
