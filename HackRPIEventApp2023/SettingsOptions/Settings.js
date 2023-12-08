@@ -48,17 +48,29 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
-    backgroundColor: '#191919',
+    backgroundColor: '#000', // Dark background color
     padding: 20,
   },
   button: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 10,
+    backgroundColor: '#f00', // Red background for the button
+    paddingVertical: 10, // Vertical padding for the button
+    paddingHorizontal: 20, // Horizontal padding for the button
+    borderRadius: 20, // Rounded corners for the button
+    width: '100%', // Full width buttons
+    marginBottom: 10, // Margin bottom for spacing
+    justifyContent: 'space-between', // Space between the text and the icon
+    shadowColor: '#000', // Shadow for the button
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   buttonText: {
-    color: 'white',
-    marginRight: 10,
+    color: 'white', // White text color for the button
+    fontSize: 16, // Font size for the button text
+    fontWeight: 'bold', // Bold font weight for the button text
   },
 });
 
