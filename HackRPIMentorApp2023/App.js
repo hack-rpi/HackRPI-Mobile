@@ -666,6 +666,41 @@ const scheduleFollowUpForHelpedStudents = async () => {
   }
 };
 
+// Function to notify mentors about new requests in their expertise areas
+const notifyMentorsForNewRequests = async () => {
+  try {
+    const mentorsCollection = collection(db, 'mentors');
+    const requestsCollection = collection(db, 'requests');
+    const mentorsSnapshot = await getDocs(mentorsCollection);
+    const requestsSnapshot = await getDocs(requestsCollection);
+
+    // Convert requests snapshot to a more manageable format
+    const newRequests = [];
+    requestsSnapshot.forEach(doc => {
+      const data = doc.data();
+      if (!data.assignedTo) { // Assuming 'assignedTo' indicates if a request is already taken
+        newRequests.push({ id: doc.id, ...data });
+      }
+    });
+
+    // Iterate through each mentor and check for matching new requests
+    mentorsSnapshot.forEach(async (mentorDoc) => {
+      const mentorData = mentorDoc.data();
+
+      newRequests.forEach(async (request) => {
+        if (mentorData.expertise.includes(request.subject)) {
+          console.log(`Notifying ${mentorData.name} about a new request in ${request.subject}.`);
+          // Example: await sendNotification(mentorData.contactDetails, request);
+        }
+      });
+    });
+
+    console.log('Mentors notified about new requests in their areas of expertise.');
+  } catch (error) {
+    console.error('Error notifying mentors:', error);
+  }
+};
+
 
   
   
