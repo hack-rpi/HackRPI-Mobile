@@ -1,5 +1,5 @@
-import React, { useState }from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
 const Report = () => {
   const [issueDescription, setIssueDescription] = useState('');
@@ -23,12 +23,15 @@ const Report = () => {
             style={styles.input}
             multiline
             placeholder="Describe the issue..."
+            placeholderTextColor="#666" // Placeholder text color for better visibility
             value={issueDescription}
             onChangeText={setIssueDescription}
           />
 
           {/* Submit Button */}
-          <Button title="Submit Report" onPress={handleSubmit} />
+          <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+            <Text style={styles.buttonText}>Submit Report</Text>
+          </TouchableOpacity>
         </>
       ) : (
         <Text style={styles.confirmationText}>
@@ -44,24 +47,43 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#000', // Background color set to black
     padding: 20,
   },
   heading: {
-    fontSize: 20,
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#fff', // Heading text color set to white
     marginBottom: 20,
   },
   input: {
     borderWidth: 1,
-    borderColor: '#CCCCCC',
-    borderRadius: 5,
+    borderColor: '#fff', // Input border color set to white
+    borderRadius: 20, // Border radius set to match the rounded corners
     padding: 10,
     marginBottom: 20,
     width: '100%',
     minHeight: 100,
+    color: '#fff', // Input text color set to white
+    backgroundColor: '#333', // Input background color set to a dark shade
+  },
+  buttonText: {
+    color: '#fff', // Button text color set to white
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontSize: 16,
+  },
+  button: {
+    backgroundColor: '#f00', // Button background color set to red
+    borderRadius: 20, // Button border radius set for rounded corners
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    width: '100%', // Button width set to match input fields
+    marginBottom: 10,
   },
   confirmationText: {
     textAlign: 'center',
+    color: '#fff', // Confirmation text color set to white
     fontSize: 18,
   },
 });
