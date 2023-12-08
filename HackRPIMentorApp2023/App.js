@@ -639,6 +639,33 @@ const autoPauseInactiveStudents = async () => {
   }
 };
 
+// Function to schedule a follow-up for students who have been helped
+const scheduleFollowUpForHelpedStudents = async () => {
+  try {
+    const requestsCollection = collection(db, 'requests');
+    const querySnapshot = await getDocs(requestsCollection);
+
+    let followUps = [];
+
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      // Assuming 'helped' is a field that indicates if a student has been helped
+      if (data.helped && !data.followUpScheduled) {
+        // Schedule a follow-up and update the document
+        const followUpDate = new Date(new Date().getTime() + (24 * 60 * 60 * 1000)); // 24 hours later
+        followUps.push(doc.ref.update({ followUpScheduled: true, followUpDate }));
+      }
+    });
+
+    // Execute all update promises
+    await Promise.all(followUps);
+
+    console.log(`Scheduled follow-ups for ${followUps.length} students.`);
+  } catch (error) {
+    console.error('Error scheduling follow-ups for helped students:', error);
+  }
+};
+
 
   
   
