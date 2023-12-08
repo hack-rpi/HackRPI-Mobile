@@ -611,6 +611,34 @@ const calculatePriority = (data) => {
   return waitTime > 30 ? 'high' : 'normal';
 };
 
+// Function to auto-pause inactive students in the queue
+const autoPauseInactiveStudents = async () => {
+  try {
+    const requestsCollection = collection(db, 'requests');
+    const querySnapshot = await getDocs(requestsCollection);
+
+    const now = new Date().getTime();
+    const inactiveThreshold = 15 * 60 * 1000; // 15 minutes of inactivity threshold
+    let updates = [];
+
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      // Assuming 'lastActiveTimestamp' is a field indicating the last time the student was active
+      if (data.lastActiveTimestamp && (now - data.lastActiveTimestamp.toMillis()) > inactiveThreshold) {
+        // If the student has been inactive for more than the threshold, pause the request
+        updates.push(doc.ref.update({ paused: true }));
+      }
+    });
+
+    // Execute all update promises
+    await Promise.all(updates);
+
+    console.log(`Auto-paused ${updates.length} inactive students in the queue.`);
+  } catch (error) {
+    console.error('Error auto-pausing inactive students:', error);
+  }
+};
+
 
   
   
