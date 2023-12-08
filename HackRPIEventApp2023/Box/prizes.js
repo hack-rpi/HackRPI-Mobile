@@ -1,142 +1,68 @@
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Modal,
-  FlatList,
-  StyleSheet,
-  Animated,
-  Image,
-} from 'react-native';
-import Swiper from 'react-native-swiper';
+import { View, Text, TouchableOpacity, Modal, StyleSheet, Animated, FlatList } from 'react-native';
+import PropTypes from 'prop-types';
+import useModalAnimation from './hooks/useModalAnimation'; // Custom hook for modal animation
 
-const data = [
-  {
-    category: 'Best Mobile App',
-    prize: '$1000',
-    details: 'Details about the Best Mobile App category.',
-    requirements: 'Add your specific requirements here',
-  },
-  {
-    category: 'Best Web App',
-    prize: '$800',
-    details: 'Details about the Best Web App category.',
-    requirements: 'Add your specific requirements here',
-  },
-  {
-    category: 'Best UI/UX Design',
-    prize: '$500',
-    details: 'Details about the Best UI/UX Design category.',
-    requirements: 'Add your specific requirements here',
-  },
-  // Add more categories and prizes as needed
-];
+// Smaller Component: CategoryItem
+const CategoryItem = ({ item, onSelect }) => (
+  <TouchableOpacity onPress={() => onSelect(item.category)} style={styles.modalItem}>
+    <Text style={styles.category}>{item.category}</Text>
+    <Text style={styles.prize}>{item.prize}</Text>
+  </TouchableOpacity>
+);
 
+CategoryItem.propTypes = {
+  item: PropTypes.object.isRequired,
+  onSelect: PropTypes.func.isRequired,
+};
+
+// Custom Hook for Modal Animation
+const useModalAnimation = () => {
+  const modalOpacity = useState(new Animated.Value(0))[0];
+
+  const toggleModal = (isVisible) => {
+    Animated.timing(modalOpacity, {
+      toValue: isVisible ? 1 : 0,
+      duration: 300,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  return [modalOpacity, toggleModal];
+};
+
+// Main Component: HackathonScreen
 const HackathonScreen = () => {
   const [isModalVisible, setModalVisible] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const [isPrizeIdeaFormOpen, setPrizeIdeaFormOpen] = useState(false);
-  const [selectedImageIndex, setSelectedImageIndex] = useState(0); // New state variable
-  const modalOpacity = new Animated.Value(0);
+  const [modalOpacity, toggleModal] = useModalAnimation();
 
-  const toggleModal = () => {
-    if (isModalVisible) {
-      Animated.timing(modalOpacity, {
-        toValue: 0,
-        duration: 300,
-        useNativeDriver: false,
-      }).start(() => {
-        setModalVisible(false);
-        setSelectedCategory(null);
-        setSelectedImageIndex(0);
-      });
-    } else {
-      setSelectedCategory(null);
-      setSelectedImageIndex(0);
-      Animated.timing(modalOpacity, {
-        toValue: 1,
-        duration: 300,
-        useNativeDriver: false,
-      }).start(() => setModalVisible(true));
-    }
+  const handleModalToggle = () => {
+    setModalVisible(!isModalVisible);
+    toggleModal(!isModalVisible);
   };
 
   const selectCategory = (category) => {
     setSelectedCategory(category);
-  };
-
-  const togglePrizeIdeaForm = () => {
-    setPrizeIdeaFormOpen(!isPrizeIdeaFormOpen);
+    handleModalToggle();
   };
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={toggleModal} style={[styles.button, { backgroundColor: theme.primaryColor }]}>
-        <Text style={[styles.buttonText, { color: theme.textColor }]}>View Categories and Prizes</Text>
+      <TouchableOpacity onPress={handleModalToggle} style={styles.button}>
+        <Text style={styles.buttonText}>View Categories and Prizes</Text>
       </TouchableOpacity>
       <Modal transparent visible={isModalVisible} animationType="slide">
         <View style={styles.modalContainer}>
-          {selectedCategory ? (
-            <Animated.View style={[styles.modalContent, { opacity: modalOpacity, flex: 1 }]}>
-              {/* Inner modal content */}
-              <Swiper
-                loop={false}
-                index={selectedImageIndex}
-                onIndexChanged={(index) => setSelectedImageIndex(index)}
-              >
-                {data
-                  .filter((item) => item.category === selectedCategory)
-                  .map((item, index) => (
-                    <View key={index} style={styles.imageContainer}>
-                      <Image source={require('./kuromi.jpg')} style={styles.categoryImage} />
-                      {/* You can replace the above line with your actual image source */}
-                    </View>
-                  ))}
-              </Swiper>
-              <Text style={[styles.selectedCategory, { textAlign: 'center', color: 'orange' }]}>
-                {selectedCategory}
-              </Text>
-              <Text style={[styles.details, { textAlign: 'center' }]}>
-                {data.find((item) => item.category === selectedCategory).details}
-              </Text>
-              <Text style={[styles.details, { textAlign: 'center', marginTop: 10 }]}>
-                Prize: {data.find((item) => item.category === selectedCategory).prize}
-              </Text>
-              <Text style={[styles.details, { textAlign: 'center', marginTop: 10 }]}>
-                Requirements: {data.find((item) => item.category === selectedCategory).requirements}
-              </Text>
-              <TouchableOpacity
-                onPress={togglePrizeIdeaForm}
-                style={[styles.submitButton, { backgroundColor: theme.primaryColor }]}
-              >
-                <Text style={[styles.submitButtonText, { color: theme.textColor }]}>Submit Prize Idea</Text>
-              </TouchableOpacity>
-            </Animated.View>
-          ) : (
+          <Animated.View style={[styles.modalContent, { opacity: modalOpacity }]}>
             <FlatList
               data={data}
-              renderItem={({ item }) => (
-                <TouchableOpacity onPress={() => selectCategory(item.category)} style={styles.modalItem}>
-                  <Image source={require('./kuromi.jpg')} style={styles.categoryIcon} />
-                  <View>
-                    <Text style={styles.category}>{item.category}</Text>
-                    <Text style={styles.prize}>{item.prize}</Text>
-                  </View>
-                </TouchableOpacity>
-              )}
+              renderItem={({ item }) => <CategoryItem item={item} onSelect={selectCategory} />}
               keyExtractor={(item) => item.category}
-              contentContainerStyle={styles.flatListContainer}
             />
-          )}
-          <TouchableOpacity onPress={toggleModal} style={[styles.closeButton, { backgroundColor: theme.primaryColor }]}>
-            <Text style={[styles.closeButtonText, { color: theme.textColor }]}>Close &#10006;</Text>
-          </TouchableOpacity>
+          </Animated.View>
         </View>
       </Modal>
-      {isPrizeIdeaFormOpen ? (
-        <PrizeIdeaForm onClose={togglePrizeIdeaForm} />
-      ) : null}
     </View>
   );
 };
