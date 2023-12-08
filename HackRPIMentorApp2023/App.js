@@ -5,7 +5,8 @@ import { StatusBar } from 'expo-status-bar';
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification, updateProfile } from "firebase/auth";
 import { FieldValue, getFirestore, addDoc, collection, getDocs } from "firebase/firestore";
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Button, Alert } from 'react-native';
+import { sendEmailVerificationCode } from "./emailService";
 import LoginButton from "./components/login";
 import LogoutButton from "./components/logout";
 
@@ -375,6 +376,33 @@ const getTotalStudentsHelped = async () => {
       console.error('Error in getQueueStatistics:', error);
     }
   };
+  const TwoFactorAuth = () => {
+    const [email, setEmail] = useState("");
+    const [verificationCode, setVerificationCode] = useState("");
+    const [isCodeSent, setIsCodeSent] = useState(false);
+  
+    const handleSendVerificationCode = async () => {
+      try {
+        // Call your email service to send the verification code
+        await sendEmailVerificationCode(email);
+        setIsCodeSent(true);
+      } catch (error) {
+        console.error("Error sending verification code:", error);
+        Alert.alert("Error", "Failed to send verification code.");
+      }
+    };
+  
+    const handleVerifyCode = () => {
+      // Validate the verification code here
+      // In a real implementation, you would compare the entered code with the one sent to the user's email
+      // For simplicity, we'll just show an alert for demonstration purposes
+  
+      if (verificationCode === "123456") {
+        Alert.alert("Success", "Verification successful!");
+      } else {
+        Alert.alert("Error", "Invalid verification code. Please try again.");
+      }
+    };
   
   
   // This function calculates the time since the student was last helped
@@ -548,51 +576,77 @@ const logout = async () => {
   
   
 
-  return (
-    // used for testing
-    <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        onChangeText={(text) => setEmail(text)} // Update email state
-        value={email} // Set the value to the email state
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        secureTextEntry
-        onChangeText={(text) => setPassword(text)} // Update password state
-        value={password} // Set the value to the password state
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        secureTextEntry
-        onChangeText={(text) => setChecker(text)} // Update password state
-        value={checker} // Set the value to the password state
-      />
-      <TouchableOpacity
-        style={styles.registerButton}
-        onPress={registerWithEmailAndPassword}
-      >
-        <Text style={styles.buttonText}>Register</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.loginButton}
-        onPress={loginWithEmailAndPassword}
-      >
-        <Text style={styles.buttonText}>Login</Text>
-      </TouchableOpacity>
-      <StatusBar style="auto" />
-      <TouchableOpacity
+return (
+  <View style={styles.container}>
+    {/* Existing code for email, password, and buttons */}
+    <TextInput
+      style={styles.input}
+      placeholder="Email"
+      onChangeText={(text) => setEmail(text)}
+      value={email}
+    />
+    <TextInput
+      style={styles.input}
+      placeholder="Password"
+      secureTextEntry
+      onChangeText={(text) => setPassword(text)}
+      value={password}
+    />
+    <TextInput
+      style={styles.input}
+      placeholder="Password"
+      secureTextEntry
+      onChangeText={(text) => setChecker(text)}
+      value={checker}
+    />
+    <TouchableOpacity
+      style={styles.registerButton}
+      onPress={registerWithEmailAndPassword}
+    >
+      <Text style={styles.buttonText}>Register</Text>
+    </TouchableOpacity>
+    <TouchableOpacity
+      style={styles.loginButton}
+      onPress={loginWithEmailAndPassword}
+    >
+      <Text style={styles.buttonText}>Login</Text>
+    </TouchableOpacity>
+    <TouchableOpacity
       style={styles.logoutButton}
       onPress={logout}
     >
       <Text style={styles.buttonText}>Logout</Text>
     </TouchableOpacity>
-    </View>
-  );
-}
+
+    {  <View>
+      <TextInput
+        placeholder="Enter your email"
+        value={email}
+        onChangeText={(text) => setEmail(text)}
+      />
+      {!isCodeSent ? (
+        <Button
+          title="Send Verification Code"
+          onPress={handleSendVerificationCode}
+        />
+      ) : (
+        <View>
+          <TextInput
+            placeholder="Enter verification code"
+            value={verificationCode}
+            onChangeText={(text) => setVerificationCode(text)}
+          />
+          <Button title="Verify Code" onPress={handleVerifyCode} />
+        </View>
+      )}
+    </View>}
+    <TwoFactorAuth />
+
+    <StatusBar style="auto" />
+  </View>
+);
+};
+
 
 const styles = StyleSheet.create({
   container: {
