@@ -573,6 +573,45 @@ const logout = async () => {
   }
 };
 
+// Function to update the priority of students in the queue
+const updateStudentPriority = async () => {
+  try {
+    const requestsCollection = collection(db, 'requests');
+    const querySnapshot = await getDocs(requestsCollection);
+
+    let updates = [];
+
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      let priority = calculatePriority(data);
+
+      // Assuming 'priority' is a field in your document to denote the urgency
+      if (data.priority !== priority) {
+        updates.push(doc.ref.update({ priority }));
+      }
+    });
+
+    // Execute all update promises
+    await Promise.all(updates);
+
+    console.log(`Updated priorities for ${updates.length} students in the queue.`);
+  } catch (error) {
+    console.error('Error updating student priorities:', error);
+  }
+};
+
+// Helper function to calculate the priority based on certain criteria
+const calculatePriority = (data) => {
+  // Define your criteria for priority here. For example, longer wait time
+  // or specific help types could have higher priority
+  const now = new Date().getTime();
+  const waitTime = (now - data.timestamp.toMillis()) / 60000; // Wait time in minutes
+
+  // Example: if wait time is more than 30 minutes, increase priority
+  return waitTime > 30 ? 'high' : 'normal';
+};
+
+
   
   
 
