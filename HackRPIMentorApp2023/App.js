@@ -701,6 +701,49 @@ const notifyMentorsForNewRequests = async () => {
   }
 };
 
+// Function to generate a daily report of the queue's status
+const generateDailyQueueReport = async () => {
+  try {
+    const requestsCollection = collection(db, 'requests');
+    const querySnapshot = await getDocs(requestsCollection);
+
+    let totalStudentsHelped = 0;
+    let totalWaitTime = 0;
+    let outstandingRequests = 0;
+    let studentsHelpedToday = [];
+
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      if (data.helped) {
+        totalStudentsHelped++;
+        studentsHelpedToday.push(data.Name); // Assuming 'Name' is the field for the student's name
+
+        // Calculate total wait time
+        if (data.timestamp && data.helpedTimestamp) {
+          totalWaitTime += (data.helpedTimestamp.toMillis() - data.timestamp.toMillis());
+        }
+      } else {
+        outstandingRequests++;
+      }
+    });
+
+    const averageWaitTime = totalStudentsHelped > 0 ? (totalWaitTime / totalStudentsHelped) / 60000 : 0; // Convert to minutes
+
+    // Create the report
+    const report = {
+      date: new Date().toLocaleDateString(),
+      totalStudentsHelped,
+      averageWaitTime: averageWaitTime.toFixed(2),
+      outstandingRequests,
+      studentsHelpedToday
+    };
+
+    console.log('Daily Queue Report:', report);
+    return report;
+  } catch (error) {
+    console.error('Error generating daily queue report:', error);
+  }
+};
 
   
   
