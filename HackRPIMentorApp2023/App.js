@@ -462,6 +462,40 @@ const balanceQueue = async () => {
   }
 };
 
+// Function to calculate the average waiting time for students in the queue
+const calculateAverageWaitTime = async () => {
+  try {
+    const requestsCollection = collection(db, 'requests');
+    const querySnapshot = await getDocs(requestsCollection);
+
+    let totalWaitTime = 0;
+    let count = 0;
+
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      // Assuming 'timestamp' is the time when the student was added to the queue
+      // and 'helpedTimestamp' is the time when the student was helped.
+      if (data.timestamp && data.helpedTimestamp) {
+        // Calculate wait time in minutes and add to total wait time
+        const waitTime = (data.helpedTimestamp.toMillis() - data.timestamp.toMillis()) / 60000;
+        totalWaitTime += waitTime;
+        count++;
+      }
+    });
+
+    if (count === 0) {
+      console.log('No students have been helped yet.');
+      return 0;
+    }
+
+    const averageWaitTime = totalWaitTime / count;
+    console.log(`Average Waiting Time: ${averageWaitTime.toFixed(2)} minutes`);
+    return averageWaitTime.toFixed(2);
+  } catch (error) {
+    console.error('Error calculating average wait time:', error);
+  }
+};
+
 // Function to find peak hours
 const findPeakHours = async () => {
   try {
