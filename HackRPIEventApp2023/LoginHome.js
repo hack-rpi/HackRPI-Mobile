@@ -5,13 +5,23 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
+  const [verificationCode, setVerificationCode] = useState('');
+  const [enteredCode, setEnteredCode] = useState('');
+
+  const generateVerificationCode = () => {
+    // Generate a random 6-digit verification code
+    const code = Math.floor(100000 + Math.random() * 900000).toString();
+    setVerificationCode(code);
+    // Here you would send the verification code to the user, for example via email or SMS
+    Alert.alert('Verification code generated: ' + code);
+  };
 
   const handleLogin = () => {
-    if (username && password) {
+    if (username && password && enteredCode === verificationCode) {
       setLoggedIn(true);
       Alert.alert('Logged in successfully!');
     } else {
-      Alert.alert('Please enter username and password');
+      Alert.alert('Please enter username, password, and correct verification code');
     }
   };
 
@@ -34,6 +44,18 @@ const Login = () => {
             secureTextEntry={true}
             value={password}
             onChangeText={(text) => setPassword(text)}
+          />
+          <TouchableOpacity
+            style={{ backgroundColor: 'blue', padding: 10, borderRadius: 5, marginBottom: 10 }}
+            onPress={generateVerificationCode}
+          >
+            <Text style={{ color: 'white', textAlign: 'center' }}>Generate Verification Code</Text>
+          </TouchableOpacity>
+          <TextInput
+            style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10, paddingHorizontal: 10 }}
+            placeholder="Verification Code"
+            value={enteredCode}
+            onChangeText={(text) => setEnteredCode(text)}
           />
           <TouchableOpacity
             style={{ backgroundColor: 'blue', padding: 10, borderRadius: 5 }}

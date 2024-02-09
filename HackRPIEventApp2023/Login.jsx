@@ -1,17 +1,27 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 
-const Login = () => {
+const Login = ({ navigation }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [verificationCode, setVerificationCode] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
 
+  const verifyCredentials = (enteredUsername, enteredPassword, enteredVerificationCode) => {
+    // Replace these credentials and verification code with your actual values
+    const validUsername = 'admin';
+    const validPassword = 'password';
+    const validVerificationCode = '1234'; // Example verification code
+
+    return enteredUsername === validUsername && enteredPassword === validPassword && enteredVerificationCode === validVerificationCode;
+  };
+
   const handleLogin = () => {
-    if (username && password) {
+    if (verifyCredentials(username, password, verificationCode)) {
       setLoggedIn(true);
       Alert.alert('Logged in successfully!');
     } else {
-      Alert.alert('Please enter username and password');
+      Alert.alert('Invalid username, password, or verification code');
     }
   };
 
@@ -34,6 +44,12 @@ const Login = () => {
             secureTextEntry={true}
             value={password}
             onChangeText={(text) => setPassword(text)}
+          />
+          <TextInput
+            style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10, paddingHorizontal: 10 }}
+            placeholder="Verification Code"
+            value={verificationCode}
+            onChangeText={(text) => setVerificationCode(text)}
           />
           <TouchableOpacity
             style={{ backgroundColor: 'blue', padding: 10, borderRadius: 5 }}
