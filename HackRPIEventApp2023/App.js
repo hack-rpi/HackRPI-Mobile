@@ -91,4 +91,13 @@ const styles = StyleSheet.create({
     fontWeight: globalStyles.fontWeight,
     color: globalStyles.text,
   },
+  circleContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-around",
+  },
+  circle: {
+    borderRadius: 50,
+    overflow: "hidden",
+  },
 });
