@@ -6,6 +6,7 @@ import { Feather } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
 import Calander from "./Box/Calander";
 import Food from "./information/Food";
+import HackerQue from "./HackerQue/QueEntry.js";
 // import { colors } from './colors';
 import { globalStyles } from "./styles";
 
@@ -32,8 +33,7 @@ function HomeScreen() {
 function QueueScreen() {
   return (
     <View style={styles.container}>
-      <Feather name="user" size={24} color="white" />
-      <Text style={styles.text}>Put something useful lol</Text>
+      <HackerQue></HackerQue>
     </View>
   );
 }
