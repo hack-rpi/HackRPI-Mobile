@@ -54,15 +54,15 @@ export default function App() {
               />
             );
           },
-          tabBarLabelStyle: {
-            fontSize: 12,
-          },
-          tabBarStyle: {
-            backgroundColor: globalStyles.primary, 
-            borderTopWidth: 0, // Hide top border of the tab bar
-          },
-          tabBarActiveTintColor: globalStyles.accent,
-          tabBarInactiveTintColor: "white", //matches the names to the components
+          // tabBarLabelStyle: {
+          //   fontSize: 12,
+          // },
+          // tabBarStyle: {
+          //   backgroundColor: globalStyles.primary, 
+          //   borderTopWidth: 0, // Hide top border of the tab bar
+          // },
+          // tabBarActiveTintColor: globalStyles.accent,
+          // tabBarInactiveTintColor: "white", //matches the names to the components
         })}>
         <Tab.Screen name="login" component={loginScreen} />
         <Tab.Screen name="logout" component={logoutScreen} />
