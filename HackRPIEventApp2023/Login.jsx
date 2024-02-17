@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { GoogleLogin } from 'react-google-login'; // Import GoogleLogin from the library
 
 const Login = ({ navigation }) => {
   const [username, setUsername] = useState('');
@@ -23,6 +24,11 @@ const Login = ({ navigation }) => {
     } else {
       Alert.alert('Invalid username, password, or verification code');
     }
+  };
+
+  const responseGoogle = (response) => {
+    // Handle Google login response here
+    console.log(response);
   };
 
   return (
@@ -52,11 +58,19 @@ const Login = ({ navigation }) => {
             onChangeText={(text) => setVerificationCode(text)}
           />
           <TouchableOpacity
-            style={{ backgroundColor: 'blue', padding: 10, borderRadius: 5 }}
+            style={{ backgroundColor: 'blue', padding: 10, borderRadius: 5, marginBottom: 10 }}
             onPress={handleLogin}
           >
             <Text style={{ color: 'white', textAlign: 'center' }}>Login</Text>
           </TouchableOpacity>
+          {/* Google login button */}
+          <GoogleLogin
+            clientId="125929146509-1auuabrn35ar8r81fi9p7en383imdtkb.apps.googleusercontent.com"
+            buttonText="Login with Google"
+            onSuccess={responseGoogle}
+            onFailure={responseGoogle}
+            cookiePolicy={'single_host_origin'}
+          />
         </View>
       )}
     </View>

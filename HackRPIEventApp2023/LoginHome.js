@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { GoogleLogin } from 'react-google-login';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -23,6 +24,14 @@ const Login = () => {
     } else {
       Alert.alert('Please enter username, password, and correct verification code');
     }
+  };
+
+  const onSuccess = (res) => {
+    console.log('Login Success: currentUser:', res.profileObj);
+  };
+
+  const onFailure = (res) => {
+    console.log('Login failed: res:', res);
   };
 
   return (
@@ -63,6 +72,14 @@ const Login = () => {
           >
             <Text style={{ color: 'white', textAlign: 'center' }}>Login</Text>
           </TouchableOpacity>
+          {/* Google login button */}
+          <GoogleLogin
+            clientId="125929146509-1auuabrn35ar8r81fi9p7en383imdtkb.apps.googleusercontent.com"
+            buttonText="Login with Google"
+            onSuccess={onSuccess}
+            onFailure={onFailure}
+            cookiePolicy={'single_host_origin'}
+          />
         </View>
       )}
     </View>
