@@ -1,11 +1,15 @@
 import React from "react";
-import { SafeAreaView, ScrollView, StyleSheet } from "react-native";
+import { SafeAreaView, ScrollView, StyleSheet, View, Dimensions } from "react-native"; // Importing Dimensions from react-native
 import CalanderObject from "./CalanderObject";
 import WorkShops from "./WorkShops.json";
 import Active_Check from "./Active_Check";
 import Past_Check from "./Past_Check";
 import Time_Convert from "./Time_Convert";
 import CountdownTimer from "../Components/CountdownTimer";
+
+
+// Calculate device width
+const windowWidth = Dimensions.get('window').width;
 
 // calander object that holds all events and handles which are visable, which are active, and which are upcoming.
 const Calander = () => {
@@ -58,15 +62,26 @@ const Calander = () => {
 };
 
 const styles = StyleSheet.create({
-  CalanderStyle: {
-    marginTop: 0,
-    marginBottom: 20,
-    backgroundColor: "transparent",
-    flex: 1,
-    justifyContent: "start",
-    alignItems: "left",
-    padding: 10,
-  },
+//   CalanderStyle: {
+//     marginTop: 0,
+//     marginBottom: 20,
+//     backgroundColor: "transparent",
+//     flex: 1,
+//     justifyContent: "start",
+//     alignItems: "left",
+//     padding: 10,
+//   },
+// });
+      container: {
+      flex: 1,
+      backgroundColor: '#fff',
+      justifyContent: 'center',
+      alignItems: 'center',
+      },
+      scrollView: {
+        width: windowWidth, // Set ScrollView width to device width
+        paddingHorizontal: 20, // Adjust padding based on your design
+      },
 });
 
 export default Calander;
