@@ -72,16 +72,17 @@ const styles = StyleSheet.create({
 //     padding: 10,
 //   },
 // });
-      container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      justifyContent: 'center',
-      alignItems: 'center',
-      },
-      scrollView: {
-        width: windowWidth, // Set ScrollView width to device width
-        paddingHorizontal: 20, // Adjust padding based on your design
-      },
+container: {
+  flex: 1,
+  backgroundColor: '#fff',
+},
+scrollViewContent: {
+  flexGrow: 1,
+  paddingHorizontal: 20, // Adjust padding based on your design
+  paddingTop: 10, // Adjust top padding to reduce space at the top
+  alignItems: 'flex-start', // Align items to the left
+},
 });
+
 
 export default Calander;
