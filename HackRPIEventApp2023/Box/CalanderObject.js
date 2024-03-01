@@ -29,7 +29,7 @@ const CalanderObject = ({
         isRed={isRed} //this line is use for hardcode
         //isRed={checkCondition()} -> This line will be use instead if we implement checkCondition() function
       />
-      <View
+      {/* <View
         style={styles.notifBox}
         backgroundColor={isRed ? "black" : isActive ? "black" : "white"}
         borderColor={isRed ? "red" : "white"}>
@@ -42,6 +42,16 @@ const CalanderObject = ({
           // Add onPress to handle click
         />
       </View>
+    </View>
+  );
+}; */}
+<TouchableOpacity onPress={handleClick} style={styles.notifBox}>
+        <Feather
+          name={isActive ? "bell-off" : "bell"}
+          size={30}
+          color={isRed ? "red" : isActive ? "white" : "black"}
+        />
+      </TouchableOpacity>
     </View>
   );
 };
