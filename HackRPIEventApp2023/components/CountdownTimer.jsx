@@ -129,11 +129,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#191919", // Updated background color
     alignItems: "center",
     justifyContent: "flex-start",
-    paddingTop: 80,
+    paddingTop: 0,//Adjusting padding top for the header positioning
   },
   header: {
     alignItems: "center",
     justifyContent: "center",
+    marginTop: 20, // Added marginTop to center header
   },
   circleContainer: {
     flexDirection: "row",
