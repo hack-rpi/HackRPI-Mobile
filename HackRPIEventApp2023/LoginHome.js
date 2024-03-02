@@ -1,19 +1,31 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Alert, Image } from 'react-native';
-import * as WebBrowser from 'expo-web-browser';
-import * as Google from 'expo-auth-session/providers/google';
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { GoogleLogin } from 'react-google-login';
 
-WebBrowser.maybeCompleteAuthSession();
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
-  const [accessToken, setAccessToken] = useState(null);
-  const [user, setUser] = useState(null);
-  const [request, response, promptAsync] = Google.useAuthRequest({
-    clientId: "125929146509-1auuabrn35ar8r81fi9p7en383imdtkb.apps.googleusercontent.com",
-    iosClientId: "125929146509-gu6ir4226bapt7hb7hp1kj3aqot56478.apps.googleusercontent.com",
-  });
+  const [verificationCode, setVerificationCode] = useState('');
+  const [enteredCode, setEnteredCode] = useState('');
+
+  const handleLogin = () => {
+    if (username && password && enteredCode === verificationCode) {
+      setLoggedIn(true);
+      Alert.alert('Logged in successfully!');
+    } else {
+      Alert.alert('Please enter username, password, and correct verification code');
+    }
+  };
+
+  const onSuccess = (res) => {
+    console.log('Login Success: currentUser:', res.profileObj);
+  };
+
+  const onFailure = (res) => {
+    console.log('Login failed: res:', res);
+  };
+
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       {loggedIn ? (
@@ -40,6 +52,14 @@ const Login = () => {
           >
             <Text style={{ color: 'white', textAlign: 'center' }}>Login</Text>
           </TouchableOpacity>
+          {/* Google login button */}
+          <GoogleLogin
+            clientId="125929146509-1auuabrn35ar8r81fi9p7en383imdtkb.apps.googleusercontent.com"
+            buttonText="Login with Google"
+            onSuccess={onSuccess}
+            onFailure={onFailure}
+            cookiePolicy={'single_host_origin'}
+          />
         </View>
       )}
     </View>
