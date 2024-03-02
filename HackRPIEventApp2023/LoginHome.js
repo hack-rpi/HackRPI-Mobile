@@ -1,30 +1,57 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
-import { GoogleLogin } from 'react-google-login';
+import { View, Text, TextInput, TouchableOpacity, Alert, Image } from 'react-native';
+import * as Google from 'expo-auth-session/providers/google';
+import * as WebBrowser from 'expo-web-browser';
 
+WebBrowser.maybeCompleteAuthSession();
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
-  const [verificationCode, setVerificationCode] = useState('');
-  const [enteredCode, setEnteredCode] = useState('');
+  const [accessToken, setAccessToken] = useState(null);
+  const [user, setUser] = useState(null);
+  const [reuqest, response, promptAsync] = Google.useIdTokenAuthRequest({
+    clientId: '125929146509-1auuabrn35ar8r81fi9p7en383imdtkb.apps.googleusercontent.com',
+    iosClientId: '125929146509-gu6ir4226bapt7hb7hp1kj3aqot56478.apps.googleusercontent.com'
+  })
+
+  React.useEffect(() => {
+    if (response?.type === 'success') {
+      const { id_token } = response.params;
+      setAccessToken(id_token);
+      setAccessToken && fetchUserInfo();
+    }
+  }, [response, accessToken]);
+
+  async function fetchUserInfo() {
+    const response = await fetch('https://www.googleapis.com/oauth2/v1/userinfo?alt=json', {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+    const userInfo = await response.json();
+    setUser(userInfo);
+  }
+
+  const ShowUserInfo = () => {
+    if(user){
+      return (
+        <View style = {{flex:1, alignItems: 'center', justifyContent: 'center'}}>
+          <Image source = {{uri: user.picture}} style = {{width: 100, height: 100, borderRadius: 50}}/>
+          <Text>{user.name}</Text>
+          <Text>{user.email}</Text>
+        </View>
+      )
+    }
+  }
 
   const handleLogin = () => {
-    if (username && password && enteredCode === verificationCode) {
+    if (username && password) {
       setLoggedIn(true);
       Alert.alert('Logged in successfully!');
     } else {
-      Alert.alert('Please enter username, password, and correct verification code');
+      Alert.alert('Please enter username, password');
     }
   };
 
-  const onSuccess = (res) => {
-    console.log('Login Success: currentUser:', res.profileObj);
-  };
-
-  const onFailure = (res) => {
-    console.log('Login failed: res:', res);
-  };
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -52,14 +79,13 @@ const Login = () => {
           >
             <Text style={{ color: 'white', textAlign: 'center' }}>Login</Text>
           </TouchableOpacity>
-          {/* Google login button */}
-          <GoogleLogin
-            clientId="125929146509-1auuabrn35ar8r81fi9p7en383imdtkb.apps.googleusercontent.com"
-            buttonText="Login with Google"
-            onSuccess={onSuccess}
-            onFailure={onFailure}
-            cookiePolicy={'single_host_origin'}
-          />
+          <TouchableOpacity
+            onPress={() => {
+              promptAsync();
+            }}
+          >
+            <Text>Login with Google</Text>
+          </TouchableOpacity>
         </View>
       )}
     </View>
