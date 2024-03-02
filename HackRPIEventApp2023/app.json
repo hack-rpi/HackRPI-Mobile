@@ -15,9 +15,11 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.hackrpi.eventapp2023",
       "supportsTablet": true
     },
     "android": {
+      "package": "com.hackrpi.eventapp2023",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
