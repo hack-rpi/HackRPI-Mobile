@@ -34,4 +34,24 @@ app.post('/send-notification', (req, res) => {
       console.error('APNs error:', error);
     });
   }
+
+
+if (fcmToken) {
+    // send FCM to android
+    const fcmPayload = {
+      notification: {
+        title: 'title', // change late
+        body: message,
+      },
+    };
+    admin.messaging().sendToDevice(fcmToken, fcmPayload)
+      .then(response => {
+        console.log('FCM notification:', response);
+      })
+      .catch(error => {
+        console.error('FCM error:', error);
+      });
+  }
+
+  res.json({ success: true });
 });
