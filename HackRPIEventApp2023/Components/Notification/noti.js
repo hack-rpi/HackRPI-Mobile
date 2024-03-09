@@ -5,12 +5,33 @@ const admin = require('firebase-admin');
 const app = express();
 app.use(express.json());
 
-// ios apn
+// apn for ios
 const apnProvider = new apn.Provider({
   token: {
     key: '',
-    keyId: '',
+    keyId: '', // which need apple devloper member(key)
     teamId: '',
   },
   production: false, 
+});
+
+// FCM for Android
+const serviceAccount = require('');
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+});
+
+app.post('/send-notification', (req, res) => {
+  const { deviceToken, fcmToken, message } = req.body;
+
+  if (deviceToken) {
+    // send apn nnotification to ios
+    const apnNotification = new apn.Notification();
+    apnNotification.alert = message;
+    apnProvider.send(apnNotification, deviceToken).then(result => {
+      console.log('APNs notification:', result);
+    }).catch(error => {
+      console.error('APNs error:', error);
+    });
+  }
 });
