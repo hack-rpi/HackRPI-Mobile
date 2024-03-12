@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Feather } from "@expo/vector-icons";
-import EventObject from "./EventObject"; // Import the EventObject component
+import EventObject from "./EventObject";
 
-//reusable component that ties an event object to it's notification bell
 const CalanderObject = ({
   workshop_Title,
   Time,
@@ -12,7 +11,7 @@ const CalanderObject = ({
   Description,
   isRed,
 }) => {
-  const [isActive, setIsActive] = useState(false); // Define isActive state
+  const [isActive, setIsActive] = useState(false);
 
   const handleClick = () => {
     setIsActive(!isActive);
@@ -26,30 +25,13 @@ const CalanderObject = ({
         location={Location}
         presenter={Presenter}
         description={Description}
-        isRed={isRed} //this line is use for hardcode
-        //isRed={checkCondition()} -> This line will be use instead if we implement checkCondition() function
+        isRed={isRed}
       />
-      {/* <View
-        style={styles.notifBox}
-        backgroundColor={isRed ? "black" : isActive ? "black" : "white"}
-        borderColor={isRed ? "red" : "white"}>
+      <TouchableOpacity onPress={handleClick} style={styles.notifBox}>
         <Feather
           name={isActive ? "bell-off" : "bell"}
           size={30}
-          color={isRed ? "red" : isActive ? "white" : "black"}
-          onPress={handleClick}
-          zIndex={2}
-          // Add onPress to handle click
-        />
-      </View>
-    </View>
-  );
-}; */}
-<TouchableOpacity onPress={handleClick} style={styles.notifBox}>
-        <Feather
-          name={isActive ? "bell-off" : "bell"}
-          size={30}
-          color={isRed ? "red" : isActive ? "white" : "black"}
+          color={isActive ? "red" : isRed ? "red" : "black"}
         />
       </TouchableOpacity>
     </View>
@@ -58,23 +40,21 @@ const CalanderObject = ({
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row", // Arrange children horizontally
-    alignItems: "center", // Center children vertically
-    backgroundColor: "transparent", // Replace with your desired background color
+    flexDirection: "row",
+    alignItems: "center",
     padding: 10,
     borderRadius: 10,
-    marginBottom: 0,
+    marginBottom: 10,
   },
   notifBox: {
     width: 60,
-    height: 150,
+    height: 60,
     borderWidth: 3,
-    borderRadius: 20,
+    borderRadius: 30,
     padding: 10,
     marginLeft: 20,
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 0,
     zIndex: 1,
   },
 });
