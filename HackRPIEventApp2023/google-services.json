@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "940483956476",
+    "project_id": "hackrpieventapp",
+    "storage_bucket": "hackrpieventapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:940483956476:android:079daf90dc3d4562741179",
+        "android_client_info": {
+          "package_name": "com.HackRPIEventApp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrru6VyGaLI8grYSOh7iibrzgPcUtaWHE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

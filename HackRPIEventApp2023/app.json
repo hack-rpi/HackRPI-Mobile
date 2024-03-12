@@ -19,6 +19,7 @@
     },
     "android": {
       "package": "com.HackRPIEventApp",
+      "googleServicesFile": "./google-services.json",
       "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
