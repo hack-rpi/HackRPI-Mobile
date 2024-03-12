@@ -11,10 +11,26 @@ import { globalStyles } from "./styles";
 
 const Tab = createBottomTabNavigator();
 
-function InfoScreen() {
+/*function InfoScreen() {
   return (
     <View style={styles.container}>
       <Food />
+    </View>
+  );
+}*/
+
+// max testing
+function expandSection() {
+  // do something
+}
+
+function InfoScreen() {
+  return (
+    <View style={styles.info}>
+      <Text style={styles.title}>INFO</Text>
+      <View style={styles.text}>
+        <Text onPress={expandSection}>Food</Text>
+      </View>
     </View>
   );
 }
@@ -90,5 +106,16 @@ const styles = StyleSheet.create({
     fontSize: globalStyles.fontSize,
     fontWeight: globalStyles.fontWeight,
     color: globalStyles.text,
+  },
+  info: { // max testing
+    flex: 1,
+    backgroundColor: "#1E1E1E",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#FFFFFF",
   },
 });
