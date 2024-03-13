@@ -21,6 +21,11 @@ const serviceAccount = require('');
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
+// Helper function to get formatted date and time
+function getFormattedDate() {
+  const now = new Date();
+  return now.toISOString(); // This will return the date and time in ISO 8601 format (e.g., "2024-03-13T14:18:34.000Z")
+}
 
 app.post('/send-notification', (req, res) => {
   const { deviceToken, fcmToken, message } = req.body;  // Function to handle APNs result
@@ -34,8 +39,25 @@ app.post('/send-notification', (req, res) => {
     console.log('FCM notification:', response);
     return response.successCount > 0;
   }
+  // Get the formatted date and time
+  const dateTime = getFormattedDate();
 
   let tasks = [];
+
+  if (deviceToken) {
+    // Set up APNs notification
+    const apnNotification = new apn.Notification();
+    apnNotification.alert = message;
+    apnNotification.badge = 1;
+    apnNotification.sound = 'default';
+    apnNotification.title = title || 'New Notification';
+    apnNotification.payload = { 'dateTime': dateTime }; // Add date and time to the payload
+
+    // Send APNs notification to iOS devices
+    tasks.push(
+      apnProvider.send(apnNotification, deviceToken).then(handleApnResult)
+    );
+  }
 
   if (deviceToken) {
     // send apn nnotification to ios
@@ -58,6 +80,9 @@ if (fcmToken) {
       notification: {
         title: 'title', // change late
         body: message,
+      },
+      data: {
+        dateTime: dateTime, // Add date and time to the data payload
       },
     };
 
