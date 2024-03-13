@@ -14,6 +14,7 @@ const apnProvider = new apn.Provider({
   },
   production: false, 
 });
+// const apnProvider = new apn.Provider(apnOptions);
 
 // FCM for Android
 const serviceAccount = require('');
@@ -22,18 +23,33 @@ admin.initializeApp({
 });
 
 app.post('/send-notification', (req, res) => {
-  const { deviceToken, fcmToken, message } = req.body;
+  const { deviceToken, fcmToken, message } = req.body;  // Function to handle APNs result
+  function handleApnResult(result) {
+    console.log('APNs notification:', result);
+    return result.failed.length === 0;
+  }
+
+  // Function to handle FCM result
+  function handleFcmResult(response) {
+    console.log('FCM notification:', response);
+    return response.successCount > 0;
+  }
+
+  let tasks = [];
 
   if (deviceToken) {
     // send apn nnotification to ios
+
     const apnNotification = new apn.Notification();
     apnNotification.alert = message;
-    apnProvider.send(apnNotification, deviceToken).then(result => {
-      console.log('APNs notification:', result);
-    }).catch(error => {
-      console.error('APNs error:', error);
-    });
-  }
+    apnNotification.badge = 1;
+    apnNotification.sound = 'default';
+    apnNotification.title = title || 'New Notification';
+
+    // send APNs notification to iOS
+    tasks.push(
+      apnProvider.send(apnNotification, deviceToken).then(handleApnResult)
+    );  }
 
 
 if (fcmToken) {
