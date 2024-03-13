@@ -60,14 +60,29 @@ if (fcmToken) {
         body: message,
       },
     };
-    admin.messaging().sendToDevice(fcmToken, fcmPayload)
-      .then(response => {
-        console.log('FCM notification:', response);
-      })
-      .catch(error => {
-        console.error('FCM error:', error);
-      });
+
+    // send FCM to Android
+    tasks.push(
+      admin.messaging().sendToDevice(fcmToken, fcmPayload).then(handleFcmResult)
+    );
   }
 
-  res.json({ success: true });
+  // Wait for all the tasks to complete
+  Promise.all(tasks).then(results => {
+    const allSuccessful = results.every(result => result);
+    if (allSuccessful) {
+      res.json({ success: true });
+    } else {
+      res.status(500).json({ success: false, message: 'Some notifications failed to send.' });
+    }
+  }).catch(error => {
+    console.error('Notification sending error:', error);
+    res.status(500).json({ success: false, message: 'An error occurred while sending notifications.' });
+  });
 });
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
