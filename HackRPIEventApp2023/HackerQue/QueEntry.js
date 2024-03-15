@@ -6,9 +6,39 @@ import slideIcon from "../assets/chevron-right.png";
 import QueCard from "./QueCard";
 
 const QueEntry = ({ name, roomNumber, problemType }) => {
+  const [inQue, setQue] = useState(false);
   const [stateName, setName] = useState("");
   const [stateRoomNumber, setRoomNumber] = useState("");
   const [stateProblemType, setProblemType] = useState("");
+
+  const toggleQue = () => {
+    if (!inQue) {
+    }
+    setQue(!inQue);
+  };
+
+  const handleNameChange = (name) => {
+    setName(name);
+  };
+
+  const handleRoomNumberChange = (roomNumber) => {
+    setRoomNumber(roomNumber);
+  };
+
+  const handleProblemTypeChange = (problemType) => {
+    setProblemType(problemType);
+  };
+
+  const submitForm = () => {
+    // You can perform actions with the entered data here.
+    // For example, send the data to a server or perform local processing.
+
+    // add error checking for vals
+    if (!inQue) {
+      // enter que code
+      console.log("Name:", stateName);
+      console.log("Room Number:", stateRoomNumber);
+      console.log("Problem Type:", stateProblemType);
       // value checking
     } else {
       // exit que code
