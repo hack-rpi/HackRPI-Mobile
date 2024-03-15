@@ -21,15 +21,35 @@ const Tab = createBottomTabNavigator();
 
 // max testing
 function expandSection() {
-  // do something
+  console.log("cool beans");
 }
 
+//this should be a grid
+//expand section needs to be replaced for specific buttons
 function InfoScreen() {
   return (
     <View style={styles.info}>
       <Text style={styles.title}>INFO</Text>
       <View style={styles.text}>
-        <Text onPress={expandSection}>Food</Text>
+        <Text style={styles.subtitle} onPress={expandSection}>Food</Text>
+      </View>
+      <View style={styles.text}>
+        <Text style={styles.subtitle} onPress={expandSection}>Map</Text>
+      </View>
+      <View style={styles.text}>
+        <Text style={styles.subtitle} onPress={expandSection}>Handbook</Text>
+      </View>
+      <View style={styles.text}>
+        <Text style={styles.subtitle} onPress={expandSection}>FAQ</Text>
+      </View>
+      <View style={styles.text}>
+        <Text style={styles.subtitle} onPress={expandSection}>Rules</Text>
+      </View>
+      <View style={styles.text}>
+        <Text style={styles.subtitle} onPress={expandSection}>Location</Text>
+      </View>
+      <View style={styles.text}>
+        <Text style={styles.subtitle} onPress={expandSection}>Sample</Text>
       </View>
     </View>
   );
@@ -110,12 +130,21 @@ const styles = StyleSheet.create({
   info: { // max testing
     flex: 1,
     backgroundColor: "#1E1E1E",
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: "flex-start",
+    justifyContent: "left",
+    
   },
   title: {
-    fontSize: 20,
+    fontSize: 50,
     fontWeight: "bold",
     color: "#FFFFFF",
+    marginTop: 20,
+    marginLeft: 30,
+  },
+  subtitle: {
+    fontSize: 30,
+    fontWeight: "bold",
+    color: "#FFFFFF",
+    marginLeft: 50,
   },
 });
