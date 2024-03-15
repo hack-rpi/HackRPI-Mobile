@@ -141,3 +141,56 @@ const popQueue = async (docKey) => {
       console.error('Error adding to queue:', error);
     }
   }
+
+  const togglePause = async (docKey) => {
+    try {
+      const docRef = db.collection('requests').doc(docKey);
+      const docSnapshot = await docRef.get();
+  
+      if (!docSnapshot.exists) {
+        console.log('No such document!');
+        return;
+      }
+  
+      const data = docSnapshot.data();
+  
+      if (data && data.helped) {
+        alert('This student has already been helped.');
+        return;
+      }
+  
+      // Check if the student is already paused
+      if (data && data.paused) {
+        // Calculate the duration of the pause
+        const pauseStartTimestamp = data.pauseStartTimestamp.toMillis();
+        const now = new Date().getTime();
+        const pauseDuration = (now - pauseStartTimestamp) / 60000; // Convert from milliseconds to minutes
+  
+        // Check if the pause duration is longer than an hour
+        if (pauseDuration > 60) {
+          // Delete the help request if paused for more than an hour
+          await docRef.delete();
+          console.log('Help request deleted due to exceeding pause duration.');
+          return;
+        }
+  
+        // Unpause the student by removing the 'paused' field
+        await docRef.update({
+          paused: FieldValue.delete(),
+          pauseStartTimestamp: FieldValue.delete(),
+        });
+  
+        console.log('Student position in the queue unpause.');
+      } else {
+        // Pause the student by adding the 'paused' field and setting the pause start timestamp
+        await docRef.update({
+          paused: true,
+          pauseStartTimestamp: FieldValue.serverTimestamp(),
+        });
+  
+        console.log('Student position in the queue paused.');
+      }
+    } catch (error) {
+      console.error('Error toggling pause:', error);
+    }
+  };
