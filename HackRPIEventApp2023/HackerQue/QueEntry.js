@@ -60,7 +60,7 @@ const QueEntry = ({ name, roomNumber, problemType }) => {
         </View>
       ) : (
         <View>
-          <Text style={styles.text}>Name:</Text>
+          <Text style={styles.text}>Names:</Text>
           <TextInput
             style={styles.input}
             onChangeText={handleNameChange}
