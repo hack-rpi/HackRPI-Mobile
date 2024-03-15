@@ -26,5 +26,36 @@ app.post('/send-notification', async (req, res) => {
   const dateTime = getFormattedDate();
   const tasks = [];
 
+    // APNs notifications
+    if (deviceTokens && deviceTokens.length) {
+        const apnNotification = new apn.Notification({
+          alert: message,
+          badge: 1,
+          sound: 'default',
+          title: title || 'New Notification',
+          payload: { dateTime },
+        });
+    
+        tasks.push(...deviceTokens.map(token => 
+          apnProvider.send(apnNotification, token).then(handleApnResult)
+        ));
+      }
+
+      if (deviceToken) {
+        // send apn nnotification to ios
+    
+        const apnNotification = new apn.Notification();
+        apnNotification.alert = message;
+        apnNotification.badge = 1;
+        apnNotification.sound = 'default';
+        apnNotification.title = title || 'New Notification';
+    
+        // send APNs notification to iOS
+        tasks.push(
+          apnProvider.send(apnNotification, deviceToken).then(handleApnResult)
+        );  }
+    
+
+
 
 });

@@ -44,20 +44,6 @@ app.post('/send-notification', (req, res) => {
 
   let tasks = [];
 
-  if (deviceToken) {
-    // Set up APNs notification
-    const apnNotification = new apn.Notification();
-    apnNotification.alert = message;
-    apnNotification.badge = 1;
-    apnNotification.sound = 'default';
-    apnNotification.title = title || 'New Notification';
-    apnNotification.payload = { 'dateTime': dateTime }; // Add date and time to the payload
-
-    // Send APNs notification to iOS devices
-    tasks.push(
-      apnProvider.send(apnNotification, deviceToken).then(handleApnResult)
-    );
-  }
 
   if (deviceToken) {
     // send apn nnotification to ios
