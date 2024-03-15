@@ -194,3 +194,53 @@ const popQueue = async (docKey) => {
       console.error('Error toggling pause:', error);
     }
   };
+
+    // Gets the total number of students in the queue.
+const getTotalStudentsInQueue = async () => {
+    try {
+      const requestsCollection = collection(db, 'requests');
+      const querySnapshot = await getDocs(requestsCollection);
+      const totalStudents = querySnapshot.size;
+      console.log(`Total Students in Queue: ${totalStudents}`);
+      return totalStudents;
+    } catch (error) {
+      console.error('Error calculating total students in queue:', error);
+      return 0;
+    }
+  };
+
+  const getAverageWaitTime = async () => {
+    try {
+      const requestsCollection = collection(db, 'requests');
+      const querySnapshot = await getDocs(requestsCollection);
+  
+      let totalWaitTime = 0;
+      let totalStudents = 0;
+  
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        const addedTimestamp = data.addedTimestamp; // Timestamp when student was added to the queue
+        const helpedTimestamp = data.helpedTimestamp; // Timestamp when student was helped
+  
+        if (addedTimestamp && helpedTimestamp) {
+          // Calculate the time spent in the queue in milliseconds
+          const waitTime = helpedTimestamp - addedTimestamp;
+  
+          // Add the wait time to the total
+          totalWaitTime += waitTime;
+          totalStudents++;
+        }
+      });
+  
+      if (totalStudents === 0) {
+        console.log('No data available to calculate average wait time.');
+        return;
+      }
+  
+      // Calculate the average wait time in minutes
+      const averageWaitTime = totalWaitTime / (totalStudents * 60000); // Convert milliseconds to minutes
+      console.log(`Average Wait Time: ${averageWaitTime.toFixed(2)} minutes`);
+    } catch (error) {
+      console.error('Error calculating average wait time:', error);
+    }
+  };
