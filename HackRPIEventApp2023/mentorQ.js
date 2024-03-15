@@ -70,3 +70,74 @@ try {
     console.error('Error retrieving document:', error);
 }
 };
+
+// A function to fetch the data of a document, i.e., the student in the queue.
+// It takes in a document key.
+const fetchDoc = async (docKey) => {
+try {
+    // Grabs the document
+    const ans = await db.collection('requests').doc(docKey);
+    console.log(ans.data());
+    // Returns the data of that document
+    return ans.data();
+} catch (error) {
+    console.error('Error retrieving individual doc:', error);
+}
+};
+
+
+// helps the student
+const queueOut = async (docKey) => {
+    try {
+      // Create a reference to the student's document using the provided docKey
+      const docRef = db.collection('requests').doc(docKey);
+  
+      // Check if the "helped" field is already true
+      const docSnapshot = await docRef.get();
+      const data = docSnapshot.data();
+  
+      if (data && data.helped) {
+        alert('This student has already been helped.');
+      } else {
+        // Set the "helped" field to true
+        await docRef.set({
+          helped: true
+        });
+      }
+    } catch (error) {
+      console.error('Error claiming queue:', error);
+    }
+};
+
+
+// deletes the student from the queue
+const popQueue = async (docKey) => {
+    try {
+      const batch = writeBatch(db);
+      const docRef = doc(db, 'requests', docKey);
+      batch.delete(docRef);
+      await commitBatch(batch);
+    } catch (error) {
+      console.error('Error in popQueue:', error);
+      throw error;
+    }
+  };
+
+   // Adds someone into the queue.
+  // It takes in student name, table number, and help type.
+  const addQueue = async (student, tblN, helpType) => {
+    const data = {
+      Name: student,
+      helped: false,
+      tablenum: tblN,
+      type: helpType,
+      paused: false,
+    };
+    // Makes UID unique and time-based for sorting in the database.
+    const uID = Date.now();
+    try {
+      const ans = await db.collection('requests').doc(uId).set(data);
+    } catch (error) {
+      console.error('Error adding to queue:', error);
+    }
+  }
