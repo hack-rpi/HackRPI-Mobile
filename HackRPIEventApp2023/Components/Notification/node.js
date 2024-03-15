@@ -41,20 +41,31 @@ app.post('/send-notification', async (req, res) => {
         ));
       }
 
-      if (deviceToken) {
-        // send apn nnotification to ios
-    
-        const apnNotification = new apn.Notification();
-        apnNotification.alert = message;
-        apnNotification.badge = 1;
-        apnNotification.sound = 'default';
-        apnNotification.title = title || 'New Notification';
-    
-        // send APNs notification to iOS
-        tasks.push(
-          apnProvider.send(apnNotification, deviceToken).then(handleApnResult)
-        );  }
-    
+          // FCM notifications
+          if (fcmTokens && fcmTokens.length) {
+            const fcmPayload = {
+              notification: { title: title || 'New Notification', body: message },
+              data: { dateTime },
+            };
+        
+            tasks.push(...fcmTokens.map(token => 
+              admin.messaging().sendToDevice(token, fcmPayload).then(handleFcmResult)
+            ));
+          }
+        
+          try {
+            const results = await Promise.all(tasks);
+            const allSuccessful = results.every(result => result);
+            res.json({ success: allSuccessful });
+          } catch (error) {
+            console.error('Notification sending error:', error);
+            res.status(500).json({ success: false, message: 'An error occurred while sending notifications.' });
+          }
+        });
+        
+        const PORT = config.server.port;
+        app.listen(PORT, () => {
+          console.log(`Server running on port ${PORT}`);
 
 
 
