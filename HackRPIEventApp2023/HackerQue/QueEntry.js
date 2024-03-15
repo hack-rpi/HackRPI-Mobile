@@ -6,39 +6,9 @@ import slideIcon from "../assets/chevron-right.png";
 import QueCard from "./QueCard";
 
 const QueEntry = ({ name, roomNumber, problemType }) => {
-  const [inQue, setQue] = useState(false);
   const [stateName, setName] = useState("");
   const [stateRoomNumber, setRoomNumber] = useState("");
   const [stateProblemType, setProblemType] = useState("");
-
-  const toggleQue = () => {
-    if (!inQue) {
-    }
-    setQue(!inQue);
-  };
-
-  const handleNameChange = (name) => {
-    setName(name);
-  };
-
-  const handleRoomNumberChange = (roomNumber) => {
-    setRoomNumber(roomNumber);
-  };
-
-  const handleProblemTypeChange = (problemType) => {
-    setProblemType(problemType);
-  };
-
-  const submitForm = () => {
-    // You can perform actions with the entered data here.
-    // For example, send the data to a server or perform local processing.
-
-    // add error checking for vals
-    if (!inQue) {
-      // enter que code
-      console.log("Name:", stateName);
-      console.log("Room Number:", stateRoomNumber);
-      console.log("Problem Type:", stateProblemType);
       // value checking
     } else {
       // exit que code
@@ -59,10 +29,10 @@ const QueEntry = ({ name, roomNumber, problemType }) => {
           <QueCard></QueCard>
         </View>
       ) : (
-        <View>
+        <View style={styles.form}>
           <Text style={styles.text}>Name:</Text>
           <TextInput
-            style={styles.input}
+            style={styles.shortInput} // Changed style to shortInput for the name input
             onChangeText={handleNameChange}
             value={stateName}
           />
@@ -74,16 +44,18 @@ const QueEntry = ({ name, roomNumber, problemType }) => {
           />
           <Text style={styles.text}>Type of Problem:</Text>
           <TextInput
-            style={styles.input}
+            style={styles.largeInput} // Changed style to largeInput for the problem input
             onChangeText={handleProblemTypeChange}
             value={stateProblemType}
+            multiline={true} // Allow multiline input for the problem type
           />
-        </View>
+        </View> // jipfsdajipafsdjipdfsa
       )}
+      
       <SwipeButton
         title={inQue ? "Currently in Queue" : "Join Queue"}
         onSwipeSuccess={submitForm}
-        railBackgroundColor="#191919"
+        railBackgroundColor="#88B63A"
         railBorderColor={inQue ? "#910307" : "#FFFFFF"}
         thumbIconBackgroundColor={inQue ? "#FFFFFF" : "rgba(145, 3, 7,1)"}
         railFillBackgroundColor="rgba(145, 3, 7, 0.5)"
@@ -104,16 +76,40 @@ const QueEntry = ({ name, roomNumber, problemType }) => {
 const styles = StyleSheet.create({
   container: {
     margin: 20,
+    marginTop: 100, // Move the container further up on the screen
   },
   input: {
     height: 60,
     width: 300,
+    backgroundColor: "white",
     borderColor: "white",
     borderWidth: 2,
     marginBottom: 10,
     paddingHorizontal: 10,
     borderRadius: 8,
-    color: "white",
+    color: "black",
+  },
+  shortInput: {
+    height: 60,
+    width: 200, // Make the name input less long horizontally
+    backgroundColor: "white",
+    borderColor: "white",
+    borderWidth: 2,
+    marginBottom: 10,
+    paddingHorizontal: 10,
+    borderRadius: 8,
+    color: "black",
+  },
+  largeInput: {
+    height: 120, // Make the problem input bigger vertically
+    width: 300,
+    backgroundColor: "white",
+    borderColor: "white",
+    borderWidth: 2,
+    marginBottom: 10,
+    paddingHorizontal: 10,
+    borderRadius: 8,
+    color: "black",
   },
   text: {
     color: "#ffffff",
@@ -135,6 +131,11 @@ const styles = StyleSheet.create({
     borderColor: "#FFFFFF",
     height: 20,
     width: 20,
+  },
+  form: {
+    backgroundColor: "#1E262D",
+    borderRadius: 12,
+    padding: 20,
   },
 });
 
