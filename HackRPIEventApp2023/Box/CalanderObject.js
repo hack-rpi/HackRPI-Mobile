@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { Feather } from "@expo/vector-icons";
-import EventObject from "./EventObject";
+import EventObject from "./EventObject"; // Import the EventObject component
 
+//reusable component that ties an event object to it's notification bell
 const CalanderObject = ({
   workshop_Title,
   Time,
@@ -11,7 +12,7 @@ const CalanderObject = ({
   Description,
   isRed,
 }) => {
-  const [isActive, setIsActive] = useState(false);
+  const [isActive, setIsActive] = useState(false); // Define isActive state
 
   const handleClick = () => {
     setIsActive(!isActive);
@@ -25,36 +26,45 @@ const CalanderObject = ({
         location={Location}
         presenter={Presenter}
         description={Description}
-        isRed={isRed}
+        isRed={isRed} //this line is use for hardcode
+        //isRed={checkCondition()} -> This line will be use instead if we implement checkCondition() function
       />
-      <TouchableOpacity onPress={handleClick} style={styles.notifBox}>
+      <View
+        style={styles.notifBox}
+        backgroundColor={isRed ? "black" : isActive ? "black" : "white"}
+        borderColor={isRed ? "red" : "white"}>
         <Feather
           name={isActive ? "bell-off" : "bell"}
           size={30}
-          color={isActive ? "red" : isRed ? "red" : "black"}
+          color={isRed ? "red" : isActive ? "white" : "black"}
+          onPress={handleClick}
+          zIndex={2}
+          // Add onPress to handle click
         />
-      </TouchableOpacity>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: "row", // Arrange children horizontally
+    alignItems: "center", // Center children vertically
+    backgroundColor: "transparent", // Replace with your desired background color
     padding: 10,
     borderRadius: 10,
-    marginBottom: 10,
+    marginBottom: 0,
   },
   notifBox: {
     width: 60,
-    height: 60,
+    height: 150,
     borderWidth: 3,
-    borderRadius: 30,
+    borderRadius: 20,
     padding: 10,
     marginLeft: 20,
     justifyContent: "center",
     alignItems: "center",
+    marginBottom: 0,
     zIndex: 1,
   },
 });
