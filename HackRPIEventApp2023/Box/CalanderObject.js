@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native"; // Import TouchableOpacity for touchable container
 import { Feather } from "@expo/vector-icons";
-import EventObject from "./EventObject"; // Import the EventObject component
+import EventObject from "./EventObject";
 
-//reusable component that ties an event object to it's notification bell
 const CalanderObject = ({
   workshop_Title,
   Time,
@@ -12,45 +11,46 @@ const CalanderObject = ({
   Description,
   isRed,
 }) => {
-  const [isActive, setIsActive] = useState(false); // Define isActive state
+  const [isActive, setIsActive] = useState(false);
 
   const handleClick = () => {
     setIsActive(!isActive);
   };
 
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={handleClick}>
       <EventObject
         workshop_title={workshop_Title}
         time={Time}
         location={Location}
         presenter={Presenter}
         description={Description}
-        isRed={isRed} //this line is use for hardcode
-        //isRed={checkCondition()} -> This line will be use instead if we implement checkCondition() function
+        isRed={isRed}
       />
       <View
-        style={styles.notifBox}
-        backgroundColor={isRed ? "black" : isActive ? "black" : "white"}
-        borderColor={isRed ? "red" : "white"}>
+        style={[
+          styles.notifBox,
+          {
+            backgroundColor: isRed ? "black" : isActive ? "black" : "white",
+            borderColor: isRed ? "red" : "white",
+          },
+        ]}
+      >
         <Feather
           name={isActive ? "bell-off" : "bell"}
           size={30}
           color={isRed ? "red" : isActive ? "white" : "black"}
-          onPress={handleClick}
-          zIndex={2}
-          // Add onPress to handle click
         />
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row", // Arrange children horizontally
-    alignItems: "center", // Center children vertically
-    backgroundColor: "transparent", // Replace with your desired background color
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "transparent",
     padding: 10,
     borderRadius: 10,
     marginBottom: 0,
@@ -65,7 +65,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 0,
-    zIndex: 1,
   },
 });
 
