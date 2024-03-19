@@ -1,8 +1,9 @@
 import React from "react";
-import { StyleSheet, View, StatusBar } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Feather } from "@expo/vector-icons";
+import { StatusBar } from "expo-status-bar";
 import Calander from "./Box/Calander";
 import Food from "./information/Food";
 import HackerQue from "./HackerQue/QueEntry.js";
@@ -38,7 +39,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <View style={styles.container}>
-        <StatusBar hidden />
+        <StatusBar style="auto" />
         <Tab.Navigator
           screenOptions={({ route }) => ({
             tabBarIcon: ({ focused, color, size }) => {
@@ -69,9 +70,21 @@ export default function App() {
             tabBarInactiveTintColor: "white",
           })}
         >
-          <Tab.Screen name="Info" component={InfoScreen} />
-          <Tab.Screen name="Home" component={HomeScreen} />
-          <Tab.Screen name="Queue" component={QueueScreen} />
+          <Tab.Screen
+            name="Info"
+            component={InfoScreen}
+            options={{ headerShown: false }} // Hides the header for this screen
+          />
+          <Tab.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{ headerShown: false }} // Hides the header for this screen
+          />
+          <Tab.Screen
+            name="Queue"
+            component={QueueScreen}
+            options={{ headerShown: false }} // Hides the header for this screen
+          />
         </Tab.Navigator>
       </View>
     </NavigationContainer>
