@@ -7,6 +7,7 @@ import { StatusBar } from "expo-status-bar";
 import Calander from "./Box/Calander";
 import Food from "./information/Food";
 import HackerQue from "./HackerQue/QueEntry.js";
+import MentorQue from "./MentorQue/MentorQue";
 // import { colors } from './colors';
 import { globalStyles } from "./styles";
 
@@ -33,7 +34,7 @@ function HomeScreen() {
 function QueueScreen() {
   return (
     <View style={styles.container}>
-      <HackerQue></HackerQue>
+      <MentorQue></MentorQue>
     </View>
   );
 }

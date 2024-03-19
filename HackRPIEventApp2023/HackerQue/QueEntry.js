@@ -59,7 +59,7 @@ const QueEntry = ({ name, roomNumber, problemType }) => {
           <QueCard></QueCard>
         </View>
       ) : (
-        <View>
+        <View style={styles.form}>
           <Text style={styles.text}>Name:</Text>
           <TextInput
             style={styles.input}
@@ -136,6 +136,11 @@ const styles = StyleSheet.create({
     height: 20,
     width: 20,
   },
+    form: {
+        backgroundColor: "#1E262D",
+        borderRadius:12,
+        padding:20, 
+    },
 });
 
 export default QueEntry;

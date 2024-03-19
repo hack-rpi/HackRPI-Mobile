@@ -1,6 +1,6 @@
 export const globalStyles = {
   //COLORS
-  primary: "#191919", //backgroundBlack
+  primary: "#25303C", //backgroundBlack
   accent: "#910307", //mainRed
   secondary: "#9E9E9E", //mainGray
   icons: "#FFFFFF", //white
@@ -10,3 +10,4 @@ export const globalStyles = {
   fontSize: 20,
   fontWeight: "bold",
 };
+    
