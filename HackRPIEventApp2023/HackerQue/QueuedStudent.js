@@ -1,6 +1,5 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-//might need to remove circle progress
 import CircleProgress from "../Components/CircleProgress";
 import calculateTimeDifference from "../HackerQue/Time_Dif";
 import { useState, useEffect } from "react";
@@ -27,7 +26,7 @@ function QueCard() {
     <View style={styles.box}>
       {/* Inner View for heading */}
       <View style={styles.heading}>
-        <Text style={styles.textHeader}>trying</Text>
+        <Text style={styles.textHeader}>Issue: HTML</Text>
       </View>
       <View style={styles.row}>
         <View style={styles.subBox}>
