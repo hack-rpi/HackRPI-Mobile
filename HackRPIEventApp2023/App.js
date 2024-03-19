@@ -8,6 +8,7 @@ import Calander from "./Box/Calander";
 import Food from "./information/Food";
 import HackerQue from "./HackerQue/QueEntry.js";
 import MentorQue from "./MentorQue/MentorQue";
+import PopupHackerQueue from "./HackerQue/PopupHackerQueue"; // wasn't working over here but saw it was causing problems, hope doesnt break anything?
 // import { colors } from './colors';
 import { globalStyles } from "./styles";
 
@@ -34,7 +35,8 @@ function HomeScreen() {
 function QueueScreen() {
   return (
     <View style={styles.container}>
-      <MentorQue></MentorQue>
+      {/* <PopupHackerQueue /> Integrate the PopupHackerQueue component */}
+      <HackerQue />
     </View>
   );
 }

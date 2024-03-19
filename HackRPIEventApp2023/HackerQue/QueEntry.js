@@ -62,7 +62,7 @@ const QueEntry = ({ name, roomNumber, problemType }) => {
         <View style={styles.form}>
           <Text style={styles.text}>Name:</Text>
           <TextInput
-            style={styles.input}
+            style={styles.shortInput} // Changed style to shortInput for the name input
             onChangeText={handleNameChange}
             value={stateName}
           />
@@ -74,16 +74,18 @@ const QueEntry = ({ name, roomNumber, problemType }) => {
           />
           <Text style={styles.text}>Type of Problem:</Text>
           <TextInput
-            style={styles.input}
+            style={styles.largeInput} // Changed style to largeInput for the problem input
             onChangeText={handleProblemTypeChange}
             value={stateProblemType}
+            multiline={true} // Allow multiline input for the problem type
           />
-        </View>
+        </View> // jipfsdajipafsdjipdfsa
       )}
+      
       <SwipeButton
         title={inQue ? "Currently in Queue" : "Join Queue"}
         onSwipeSuccess={submitForm}
-        railBackgroundColor="#191919"
+        railBackgroundColor="#88B63A"
         railBorderColor={inQue ? "#910307" : "#FFFFFF"}
         thumbIconBackgroundColor={inQue ? "#FFFFFF" : "rgba(145, 3, 7,1)"}
         railFillBackgroundColor="rgba(145, 3, 7, 0.5)"
@@ -104,16 +106,40 @@ const QueEntry = ({ name, roomNumber, problemType }) => {
 const styles = StyleSheet.create({
   container: {
     margin: 20,
+    marginTop: 100, // Move the container further up on the screen
   },
   input: {
     height: 60,
     width: 300,
+    backgroundColor: "white",
     borderColor: "white",
     borderWidth: 2,
     marginBottom: 10,
     paddingHorizontal: 10,
     borderRadius: 8,
-    color: "white",
+    color: "black",
+  },
+  shortInput: {
+    height: 60,
+    width: 200, // Make the name input less long horizontally
+    backgroundColor: "white",
+    borderColor: "white",
+    borderWidth: 2,
+    marginBottom: 10,
+    paddingHorizontal: 10,
+    borderRadius: 8,
+    color: "black",
+  },
+  largeInput: {
+    height: 120, // Make the problem input bigger vertically
+    width: 300,
+    backgroundColor: "white",
+    borderColor: "white",
+    borderWidth: 2,
+    marginBottom: 10,
+    paddingHorizontal: 10,
+    borderRadius: 8,
+    color: "black",
   },
   text: {
     color: "#ffffff",
@@ -136,11 +162,11 @@ const styles = StyleSheet.create({
     height: 20,
     width: 20,
   },
-    form: {
-        backgroundColor: "#1E262D",
-        borderRadius:12,
-        padding:20, 
-    },
+  form: {
+    backgroundColor: "#1E262D",
+    borderRadius: 12,
+    padding: 20,
+  },
 });
 
 export default QueEntry;
