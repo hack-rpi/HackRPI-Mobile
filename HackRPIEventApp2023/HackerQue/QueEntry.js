@@ -37,7 +37,7 @@ const QueEntry = ({ name, roomNumber, problemType }) => {
     if (!inQue) {
       // enter que code
       console.log("Name:", stateName);
-      console.log("Room Number:", stateRoomNumber);
+      console.log("Table #:", stateRoomNumber);
       console.log("Problem Type:", stateProblemType);
       // value checking
     } else {
@@ -60,38 +60,44 @@ const QueEntry = ({ name, roomNumber, problemType }) => {
         </View>
       ) : (
         <View style={styles.form}>
-          <Text style={styles.text}>Name:</Text>
-          <TextInput
-            style={styles.shortInput} // Changed style to shortInput for the name input
-            onChangeText={handleNameChange}
-            value={stateName}
-          />
-          <Text style={styles.text}>Room Number:</Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={handleRoomNumberChange}
-            value={stateRoomNumber}
-          />
+          <View style={styles.inputContainer}>
+            <View style={styles.inputWrapper}>
+              <Text style={styles.text}>Name:</Text>
+              <TextInput
+                style={styles.shortInput} 
+                onChangeText={handleNameChange}
+                value={stateName}
+              />
+            </View>
+            <View style={[styles.inputWrapper, styles.tableInputWrapper]}>
+              <Text style={styles.text}>Table #</Text>
+              <TextInput
+                style={styles.tinyInput}
+                onChangeText={handleRoomNumberChange}
+                value={stateRoomNumber}
+              />
+            </View>
+          </View>
           <Text style={styles.text}>Type of Problem:</Text>
           <TextInput
-            style={styles.largeInput} // Changed style to largeInput for the problem input
+            style={styles.largeInput}
             onChangeText={handleProblemTypeChange}
             value={stateProblemType}
-            multiline={true} // Allow multiline input for the problem type
+            multiline={true}
           />
-        </View> // jipfsdajipafsdjipdfsa
+        </View> 
       )}
       
       <SwipeButton
         title={inQue ? "Currently in Queue" : "Join Queue"}
         onSwipeSuccess={submitForm}
         railBackgroundColor="#88B63A"
-        railBorderColor={inQue ? "#910307" : "#FFFFFF"}
-        thumbIconBackgroundColor={inQue ? "#FFFFFF" : "rgba(145, 3, 7,1)"}
-        railFillBackgroundColor="rgba(145, 3, 7, 0.5)"
-        railFillBorderColor="rgba(145, 3, 7, 0.5)"
-        thumbIconBorderColor={inQue ? "#910307" : "#FFFFFF"}
-        titleColor={inQue ? "#910307" : "#FFFFFF"}
+        railBorderColor={inQue ? "#EDD559" : "#FFFFFF"}
+        thumbIconBackgroundColor={inQue ? "#FFFFFF" : "#EDD559"}
+        railFillBackgroundColor="#EDD559"
+        railFillBorderColor="#EDD559"
+        thumbIconBorderColor={inQue ? "#EDD559" : "#FFFFFF"}
+        titleColor={inQue ? "#FFFFFF" : "#FFFFFF"}
         resetAfterSuccessAnimDelay={350}
         shouldResetAfterSuccess={true}
         containerStyles={styles.buttonContainer}
@@ -101,9 +107,27 @@ const QueEntry = ({ name, roomNumber, problemType }) => {
       />
     </View>
   );
+  
+  
+  
+  
 };
 
 const styles = StyleSheet.create({
+
+  inputContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  inputWrapper: {
+    flex: 1,
+    marginRight: 10,
+  },
+  tableInputWrapper: {
+    flex: 2, // Takes twice as much space as the "Name" input wrapper
+  },
+
+  
   container: {
     margin: 20,
     marginTop: 100, // Move the container further up on the screen
@@ -121,7 +145,18 @@ const styles = StyleSheet.create({
   },
   shortInput: {
     height: 60,
-    width: 200, // Make the name input less long horizontally
+    width: 200,
+    backgroundColor: "white",
+    borderColor: "white",
+    borderWidth: 2,
+    marginBottom: 10,
+    paddingHorizontal: 10,
+    borderRadius: 8,
+    color: "black",
+  },
+  tinyInput: {
+    height: 60,
+    width: 90, 
     backgroundColor: "white",
     borderColor: "white",
     borderWidth: 2,
@@ -131,7 +166,7 @@ const styles = StyleSheet.create({
     color: "black",
   },
   largeInput: {
-    height: 120, // Make the problem input bigger vertically
+    height: 180, 
     width: 300,
     backgroundColor: "white",
     borderColor: "white",
