@@ -7,7 +7,7 @@ import { StatusBar } from "expo-status-bar";
 import Calander from "./Box/Calander";
 import Food from "./information/Food";
 import HackerQue from "./HackerQue/QueEntry.js";
-import PopupHackerQueue from "./PopupHackerQueue"; // Import the PopupHackerQueue component
+import PopupHackerQueue from "./HackerQue/PopupHackerQueue"; // wasn't working over here but saw it was causing problems, hope doesnt break anything?
 // import { colors } from './colors';
 import { globalStyles } from "./styles";
 
@@ -34,8 +34,7 @@ function HomeScreen() {
 function QueueScreen() {
   return (
     <View style={styles.container}>
-      {/*<HackerQue></HackerQue>*/}
-      <PopupHackerQueue /> {/* Integrate the PopupHackerQueue component */}
+      {/* <PopupHackerQueue /> Integrate the PopupHackerQueue component */}
       <HackerQue />
     </View>
   );
