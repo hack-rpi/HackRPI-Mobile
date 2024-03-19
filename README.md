@@ -1,4 +1,4 @@
-# HackRPI-Mobile2023
+# HackRPI-Mobile
 
 Welcome to the official GitHub repository for the HackRPI X Event App! Over the past decade, HackRPI has grown into one of the most prestigious hackathons, providing a platform for innovation, collaboration, and creativity. As we celebrate this milestone, we invite you to be a part of this journey.
 
