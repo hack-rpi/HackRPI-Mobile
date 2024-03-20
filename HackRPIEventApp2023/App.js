@@ -19,7 +19,7 @@ import Pdf from 'react-native-pdf';
 Import this new component into the appropriate screen where you want the
 PDF to be displayed. You would add a Tab.Screen for the PDF viewer in your
 Tab.Navigator if you want it to be accessible from the tab bar, or you might
-integrate it into one of your existing screen.
+integrate it into one of your existing screen
  */
 const PDFViewer = ({ uri }) => {
     const source = { uri, cache: true };
