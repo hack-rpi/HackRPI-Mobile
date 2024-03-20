@@ -12,6 +12,35 @@ import { globalStyles } from "./styles";
 
 const Tab = createBottomTabNavigator();
 
+
+import { SafeAreaView, Dimensions } from 'react-native';
+import Pdf from 'react-native-pdf';
+/*
+Import this new component into the appropriate screen where you want the
+PDF to be displayed. You would add a Tab.Screen for the PDF viewer in your
+Tab.Navigator if you want it to be accessible from the tab bar, or you might
+integrate it into one of your existing screen
+ */
+const PDFViewer = ({ uri }) => {
+    const source = { uri, cache: true };
+    return (
+        <SafeAreaView style={{ flex: 1 }}>
+            <Pdf
+                source={source}
+                onLoadComplete={(numberOfPages, filePath) => {
+                    console.log(`Number of pages: ${numberOfPages}`);
+                }}
+                onPageChanged={(page, numberOfPages) => {
+                    console.log(`Current page: ${page}`);
+                }}
+                onError={(error) => {
+                    console.log(error);
+                }}
+                style={{ flex: 1, width: Dimensions.get('window').width }}
+            />
+        </SafeAreaView>
+    );
+}
 function InfoScreen() {
   return (
     <View style={styles.container}>
