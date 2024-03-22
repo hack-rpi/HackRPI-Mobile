@@ -25,8 +25,7 @@ export default function PopupHackerQueue() {
         animationType="slide"
         transparent={true}
         visible={isMenuVisible}
-        onRequestClose={handleCloseMenu}
-      >
+        onRequestClose={handleCloseMenu}>
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             <Text>Menu Content Here</Text>
