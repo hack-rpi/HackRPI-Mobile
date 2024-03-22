@@ -54,57 +54,61 @@ const QueEntry = ({ name, roomNumber, problemType }) => {
 
   return (
     <View style={styles.container}>
-      {inQue ? (
-        <View>
-          <QueCard></QueCard>
-        </View>
-      ) : (
-        <View style={styles.form}>
-          <View style={styles.inputContainer}>
-            <View style={styles.inputWrapper}>
-              <Text style={styles.text}>Name:</Text>
-              <TextInput
-                style={styles.shortInput} 
-                onChangeText={handleNameChange}
-                value={stateName}
-              />
-            </View>
-            <View style={[styles.inputWrapper, styles.tableInputWrapper]}>
-              <Text style={styles.text}>Table #</Text>
-              <TextInput
-                style={styles.tinyInput}
-                onChangeText={handleRoomNumberChange}
-                value={stateRoomNumber}
-              />
-            </View>
+      <View style={{flex: 1}}>
+        {inQue ? (
+          <View>
+            <QueCard></QueCard>
           </View>
-          <Text style={styles.text}>Type of Problem:</Text>
-          <TextInput
-            style={styles.largeInput}
-            onChangeText={handleProblemTypeChange}
-            value={stateProblemType}
-            multiline={true}
-          />
-        </View> 
-      )}
-      
-      <SwipeButton
-        title={inQue ? "Currently in Queue" : "Join Queue"}
-        onSwipeSuccess={submitForm}
-        railBackgroundColor="#88B63A"
-        railBorderColor={inQue ? "#EDD559" : "#FFFFFF"}
-        thumbIconBackgroundColor={inQue ? "#FFFFFF" : "#EDD559"}
-        railFillBackgroundColor="#EDD559"
-        railFillBorderColor="#EDD559"
-        thumbIconBorderColor={inQue ? "#EDD559" : "#FFFFFF"}
-        titleColor={inQue ? "#FFFFFF" : "#FFFFFF"}
-        resetAfterSuccessAnimDelay={350}
-        shouldResetAfterSuccess={true}
-        containerStyles={styles.buttonContainer}
-        railStyles={styles.rail}
-        thumbIconStyles={styles.thumbIcon}
-        thumbIconImageSource={inQue ? checkIcon : slideIcon}
-      />
+        ) : (
+          <View style={styles.form}>
+            <View style={styles.inputContainer}>
+              <View style={styles.inputWrapper}>
+                <Text style={styles.text}>Name:</Text>
+                <TextInput
+                  style={styles.shortInput} 
+                  onChangeText={handleNameChange}
+                  value={stateName}
+                />
+              </View>
+              <View style={[styles.inputWrapper, styles.tableInputWrapper]}>
+                <Text style={styles.text}>Table #</Text>
+                <TextInput
+                  style={styles.tinyInput}
+                  onChangeText={handleRoomNumberChange}
+                  value={stateRoomNumber}
+                />
+              </View>
+            </View>
+            <Text style={styles.text}>Type of Problem:</Text>
+            <TextInput
+              style={styles.largeInput}
+              onChangeText={handleProblemTypeChange}
+              value={stateProblemType}
+              multiline={true}
+            />
+          </View> 
+        )}
+      </View>
+
+      <View style={{flex: 1, justifyContent: 'flex-start', marginTop:250}}>
+        <SwipeButton
+          title={inQue ? "Currently in Queue" : "Join Queue"}
+          onSwipeSuccess={submitForm}
+          railBackgroundColor="#88B63A"
+          railBorderColor={inQue ? "#EDD559" : "#FFFFFF"}
+          thumbIconBackgroundColor={inQue ? "#FFFFFF" : "#EDD559"}
+          railFillBackgroundColor="#EDD559"
+          railFillBorderColor="#EDD559"
+          thumbIconBorderColor={inQue ? "#EDD559" : "#FFFFFF"}
+          titleColor={inQue ? "#FFFFFF" : "#FFFFFF"}
+          resetAfterSuccessAnimDelay={350}
+          shouldResetAfterSuccess={true}
+          containerStyles={styles.buttonContainer}
+          railStyles={styles.rail}
+          thumbIconStyles={styles.thumbIcon}
+          thumbIconImageSource={inQue ? checkIcon : slideIcon}
+        />
+      </View>
     </View>
   );
   
@@ -124,13 +128,15 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   tableInputWrapper: {
-    flex: 2, // Takes twice as much space as the "Name" input wrapper
+    flex: 2,
+    marginLeft: 110,
   },
 
   
   container: {
     margin: 20,
-    marginTop: 100, // Move the container further up on the screen
+    marginTop: 90, 
+    marginBottom: 30,
   },
   input: {
     height: 60,
@@ -145,7 +151,7 @@ const styles = StyleSheet.create({
   },
   shortInput: {
     height: 60,
-    width: 200,
+    width: 170,
     backgroundColor: "white",
     borderColor: "white",
     borderWidth: 2,
@@ -156,11 +162,12 @@ const styles = StyleSheet.create({
   },
   tinyInput: {
     height: 60,
-    width: 90, 
+    width: 120, 
     backgroundColor: "white",
     borderColor: "white",
     borderWidth: 2,
     marginBottom: 10,
+    marginLeft: 5,
     paddingHorizontal: 10,
     borderRadius: 8,
     color: "black",
