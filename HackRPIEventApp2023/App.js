@@ -36,7 +36,7 @@ function QueueScreen() {
   return (
     <View style={styles.container}>
       {/* <PopupHackerQueue /> Integrate the PopupHackerQueue component */}
-      <HackerQue />
+      <MentorQue />
     </View>
   );
 }

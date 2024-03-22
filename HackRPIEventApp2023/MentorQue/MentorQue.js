@@ -2,18 +2,26 @@ import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, Button, TouchableOpacity, Animated, PanResponder } from 'react-native';
 import { useFonts } from 'expo-font';
 import { Inter_800ExtraBold, Inter_400Regular } from '@expo-google-fonts/inter';
+import BottomPopup from './BottomPopup';
+import QueueEntry from '../Components/QueueEntry/QueueEntry';
 
 function MentorQue() {
     const [fontsLoaded] = useFonts({
         Inter_800ExtraBold,
         Inter_400Regular,
     });
-    
-    if (!fontsLoaded) {
-        return <View style={styles.container}><Text>Loading...</Text></View>;
-    }
 
+    const [queues, setQueue] = useState([]);
+    const [showPopup, setShowPopup] = useState(false);
 
+    useEffect(() => {
+        const fetchQueue = async () => {
+          const queueData = await getQueue();
+          setQueue(queueData);
+        };
+      
+        fetchQueue();
+      }, []);
 
     const getQueue = async () => {
         // Get the queue from the database
@@ -31,8 +39,20 @@ function MentorQue() {
             }
         ];
     };
+
+
+    if (!fontsLoaded) {
+        return <View style={styles.container}><Text>Loading...</Text></View>;
+    }
+
+
     return (
         <View style={styles.container}>
+            <BottomPopup visible={showPopup} onDismiss={()=>{setShowPopup(false)}}>
+                {queues.map((entry, index) => (
+                    <QueueEntry key={index} index={index} name={entry.name} table={entry.table} problem={entry.description} />
+                ))}
+            </BottomPopup>            
             <View style={styles.form}>
                 <Text style={styles.header}>Not Currently Helping</Text>
                 <View style={styles.personContainer}>
@@ -43,14 +63,13 @@ function MentorQue() {
                 <Text style={styles.header}>Next in Queue</Text>
                 <View style={styles.personContainer}>
                 </View>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={()=>{setShowPopup(!showPopup)}}>
                     <Text style={styles.interfaceText}>View Queue</Text>
                 </TouchableOpacity>
             </View>
             <TouchableOpacity style={styles.darkButton}>
                 <Text style={styles.lightInterfaceText}>Call for Backup</Text>
             </TouchableOpacity>
-            
         </View >
     );
 }
@@ -91,6 +110,7 @@ const styles = StyleSheet.create({
         justifyContent: 'start',
         width: '100%',
         paddingHorizontal: 20,
+        position: 'relative',
     },
     form: {
         // flex:1,
