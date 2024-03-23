@@ -31,7 +31,7 @@ const CalanderObject = ({
       />
       <View
         style={styles.notifBox}
-        backgroundColor={isRed ? "black" : isActive ? "black" : "white"}
+        backgroundColor={isRed ? "gray" : isActive ? "gray" : "yellow"}
         borderColor={isRed ? "red" : "white"}>
         <Feather
           name={isActive ? "bell-off" : "bell"}
