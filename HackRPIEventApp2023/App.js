@@ -36,10 +36,12 @@ function QueueScreen() {
   return (
     <View style={styles.container}>
       {/* <PopupHackerQueue /> Integrate the PopupHackerQueue component */}
-
+{/*         
       <HackerQue />
 
-      <PopupHackerQueue></PopupHackerQueue>
+      <PopupHackerQueue></PopupHackerQueue> */}
+        <MentorQue />
+        {/* <HackerQue /> */}
     </View>
   );
 }

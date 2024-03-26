@@ -4,6 +4,7 @@ import { useFonts } from 'expo-font';
 import { Inter_800ExtraBold, Inter_400Regular } from '@expo-google-fonts/inter';
 import BottomPopup from './BottomPopup';
 import QueueEntry from '../Components/QueueEntry/QueueEntry';
+import DetailedQueueEntry from '../Components/DetailedQueueEntry/DetailedQueueEntry';
 
 function MentorQue() {
     const [fontsLoaded] = useFonts({
@@ -62,6 +63,7 @@ function MentorQue() {
                 </View>
                 <Text style={styles.header}>Next in Queue</Text>
                 <View style={styles.personContainer}>
+                    <DetailedQueueEntry name="John Doe" table={20} problem="I need help with my project" />
                 </View>
                 <TouchableOpacity style={styles.button} onPress={()=>{setShowPopup(!showPopup)}}>
                     <Text style={styles.interfaceText}>View Queue</Text>
@@ -119,7 +121,7 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: '#1E262D',
         // height:'60%',
-        borderRadius: 12,
+        borderRadius: 15,
         padding: 15,
         marginTop: 34,
         marginBottom: 24,
