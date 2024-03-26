@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, StyleSheet } from "react-native";
-import SwipeButton from "rn-swipe-button";
+import { View, Text, TextInput, StyleSheet,TouchableOpacity } from "react-native";
 import checkIcon from "../assets/xRed.png";
 import slideIcon from "../assets/chevron-right.png";
 import QueCard from "./QueCard";
@@ -89,32 +88,13 @@ const QueEntry = ({ name, roomNumber, problemType }) => {
           </View> 
         )}
       </View>
-
       <View style={{flex: 1, justifyContent: 'flex-start', marginTop:250}}>
-        <SwipeButton
-          title={inQue ? "Currently in Queue" : "Join Queue"}
-          onSwipeSuccess={submitForm}
-          railBackgroundColor="#88B63A"
-          railBorderColor={inQue ? "#EDD559" : "#FFFFFF"}
-          thumbIconBackgroundColor={inQue ? "#FFFFFF" : "#EDD559"}
-          railFillBackgroundColor="#EDD559"
-          railFillBorderColor="#EDD559"
-          thumbIconBorderColor={inQue ? "#EDD559" : "#FFFFFF"}
-          titleColor={inQue ? "#FFFFFF" : "#FFFFFF"}
-          resetAfterSuccessAnimDelay={350}
-          shouldResetAfterSuccess={true}
-          containerStyles={styles.buttonContainer}
-          railStyles={styles.rail}
-          thumbIconStyles={styles.thumbIcon}
-          thumbIconImageSource={inQue ? checkIcon : slideIcon}
-        />
+      <TouchableOpacity style={styles.button} onPress={submitForm}>
+        <Text style={styles.interfaceText}>{inQue ? "Exit Queue" : "Join Queue"}</Text>
+      </TouchableOpacity>
       </View>
     </View>
   );
-  
-  
-  
-  
 };
 
 const styles = StyleSheet.create({
@@ -122,6 +102,12 @@ const styles = StyleSheet.create({
   inputContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
+  },
+  interfaceText: {
+    fontSize: 20,
+    color: '#25303C',
+    fontWeight: 'bold',
+    marginLeft: 10,
   },
   inputWrapper: {
     flex: 1,
@@ -131,8 +117,6 @@ const styles = StyleSheet.create({
     flex: 2,
     marginLeft: 110,
   },
-
-  
   container: {
     margin: 20,
     marginTop: 90, 
@@ -196,7 +180,17 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     borderWidth: 3,
   },
-
+  button: {
+    borderRadius: 10,
+    backgroundColor: '#88B63A',
+    width: 320,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    height: 55,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   thumbIcon: {
     borderRadius: 100,
     borderWidth: 2,
