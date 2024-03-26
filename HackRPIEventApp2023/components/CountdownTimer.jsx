@@ -1,23 +1,36 @@
 import React, { useState, useEffect } from "react";
 import { StatusBar, Dimensions } from "react-native";
 import { StyleSheet, View, Text } from "react-native";
-import CircleProgress from "./CircleProgress";
+// import CircleProgress from "./CircleProgress";//
 
 const Timer = ({ percentage, circleSize, timeUnit, timeRemaining }) => {
+  let backgroundColor;
+  if (timeUnit === "Days") {
+    backgroundColor = "#F8A13A";
+  } else if (timeUnit === "Hours") {
+    backgroundColor = "#05A65C";
+  } else if (timeUnit === "Minutes") {
+    backgroundColor = "#0158A9";
+  } else if (timeUnit === "Seconds") {
+    backgroundColor = "#B43D96";
+  }
+
   return (
     <View
       style={[
         styles.circle,
-        { width: circleSize, height: circleSize, borderRadius: circleSize / 2 },
-      ]}>
-      <CircleProgress percentage={percentage} circleWidth={circleSize} />
+        { width: circleSize, height: circleSize, borderRadius: circleSize / 2, backgroundColor },
+      ]}
+    >
+      {/* <CircleProgress percentage={50} circleWidth={circleSize} /> */}
       <View style={styles.timerContainer}>
         <Text style={styles.timerText}>{timeRemaining}</Text>
         <Text
           style={[
             styles.unitText,
             { fontSize: timeUnit.length > 6 ? 10 : 14 },
-          ]}>
+          ]}
+        >
           {timeUnit}
         </Text>
       </View>
@@ -126,7 +139,7 @@ export default function CountdownTimer() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#191919", // Updated background color
+    backgroundColor: "#191919", // Do we want this same as rest? if so, #27303B
     alignItems: "center",
     justifyContent: "flex-start",
     paddingTop: 80,
@@ -144,11 +157,9 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     borderRadius: 100 / 2,
-    backgroundColor: "transparent",
+    backgroundColor: "#27303B",
     alignItems: "center",
     justifyContent: "center",
-    borderWidth: 0, // Add a border width (you can adjust this as needed)
-    borderColor: "red",
   },
   timerText: {
     fontSize: 20,
