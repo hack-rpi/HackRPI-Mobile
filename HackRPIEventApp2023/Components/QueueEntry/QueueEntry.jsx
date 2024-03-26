@@ -13,7 +13,7 @@ function QueueEntry({index, name, table, problem}){
     )
 }
 
-styles = StyleSheet.create({
+const styles = StyleSheet.create({
     container:{
         display:'flex',
         flexDirection: 'row',
@@ -23,6 +23,9 @@ styles = StyleSheet.create({
         justifyContent: "left",
         borderRadius: 10,
         marginBottom: 5,
+        width:'100%',
+        backgroundColor: "#1E262D",
+
     }, 
     index: {
         color: "#ffffff",

@@ -6,11 +6,13 @@ import {
   PanResponder,
   StyleSheet,
   View,
+  ScrollView
 } from 'react-native';
 
 export default (props) => {
   const screenHeight = Dimensions.get('screen').height;
   const panY = useRef(new Animated.Value(screenHeight)).current;
+  const isAtTop = useRef(false);
 
   const resetPositionAnim = Animated.timing(panY, {
     toValue: 0,
@@ -41,23 +43,34 @@ export default (props) => {
       resetPositionAnim.start();
     }
   }, [props.visible, resetPositionAnim, screenHeight, panY]);
-  
+
 
   const panResponders = useRef(
     PanResponder.create({
       onStartShouldSetPanResponder: () => true,
       onMoveShouldSetPanResponder: () => false,
-      onPanResponderMove: Animated.event([null, {dy: panY}], {
-        useNativeDriver: false,
-      }),
+      onPanResponderMove: (event, gestureState) => {
+        if (isAtTop.current) {
+            // Only update the animated value if `shouldMove` is true
+            Animated.event([null, {dy: panY}], {
+              useNativeDriver: false,
+            })(event, gestureState);
+          }
+      },
       onPanResponderRelease: (_, gs) => {
-        if (gs.dy > 0 && gs.vy > 2) {
+        if (gs.dy > 0 && gs.vy > 2 && isAtTop.current) {
+
           return handleDismiss();
         }
         return resetPositionAnim.start();
       },
     }),
   ).current;  
+
+  const onScroll = (event) => {
+    const scrollPosition = event.nativeEvent.contentOffset.y;
+    isAtTop.current = scrollPosition <= 0;
+  };
 
 
   return (
@@ -76,7 +89,13 @@ export default (props) => {
           <View style={styles.sliderIndicatorRow}>
             <View style={styles.sliderIndicator} />
           </View>
-          {props.children}
+          <ScrollView 
+            style={styles.scrollView}
+            onScroll={onScroll}
+            scrollEventThrottle={16}
+          >
+            {props.children}
+          </ScrollView>
         </Animated.View>
       </View>
     </Modal>
@@ -95,7 +114,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
-    minHeight: 500,
+    maxHeight: 500,
   },
   sliderIndicatorRow: {
     flexDirection: 'row',
@@ -107,5 +126,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#191919',
     height: 4,
     width: 45,
+  },
+  scrollView: {
+    maxHeight: 500, // You might want to adjust this value
   },
 });

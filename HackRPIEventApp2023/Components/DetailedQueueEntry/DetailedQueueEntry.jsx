@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, Button, TouchableOpacity, Animated, PanResponder } from 'react-native';
+import { View, Text, StyleSheet  } from 'react-native';
 import { useFonts } from 'expo-font';
 import { Inter_800ExtraBold, Inter_400Regular } from '@expo-google-fonts/inter';
 
 function DetailedQueueEntry({name, table, problem}){
     return(
-        <View style={styles.container}>
+        <View style={styles.queueEntryContainer}>
             <View style={styles.row}>
                 <Text style={styles.name}>{name}</Text>
                 <Text style={styles.table}> Table #{table}</Text>
@@ -15,8 +15,8 @@ function DetailedQueueEntry({name, table, problem}){
     )
 }
 
-styles = StyleSheet.create({
-    container:{
+const styles = StyleSheet.create({
+    queueEntryContainer:{
         display:'flex',
         flexDirection: 'column',
         padding:10,
