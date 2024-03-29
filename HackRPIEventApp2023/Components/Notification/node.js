@@ -67,6 +67,39 @@ app.post('/send-notification', async (req, res) => {
         app.listen(PORT, () => {
           console.log(`Server running on port ${PORT}`);
 
+        // Assume express, app and other initializations from your provided code above...
+
+          // A simple in-memory store for feedback
+          const feedbackStore = [];
+
+          // Middleware for basic input validation
+          const validateFeedbackInput = (req, res, next) => {
+            const { userId, feedback } = req.body;
+            if (!userId || typeof userId !== 'string' || !feedback || typeof feedback !== 'string') {
+              return res.status(400).json({ success: false, message: 'Invalid input. Please provide userId and feedback.' });
+            }
+            next();
+          };
+
+          app.post('/submit-feedback', validateFeedbackInput, (req, res) => {
+            const { userId, feedback } = req.body;
+            const feedbackEntry = {
+              id: feedbackStore.length + 1,
+              userId,
+              feedback,
+              submittedAt: new Date().toISOString(),
+            };
+
+            feedbackStore.push(feedbackEntry);
+            res.status(201).json({ success: true, message: 'Feedback submitted successfully.', feedbackId: feedbackEntry.id });
+          });
+
+          app.get('/feedback', (req, res) => {
+            res.json(feedbackStore);
+          });
+
+
+
 
 
 });
