@@ -16,7 +16,11 @@ const Food = () => {
         <View style={styles.container}>
           <FoodObject
             food_Title="Breakfast"
-            Store="Bagels, Donuts, Coffee"
+            Store={
+              <Text numberOfLines={1}>
+                Bagels, Donuts, Coffee
+              </Text>
+            }
             Time="Time: TBA"
             Location="Location"
             Description=""
@@ -87,6 +91,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 
+  foodTitle: {
+    fontSize: 24, // Adjust as needed
+    fontWeight: "bold",
+    color: "black", // Change to the desired color
+    marginBottom: 10, // Adjust spacing between food objects
+  },
+  foodStore: {
+    fontStyle: "italic", // Set font style to italic
+  },
   marginTop: 20,
   marginBottom: 20,
   backgroundColor: "transparent",
