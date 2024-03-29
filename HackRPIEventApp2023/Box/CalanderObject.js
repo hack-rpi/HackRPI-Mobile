@@ -31,12 +31,12 @@ const CalanderObject = ({
       />
       <View
         style={styles.notifBox}
-        backgroundColor={isRed ? "gray" : isActive ? "gray" : "yellow"}
-        borderColor={isRed ? "red" : "white"}>
+        backgroundColor={isRed ? "#EDD559" : isActive ? "black" : "#9E9E9E"}
+        borderColor={isRed ? "#EDD559" : isActive ? "#EDD559" : "#9E9E9E"}>
         <Feather
           name={isActive ? "bell-off" : "bell"}
           size={30}
-          color={isRed ? "red" : isActive ? "white" : "black"}
+          color={isRed ? "red" : isActive ? "#EDD559" : "black"}
           onPress={handleClick}
           zIndex={2}
           // Add onPress to handle click
