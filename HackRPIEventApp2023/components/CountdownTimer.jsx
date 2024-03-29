@@ -3,7 +3,8 @@ import { StatusBar, Dimensions } from "react-native";
 import { StyleSheet, View, Text } from "react-native";
 // import CircleProgress from "./CircleProgress";//
 
-const Timer = ({ percentage, circleSize, timeUnit, timeRemaining }) => {
+const Timer = ({circleSize, timeUnit, timeRemaining }) => {
+  //Got rid of percentage from input, but code still exists in other file if we want it
   let backgroundColor;
   if (timeUnit === "Days") {
     backgroundColor = "#F8A13A";
@@ -33,8 +34,34 @@ const Timer = ({ percentage, circleSize, timeUnit, timeRemaining }) => {
             { fontSize: timeUnit.length > 6 ? 10 : 14 },
           ]}
         >
-          {timeUnit}
         </Text>
+      </View>
+    </View>
+  );
+};
+
+
+const CircleLetter = ({ circleSize,text }) => {
+  let backgroundColor;
+  if (text === "D") {
+    backgroundColor = "#F8A13A";
+  } else if (text === "H") {
+    backgroundColor = "#05A65C";
+  } else if (text === "M") {
+    backgroundColor = "#0158A9";
+  } else if (text === "S") {
+    backgroundColor = "#B43D96";
+  }
+  return (
+    <View
+      style={[
+        styles.circle,
+        { width: circleSize, height: circleSize, borderRadius: circleSize / 2, backgroundColor },
+      ]}
+    >
+      {/* <CircleProgress percentage={50} circleWidth={circleSize} /> */}
+      <View style={styles.timerContainer}>
+        <Text style={styles.circleText}>{text}</Text>
       </View>
     </View>
   );
@@ -95,49 +122,7 @@ export default function CountdownTimer() {
           <Text style={styles.subtitle}>November 2-3</Text>
         </View>
       </View>
-      <View style={styles.letterCircleContainer}>
-      {/* Add space between header and circles */}
-      <View style={{ marginTop: 20 }}></View>
 
-      <View style={styles.circleContainer}>
-        <View style={styles.circleWrapper}>
-          <Timer
-            percentage={(days / 30) * 100}
-            circleSize={circleSize}
-            timeUnit="Days"
-            timeRemaining={formattedDays}
-          />
-        </View>
-        <View style={styles.circleWrapper}>
-          <Timer
-            percentage={(hours / 24) * 100}
-            circleSize={circleSize}
-            timeUnit="Hours"
-            timeRemaining={formattedHours}
-          />
-        </View>
-        <View style={styles.circleWrapper}>
-          <Timer
-            percentage={(minutes / 60) * 100}
-            circleSize={circleSize}
-            timeUnit="Minutes"
-            timeRemaining={formattedMinutes}
-          />
-        </View>
-        <View style={styles.circleWrapper}>
-          <Timer
-            percentage={(remainingSeconds / 60) * 100}
-            circleSize={circleSize}
-            timeUnit="Seconds"
-            timeRemaining={formattedSeconds}
-          />
-        </View>
-      </View>
-      <StatusBar style="auto" />
-    </View>
-
-
-{/* Actual circles with numbers below, not just labels */}
       <View style={styles.container}>
       {/* Add space between header and circles */}
       <View style={{ marginTop: 20 }}></View>
@@ -177,24 +162,66 @@ export default function CountdownTimer() {
         </View>
       </View>
       <StatusBar style="auto" />
+
+      
+      <View style={styles.letterCircleContainer}>
+      {/* Add space between header and circles */}
+      <View style={{ marginTop: 20 }}></View>
+
+      <View style={styles.circleContainer}>
+        <View style={styles.circleWrapper}>
+          <CircleLetter
+            circleSize={circleSize}
+            text="D"
+          />
+        </View>
+        <View style={styles.circleWrapper}>
+        <CircleLetter
+            circleSize={circleSize}
+            text="H"
+          />
+        </View>
+        <View style={styles.circleWrapper}>
+        <CircleLetter
+            circleSize={circleSize}
+            text="M"
+          />
+        </View>
+        <View style={styles.circleWrapper}>
+          <CircleLetter
+            circleSize={circleSize}
+            text="S"
+          />
+        </View>
+      </View>
+      <StatusBar style="auto" />
+    </View>
+
+
+{/* Actual circles with numbers below, not just labels */}
     </View>
   </>
   );
 }
 
 const styles = StyleSheet.create({
+  circleText: {
+    fontSize: 30,
+    fontWeight: "bold",
+    color: "white",
+  },
   textContainer: {
     height: 100,
-    backgroundColor: "#191919",//make sure same as container below
+    backgroundColor: "#62819d",//make sure same as container below
     alignItems: "center",
     paddingTop: 40,
   },
   container: {
     flex: 1,
-    backgroundColor: "#191919", // Do we want this same as rest? if so, #27303B
+    backgroundColor: "#62819d", // Do we want this same as rest? if so, #27303B, also used to be #191919, #27303B also used in web? idk
     alignItems: "center",
     justifyContent: "flex-start",
-    paddingTop: 0,
+    paddingTop: 20,
   },
   header: {
     alignItems: "center",
@@ -204,8 +231,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-around",
-    paddingTop: 50,
-    backgroundColor: "#191919",//also should be same as others behind
+    paddingTop: 10,
+    backgroundColor: "#62819d",//also should be same as others behind
   },
   circleContainer: {
     flexDirection: "row",
@@ -221,7 +248,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   timerText: {
-    fontSize: 20,
+    fontSize: 30,
+    paddingTop: 15,//bad way to do this... welcome to better solution because idk what im doing
     fontWeight: "bold",
     color: "white",
   },
@@ -231,15 +259,15 @@ const styles = StyleSheet.create({
   },
   timerContainer: {
     position: "absolute",
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: "stretch",
+    justifyContent: "space-between",//honestly not sure if changing these did anything
   },
   circleWrapper: {
     marginHorizontal: 20, // Adjust this value to increase or decrease the space between circles
     marginTop: 10, // Adjust the marginTop to control the space between circles and header
   },
   title: {
-    fontSize: 36, // Adjust the font size as needed
+    fontSize: 36,
     fontWeight: "bold",
     color: "white",
   },
