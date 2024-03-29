@@ -35,7 +35,7 @@ function HomeScreen() {
 function QueueScreen() {
   return (
     <View style={styles.container}>
-        <HackerQue />
+        <MentorQue />
     </View>
   );
 }

@@ -12,8 +12,10 @@ function MentorQue() {
         Inter_400Regular,
     });
 
-    const [queues, setQueue] = useState([]);
+    const [queue, setQueue] = useState([]);
     const [showPopup, setShowPopup] = useState(false);
+    const [isHelping, setIsHelping] = useState(false);
+    const [helping, setHelping] = useState(null);
 
     useEffect(() => {
         const fetchQueue = async () => {
@@ -78,6 +80,32 @@ function MentorQue() {
         ];
     };
 
+    const handleStartHelping = () => {
+        // Set the current person being helped
+        setHelping(queue[0]);
+        setIsHelping(true);
+        handleNext();
+        //handle backend logic
+    };
+
+    const handleNext = () => {
+        // Remove the first person from the queue
+        if(!isHelping) return;
+        if(queue.length === 0){
+            setHelping(null);
+            setIsHelping(false);
+            return;
+        }
+        if(queue.length === 1) {
+            setHelping(queue[0]);
+            setQueue([]);
+            return;
+        };
+        setHelping(queue[0]);
+        const newQueue = queue.slice(1);
+
+        setQueue(newQueue);
+    };
 
     if (!fontsLoaded) {
         return <View style={styles.container}><Text>Loading...</Text></View>;
@@ -87,20 +115,28 @@ function MentorQue() {
     return (
         <View style={styles.container}>
             <BottomPopup visible={showPopup} onDismiss={()=>{setShowPopup(false)}}>
-                {queues.map((entry, index) => (
+                {queue.map((entry, index) => (
                     <QueueEntry key={index} index={index} name={entry.name} table={entry.table} problem={entry.description} />
                 ))}
             </BottomPopup>            
             <View style={styles.form}>
                 <Text style={styles.header}>Not Currently Helping</Text>
                 <View style={styles.personContainer}>
-                    <TouchableOpacity style={styles.startButton}>
-                        <Text style={styles.interfaceText}>Start Helping</Text>
-                    </TouchableOpacity>
+                    {helping ? 
+                    isHelping ? 
+                        <DetailedQueueEntry name={helping? helping.name : ""} table={helping? helping.table : ""} problem={helping? helping.description : ""} />
+                    :
+                        <TouchableOpacity style={styles.startButton} onPress={handleStartHelping}>
+                            <Text style={styles.interfaceText}>Start Helping</Text>
+                        </TouchableOpacity> 
+                    :   <TouchableOpacity style={styles.startButton} onPress={handleStartHelping}>
+                            <Text style={styles.interfaceText}>Start Helping</Text>
+                        </TouchableOpacity> 
+                    } 
                 </View>
                 <Text style={styles.header}>Next in Queue</Text>
                 <View style={styles.personContainer}>
-                    <DetailedQueueEntry name="John Doe" table={20} problem="I need help with my project" />
+                    {queue[0] ? <DetailedQueueEntry name={queue[0].name} table={queue[0].table} problem={queue[0].description} />: ""} 
                 </View>
                 <TouchableOpacity style={styles.button} onPress={()=>{setShowPopup(!showPopup)}}>
                     <Text style={styles.interfaceText}>View Queue</Text>
@@ -108,6 +144,9 @@ function MentorQue() {
             </View>
             <TouchableOpacity style={styles.darkButton}>
                 <Text style={styles.lightInterfaceText}>Call for Backup</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.darkButton} onPress={handleNext}>
+                <Text style={styles.lightInterfaceText}>Next</Text>
             </TouchableOpacity>
         </View >
     );
@@ -161,7 +200,7 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         padding: 15,
         marginTop: 34,
-        marginBottom: 24,
+        // marginBottom: 24,
     },
     personContainer: {
         borderRadius: 10,
@@ -192,6 +231,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     darkButton: {
+        marginTop:10,
         borderRadius: 10,
         backgroundColor: '#1E262D',
         width: "100%",

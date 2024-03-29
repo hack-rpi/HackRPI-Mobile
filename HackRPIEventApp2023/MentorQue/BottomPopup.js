@@ -34,6 +34,10 @@ export default (props) => {
   const handleDismiss = () => closeAnim.start(() => props.onDismiss());
 
   useEffect(() => {
+    isAtTop.current = true;
+  }, []);
+
+  useEffect(() => {
     resetPositionAnim.start();
   }, [resetPositionAnim]);
 
@@ -47,8 +51,8 @@ export default (props) => {
 
   const panResponders = useRef(
     PanResponder.create({
-      onStartShouldSetPanResponder: () => true,
-      onMoveShouldSetPanResponder: () => false,
+      onStartShouldSetPanResponder: () => isAtTop.current,
+      onMoveShouldSetPanResponder: () => isAtTop.current,
       onPanResponderMove: (event, gestureState) => {
         if (isAtTop.current) {
             // Only update the animated value if `shouldMove` is true
@@ -58,8 +62,7 @@ export default (props) => {
           }
       },
       onPanResponderRelease: (_, gs) => {
-        if (gs.dy > 0 && gs.vy > 2 && isAtTop.current) {
-
+        if (gs.dy > 0 && gs.vy > 1 && isAtTop.current) {
           return handleDismiss();
         }
         return resetPositionAnim.start();
