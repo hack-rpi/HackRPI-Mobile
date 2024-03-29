@@ -15,6 +15,8 @@ const Timer = ({ percentage, circleSize, timeUnit, timeRemaining }) => {
     backgroundColor = "#B43D96";
   }
 
+  //Setting colors based on which circle, to subway colors matching website
+
   return (
     <View
       style={[
@@ -40,15 +42,13 @@ const Timer = ({ percentage, circleSize, timeUnit, timeRemaining }) => {
 
 export default function CountdownTimer() {
   // Calculate the target date (November 4) in EDT
-  const targetDate = new Date("2023-12-05T12:00:00");
+  const targetDate = new Date("2024-11-02T12:00:00");
   const currentDate = new Date();
   const totalSeconds = Math.max(Math.floor((targetDate - currentDate) / 20), 0);
-
   const [secondsRemaining, setSecondsRemaining] = useState(totalSeconds);
 
   // Get screen dimensions
   const { width } = Dimensions.get("window");
-
   useEffect(() => {
     const interval = setInterval(() => {
       setSecondsRemaining((prevSeconds) => {
@@ -88,12 +88,14 @@ export default function CountdownTimer() {
   const circleSize = width * 0.2; // Adjust the multiplier as needed
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.title}>HackRPI X</Text>
-        <Text style={styles.subtitle}>November 4-5</Text>
+    <>
+      <View style={styles.textContainer}>
+        <View style={styles.header}>
+          <Text style={styles.title}>HackRPI XI</Text>
+          <Text style={styles.subtitle}>November 2-3</Text>
+        </View>
       </View>
-
+      <View style={styles.letterCircleContainer}>
       {/* Add space between header and circles */}
       <View style={{ marginTop: 20 }}></View>
 
@@ -133,20 +135,77 @@ export default function CountdownTimer() {
       </View>
       <StatusBar style="auto" />
     </View>
+
+
+{/* Actual circles with numbers below, not just labels */}
+      <View style={styles.container}>
+      {/* Add space between header and circles */}
+      <View style={{ marginTop: 20 }}></View>
+
+      <View style={styles.circleContainer}>
+        <View style={styles.circleWrapper}>
+          <Timer
+            percentage={(days / 30) * 100}
+            circleSize={circleSize}
+            timeUnit="Days"
+            timeRemaining={formattedDays}
+          />
+        </View>
+        <View style={styles.circleWrapper}>
+          <Timer
+            percentage={(hours / 24) * 100}
+            circleSize={circleSize}
+            timeUnit="Hours"
+            timeRemaining={formattedHours}
+          />
+        </View>
+        <View style={styles.circleWrapper}>
+          <Timer
+            percentage={(minutes / 60) * 100}
+            circleSize={circleSize}
+            timeUnit="Minutes"
+            timeRemaining={formattedMinutes}
+          />
+        </View>
+        <View style={styles.circleWrapper}>
+          <Timer
+            percentage={(remainingSeconds / 60) * 100}
+            circleSize={circleSize}
+            timeUnit="Seconds"
+            timeRemaining={formattedSeconds}
+          />
+        </View>
+      </View>
+      <StatusBar style="auto" />
+    </View>
+  </>
   );
 }
 
 const styles = StyleSheet.create({
+  textContainer: {
+    height: 100,
+    backgroundColor: "#191919",//make sure same as container below
+    alignItems: "center",
+    paddingTop: 40,
+  },
   container: {
     flex: 1,
     backgroundColor: "#191919", // Do we want this same as rest? if so, #27303B
     alignItems: "center",
     justifyContent: "flex-start",
-    paddingTop: 80,
+    paddingTop: 0,
   },
   header: {
     alignItems: "center",
     justifyContent: "center",
+  },
+  letterCircleContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-around",
+    paddingTop: 50,
+    backgroundColor: "#191919",//also should be same as others behind
   },
   circleContainer: {
     flexDirection: "row",
