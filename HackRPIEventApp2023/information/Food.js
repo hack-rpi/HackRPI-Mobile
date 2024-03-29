@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     alignItems: "left",
-    marginBottom: 20, // Adjust as needed
+    marginBottom: 40, // Adjust as needed
     marginTop: 10,
   },
   header: {
