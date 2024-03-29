@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@expo/webpack-config": "^19.0.0",
-    "@react-navigation/bottom-tabs": "^6.5.11",
+    "@react-navigation/bottom-tabs": "^6.5.20",
     "@react-navigation/native": "^6.1.9",
     "@types/react": "~18.2.14",
     "expo": "^49.0.21",
