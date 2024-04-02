@@ -97,8 +97,57 @@ app.post('/send-notification', async (req, res) => {
           app.get('/feedback', (req, res) => {
             res.json(feedbackStore);
           });
+          const bcrypt = require('bcrypt');
+          const jwt = require('jsonwebtoken');
+
+          const User = {
+
+            async save(newUser) {
+
+            },
+            async findByUsername(username) {
+      
+            }
+          };
+          
+          app.post('/register', async (req, res) => {
+            const { username, password } = req.body;
+            const hashedPassword = await bcrypt.hash(password, 10);
+            
+            try {
+
+              await User.save({ username, password: hashedPassword });
+              res.status(201).json({ success: true, message: 'User registered successfully' });
+            } catch (error) {
+              res.status(500).json({ success: false, message: 'Error registering new user' });
+            }
+          });
+          
+          app.post('/login', async (req, res) => {
+            const { username, password } = req.body;
+            const user = await User.findByUsername(username);
+            
+            if (user && await bcrypt.compare(password, user.password)) {
+
+              const token = jwt.sign({ userId: user.id }, 'your_secret_key', { expiresIn: '1h' });
+              res.json({ success: true, token });
+            } else {
+              res.status(401).json({ success: false, message: 'Authentication failed' });
+            }
+          });
 
 
+          const authenticate = (req, res, next) => {
+
+          };
+          
+          app.post('/submit-feedback', authenticate, (req, res) => {
+
+          });
+          
+          app.get('/feedback', authenticate, (req, res) => {
+ 
+          });
 
 
 
