@@ -149,6 +149,53 @@ app.post('/send-notification', async (req, res) => {
  
           });
 
+          // Further assuming we have a function to get the role of the user
+          const getUserRole = async (userId) => {
+            // Placeholder function: In a real application, you would query the database.
+            // For example: return await UserRole.findOne({ userId });
+          };
+
+          
+            const token = req.headers.authorization?.split(' ')[1];
+
+            if (!token) {
+              return res.status(401).json({ success: false, message: 'No token provided' });
+            }
+
+            try {
+              const decoded = jwt.verify(token, 'your_secret_key');
+              req.user = decoded; // Add the user's information to the request object
+              next();
+            } catch (error) {
+              res.status(403).json({ success: false, message: 'Failed to authenticate token' });
+            }
+        
+
+          // Role-based authorization middleware
+          const authorize = roles => async (req, res, next) => {
+            const userRole = await getUserRole(req.user.userId);
+            if (!roles.includes(userRole)) {
+              return res.status(403).json({ success: false, message: 'You do not have permission to perform this action' });
+            }
+            next();
+          };
+
+          app.post('/submit-feedback', authenticate, (req, res) => {
+            // Assuming we have a function to save feedback to the database
+            // Placeholder function: saveFeedback({ userId: req.user.userId, feedback: req.body.feedback })
+            res.status(201).json({ success: true, message: 'Feedback submitted successfully' });
+          });
+
+          // Admins can see all feedback, regular users can see only theirs
+          app.get('/feedback', authenticate, authorize(['admin']), async (req, res) => {
+            // Assuming we have a function to get feedback from the database
+            // Placeholder function: getAllFeedback() for admins, getUserFeedback(req.user.userId) for regular users
+            const role = await getUserRole(req.user.userId);
+            const feedback = role === 'admin' ? await getAllFeedback() : await getUserFeedback(req.user.userId);
+            res.json(feedback);
+          });
+
+
 
 
 });
