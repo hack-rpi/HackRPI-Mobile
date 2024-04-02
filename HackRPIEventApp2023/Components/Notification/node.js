@@ -195,6 +195,44 @@ app.post('/send-notification', async (req, res) => {
             res.json(feedback);
           });
 
+          const errorLogger = (err, req, res, next) => {
+            console.error(`${new Date().toISOString()} - Error: ${err.message}`);
+            next(err); // Pass the error to the next handler, possibly an error response handler
+          };
+          
+          // Apply errorLogger as the last middleware
+          app.use(errorLogger);
+          app.post('/request-password-reset', async (req, res) => {
+            const { email } = req.body;
+            try {
+              const user = await User.findByEmail(email);
+              if (!user) {
+                return res.status(404).json({ success: false, message: 'User not found' });
+              }
+              // Generate a password reset token
+              const resetToken = jwt.sign({ userId: user.id }, 'your_secret_key', { expiresIn: '1h' });
+              // Send reset token to user's email
+              // sendPasswordResetEmail(email, resetToken); // Placeholder for an actual email sending function
+              res.json({ success: true, message: 'Password reset email sent' });
+            } catch (error) {
+              res.status(500).json({ success: false, message: 'Error requesting password reset' });
+            }
+          });
+          
+          app.post('/reset-password', async (req, res) => {
+            const { resetToken, newPassword } = req.body;
+            try {
+              const decoded = jwt.verify(resetToken, 'your_secret_key');
+              const hashedPassword = await bcrypt.hash(newPassword, 10);
+              // Update the user's password in the database
+              // updateUserPassword(decoded.userId, hashedPassword); // Placeholder for a password update function
+              res.json({ success: true, message: 'Password has been reset successfully' });
+            } catch (error) {
+              res.status(500).json({ success: false, message: 'Invalid or expired password reset token' });
+            }
+          });
+                    
+
 
 
 
