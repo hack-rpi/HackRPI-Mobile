@@ -24,3 +24,34 @@ eas build:configure
 ```
 eas build --platform all
 ```
+### - Or we can build on different platforms separately
+for build on Android
+```
+eas build --platform android
+```
+for build on iOS 
+```
+eas build --platform ios
+```
+### Building on plaforms may took a while, so if you want to see the progress, you can open the dashboard by
+```
+eas build:list
+```
+
+#Push notification environment configuration
+##Install libraries
+```
+npx expo install expo-notifications expo-device expo-constants
+```
+##Run the code in testPushNoti.js
+##Run on platform
+For run on Android
+> View the link on [Add Android FCM V1 credentials](https://docs.expo.dev/push-notifications/fcm-credentials)
+
+For run on iOS (need an Apple developer account before running)
+> eas build
+
+# Test using the push notifications tool
+```
+npx expo start
+```
