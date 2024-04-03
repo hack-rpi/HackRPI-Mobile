@@ -8,51 +8,21 @@ import Calander from "./Box/Calander";
 import Food from "./information/Food";
 // import { colors } from './colors';
 import { globalStyles } from "./styles";
+import InfoButton from "./Components/InfoButton";
 
 const Tab = createBottomTabNavigator();
 
-/*function InfoScreen() {
+function InfoScreen() {
   return (
-    <View style={styles.container}>
-      <Food />
+    <View>
+      <InfoButton color="#fffff" text="YARAAAY" icon = "./assets/favicon.png" func = {expandSection}/>
     </View>
   );
-}*/
+}
 
 // max testing
 function expandSection() {
   console.log("cool beans");
-}
-
-//this should be a grid
-//expand section needs to be replaced for specific buttons
-function InfoScreen() {
-  return (
-    <View style={styles.info}>
-      <Text style={styles.title}>INFO</Text>
-      <View style={styles.text}>
-        <Text style={styles.subtitle} onPress={expandSection}>Food</Text>
-      </View>
-      <View style={styles.text}>
-        <Text style={styles.subtitle} onPress={expandSection}>Map</Text>
-      </View>
-      <View style={styles.text}>
-        <Text style={styles.subtitle} onPress={expandSection}>Handbook</Text>
-      </View>
-      <View style={styles.text}>
-        <Text style={styles.subtitle} onPress={expandSection}>FAQ</Text>
-      </View>
-      <View style={styles.text}>
-        <Text style={styles.subtitle} onPress={expandSection}>Rules</Text>
-      </View>
-      <View style={styles.text}>
-        <Text style={styles.subtitle} onPress={expandSection}>Location</Text>
-      </View>
-      <View style={styles.text}>
-        <Text style={styles.subtitle} onPress={expandSection}>Sample</Text>
-      </View>
-    </View>
-  );
 }
 
 function HomeScreen() {
