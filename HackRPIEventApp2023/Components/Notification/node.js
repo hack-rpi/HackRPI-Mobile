@@ -109,6 +109,13 @@ app.post('/send-notification', async (req, res) => {
       
             }
           };
+
+
+
+
+
+
+          
           
           app.post('/register', async (req, res) => {
             const { username, password } = req.body;
@@ -161,6 +168,14 @@ app.post('/send-notification', async (req, res) => {
             if (!token) {
               return res.status(401).json({ success: false, message: 'No token provided' });
             }
+
+
+
+
+
+
+
+
 
             try {
               const decoded = jwt.verify(token, 'your_secret_key');

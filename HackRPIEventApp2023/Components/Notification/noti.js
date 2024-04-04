@@ -1,88 +1,95 @@
 const express = require('express');
 const apn = require('apn');
 const admin = require('firebase-admin');
+const morgan = require('morgan'); // For logging request details
 
 const app = express();
 app.use(express.json());
+app.use(morgan('tiny')); // Log requests to the console
 
-// apn for ios
-const apnProvider = new apn.Provider({
+// Load configuration for APNs and FCM from environment variables or configuration file
+const apnOptions = {
   token: {
-    key: '',
-    keyId: '', // which need apple devloper member(key)
-    teamId: '',
+    key: process.env.APN_KEY,
+    keyId: process.env.APN_KEY_ID,
+    teamId: process.env.APN_TEAM_ID,
   },
-  production: false, 
-});
-// const apnProvider = new apn.Provider(apnOptions);
+  production: process.env.APN_ENV === 'production',
+};
 
-// FCM for Android
-const serviceAccount = require('');
+const apnProvider = new apn.Provider(apnOptions);
+
+// Initialize Firebase Admin SDK
+const serviceAccount = require(process.env.FCM_SERVICE_ACCOUNT_PATH);
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
+
 // Helper function to get formatted date and time
 function getFormattedDate() {
   const now = new Date();
-  return now.toISOString(); // This will return the date and time in ISO 8601 format (e.g., "2024-03-13T14:18:34.000Z")
+  return now.toISOString();
 }
 
-app.post('/send-notification', (req, res) => {
-  const { deviceToken, fcmToken, message } = req.body;  // Function to handle APNs result
-  function handleApnResult(result) {
-    console.log('APNs notification:', result);
-    return result.failed.length === 0;
+// Validate the request body to ensure required fields are present
+function validateRequestBody(req, res, next) {
+  const { deviceTokens, fcmTokens, message } = req.body;
+  if (!message) {
+    return res.status(400).json({ success: false, message: 'Message is required.' });
   }
+  if (!deviceTokens && !fcmTokens) {
+    return res.status(400).json({ success: false, message: 'At least one device token or FCM token is required.' });
+  }
+  next();
+}
 
-  // Function to handle FCM result
-  function handleFcmResult(response) {
-    console.log('FCM notification:', response);
-    return response.successCount > 0;
-  }
-  // Get the formatted date and time
+app.post('/send-notification', validateRequestBody, (req, res) => {
+  const { deviceTokens, fcmTokens, message, title = 'New Notification' } = req.body;
   const dateTime = getFormattedDate();
 
   let tasks = [];
 
+  if (deviceTokens) {
+    // send APNs notification to multiple iOS devices
+    const apnNotification = new apn.Notification({
+      alert: message,
+      badge: 1,
+      sound: 'default',
+      title: title,
+    });
 
-  if (deviceToken) {
-    // send apn nnotification to ios
-
-    const apnNotification = new apn.Notification();
-    apnNotification.alert = message;
-    apnNotification.badge = 1;
-    apnNotification.sound = 'default';
-    apnNotification.title = title || 'New Notification';
-
-    // send APNs notification to iOS
     tasks.push(
-      apnProvider.send(apnNotification, deviceToken).then(handleApnResult)
-    );  }
-
-
-if (fcmToken) {
-    // send FCM to android
-    const fcmPayload = {
-      notification: {
-        title: 'title', // change late
-        body: message,
-      },
-      data: {
-        dateTime: dateTime, // Add date and time to the data payload
-      },
-    };
-
-    // send FCM to Android
-    tasks.push(
-      admin.messaging().sendToDevice(fcmToken, fcmPayload).then(handleFcmResult)
+      apnProvider.send(apnNotification, deviceTokens).then(result => {
+        console.log('APNs notification result:', result);
+        return result.failed.length === 0;
+      })
     );
   }
 
-  // Wait for all the tasks to complete
+  if (fcmTokens) {
+    // send FCM notification to multiple Android devices
+    const fcmPayload = {
+      notification: {
+        title: title,
+        body: message,
+      },
+      data: {
+        dateTime: dateTime,
+      },
+    };
+
+    tasks.push(
+      admin.messaging().sendToDevice(fcmTokens, fcmPayload).then(response => {
+        console.log('FCM notification response:', response);
+        return response.successCount === fcmTokens.length;
+      })
+    );
+  }
+
   Promise.all(tasks).then(results => {
     const allSuccessful = results.every(result => result);
     if (allSuccessful) {
-      res.json({ success: true });
+      res.json({ success: true, message: 'Notifications sent successfully.' });
     } else {
       res.status(500).json({ success: false, message: 'Some notifications failed to send.' });
     }
@@ -96,4 +103,3 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-
