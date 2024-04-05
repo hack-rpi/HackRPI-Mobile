@@ -11,7 +11,7 @@ export default function InfoButton ({circleColor, text, icon, func}) {
           <View style={styles.iconContainer} backgroundColor={circleColor} >
             <FontAwesomeIcon icon={icon} style={styles.textStyle} size={40} />
           </View>
-          <Text style={styles.textStyle} >{text}</Text>
+          <Text style={styles.textStyle} adjustsFontSizeToFit={true} flex={1}>{text}</Text>
         </Pressable>
       </View>
     );

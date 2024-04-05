@@ -23,6 +23,8 @@ function InfoScreen() {
       <InfoButton circleColor="#EF3B41" text="MAP" icon = {faMap} func = {expandSection}/>
       <InfoButton circleColor="#F8A13A" text="FOOD" icon = {faUtensils} func = {expandSection}/>
       <InfoButtonFinal circleColor="#F8A13A" text="Food" icon = {faUtensils} func = {expandSection}/>
+      <InfoButtonFinal circleColor="#0C0C3A" text="Longtexttestinglololololol" icon = {faUtensils} func = {expandSection}/>
+      <InfoButtonFinal circleColor="#59ff00" text="i typed here for a long time and now the text is super long" icon = {faUtensils} func = {expandSection}/>
     </View>
   );
 }

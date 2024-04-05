@@ -2,16 +2,16 @@ import React from "react";
 import { StyleSheet, View, Pressable, Text, Image } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 
-// the icon should come in from app.js and be passed in as arg i think
+// can also set a line maximum for text if necessary
 
 export default function InfoButton ({circleColor, text, icon, func}) {
     return (
       <View style={styles.buttonContainer}>
         <Pressable style={styles.buttonContents} onPress={func}>
-          <View style={styles.iconContainer} backgroundColor={circleColor} >
+          <View style={styles.iconContainer} backgroundColor={circleColor}>
             <FontAwesomeIcon icon={icon} style={styles.textStyle} size={40} />
           </View>
-          <Text style={styles.textStyle} >{text}</Text>
+          <Text style={styles.textStyle} adjustsFontSizeToFit={true} flex={1}>{text}</Text>
         </Pressable>
       </View>
     );
@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
     borderRadius: 35,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 5,
+    marginTop: 3,
+    marginBottom: 2,
   }
 });
