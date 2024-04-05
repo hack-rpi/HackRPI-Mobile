@@ -7,13 +7,13 @@ const Timer = ({circleSize, timeUnit, timeRemaining }) => {
   //Got rid of percentage from input, but code still exists in other file if we want it
   let backgroundColor;
   if (timeUnit === "Days") {
-    backgroundColor = "#F8A13A";
+    backgroundColor = "#EE352E";
   } else if (timeUnit === "Hours") {
-    backgroundColor = "#05A65C";
+    backgroundColor = "#F8A13A";
   } else if (timeUnit === "Minutes") {
-    backgroundColor = "#0158A9";
+    backgroundColor = "#05A65C";
   } else if (timeUnit === "Seconds") {
-    backgroundColor = "#B43D96";
+    backgroundColor = "#0158A9";
   }
 
   //Setting colors based on which circle, to subway colors matching website
@@ -44,13 +44,13 @@ const Timer = ({circleSize, timeUnit, timeRemaining }) => {
 const CircleLetter = ({ circleSize,text }) => {
   let backgroundColor;
   if (text === "D") {
-    backgroundColor = "#F8A13A";
+    backgroundColor = "#EE352E";
   } else if (text === "H") {
-    backgroundColor = "#05A65C";
+    backgroundColor = "#F8A13A";
   } else if (text === "M") {
-    backgroundColor = "#0158A9";
+    backgroundColor = "#05A65C";
   } else if (text === "S") {
-    backgroundColor = "#B43D96";
+    backgroundColor = "#0158A9";
   }
   return (
     <View
@@ -119,7 +119,6 @@ export default function CountdownTimer() {
       <View style={styles.textContainer}>
         <View style={styles.header}>
           <Text style={styles.title}>HackRPI XI</Text>
-          <Text style={styles.subtitle}>November 2-3</Text>
         </View>
       </View>
 
@@ -211,17 +210,16 @@ const styles = StyleSheet.create({
     color: "white",
   },
   textContainer: {
-    height: 100,
-    backgroundColor: "#62819d",//make sure same as container below
+    height: 50,
     alignItems: "center",
-    paddingTop: 40,
+    paddingTop: 10,
   },
   container: {
     flex: 1,
-    backgroundColor: "#62819d", // Do we want this same as rest? if so, #27303B, also used to be #191919, #27303B also used in web? idk
     alignItems: "center",
     justifyContent: "flex-start",
-    paddingTop: 20,
+    // paddingTop: 20,
+    paddingHorizontal: 20,
   },
   header: {
     alignItems: "center",
@@ -232,7 +230,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-around",
     paddingTop: 10,
-    backgroundColor: "#62819d",//also should be same as others behind
+    paddingBottom: 10,
   },
   circleContainer: {
     flexDirection: "row",
@@ -260,7 +258,6 @@ const styles = StyleSheet.create({
   timerContainer: {
     position: "absolute",
     alignItems: "stretch",
-    justifyContent: "space-between",//honestly not sure if changing these did anything
   },
   circleWrapper: {
     marginHorizontal: 20, // Adjust this value to increase or decrease the space between circles
