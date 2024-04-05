@@ -13,6 +13,7 @@ import InfoButton from "./Components/InfoButton";
 //import { faMap } from "@fortawesome/free-regular-svg-icons";
 import { faMap } from "@fortawesome/free-solid-svg-icons";
 import { faUtensils } from "@fortawesome/free-solid-svg-icons";
+import InfoButtonFinal from "./Components/InfoButtonFinal";
 
 const Tab = createBottomTabNavigator();
 
@@ -21,6 +22,7 @@ function InfoScreen() {
     <View>
       <InfoButton circleColor="#EF3B41" text="MAP" icon = {faMap} func = {expandSection}/>
       <InfoButton circleColor="#F8A13A" text="FOOD" icon = {faUtensils} func = {expandSection}/>
+      <InfoButtonFinal circleColor="#F8A13A" text="Food" icon = {faUtensils} func = {expandSection}/>
     </View>
   );
 }
