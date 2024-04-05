@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
+import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Feather } from "@expo/vector-icons";
@@ -32,27 +33,92 @@ function HomeScreen() {
   );
 }
 
+
 function QueueScreen() {
   return (
     <View style={styles.container}>
-        <MentorQue />
+        <HackerQue />
     </View>
+  );
+}
+
+const InfoStack = createStackNavigator();
+function InfoStackNavigator() {
+  return (
+    <InfoStack.Navigator screenOptions={{
+      headerStyle: {
+        backgroundColor: '#25303C',
+      },
+      headerTintColor: 'white',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+        fontSize: 30,
+        marginTop:20,
+        marginLeft: 10,
+      },
+      headerShadowVisible: false, 
+    }}>
+      <InfoStack.Screen name="Info" component={InfoScreen} />
+    </InfoStack.Navigator>
+  );
+}
+
+const HomeStack = createStackNavigator();
+function HomeStackNavigator() {
+  return (
+    <HomeStack.Navigator screenOptions={{
+      headerStyle: {
+        backgroundColor: '#25303C',
+      },
+      headerTintColor: 'white',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+        fontSize: 30,
+        marginTop:20,
+        marginLeft: 10,
+      },
+      headerShadowVisible: false, 
+    }}>
+      <HomeStack.Screen name="Home" component={HomeScreen} />
+    </HomeStack.Navigator>
+  );
+}
+
+const QueueStack = createStackNavigator();
+function QueueStackNavigator() {
+  return (
+    <QueueStack.Navigator screenOptions={{
+      headerStyle: {
+        backgroundColor: '#25303C',
+      },
+      headerTintColor: 'white',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+        fontSize: 30,
+        marginTop:20,
+        marginLeft: 10,
+      },
+      headerShadowVisible: false, 
+    }}>
+      <QueueStack.Screen name="Mentor Queue" component={QueueScreen} />
+    </QueueStack.Navigator>
   );
 }
 
 export default function App() {
   return (
     <NavigationContainer>
+      <StatusBar style="light" />
       <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
             //adding icons
             let iconName;
-            if (route.name === "Info") {
+            if (route.name === "InfoScreen") {
               iconName = "info";
-            } else if (route.name === "Home") {
+            } else if (route.name === "HomeScreen") {
               iconName = "home";
-            } else if (route.name === "Queue") {
+            } else if (route.name === "QueueScreen") {
               iconName = "user";
             }
             return (
@@ -73,9 +139,9 @@ export default function App() {
           tabBarActiveTintColor: globalStyles.accent,
           tabBarInactiveTintColor: "white",
         })}>
-        <Tab.Screen name="Info" component={InfoScreen} />
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Queue" component={QueueScreen} />
+        <Tab.Screen name="InfoScreen" component={InfoStackNavigator} options={{ headerShown: false }} />
+        <Tab.Screen name="HomeScreen" component={HomeStackNavigator} options={{ headerShown: false }} />
+        <Tab.Screen name="QueueScreen" component={QueueStackNavigator} options={{ headerShown: false }} />
       </Tab.Navigator>
     </NavigationContainer>
   );
