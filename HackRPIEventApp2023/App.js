@@ -8,14 +8,19 @@ import Calander from "./Box/Calander";
 import Food from "./information/Food";
 // import { colors } from './colors';
 import { globalStyles } from "./styles";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import InfoButton from "./Components/InfoButton";
+//import { faMap } from "@fortawesome/free-regular-svg-icons";
+import { faMap } from "@fortawesome/free-solid-svg-icons";
+import { faUtensils } from "@fortawesome/free-solid-svg-icons";
 
 const Tab = createBottomTabNavigator();
 
 function InfoScreen() {
   return (
     <View>
-      <InfoButton color="#fffff" text="YARAAAY" icon = "./assets/favicon.png" func = {expandSection}/>
+      <InfoButton circleColor="#EF3B41" text="MAP" icon = {faMap} func = {expandSection}/>
+      <InfoButton circleColor="#F8A13A" text="FOOD" icon = {faUtensils} func = {expandSection}/>
     </View>
   );
 }
