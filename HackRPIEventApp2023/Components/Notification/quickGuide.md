@@ -40,3 +40,59 @@ cat key.pem certificate.pem > pushcertificates.pem
 ## Get the Device Token
 
 To send a push notification, you need the device's token.
+
+### For iOS 8 and Above
+
+- **Objective-C Example**:
+
+```objc
+UIApplication *application = [UIApplication sharedApplication];
+if ([application respondsToSelector:@selector(isRegisteredForRemoteNotifications)]) {
+    [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+    [application registerForRemoteNotifications];
+}
+```
+
+- **Swift Example**:
+
+```swift
+UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {
+    granted, error in
+    if granted {
+        print("Permission granted!")
+        DispatchQueue.main.async {
+            UIApplication.shared.registerForRemoteNotifications()
+        }
+    } else {
+        print("error while getting permission \(String(describing: error))")
+    }
+}
+```
+
+### Retrieving the Device Token
+
+- **Objective-C and Swift Examples**: Show how to log the device token upon registration for notifications.
+
+## Send a Push Notification
+
+To send a push notification, you can use the PyAPNs2 library. Download it from GitHub and follow the instructions to use your `pushcertificates.pem` for sending notifications.
+
+- **PyAPNs2 GitHub**: [https://github.com/Pr0Ger/PyAPNs2](https://github.com/Pr0Ger/PyAPNs2)
+- **Python Example**: Includes how to create a payload and send a notification using the `APNsClient`.
+
+## Get the Notification in Your App
+
+It's important to handle the notification in your app properly, including setting the badge number and processing the notification data.
+
+- **Clear the Badge**: How to set the application icon badge number to 0.
+- **Process Notification**: Implement `didReceiveRemoteNotification` in your app delegate to handle incoming notifications.
+
+## Use Authentication Keys
+
+An alternative to certificates is using authentication keys, which can simplify the process and is supported by utilities like PushNotifications from GitHub.
+
+- **PushNotifications GitHub**: [https://github.com/onmyway133/PushNotifications](https://github.com/onmyway133/PushNotifications)
+
+This guide aims to simplify the process of setting up Apple Push Notifications and includes examples in both Objective-C and Swift. For more detailed information on payloads, refer to the [official Apple documentation](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification?language=objc).
+
+Happy coding!
