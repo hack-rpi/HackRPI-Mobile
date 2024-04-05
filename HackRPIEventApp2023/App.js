@@ -10,17 +10,12 @@ import Food from "./information/Food";
 import { globalStyles } from "./styles";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import InfoButton from "./Components/InfoButton";
-//import { faMap } from "@fortawesome/free-regular-svg-icons";
-import { faMap } from "@fortawesome/free-solid-svg-icons";
-import { faUtensils } from "@fortawesome/free-solid-svg-icons";
-import { faQuestion } from "@fortawesome/free-solid-svg-icons";
-import { faDollarSign } from "@fortawesome/free-solid-svg-icons";
-import { faBook } from "@fortawesome/free-solid-svg-icons";
+import { faUtensils, faQuestion, faDollarSign, faBook, faMap } from "@fortawesome/free-solid-svg-icons";
 import InfoButtonFinal from "./Components/InfoButtonFinal";
 
 const Tab = createBottomTabNavigator();
 
-// TODO: stylize the view container
+// other variation
 /*function InfoScreenTEST() {
   return (
     <View style={styles.info}>
@@ -41,13 +36,15 @@ const Tab = createBottomTabNavigator();
   );
 }*/
 
+// change spacing/contents
 function InfoScreen() {
   return (
     <View style={styles.info}>
       <View flex={20} style={styles.titleBlock}>
         <Text style={styles.title}>Info</Text>
       </View>
-      <View flexDirection="row" flex={80}>
+      <View flex={5}></View>
+      <View flexDirection="row" flex={75}>
         <View style={styles.imageSpot} flex={20}>
           <Image source={require("./assets/favicon.png")}/>
         </View>
@@ -63,7 +60,7 @@ function InfoScreen() {
   );
 }
 
-// max testing
+// this will navigate to different screens
 function expandSection() {
   console.log("cool beans");
 }
@@ -152,7 +149,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "flex-start",
     alignItems: "flex-start",
-    gap: 20,
+    gap: 24,
   },
   buttonRow: {
     flex: 1,
