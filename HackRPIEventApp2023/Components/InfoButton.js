@@ -2,14 +2,12 @@ import React from "react";
 import { StyleSheet, View, Pressable, Text, Image } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 
-// the icon should come in from app.js and be passed in as arg i think
-
 export default function InfoButton ({circleColor, text, icon, func}) {
     return (
       <View style={styles.buttonContainer}>
         <Pressable style={styles.buttonContents} onPress={func}>
           <View style={styles.iconContainer} backgroundColor={circleColor} >
-            <FontAwesomeIcon icon={icon} style={styles.textStyle} size={40} />
+            <FontAwesomeIcon icon={icon} style={styles.textStyle} size={25} />
           </View>
           <Text style={styles.textStyle} adjustsFontSizeToFit={true} flex={1}>{text}</Text>
         </Pressable>
@@ -20,8 +18,8 @@ export default function InfoButton ({circleColor, text, icon, func}) {
 const styles = StyleSheet.create({
   buttonContainer: {
     borderRadius: 15,
-    width: 300,
-    height: 90,
+    width: 266,
+    height: 55,
     backgroundColor: "#1E262D",
   },
   buttonContents: {
@@ -32,12 +30,14 @@ const styles = StyleSheet.create({
     
   },
   textStyle: {
+    fontFamily: "sans-serif",
     color: '#fff',
-    fontSize: 40,
+    fontSize: 35,
   },
+
   iconContainer: {
-    width: 70,
-    height: 70,
+    width: 45,
+    height: 45,
     borderRadius: 35,
     alignItems: "center",
     justifyContent: "center",
@@ -45,3 +45,5 @@ const styles = StyleSheet.create({
     marginRight: 15,
   }
 });
+
+//change font later

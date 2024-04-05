@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, Image } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Feather } from "@expo/vector-icons";
@@ -13,18 +13,52 @@ import InfoButton from "./Components/InfoButton";
 //import { faMap } from "@fortawesome/free-regular-svg-icons";
 import { faMap } from "@fortawesome/free-solid-svg-icons";
 import { faUtensils } from "@fortawesome/free-solid-svg-icons";
+import { faQuestion } from "@fortawesome/free-solid-svg-icons";
+import { faDollarSign } from "@fortawesome/free-solid-svg-icons";
+import { faBook } from "@fortawesome/free-solid-svg-icons";
 import InfoButtonFinal from "./Components/InfoButtonFinal";
 
 const Tab = createBottomTabNavigator();
 
+// TODO: stylize the view container
+/*function InfoScreenTEST() {
+  return (
+    <View style={styles.info}>
+      <View style={styles.buttonGrid}>
+        <View style={styles.buttonRow}>
+          <InfoButtonFinal circleColor="#EF3B41" text="Food" icon = {faUtensils} func = {expandSection}/>
+          <InfoButtonFinal circleColor="#F8A13A" text="Map" icon = {faMap} func = {expandSection}/>
+        </View>
+        <View style={styles.buttonRow}>
+          <InfoButtonFinal circleColor="#05A55C" text="FAQ" icon = {faQuestion} func = {expandSection}/>
+          <InfoButtonFinal circleColor="#0158A9" text="Sponsors" icon = {faDollarSign} func = {expandSection}/>
+        </View>
+        <View style={styles.buttonRow}>
+          <InfoButtonFinal circleColor="#B43D96" text="Hacker Handbook" icon = {faBook} func = {expandSection}/>
+        </View>
+      </View>
+    </View>
+  );
+}*/
+
 function InfoScreen() {
   return (
-    <View>
-      <InfoButton circleColor="#EF3B41" text="MAP" icon = {faMap} func = {expandSection}/>
-      <InfoButton circleColor="#F8A13A" text="FOOD" icon = {faUtensils} func = {expandSection}/>
-      <InfoButtonFinal circleColor="#F8A13A" text="Food" icon = {faUtensils} func = {expandSection}/>
-      <InfoButtonFinal circleColor="#0C0C3A" text="Longtexttestinglololololol" icon = {faUtensils} func = {expandSection}/>
-      <InfoButtonFinal circleColor="#59ff00" text="i typed here for a long time and now the text is super long" icon = {faUtensils} func = {expandSection}/>
+    <View style={styles.info}>
+      <View flex={20} style={styles.titleBlock}>
+        <Text style={styles.title}>Info</Text>
+      </View>
+      <View flexDirection="row" flex={80}>
+        <View style={styles.imageSpot} flex={20}>
+          <Image source={require("./assets/favicon.png")}/>
+        </View>
+        <View style={styles.buttonGrid} flex={80}>
+            <InfoButton circleColor="#EF3B41" text="Food" icon = {faUtensils} func = {expandSection}/>
+            <InfoButton circleColor="#EF3B41" text="Food" icon = {faUtensils} func = {expandSection}/>
+            <InfoButton circleColor="#EF3B41" text="Food" icon = {faUtensils} func = {expandSection}/>
+            <InfoButton circleColor="#EF3B41" text="Food" icon = {faUtensils} func = {expandSection}/>
+            <InfoButton circleColor="#EF3B41" text="Food" icon = {faUtensils} func = {expandSection}/>
+      </View>
+      </View>
     </View>
   );
 }
@@ -106,12 +140,28 @@ const styles = StyleSheet.create({
     fontWeight: globalStyles.fontWeight,
     color: globalStyles.text,
   },
-  info: { // max testing
-    flex: 1,
+  info: {
+    width: "100%",
+    height: "100%",
     backgroundColor: "#1E1E1E",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
+  },
+  buttonGrid: {
+    flexDirection: "column",
+    justifyContent: "flex-start",
     alignItems: "flex-start",
-    justifyContent: "left",
-    
+    gap: 20,
+  },
+  buttonRow: {
+    flex: 1,
+    flexDirection: "row",
+    gap: 20,
+    justifyContent: "center",
+  },
+  titleBlock: {
+    width: "100%",
   },
   title: {
     fontSize: 50,
@@ -127,3 +177,7 @@ const styles = StyleSheet.create({
     marginLeft: 50,
   },
 });
+
+// BORDERS TO DEBUG COMPONENT PLACEMENT
+//borderColor: "#fcfdfb",
+//borderWidth: 2,
