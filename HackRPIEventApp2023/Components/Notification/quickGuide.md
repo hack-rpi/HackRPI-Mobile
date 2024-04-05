@@ -96,3 +96,39 @@ An alternative to certificates is using authentication keys, which can simplify 
 This guide aims to simplify the process of setting up Apple Push Notifications and includes examples in both Objective-C and Swift. For more detailed information on payloads, refer to the [official Apple documentation](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification?language=objc).
 
 Happy coding!
+
+## Advanced Considerations
+
+### Content-Available Notifications
+
+- Use the `content-available` flag for notifications that require the app to perform a background update. This is particularly useful for news apps or applications that need to fetch the latest content in response to a push notification.
+
+### Rich Notifications
+
+- iOS 10 and above support rich notifications, which allow you to include media attachments and more interactive elements in your notifications. To leverage this, use the `mutable-content` flag and handle the notification in the service extension.
+
+### Priority of Notifications
+
+- You can set the priority of your push notifications to `10` (high) or `5` (normal). High priority should be used for urgent notifications, such as calls or messages, whereas normal priority can be used for content updates.
+
+## Troubleshooting Tips
+
+### Notification Not Delivered
+
+- **Check Device Token**: Ensure the device token used is correct and matches the device you are trying to send the notification to.
+- **Check APNs Environment**: Make sure you're sending the notification to the correct environment (development or production), matching your app’s build.
+- **Validate Certificate**: Verify that the certificate used for sending notifications has not expired and matches the environment you are targeting.
+
+### Notification Delivered but Not Showing
+
+- **Check Notification Settings**: Ensure the notification settings in both the iOS settings and the app are configured to allow notifications.
+- **Inspect Payload**: Make sure the notification payload is correct and includes the necessary alert body or sound.
+- **Background Notifications**: If using `content-available` notifications, ensure the app is set up correctly to handle background updates.
+
+## Monitoring and Analytics
+
+Consider integrating a third-party service or using Apple's Push Notification service logs to monitor the delivery and interaction rates of your notifications. This can provide valuable insights into how users engage with your notifications and highlight areas for improvement.
+
+## Conclusion
+
+Implementing push notifications in your iOS app can significantly enhance user engagement and keep your app users informed. By following the guidelines outlined in this guide and considering the advanced considerations and troubleshooting tips, you can ensure a smooth implementation and delivery process. Always test your notification system thoroughly and stay updated with Apple's latest APNs documentation and best practices.
