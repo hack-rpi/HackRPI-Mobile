@@ -4,6 +4,8 @@
 
 >Warning: expo-notifications library are not able to run on an Android Emulator and an IOS simulator. 
 If you want to run the app on either of these simulators, please deploy the EAS build in your environment.  
+> But if you are stick with the expo-notifications build, you can skip the part of EAS build and start with 
+"Push notification environment configuration"
 
 #EAS build: 
 Intro: EAS CLI is the command-line app that you will use to interact with EAS services from your terminal. To install it, run the command:
