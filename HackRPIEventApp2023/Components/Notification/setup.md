@@ -44,8 +44,10 @@ eas build:list
 npx expo install expo-notifications expo-device expo-constants
 ```
 ##Run the code in testPushNoti.js
+
+
 ##Run on platform
-For run on Android
+For run on Android (need to change the google-services.json file in order to connect to your google account)
 > View the link on [Add Android FCM V1 credentials](https://docs.expo.dev/push-notifications/fcm-credentials)
 
 For run on iOS (need an Apple developer account before running)
