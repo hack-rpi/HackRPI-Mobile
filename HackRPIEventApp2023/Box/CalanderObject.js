@@ -2,6 +2,13 @@ import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import EventObject from "./EventObject"; // Import the EventObject component
+import { useEffect, useRef} from 'react';
+import { Platform } from 'react-native';
+import * as Device from 'expo-device';
+import * as Notifications from 'expo-notifications';
+import Constants from 'expo-constants';
+
+
 
 //reusable component that ties an event object to it's notification bell
 const CalanderObject = ({
@@ -14,9 +21,6 @@ const CalanderObject = ({
 }) => {
   const [isActive, setIsActive] = useState(false); // Define isActive state
 
-  const handleClick = () => {
-    setIsActive(!isActive);
-  };
 
   return (
     <View style={styles.container}>
