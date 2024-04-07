@@ -4,8 +4,8 @@
 
 >Warning: expo-notifications library are not able to run on an Android Emulator and an IOS simulator. 
 If you want to run the app on either of these simulators, please deploy the EAS build in your environment.  
-> But if you are stick with the expo-notifications build, you can skip the part of EAS build and start with 
-"Push notification environment configuration"
+> If you are stick with the expo-notifications build, you can skip the part of EAS build and start with 
+"Push notification environment configuration" (which is what I have successfully tested on my physical devices).
 
 #EAS build: 
 Intro: EAS CLI is the command-line app that you will use to interact with EAS services from your terminal. To install it, run the command:
@@ -49,7 +49,8 @@ npx expo install expo-notifications expo-device expo-constants
 
 
 ##Run on platform
-For run on Android (need to change the google-services.json file in order to connect to your google account)
+For run on Android (need to change the google-services.json file in order to connect to your google account, as well as 
+generating your own private key for the FCM server)
 > View the link on [Add Android FCM V1 credentials](https://docs.expo.dev/push-notifications/fcm-credentials)
 
 For run on iOS (need an Apple developer account before running)
@@ -57,5 +58,5 @@ For run on iOS (need an Apple developer account before running)
 
 # Test using the push notifications tool
 ```
-npx expo start
+expo start
 ```
