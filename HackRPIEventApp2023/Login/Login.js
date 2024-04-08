@@ -18,7 +18,7 @@ const Login = () => {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       {loggedIn ? (
-        <Text>Welcome, {username}!</Text>
+        <Text>Welcome, mentor!</Text>
       ) : (
         <View>
           <Text style={{ fontSize: 20 }}>Login</Text>

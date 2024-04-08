@@ -3,7 +3,6 @@ import React from 'react';
 import { View } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack'; // Import createStackNavigator from React Navigation
 import Login from './Login';
-import LoginButton from './LoginButton';
 
 const Stack = createStackNavigator();
 
@@ -18,7 +17,7 @@ const ParentComponent = () => {
 
 const HomeScreen = ({ navigation }) => {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <View style={{ flex: 20, justifyContent: 'center', alignItems: 'center' }}>
       <LoginButton navigation={navigation} />
     </View>
   );

@@ -8,50 +8,64 @@ import Calander from "./Box/Calander";
 import Food from "./information/Food";
 import HackerQue from "./HackerQue/QueEntry.js";
 import { globalStyles } from "./styles";
-import LoginButton from "./Login/LoginButton";
 import Login from "./Login/Login";
 
 const Tab = createBottomTabNavigator();
 
 function InfoScreen() {
+  const goToLogin = () => {
+    navigation.navigate("Login");
+  };
+
   return (
     <View style={styles.container}>
       <Food />
+      <Button title="Login" onPress={goToLogin} />
+      <StatusBar style="auto" />
     </View>
   );
 }
 
-function HomeScreen() {
+function HomeScreen({ navigation }) {
+  const goToLogin = () => {
+    navigation.navigate("Login");
+  };
+
   return (
     <View style={styles.container}>
       <Calander />
+      <Button title="Login" onPress={goToLogin} />
       <StatusBar style="auto" />
     </View>
   );
 }
 
 function QueueScreen() {
+  const goToLogin = () => {
+    navigation.navigate("Login");
+  };
   return (
     <View style={styles.container}>
       <HackerQue />
+      <Button title="Login" onPress={goToLogin} />
+      <StatusBar style="auto" />
     </View>
   );
 }
 
-const CustomHeader = ({ navigation }) => {
+function LoginScreen() {
   return (
-    <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 20 }}>
-      <LoginButton navigation={navigation} />
+    <View style={styles.container}>
+      <Login/>
     </View>
   );
-};
+}
 
 export default function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator
         screenOptions={({ route }) => ({
-          header: (props) => <CustomHeader {...props} />,
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
             if (route.name === "Info") {
@@ -80,9 +94,10 @@ export default function App() {
           tabBarInactiveTintColor: "white",
         })}
       >
-        <Tab.Screen name="Info" component={InfoScreen} />
         <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Info" component={InfoScreen} />
         <Tab.Screen name="Queue" component={QueueScreen} />
+        <Tab.Screen name="Login" component={LoginScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
