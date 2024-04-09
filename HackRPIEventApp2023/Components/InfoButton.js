@@ -1,6 +1,9 @@
 import React from "react";
 import { StyleSheet, View, Pressable, Text, Image } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { Dimensions } from 'react-native'
+
+const { width, height } = Dimensions.get('window');
 
 export default function InfoButton ({circleColor, text, icon, func}) {
     return (
@@ -17,13 +20,13 @@ export default function InfoButton ({circleColor, text, icon, func}) {
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    borderRadius: 15,
-    width: 266,
-    height: 55,
+    borderRadius: width * 0.03,
+    width: width * 0.75,
+    height: height * 0.075,
     backgroundColor: "#1E262D",
   },
   buttonContents: {
-    margin: 5,// change later?
+    margin: width * 0.01,
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
@@ -32,17 +35,17 @@ const styles = StyleSheet.create({
   textStyle: {
     fontFamily: "sans-serif",
     color: '#fff',
-    fontSize: 35,
+    fontSize: width * 0.1,
   },
 
   iconContainer: {
-    width: 45,
-    height: 45,
-    borderRadius: 35,
+    width: width * 0.12,
+    height: width * 0.12,
+    borderRadius: width * 0.12,
     alignItems: "center",
     justifyContent: "center",
-    margin: 5,
-    marginRight: 15,
+    margin: width * 0.02,
+    marginRight: width * 0.05,
   }
 });
 

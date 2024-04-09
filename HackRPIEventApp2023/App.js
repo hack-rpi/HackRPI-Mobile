@@ -49,11 +49,11 @@ function InfoScreen() {
           <Image source={require("./assets/favicon.png")}/>
         </View>
         <View style={styles.buttonGrid} flex={80}>
-            <InfoButton circleColor="#EF3B41" text="Food" icon = {faUtensils} func = {expandSection}/>
-            <InfoButton circleColor="#EF3B41" text="Food" icon = {faUtensils} func = {expandSection}/>
-            <InfoButton circleColor="#EF3B41" text="Food" icon = {faUtensils} func = {expandSection}/>
-            <InfoButton circleColor="#EF3B41" text="Food" icon = {faUtensils} func = {expandSection}/>
-            <InfoButton circleColor="#EF3B41" text="Food" icon = {faUtensils} func = {expandSection}/>
+            <InfoButton circleColor="#EF3B41" text="Foreod" icon = {faUtensils} func = {expandSection}/>
+            <InfoButton circleColor="#EF3B41" text="Fred" icon = {faUtensils} func = {expandSection}/>
+            <InfoButton circleColor="#EF3B41" text="Forede" icon = {faUtensils} func = {expandSection}/>
+            <InfoButton circleColor="#EF3B41" text="Ffored" icon = {faUtensils} func = {expandSection}/>
+            <InfoButton circleColor="#EF3B41" text="Foffeod" icon = {faUtensils} func = {expandSection}/>
       </View>
       </View>
     </View>
