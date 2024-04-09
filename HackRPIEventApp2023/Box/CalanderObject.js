@@ -82,7 +82,32 @@ const CalanderObject = ({
   isRed,
 }) => {
   const [isActive, setIsActive] = useState(false); // Define isActive state
+  const [expoPushToken, setExpoPushToken] = useState('');
+  const notificationListener = useRef();
+  const responseListener = useRef();
 
+  const handleClick =async() => {
+    setIsActive(!isActive);
+    console.log("token" + expoPushToken);
+    await sendPushNotification(expoPushToken);
+  };
+
+  useEffect(() => {
+    registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
+
+    notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
+      console.log(notification);
+    });
+
+    responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
+      console.log(response);
+    });
+
+    return () => {
+      Notifications.removeNotificationSubscription(notificationListener.current);
+      Notifications.removeNotificationSubscription(responseListener.current);
+    };
+  }, []);
 
   return (
     <View style={styles.container}>
