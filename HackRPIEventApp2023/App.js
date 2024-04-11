@@ -37,7 +37,7 @@ function HomeScreen() {
 function QueueScreen() {
   return (
     <View style={styles.container}>
-        <HackerQue />
+        <HackerQue></HackerQue>
     </View>
   );
 }
@@ -151,21 +151,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: globalStyles.primary,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  text: {
-    fontSize: globalStyles.fontSize,
-    fontWeight: globalStyles.fontWeight,
-    color: globalStyles.text,
-  },
-  circleContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-around",
-  },
-  circle: {
-    borderRadius: 50,
-    overflow: "hidden",
   },
 });
+
