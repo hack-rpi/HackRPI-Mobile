@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import CircleProgress from "../Components/CircleProgress";
 import calculateTimeDifference from "../HackerQue/Time_Dif";
-import { useState, useEffect } from "react";
 
 function QueCard() {
   const Start_Time = "2023-11-10T10:00:00Z";
@@ -24,9 +23,8 @@ function QueCard() {
 
   return (
     <View style={styles.box}>
-      {/* Inner View for heading */}
       <View style={styles.heading}>
-        <Text style={styles.textHeader}>Issue: HTML</Text>
+        <Text style={styles.textHeader}>Your Position in Queue</Text>
       </View>
       <View style={styles.row}>
         <View style={styles.subBox}>
@@ -75,8 +73,8 @@ const styles = StyleSheet.create({
     width: 300,
     height: 50,
     backgroundColor: "#910307",
-    justifyContent: "center", // To vertically center the text
-    alignItems: "center", // To horizontally center the text
+    justifyContent: "center",
+    alignItems: "center",
     borderRadius: 15,
     borderWidth: 3,
     borderColor: "#FFFFFF",
