@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import CircleProgress from "../Components/CircleProgress";
 import calculateTimeDifference from "../HackerQue/Time_Dif";
-import LeaveQueueButton from "../Components/LeaveQueueButton"; // Import the LeaveQueueButton component
 
 function QueCard() {
   const Start_Time = "2023-11-10T10:00:00Z";
@@ -11,16 +10,23 @@ function QueCard() {
   const [Time_In_Queue, setTimeInQueueHours] = useState(
     calculateTimeDifference(Start_Time)
   );
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
-    // Update the time difference every second
+    // Update the time difference every second if not paused
     const intervalId = setInterval(() => {
-      setTimeInQueueHours(calculateTimeDifference(Start_Time));
+      if (!isPaused) {
+        setTimeInQueueHours(calculateTimeDifference(Start_Time));
+      }
     }, 1000);
 
     // Cleanup the interval when the component is unmounted
     return () => clearInterval(intervalId);
-  }, []);
+  }, [isPaused]);
+
+  const handlePause = () => {
+    setIsPaused(!isPaused);
+  };
 
   return (
     <View style={styles.box}>
@@ -46,8 +52,10 @@ function QueCard() {
           <Text style={styles.textBody}> Position: {Position}</Text>
         </View>
       </View>
-      {/* Add the LeaveQueueButton component */}
-      <LeaveQueueButton />
+      {/* Add a button to pause the timer */}
+      <TouchableOpacity style={styles.button} onPress={handlePause}>
+        <Text style={styles.buttonText}>{isPaused ? 'Resume' : 'Pause'}</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -97,6 +105,18 @@ const styles = StyleSheet.create({
   textBody: {
     color: "#ffffff",
     fontSize: 20,
+  },
+  button: {
+    backgroundColor: "#FF0000", // Red color
+    padding: 10,
+    borderRadius: 5,
+    alignItems: "center",
+    marginTop: 20,
+  },
+  buttonText: {
+    color: "#FFFFFF", // White color
+    fontSize: 18,
+    fontWeight: "bold",
   },
 });
 
