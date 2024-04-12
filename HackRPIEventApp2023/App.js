@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Text, Image } from "react-native";
+import { StyleSheet, View, Text, Image, Dimensions } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Feather } from "@expo/vector-icons";
@@ -13,7 +13,11 @@ import InfoButton from "./Components/InfoButton";
 import { faUtensils, faQuestion, faDollarSign, faBook, faMap } from "@fortawesome/free-solid-svg-icons";
 import InfoButtonFinal from "./Components/InfoButtonFinal";
 
+import InfoButtonWrapper from "./Components/InfoButtonWrapper";
+
 const Tab = createBottomTabNavigator();
+
+const { width, height } = Dimensions.get('window');
 
 // other variation
 /*function InfoScreenTEST() {
@@ -45,19 +49,28 @@ function InfoScreen() {
       </View>
       <View flex={5}></View>
       <View flexDirection="row" flex={75}>
-        <View style={styles.imageSpot} flex={20}>
-          <Image source={require("./assets/favicon.png")}/>
-        </View>
-        <View style={styles.buttonGrid} flex={80}>
-            <InfoButton circleColor="#EF3B41" text="Foreod" icon = {faUtensils} func = {expandSection}/>
-            <InfoButton circleColor="#EF3B41" text="Fred" icon = {faUtensils} func = {expandSection}/>
-            <InfoButton circleColor="#EF3B41" text="Forede" icon = {faUtensils} func = {expandSection}/>
-            <InfoButton circleColor="#EF3B41" text="Ffored" icon = {faUtensils} func = {expandSection}/>
-            <InfoButton circleColor="#EF3B41" text="Foffeod" icon = {faUtensils} func = {expandSection}/>
+        <View style={styles.buttonGrid} flex={1}>
+            <InfoButtonWrapper circleColor="#EF3B41" text="Foreod" icon = {faUtensils} func = {expandSection}/>
+            <InfoButtonWrapper circleColor="#F8A13A" text="Fred" icon = {faMap} func = {expandSection}/>
+            <InfoButtonWrapper circleColor="#05A55C" text="Forede" icon = {faQuestion} func = {expandSection}/>
+            <InfoButtonWrapper circleColor="#0158A9" text="Ffored" icon = {faDollarSign} func = {expandSection}/>
+            <InfoButtonWrapper circleColor="#B43D96" text="Foffeod" icon = {faBook} func = {expandSection}/>
+            <InfoLine></InfoLine>
       </View>
       </View>
     </View>
   );
+}
+
+function InfoLine() {
+  return (
+      <View flex={0.9} style={styles.row}>
+          <View flex={2}></View>
+          <View flex={0.5} style={styles.line}>
+          </View>
+          <View flex={17.5}></View>
+      </View>
+  )
 }
 
 // this will navigate to different screens
@@ -149,23 +162,23 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "flex-start",
     alignItems: "flex-start",
-    gap: 24,
+    gap: 0,
   },
   buttonRow: {
     flex: 1,
     flexDirection: "row",
-    gap: 20,
+    gap: height*0.05,
     justifyContent: "center",
   },
   titleBlock: {
     width: "100%",
   },
   title: {
-    fontSize: 50,
+    fontSize: width*.15,
     fontWeight: "bold",
     color: "#FFFFFF",
-    marginTop: 20,
-    marginLeft: 30,
+    marginTop: height*.05,
+    marginLeft: width*0.1,
   },
   subtitle: {
     fontSize: 30,
@@ -173,7 +186,32 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     marginLeft: 50,
   },
+row: {
+    flexDirection: "row",
+},
+line: {
+    backgroundColor: "#74B7EF",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "120%",
+},
+stop: {
+    width: width * 0.07,
+    height: width * 0.07,
+    borderRadius: width * 0.07,
+    backgroundColor: "#74B7EF",
+    alignItems: "center",
+    justifyContent: "center",
+},
+inner: {
+    width: width * 0.04,
+    height: width * 0.04,
+    borderRadius: width * 0.04,
+    backgroundColor: "#25303C",
+},
 });
+
+// the current "line" is a silly workaround, test on other devices
 
 // BORDERS TO DEBUG COMPONENT PLACEMENT
 //borderColor: "#fcfdfb",
