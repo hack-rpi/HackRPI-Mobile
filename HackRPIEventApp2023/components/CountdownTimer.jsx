@@ -122,10 +122,9 @@ export default function CountdownTimer() {
         </View>
       </View>
 
-      <View style={styles.container}>
       {/* Add space between header and circles */}
       <View style={{ marginTop: 20 }}></View>
-
+      <View style={styles.totalContainer}>
       <View style={styles.circleContainer}>
         <View style={styles.circleWrapper}>
           <Timer
@@ -161,11 +160,10 @@ export default function CountdownTimer() {
         </View>
       </View>
       <StatusBar style="auto" />
-
       
-      <View style={styles.letterCircleContainer}>
+
       {/* Add space between header and circles */}
-      <View style={{ marginTop: 20 }}></View>
+      <View style={{ marginTop: 10 }}></View>
 
       <View style={styles.circleContainer}>
         <View style={styles.circleWrapper}>
@@ -192,9 +190,10 @@ export default function CountdownTimer() {
             text="S"
           />
         </View>
-      </View>
+        </View>
+
       <StatusBar style="auto" />
-    </View>
+    
 
 
 {/* Actual circles with numbers below, not just labels */}
@@ -203,6 +202,12 @@ export default function CountdownTimer() {
   );
 }
 
+
+//
+//justify content for 1 of circles uses space-around, but the other uses smth else this is related to issue
+//
+
+///
 const styles = StyleSheet.create({
   circleText: {
     fontSize: 30,
@@ -215,27 +220,30 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   container: {
-    flex: 1,
+    // flex: 1,
     alignItems: "center",
     justifyContent: "flex-start",
     // paddingTop: 20,
     paddingHorizontal: 20,
   },
+  totalContainer:{
+    display:"flex",
+    width:"100%",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+  },
   header: {
     alignItems: "center",
     justifyContent: "center",
   },
-  letterCircleContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-around",
-    paddingTop: 10,
-    paddingBottom: 10,
-  },
   circleContainer: {
+    display:"flex",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-around",
+    width:"95%",
+    gap: 5,
   },
   circle: {
     width: "100%",
@@ -261,7 +269,7 @@ const styles = StyleSheet.create({
   },
   circleWrapper: {
     marginHorizontal: 20, // Adjust this value to increase or decrease the space between circles
-    marginTop: 10, // Adjust the marginTop to control the space between circles and header
+    // marginTop: 10, // Adjust the marginTop to control the space between circles and header
   },
   title: {
     fontSize: 36,
