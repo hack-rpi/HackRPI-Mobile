@@ -80,7 +80,7 @@ const CalanderObject = ({
   Presenter,
   Description,
   isRed,
-    notiTime
+    dateAndTime,
 }) => {
   const [isActive, setIsActive] = useState(false); // Define isActive state
   const [expoPushToken, setExpoPushToken] = useState('');
@@ -89,17 +89,33 @@ const CalanderObject = ({
 
   const handleClick =async() => {
     setIsActive(!isActive);
-    console.log("token" + expoPushToken);
-    const currentTime = new Date().getTime();
-    const notificationId = await Notifications.scheduleNotificationAsync({
-      content: {
-        title: 'Workshop Reminder',
-        body: 'Your workshop  is starting now!',
-      },
-      trigger: {
-        seconds: 10, // Delay the notification by 10 second
-      },
-    });
+
+    const testNotiTime = "2024-04-12 15:15:00";
+    const [dateString, timeString] = testNotiTime.split(' ');
+    const [year, month, day] = dateString.split('-');
+    const [hours, minutes] = timeString.split(':');
+
+    const eventTime = new Date(year, month - 1, day, hours, minutes);
+    const triggerTime = new Date(eventTime.getTime() - 5 * 60 * 1000);
+
+    const currentTime = new Date();
+    const delay = triggerTime.getTime() - currentTime.getTime();
+    console.log("current +++ ", triggerTime, "----", currentTime, "----", delay);
+
+    if (delay > 0) {
+      const notificationId = await Notifications.scheduleNotificationAsync({
+        content: {
+          title: 'Workshop Reminder',
+          body: 'Your workshop is starting now!',
+        },
+        trigger: {
+          seconds: Math.floor(delay / 1000),
+        },
+      });
+      console.log(`Notification scheduled with ID: ${notificationId}`);
+    } else {
+      alert('The specified time is in the past. Notification not scheduled.');
+    }
   };
 
   useEffect(() => {
