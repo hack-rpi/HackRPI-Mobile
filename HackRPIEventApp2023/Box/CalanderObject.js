@@ -11,8 +11,8 @@ import Constants from 'expo-constants';
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
-    shouldPlaySound: false,
-    shouldSetBadge: false,
+    shouldPlaySound: true,
+    shouldSetBadge: true,
   }),
 });
 
@@ -80,6 +80,7 @@ const CalanderObject = ({
   Presenter,
   Description,
   isRed,
+    notiTime
 }) => {
   const [isActive, setIsActive] = useState(false); // Define isActive state
   const [expoPushToken, setExpoPushToken] = useState('');
@@ -89,7 +90,16 @@ const CalanderObject = ({
   const handleClick =async() => {
     setIsActive(!isActive);
     console.log("token" + expoPushToken);
-    await sendPushNotification(expoPushToken);
+    const currentTime = new Date().getTime();
+    const notificationId = await Notifications.scheduleNotificationAsync({
+      content: {
+        title: 'Workshop Reminder',
+        body: 'Your workshop  is starting now!',
+      },
+      trigger: {
+        seconds: 10, // Delay the notification by 10 second
+      },
+    });
   };
 
   useEffect(() => {
