@@ -28,6 +28,10 @@ function QueCard() {
     setIsPaused(!isPaused);
   };
 
+  const handleLeaveQueue = () => {
+    // Add logic to handle leaving the queue
+  };
+
   return (
     <View style={styles.box}>
       <View style={styles.heading}>
@@ -55,6 +59,10 @@ function QueCard() {
       {/* Add a button to pause the timer */}
       <TouchableOpacity style={styles.button} onPress={handlePause}>
         <Text style={styles.buttonText}>{isPaused ? 'Resume' : 'Pause'}</Text>
+      </TouchableOpacity>
+      {/* Add a button to leave the queue */}
+      <TouchableOpacity style={styles.button} onPress={handleLeaveQueue}>
+        <Text style={styles.buttonText}>Leave Queue</Text>
       </TouchableOpacity>
     </View>
   );
