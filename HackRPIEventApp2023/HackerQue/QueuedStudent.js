@@ -51,7 +51,7 @@ function QueCard() {
 
 const styles = StyleSheet.create({
   box: {
-    width: 300,
+    width: 400,
     height: 350,
     borderRadius: 15,
     marginBottom: 20,
