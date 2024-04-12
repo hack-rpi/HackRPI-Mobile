@@ -7,17 +7,14 @@ import Past_Check from "./Past_Check";
 import Time_Convert from "./Time_Convert";
 import CountdownTimer from "../Components/CountdownTimer";
 
-// calander object that holds all events and handles which are visable, which are active, and which are upcoming.
 const Calander = () => {
   return (
-    <SafeAreaView style={styles.CalanderStyle}>
+    <SafeAreaView style={styles.container}>
       <ScrollView
-        style={styles.ScrollView}
+        style={styles.scrollView}
         showsVerticalScrollIndicator={true}
-        //pagingEnabled={true} // Enable paging
-        //snapToInterval={150} // Set the interval to the height of a single rectangle
       >
-        <CountdownTimer></CountdownTimer>
+        <CountdownTimer />
 
         {WorkShops.map((event, index) => {
           const Active = Active_Check(
@@ -32,13 +29,14 @@ const Calander = () => {
           );
           const Start_Time = Time_Convert(event.WorkShop_StartTime);
           const End_Time = Time_Convert(event.WorkShop_EndTime);
-          if (Past) {
-            return null; //if the event is in the past, don't display it
-          }
-          if (event.WorkShop_Title == "2023-12-04") {
+          let day;
+          if (event.WorkShop_Title === "2023-12-04") {
             day = "Saturday";
           } else {
             day = "Sunday";
+          }
+          if (Past) {
+            return null;
           }
           return (
             <CalanderObject
@@ -58,14 +56,15 @@ const Calander = () => {
 };
 
 const styles = StyleSheet.create({
-  CalanderStyle: {
-    marginTop: 0,
+  container: {
+    flex: 1,
+    backgroundColor: "transparent",
+    paddingTop: Platform.OS === "android" ? 25 : 0, // Adjust for status bar
+  },
+  scrollView: {
+    flex: 1,
     marginBottom: 20,
     backgroundColor: "transparent",
-    flex: 1,
-    justifyContent: "start",
-    alignItems: "left",
-    padding: 10,
   },
 });
 

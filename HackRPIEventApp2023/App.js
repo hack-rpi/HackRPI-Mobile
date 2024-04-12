@@ -37,7 +37,7 @@ function HomeScreen() {
 function QueueScreen() {
   return (
     <View style={styles.container}>
-        <HackerQue />
+        <HackerQue></HackerQue>
     </View>
   );
 }
@@ -48,12 +48,13 @@ function InfoStackNavigator() {
     <InfoStack.Navigator screenOptions={{
       headerStyle: {
         backgroundColor: '#25303C',
+        height: 110, // Adjust header height
       },
       headerTintColor: 'white',
       headerTitleStyle: {
         fontWeight: 'bold',
         fontSize: 30,
-        marginTop:20,
+        marginTop:0,
         marginLeft: 10,
       },
       headerShadowVisible: false, 
@@ -69,12 +70,13 @@ function HomeStackNavigator() {
     <HomeStack.Navigator screenOptions={{
       headerStyle: {
         backgroundColor: '#25303C',
+        height: 110, // Adjust header height
       },
       headerTintColor: 'white',
       headerTitleStyle: {
         fontWeight: 'bold',
         fontSize: 30,
-        marginTop:20,
+        marginTop:0,
         marginLeft: 10,
       },
       headerShadowVisible: false, 
@@ -90,12 +92,13 @@ function QueueStackNavigator() {
     <QueueStack.Navigator screenOptions={{
       headerStyle: {
         backgroundColor: '#25303C',
+        height: 110, // Adjust header height
       },
       headerTintColor: 'white',
       headerTitleStyle: {
         fontWeight: 'bold',
         fontSize: 30,
-        marginTop:20,
+        marginTop:0,
         marginLeft: 10,
       },
       headerShadowVisible: false, 
@@ -151,21 +154,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: globalStyles.primary,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  text: {
-    fontSize: globalStyles.fontSize,
-    fontWeight: globalStyles.fontWeight,
-    color: globalStyles.text,
-  },
-  circleContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-around",
-  },
-  circle: {
-    borderRadius: 50,
-    overflow: "hidden",
   },
 });
+
