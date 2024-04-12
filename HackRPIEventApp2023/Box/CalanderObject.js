@@ -90,8 +90,9 @@ const CalanderObject = ({
   const handleClick =async() => {
     setIsActive(!isActive);
 
-    const testNotiTime = "2024-04-12 15:15:00";
-    const [dateString, timeString] = testNotiTime.split(' ');
+    // const notiTime = "2024-04-12 15:19:00";  // code for testing
+    const notiTime = dateAndTime;
+    const [dateString, timeString] = notiTime.split(' ');
     const [year, month, day] = dateString.split('-');
     const [hours, minutes] = timeString.split(':');
 
@@ -106,7 +107,7 @@ const CalanderObject = ({
       const notificationId = await Notifications.scheduleNotificationAsync({
         content: {
           title: 'Workshop Reminder',
-          body: 'Your workshop is starting now!',
+          body: 'Your workshop' + workshop_Title + 'is starting in 5 minutes',
         },
         trigger: {
           seconds: Math.floor(delay / 1000),
