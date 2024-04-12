@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import CircleProgress from "../Components/CircleProgress";
 import calculateTimeDifference from "../HackerQue/Time_Dif";
+import LeaveQueueButton from "../Components/LeaveQueueButton"; // Import the LeaveQueueButton component
 
 function QueCard() {
   const Start_Time = "2023-11-10T10:00:00Z";
@@ -45,14 +46,16 @@ function QueCard() {
           <Text style={styles.textBody}> Position: {Position}</Text>
         </View>
       </View>
+      {/* Add the LeaveQueueButton component */}
+      <LeaveQueueButton />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   box: {
-    width: 400,
-    height: 350,
+    width: 300,
+    height: 400,
     borderRadius: 15,
     marginBottom: 20,
     backgroundColor: "#191919",
