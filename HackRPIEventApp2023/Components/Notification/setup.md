@@ -7,7 +7,7 @@ If you want to run the app on either of these simulators, please deploy the EAS 
 > If you are stick with the expo-notifications build, you can skip the part of EAS build and start with 
 "Push notification environment configuration" (which is what I have successfully tested on my physical devices).
 
-#EAS build: 
+#EAS build (optional) (can jump to Push notification environment configuration if you want to use expo-notifications library): 
 Intro: EAS CLI is the command-line app that you will use to interact with EAS services from your terminal. To install it, run the command:
 
 ##Install library
@@ -45,7 +45,6 @@ eas build:list
 ```
 npx expo install expo-notifications expo-device expo-constants
 ```
-##Run the code in testPushNoti.js
 
 
 ##Run on platform
@@ -60,3 +59,5 @@ For run on iOS (need an Apple developer account before running)
 ```
 expo start
 ```
+
+# Remember to read all comments in "const handleClick =async() => {}" of "CalanderObject.js" to understand the how to test the push notification tool and you will be good! 

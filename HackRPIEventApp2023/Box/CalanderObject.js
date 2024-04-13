@@ -16,7 +16,6 @@ Notifications.setNotificationHandler({
   }),
 });
 
-// Can use this function below or use Expo's Push Notification Tool from: https://expo.dev/notifications
 async function sendPushNotification(expoPushToken) {
   const message = {
     to: expoPushToken,
@@ -72,7 +71,6 @@ async function registerForPushNotificationsAsync() {
 }
 
 
-//reusable component that ties an event object to it's notification bell
 const CalanderObject = ({
   workshop_Title,
   Time,
@@ -80,7 +78,7 @@ const CalanderObject = ({
   Presenter,
   Description,
   isRed,
-    dateAndTime,
+  dateAndTime,
 }) => {
   const [isActive, setIsActive] = useState(false); // Define isActive state
   const [expoPushToken, setExpoPushToken] = useState('');
@@ -90,32 +88,33 @@ const CalanderObject = ({
   const handleClick =async() => {
     setIsActive(!isActive);
 
-    // const notiTime = "2024-04-12 15:19:00";  // code for testing
-    const notiTime = dateAndTime;
+    // const notiTime = "2024-04-12 15:19:00";  // code for testing (remember to add five minutes to test because the notification is set to 5 minutes before the event)
+    //e.g. notiTime = "2024-04-12 15:19:00") => notification will be sent at 15:14:00
+    const notiTime = dateAndTime;   // remember to comment this line out when testing
     const [dateString, timeString] = notiTime.split(' ');
     const [year, month, day] = dateString.split('-');
     const [hours, minutes] = timeString.split(':');
 
-    const eventTime = new Date(year, month - 1, day, hours, minutes);
-    const triggerTime = new Date(eventTime.getTime() - 5 * 60 * 1000);
+    const eventTime = new Date(year, month - 1, day, hours, minutes); // create a Date object for event time
+    const triggerTime = new Date(eventTime.getTime() - 5 * 60 * 1000); // subtract 5 minutes from event time
 
-    const currentTime = new Date();
-    const delay = triggerTime.getTime() - currentTime.getTime();
-    console.log("current +++ ", triggerTime, "----", currentTime, "----", delay);
+    const currentTime = new Date(); // get current time
+    const delay = triggerTime.getTime() - currentTime.getTime();  // calculate the delay in milliseconds
+    // console.log("current +++ ", triggerTime, "----", currentTime, "----", delay);
 
     if (delay > 0) {
       const notificationId = await Notifications.scheduleNotificationAsync({
         content: {
-          title: 'Workshop Reminder',
-          body: 'Your workshop' + workshop_Title + 'is starting in 5 minutes',
+          title: 'Workshop Reminder',     // notification title can be changed here!
+          body: 'Your workshop' + workshop_Title + 'is starting in 5 minutes', // notification body can be changed here!
         },
         trigger: {
-          seconds: Math.floor(delay / 1000),
+          seconds: Math.floor(delay / 1000), // The difference between the event time and the current time in seconds
         },
       });
       console.log(`Notification scheduled with ID: ${notificationId}`);
     } else {
-      alert('The specified time is in the past. Notification not scheduled.');
+      alert('The workshop has passed. Notification not scheduled.');
     }
   };
 
