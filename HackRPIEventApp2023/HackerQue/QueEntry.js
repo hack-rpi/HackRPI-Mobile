@@ -90,7 +90,7 @@ const QueEntry = ({ name, roomNumber, problemType }) => {
       </View>
       <View style={{flex: 1, justifyContent: 'flex-start', marginTop:250}}>
       <TouchableOpacity style={styles.button} onPress={submitForm}>
-        <Text style={styles.interfaceText}>{inQue ? "Exit Queue" : "Join Queue"}</Text>
+        <Text style={styles.interfaceText}>{inQue ? "Exit Queue" : "Join in the Queue"}</Text>
       </TouchableOpacity>
       </View>
     </View>
