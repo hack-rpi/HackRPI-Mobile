@@ -75,6 +75,9 @@ export default function App() {
             } else if (route.name === "Queue") {
               iconName = "user";
             }
+            else if (route.name === "Login") {
+              iconName = "log-in";
+            }
             return (
               <Feather
                 name={iconName}
