@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image, Alert, ScrollView } from 'react-native';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -18,11 +18,21 @@ const Login = () => {
   };
 
   const handleLogin = () => {
-    if (username && password && verificationCode === generatedCode) {
-      setLoggedIn(true);
-      Alert.alert('Logged in successfully!');
-    } else {
-      Alert.alert('Please enter valid credentials and verification code');
+    if (verificationCode != generatedCode) {
+      Alert.alert('Invalid verification code');
+      setVerificationCode('');
+      generateRandomCode();
+    } 
+    else {
+      if (username && password) {
+        setLoggedIn(true);
+      }
+      else {
+        Alert.alert('Invalid username or password');
+        setPassword('');
+        setVerificationCode('');
+        generateRandomCode();
+      }
     }
   };
 
@@ -59,78 +69,81 @@ const Login = () => {
   }, []);
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      {loggedIn ? (
-        <View>
-          <Text style={{color: 'white'}}>Welcome, mentor!</Text>
-          <TouchableOpacity
-            style={{ backgroundColor: 'blue', padding: 10, borderRadius: 5, marginLeft: 10 }}
-            onPress={handleLogout}
-          >
-            <Text style={{ color: 'white', textAlign: 'center' }}>Logout</Text>
-          </TouchableOpacity>
-        </View>
-      ) : (
-        <View>
-          <Text style={{ fontSize: 20 , color: 'white'}}>Login</Text>
-          <Text style={{ fontSize: 5 }}> </Text>
-          <Text style={{ fontSize: 15, color: 'white' }}> Username</Text>
-          <TextInput
-            style={{ height: 40, 
-            borderColor: 'white', 
-            borderWidth: 1, 
-            marginBottom: 10, 
-            paddingHorizontal: 10, 
-            color: 'white', 
-            placeholderTextColor: 'white'}}
-            placeholder="Username"
-            value={username}
-            onChangeText={(text) => setUsername(text)}
-          />
-          <Text style={{ fontSize: 15, color: 'white' }}> Password </Text>
-          <TextInput
-            style={{ height: 40, 
-            borderColor: 'white', 
-            borderWidth: 1, marginBottom: 10, 
-            paddingHorizontal: 10,
-            color: 'white',}}
-            placeholder="Password"
-            secureTextEntry={true}
-            value={password}
-            onChangeText={(text) => setPassword(text)}
-          />
-          <Text style={{ fontSize: 15, color: 'white' }}> Verification Code </Text>
-          <TextInput
-            style={{ height: 40, 
-            borderColor: 'white', borderWidth: 1, 
-            marginBottom: 10, 
-            paddingHorizontal: 10,
-            color: 'white',}}
-            placeholder="Verification Code"
-            value={verificationCode}
-            onChangeText={(text) => setVerificationCode(text)}
-          />
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Image
-              style={{ width: 200, height: 50, marginBottom: 10 }}
-              source={{ uri: `https://via.placeholder.com/200x50?text=${generatedCode}` }} // Placeholder URL with generated code
-            />
+    <ScrollView style={{ flex: 1}}>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 20,
+      marginTop: 100 }}>
+        {loggedIn ? (
+          <View>
+            <Text style={{color: 'white'}}>Welcome, mentor!</Text>
             <TouchableOpacity
               style={{ backgroundColor: 'blue', padding: 10, borderRadius: 5, marginLeft: 10 }}
-              onPress={handleReloadVerificationCode}
+              onPress={handleLogout}
             >
-              <Text style={{ color: 'white', textAlign: 'center' }}>Reload Verification Code</Text>
+              <Text style={{ color: 'white', textAlign: 'center' }}>Logout</Text>
             </TouchableOpacity>
           </View>
-          <TouchableOpacity
-            style={{ backgroundColor: 'blue', padding: 10, borderRadius: 5 }}
-            onPress={handleLogin}
-          >
-            <Text style={{ color: 'white', textAlign: 'center' }}>Login</Text>
-          </TouchableOpacity>
-        </View>
-      )}
-    </View>
+        ) : (
+          <View>
+            <Text style={{ fontSize: 20 , color: 'white'}}>Login</Text>
+            <Text style={{ fontSize: 5 }}> </Text>
+            <Text style={{ fontSize: 15, color: 'white' }}> Username</Text>
+            <TextInput
+              style={{ height: 40, 
+              borderColor: 'white', 
+              borderWidth: 1, 
+              marginBottom: 10, 
+              paddingHorizontal: 10, 
+              color: 'white', 
+              placeholderTextColor: 'white'}}
+              placeholder="Username"
+              value={username}
+              onChangeText={(text) => setUsername(text)}
+            />
+            <Text style={{ fontSize: 15, color: 'white' }}> Password </Text>
+            <TextInput
+              style={{ height: 40, 
+              borderColor: 'white', 
+              borderWidth: 1, marginBottom: 10, 
+              paddingHorizontal: 10,
+              color: 'white',}}
+              placeholder="Password"
+              secureTextEntry={true}
+              value={password}
+              onChangeText={(text) => setPassword(text)}
+            />
+            <Text style={{ fontSize: 15, color: 'white' }}> Verification Code </Text>
+            <TextInput
+              style={{ height: 40, 
+              borderColor: 'white', borderWidth: 1, 
+              marginBottom: 10, 
+              paddingHorizontal: 10,
+              color: 'white',}}
+              placeholder="Verification Code"
+              value={verificationCode}
+              onChangeText={(text) => setVerificationCode(text)}
+            />
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Image
+                style={{ width: 200, height: 50, marginBottom: 10 }}
+                source={{ uri: `https://via.placeholder.com/200x50?text=${generatedCode}` }} // Placeholder URL with generated code
+              />
+              <TouchableOpacity
+                style={{ backgroundColor: 'blue', padding: 10, borderRadius: 5, marginLeft: 10 }}
+                onPress={handleReloadVerificationCode}
+              >
+                <Text style={{ color: 'white', textAlign: 'center' }}>Reload Verification Code</Text>
+              </TouchableOpacity>
+            </View>
+            <TouchableOpacity
+              style={{ backgroundColor: 'blue', padding: 10, borderRadius: 5 }}
+              onPress={handleLogin}
+            >
+              <Text style={{ color: 'white', textAlign: 'center' }}>Login</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+      </View>
+    </ScrollView>
   );
 };
 
