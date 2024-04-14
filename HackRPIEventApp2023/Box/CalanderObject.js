@@ -85,6 +85,8 @@ const CalanderObject = ({
   const notificationListener = useRef();
   const responseListener = useRef();
 
+  const [notificationId, setNotificationId] = useState(null); // record the scheduled notification id
+
   const handleClick =async() => {
     setIsActive(!isActive);
 
@@ -101,35 +103,44 @@ const CalanderObject = ({
       console.log(response);
     });
 
+    const notiTime = dateAndTime;
+    const [dateString, timeString] = notiTime.split(' ');
+    const [year, month, day] = dateString.split('-');
+    const [hours, minutes] = timeString.split(':');
+
+    const eventTime = new Date(year, month - 1, day, hours, minutes); // create a Date object for event
+    const triggerTime = new Date(eventTime.getTime() - 5 * 60 * 1000); // subtract 5 minutes from event time
+
+    const currentTime = new Date(); // get current time
+
     if (!isActive) {
       const scheduleNotification = async () => {
-        const notiTime = dateAndTime;
-        const [dateString, timeString] = notiTime.split(' ');
-        const [year, month, day] = dateString.split('-');
-        const [hours, minutes] = timeString.split(':');
+        try {
+          console.log('Current Time: ', currentTime, 'Trigger Time: ', triggerTime);
+          const delay = triggerTime.getTime() - currentTime.getTime(); // calculate delay in milliseconds
+          console.log('Workshop Title: ', workshop_Title, 'Date and Time: ', dateAndTime, 'Delay: ', delay);
 
-        const eventTime = new Date(year, month - 1, day, hours, minutes); // create a Date object for event
-        const triggerTime = new Date(eventTime.getTime() - 5 * 60 * 1000); // subtract 5 minutes from event time
 
-        const currentTime = new Date(); // get current time
-
-        console.log('Current Time: ', currentTime, 'Trigger Time: ', triggerTime);
-        const delay = triggerTime.getTime() - currentTime.getTime(); // calculate delay in milliseconds
-
-        if (delay > 0) {
-          const notificationId = await Notifications.scheduleNotificationAsync({
-            content: {
-              title: 'Workshop Reminder', // notification title can be changed here!
-              body: 'Your workshop' + workshop_Title + 'is starting in 5 minutes', // notification body can be changed here!
-            },
-            trigger: {
-              seconds: Math.floor(delay / 1000),  // The difference between the event time and the current time in seconds
-            },
-          });
-          console.log(`Notification scheduled with ID: ${notificationId}`);
-        } else {
-          setIsActive(true);
-          console.log('The workshop has passed. Notification not scheduled.');
+          if (delay > 0) {
+            const notificationId = await Notifications.scheduleNotificationAsync({
+              content: {
+                title: 'Workshop Reminder', // notification title can be changed here!
+                body: 'Your workshop' + workshop_Title + 'is starting in 5 minutes', // notification body can be changed here!
+              },
+              trigger: {
+                seconds: Math.floor(delay / 1000),  // The difference between the event time and the current time in seconds
+              },
+            });
+            setNotificationId(notificationId);
+            console.log(`Notification scheduled with ID: ${notificationId}`);
+          } else {
+            console.log(isActive);
+            console.log('The workshop has passed. Notification not scheduled.');
+          }
+        } catch (error){
+          console.error('Failed to schedule notification:', error);
+          // Handle the error, e.g., show an error message to the user
+          alert('Failed to schedule notification. Please try again.');
         }
       };
 
