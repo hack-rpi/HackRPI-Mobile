@@ -47,7 +47,10 @@ function InfoScreen() {
       <View flex={20} style={styles.titleBlock}>
         <Text style={styles.title}>Info</Text>
       </View>
-      <View flex={5}></View>
+      <View flex={5} flexDirection={"row"}>
+        <View flex={1} style={styles.borderline}></View>
+        <View flex={4}></View>
+      </View>
       <View flexDirection="row" flex={75}>
         <View style={styles.buttonGrid} flex={1}>
             <InfoButtonWrapper circleColor="#EF3B41" text="Foreod" icon = {faUtensils} func = {expandSection}/>
@@ -209,10 +212,18 @@ inner: {
     borderRadius: width * 0.04,
     backgroundColor: "#25303C",
 },
+bordertest: {
+    borderColor: "#fcfdfb",
+    borderWidth: 2,
+},
+borderline: {
+  borderTopWidth: width*0.03,
+  borderColor: "#74B7EF",
+  transform: [{rotate: '45deg'},{translateY: 19.2},{translateX: -19}],
+}
 });
 
 // the current "line" is a silly workaround, test on other devices
 
 // BORDERS TO DEBUG COMPONENT PLACEMENT
-//borderColor: "#fcfdfb",
-//borderWidth: 2,
+
