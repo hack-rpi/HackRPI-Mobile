@@ -88,34 +88,6 @@ const CalanderObject = ({
   const handleClick =async() => {
     setIsActive(!isActive);
 
-    // const notiTime = "2024-04-12 15:19:00";  // code for testing (remember to add five minutes to test because the notification is set to 5 minutes before the event)
-    //e.g. notiTime = "2024-04-12 15:19:00") => notification will be sent at 15:14:00
-    const notiTime = dateAndTime;   // remember to comment this line out when testing
-    const [dateString, timeString] = notiTime.split(' ');
-    const [year, month, day] = dateString.split('-');
-    const [hours, minutes] = timeString.split(':');
-
-    const eventTime = new Date(year, month - 1, day, hours, minutes); // create a Date object for event time
-    const triggerTime = new Date(eventTime.getTime() - 5 * 60 * 1000); // subtract 5 minutes from event time
-
-    const currentTime = new Date(); // get current time
-    const delay = triggerTime.getTime() - currentTime.getTime();  // calculate the delay in milliseconds
-    // console.log("current +++ ", triggerTime, "----", currentTime, "----", delay);
-
-    if (delay > 0) {
-      const notificationId = await Notifications.scheduleNotificationAsync({
-        content: {
-          title: 'Workshop Reminder',     // notification title can be changed here!
-          body: 'Your workshop' + workshop_Title + 'is starting in 5 minutes', // notification body can be changed here!
-        },
-        trigger: {
-          seconds: Math.floor(delay / 1000), // The difference between the event time and the current time in seconds
-        },
-      });
-      console.log(`Notification scheduled with ID: ${notificationId}`);
-    } else {
-      alert('The workshop has passed. Notification not scheduled.');
-    }
   };
 
   useEffect(() => {
@@ -129,11 +101,46 @@ const CalanderObject = ({
       console.log(response);
     });
 
+    if (!isActive) {
+      const scheduleNotification = async () => {
+        const notiTime = dateAndTime;
+        const [dateString, timeString] = notiTime.split(' ');
+        const [year, month, day] = dateString.split('-');
+        const [hours, minutes] = timeString.split(':');
+
+        const eventTime = new Date(year, month - 1, day, hours, minutes); // create a Date object for event
+        const triggerTime = new Date(eventTime.getTime() - 5 * 60 * 1000); // subtract 5 minutes from event time
+
+        const currentTime = new Date(); // get current time
+
+        console.log('Current Time: ', currentTime, 'Trigger Time: ', triggerTime);
+        const delay = triggerTime.getTime() - currentTime.getTime(); // calculate delay in milliseconds
+
+        if (delay > 0) {
+          const notificationId = await Notifications.scheduleNotificationAsync({
+            content: {
+              title: 'Workshop Reminder', // notification title can be changed here!
+              body: 'Your workshop' + workshop_Title + 'is starting in 5 minutes', // notification body can be changed here!
+            },
+            trigger: {
+              seconds: Math.floor(delay / 1000),  // The difference between the event time and the current time in seconds
+            },
+          });
+          console.log(`Notification scheduled with ID: ${notificationId}`);
+        } else {
+          setIsActive(true);
+          console.log('The workshop has passed. Notification not scheduled.');
+        }
+      };
+
+      scheduleNotification();
+    }
+
     return () => {
       Notifications.removeNotificationSubscription(notificationListener.current);
       Notifications.removeNotificationSubscription(responseListener.current);
     };
-  }, []);
+  }, [isActive, dateAndTime, workshop_Title]);
 
   return (
     <View style={styles.container}>
