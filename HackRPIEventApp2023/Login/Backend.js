@@ -32,7 +32,7 @@ const CheckUser = async (username, password) => {
   const matchFound = userSnapshot.docs.some(doc => {
     const userData = doc.data();
     console.log("Checking user:", userData);
-    const isMatch = userData.username === username && userData.password === password;
+    const isMatch = userData.Uid === username && userData.Pass === password;
     console.log("Match found:", isMatch);
     return isMatch;
   });
