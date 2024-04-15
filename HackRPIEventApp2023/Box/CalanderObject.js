@@ -145,6 +145,13 @@ const CalanderObject = ({
       };
 
       scheduleNotification();
+    }else{
+      if (notificationId) {
+        console.log('Cancelling notification with ID: ', notificationId);
+        Notifications.cancelScheduledNotificationAsync(notificationId);
+        setNotificationId(null);
+        console.log('Notification cancelled');
+      }
     }
 
     return () => {
