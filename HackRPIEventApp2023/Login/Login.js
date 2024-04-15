@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, Alert, ScrollView } from 'react-native';
+import {CheckUser} from './Backend';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -24,15 +25,20 @@ const Login = () => {
       generateRandomCode();
     } 
     else {
-      if (username && password) {
-        setLoggedIn(true);
-      }
-      else {
-        Alert.alert('Invalid username or password');
-        setPassword('');
-        setVerificationCode('');
-        generateRandomCode();
-      }
+      const validateUser = async () => {
+        const validUser = await CheckUser(username, password);
+        if (validUser) {
+          setLoggedIn(true);
+        }
+        else {
+          Alert.alert('Invalid username or password');
+          setPassword('');
+          setVerificationCode('');
+          generateRandomCode();
+        }
+      };
+
+      validateUser();
     }
   };
 
@@ -93,8 +99,7 @@ const Login = () => {
               borderWidth: 1, 
               marginBottom: 10, 
               paddingHorizontal: 10, 
-              color: 'white', 
-              placeholderTextColor: 'white'}}
+              color: 'white'}}
               placeholder="Username"
               value={username}
               onChangeText={(text) => setUsername(text)}
