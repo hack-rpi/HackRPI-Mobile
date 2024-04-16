@@ -4,7 +4,7 @@ import CircleProgress from "../Components/CircleProgress";
 import calculateTimeDifference from "../HackerQue/Time_Dif";
 
 function QueCard() {
-  const Start_Time = "2023-11-10T10:00:00Z";
+  const Start_Time = "2024-11-10T10:00:00Z";
   const Position = 20;
   const Total = 100;
   const [Time_In_Queue, setTimeInQueueHours] = useState(
@@ -40,7 +40,7 @@ function QueCard() {
       <View style={styles.row}>
         
         <View style={styles.subBox}>
-          <Text style={styles.textHeader}> TIQ: {Time_In_Queue}</Text>
+          <Text style={styles.textHeader}> Time in Queue: {Time_In_Queue}</Text>
         </View>
       </View>
       <View style={styles.row}>
