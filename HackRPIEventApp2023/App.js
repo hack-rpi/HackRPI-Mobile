@@ -15,8 +15,8 @@ const Tab = createBottomTabNavigator();
 function InfoScreen() {
   return (
     <View style={styles.container}>
-      {/* <Food/> */}
-      <MapInfoPage></MapInfoPage>
+      { <Food/> }
+      {/* <MapInfoPage></MapInfoPage> */}
     </View>
   );
 }
