@@ -52,7 +52,7 @@ function QueCard() {
         </View>
       </View>
       {/* Add a button to pause the timer */}
-      <TouchableOpacity style={styles.button} onPress={handleLeaveQueue}>
+      <TouchableOpacity style={[styles.button, {backgroundColor: '#BE1313'}]} onPress={handleLeaveQueue}>
         <Text style={styles.buttonText}>Leave Queue</Text>
       </TouchableOpacity>
       <TouchableOpacity style={[styles.button, {backgroundColor: '#74B7EF'}]} onPress={handlePause}>
