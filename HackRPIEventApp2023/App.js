@@ -53,11 +53,11 @@ function InfoScreen() {
       </View>
       <View flexDirection="row" flex={75}>
         <View style={styles.buttonGrid} flex={1}>
-            <InfoButtonWrapper circleColor="#EF3B41" text="Foreod" icon = {faUtensils} func = {expandSection}/>
-            <InfoButtonWrapper circleColor="#F8A13A" text="Fred" icon = {faMap} func = {expandSection}/>
-            <InfoButtonWrapper circleColor="#05A55C" text="Forede" icon = {faQuestion} func = {expandSection}/>
-            <InfoButtonWrapper circleColor="#0158A9" text="Ffored" icon = {faDollarSign} func = {expandSection}/>
-            <InfoButtonWrapper circleColor="#B43D96" text="Foffeod" icon = {faBook} func = {expandSection}/>
+            <InfoButtonWrapper circleColor="#EF3B41" text="Food" icon = {faUtensils} func = {expandSection}/>
+            <InfoButtonWrapper circleColor="#F8A13A" text="Map" icon = {faMap} func = {expandSection}/>
+            <InfoButtonWrapper circleColor="#05A55C" text="FAQ" icon = {faQuestion} func = {expandSection}/>
+            <InfoButtonWrapper circleColor="#0158A9" text="Sponsors" icon = {faDollarSign} func = {expandSection}/>
+            <InfoButtonWrapper circleColor="#B43D96" text="Hacker Handbook" icon = {faBook} func = {expandSection}/>
             <InfoLine></InfoLine>
       </View>
       </View>
@@ -217,13 +217,10 @@ bordertest: {
     borderWidth: 2,
 },
 borderline: {
-  borderTopWidth: width*0.03,
+  borderTopWidth: width*0.025,
   borderColor: "#74B7EF",
-  transform: [{rotate: '45deg'},{translateY: 19.2},{translateX: -19}],
+  transform: [{rotate: '45deg'},{translateY: width*0.052},{translateX: -width*0.053}],
 }
 });
 
-// the current "line" is a silly workaround, test on other devices
-
-// BORDERS TO DEBUG COMPONENT PLACEMENT
 
