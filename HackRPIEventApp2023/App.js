@@ -1,46 +1,18 @@
 import React from "react";
-import { StyleSheet, View, Text, Image, Dimensions } from "react-native";
+import { StyleSheet, View, Text, Dimensions } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Feather } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
 import Calander from "./Box/Calander";
-import Food from "./information/Food";
-// import { colors } from './colors';
 import { globalStyles } from "./styles";
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import InfoButton from "./Components/InfoButton";
-import { faUtensils, faQuestion, faDollarSign, faBook, faMap } from "@fortawesome/free-solid-svg-icons";
-import InfoButtonFinal from "./Components/InfoButtonFinal";
-
 import InfoButtonWrapper from "./Components/InfoButtonWrapper";
+import { faQuestion, faDollarSign, faBook, faMap, faUtensils } from "@fortawesome/free-solid-svg-icons";
 
 const Tab = createBottomTabNavigator();
 
 const { width, height } = Dimensions.get('window');
 
-// other variation
-/*function InfoScreenTEST() {
-  return (
-    <View style={styles.info}>
-      <View style={styles.buttonGrid}>
-        <View style={styles.buttonRow}>
-          <InfoButtonFinal circleColor="#EF3B41" text="Food" icon = {faUtensils} func = {expandSection}/>
-          <InfoButtonFinal circleColor="#F8A13A" text="Map" icon = {faMap} func = {expandSection}/>
-        </View>
-        <View style={styles.buttonRow}>
-          <InfoButtonFinal circleColor="#05A55C" text="FAQ" icon = {faQuestion} func = {expandSection}/>
-          <InfoButtonFinal circleColor="#0158A9" text="Sponsors" icon = {faDollarSign} func = {expandSection}/>
-        </View>
-        <View style={styles.buttonRow}>
-          <InfoButtonFinal circleColor="#B43D96" text="Hacker Handbook" icon = {faBook} func = {expandSection}/>
-        </View>
-      </View>
-    </View>
-  );
-}*/
-
-// change spacing/contents
 function InfoScreen() {
   return (
     <View style={styles.info}>
@@ -53,6 +25,7 @@ function InfoScreen() {
       </View>
       <View flexDirection="row" flex={75}>
         <View style={styles.buttonGrid} flex={1}>
+<<<<<<< Updated upstream
             <InfoButtonWrapper circleColor="#EF3B41" text="Food" icon = {faUtensils} func = {expandSection}/>
             <InfoButtonWrapper circleColor="#F8A13A" text="Map" icon = {faMap} func = {expandSection}/>
             <InfoButtonWrapper circleColor="#05A55C" text="FAQ" icon = {faQuestion} func = {expandSection}/>
@@ -60,23 +33,27 @@ function InfoScreen() {
             <InfoButtonWrapper circleColor="#B43D96" text="Hacker Handbook" icon = {faBook} func = {expandSection}/>
             <InfoLine></InfoLine>
       </View>
+=======
+            <InfoButtonWrapper circleColor="#EF3B41" text="Food" icon={faUtensils} onPress={() => expandSection()} />
+            <InfoButtonWrapper circleColor="#F8A13A" text="Maps" icon={faMap} onPress={() => expandSection()} />
+            <InfoButtonWrapper circleColor="#05A55C" text="FAQ" icon={faQuestion} onPress={() => expandSection()} />
+            <InfoButtonWrapper circleColor="#0158A9" text="Sponsors" icon={faDollarSign} onPress={() => expandSection()} />
+            <InfoButtonWrapper circleColor="#B43D96" text="Hacker Handbook" icon={faBook} onPress={() => expandSection()} />
+        </View>
+>>>>>>> Stashed changes
       </View>
     </View>
   );
 }
 
-function InfoLine() {
+function FoodPage() {
   return (
-      <View flex={0.9} style={styles.row}>
-          <View flex={2}></View>
-          <View flex={0.5} style={styles.line}>
-          </View>
-          <View flex={17.5}></View>
-      </View>
-  )
+    <View style={styles.container}>
+      <Text style={styles.text}>Food Page</Text>
+    </View>
+  );
 }
 
-// this will navigate to different screens
 function expandSection() {
   console.log("cool beans");
 }
@@ -106,7 +83,6 @@ export default function App() {
       <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
-            //adding icons
             let iconName;
             if (route.name === "Info") {
               iconName = "info";
@@ -127,15 +103,17 @@ export default function App() {
             fontSize: 12,
           },
           tabBarStyle: {
-            backgroundColor: globalStyles.primary, // should this be transparent?
-            borderTopWidth: 0, // Hide top border of the tab bar
+            backgroundColor: globalStyles.primary,
+            borderTopWidth: 0,
           },
           tabBarActiveTintColor: globalStyles.accent,
           tabBarInactiveTintColor: "white",
-        })}>
+        })}
+      >
         <Tab.Screen name="Info" component={InfoScreen} />
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Queue" component={QueueScreen} />
+        <Tab.Screen name="FoodPage" component={FoodPage} />
       </Tab.Navigator>
     </NavigationContainer>
   );
@@ -189,14 +167,15 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     marginLeft: 50,
   },
-row: {
+  row: {
     flexDirection: "row",
-},
-line: {
+  },
+  line: {
     backgroundColor: "#74B7EF",
     alignItems: "center",
     justifyContent: "center",
     height: "120%",
+<<<<<<< Updated upstream
 },
 stop: {
     width: width * 0.07,
@@ -224,3 +203,12 @@ borderline: {
 });
 
 
+=======
+  },
+  borderline: {
+    borderTopWidth: width*0.03,
+    borderColor: "#74B7EF",
+    transform: [{rotate: '45deg'},{translateY: 19.2},{translateX: -19}],
+  }
+});
+>>>>>>> Stashed changes
