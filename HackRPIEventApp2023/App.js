@@ -25,22 +25,14 @@ function InfoScreen() {
       </View>
       <View flexDirection="row" flex={75}>
         <View style={styles.buttonGrid} flex={1}>
-<<<<<<< Updated upstream
-            <InfoButtonWrapper circleColor="#EF3B41" text="Food" icon = {faUtensils} func = {expandSection}/>
-            <InfoButtonWrapper circleColor="#F8A13A" text="Map" icon = {faMap} func = {expandSection}/>
-            <InfoButtonWrapper circleColor="#05A55C" text="FAQ" icon = {faQuestion} func = {expandSection}/>
-            <InfoButtonWrapper circleColor="#0158A9" text="Sponsors" icon = {faDollarSign} func = {expandSection}/>
-            <InfoButtonWrapper circleColor="#B43D96" text="Hacker Handbook" icon = {faBook} func = {expandSection}/>
-            <InfoLine></InfoLine>
-      </View>
-=======
+
             <InfoButtonWrapper circleColor="#EF3B41" text="Food" icon={faUtensils} onPress={() => expandSection()} />
             <InfoButtonWrapper circleColor="#F8A13A" text="Maps" icon={faMap} onPress={() => expandSection()} />
             <InfoButtonWrapper circleColor="#05A55C" text="FAQ" icon={faQuestion} onPress={() => expandSection()} />
             <InfoButtonWrapper circleColor="#0158A9" text="Sponsors" icon={faDollarSign} onPress={() => expandSection()} />
             <InfoButtonWrapper circleColor="#B43D96" text="Hacker Handbook" icon={faBook} onPress={() => expandSection()} />
         </View>
->>>>>>> Stashed changes
+
       </View>
     </View>
   );
@@ -175,7 +167,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     height: "120%",
-<<<<<<< Updated upstream
+
 },
 stop: {
     width: width * 0.07,
@@ -203,12 +195,3 @@ borderline: {
 });
 
 
-=======
-  },
-  borderline: {
-    borderTopWidth: width*0.03,
-    borderColor: "#74B7EF",
-    transform: [{rotate: '45deg'},{translateY: 19.2},{translateX: -19}],
-  }
-});
->>>>>>> Stashed changes
