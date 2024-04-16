@@ -38,12 +38,7 @@ function QueCard() {
         <Text style={styles.textHeader}>Your Position in Queue</Text>
       </View>
       <View style={styles.row}>
-        <View style={styles.subBox}>
-          <CircleProgress
-            percentage={(Position / Total) * 100}
-            circleWidth={130}
-          />
-        </View>
+        
         <View style={styles.subBox}>
           <Text style={styles.textHeader}> TIQ: {Time_In_Queue}</Text>
         </View>
