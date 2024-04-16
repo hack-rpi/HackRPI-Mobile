@@ -4,7 +4,7 @@ import CircleProgress from "../Components/CircleProgress";
 import calculateTimeDifference from "../HackerQue/Time_Dif";
 
 function QueCard() {
-  const Start_Time = "2023-11-10T10:00:00Z";
+  const Start_Time = "2024-11-10T10:00:00Z";
   const Position = 20;
   const Total = 100;
   const [Time_In_Queue, setTimeInQueueHours] = useState(
@@ -38,14 +38,9 @@ function QueCard() {
         <Text style={styles.textHeader}>Your Position in Queue</Text>
       </View>
       <View style={styles.row}>
+        
         <View style={styles.subBox}>
-          <CircleProgress
-            percentage={(Position / Total) * 100}
-            circleWidth={130}
-          />
-        </View>
-        <View style={styles.subBox}>
-          <Text style={styles.textHeader}> TIQ: {Time_In_Queue}</Text>
+          <Text style={styles.textHeader}> Time in Queue: {Time_In_Queue}</Text>
         </View>
       </View>
       <View style={styles.row}>
@@ -57,13 +52,18 @@ function QueCard() {
         </View>
       </View>
       {/* Add a button to pause the timer */}
-      <TouchableOpacity style={styles.button} onPress={handlePause}>
-        <Text style={styles.buttonText}>{isPaused ? 'Resume' : 'Pause'}</Text>
-      </TouchableOpacity>
-      {/* Add a button to leave the queue */}
-      <TouchableOpacity style={styles.button} onPress={handleLeaveQueue}>
+      <TouchableOpacity style={[styles.button, {backgroundColor: '#BE1313'}]} onPress={handleLeaveQueue}>
         <Text style={styles.buttonText}>Leave Queue</Text>
       </TouchableOpacity>
+      <TouchableOpacity style={[styles.button, {backgroundColor: '#74B7EF'}]} onPress={handlePause}>
+         <Text style={[styles.buttonText, {color: 'black'}]}>
+         {isPaused ? 'Resume' : 'Pause Position'}
+         </Text>
+      </TouchableOpacity>
+
+
+      {/* Add a button to leave the queue */}
+      
     </View>
   );
 }
