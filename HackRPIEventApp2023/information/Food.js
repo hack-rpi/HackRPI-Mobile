@@ -8,7 +8,7 @@ const Food = () => {
     <SafeAreaView style={styles.FoodStyle}>
       <View style={styles.headerContainer}>
         <Text style={styles.header}>Maps</Text>
-      </View>
+      </View> 
       <ScrollView style={styles.ScrollView} showsVerticalScrollIndicator={true}>
         <ImageSlideshow />
 
