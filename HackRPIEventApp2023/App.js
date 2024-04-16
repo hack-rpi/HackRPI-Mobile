@@ -8,13 +8,15 @@ import Calander from "./Box/Calander";
 import Food from "./information/Food";
 import HackerQue from "./HackerQue/QueEntry.js";
 import { globalStyles } from "./styles";
+import MapInfoPage from "./Map/map.js";
 
 const Tab = createBottomTabNavigator();
 
 function InfoScreen() {
   return (
     <View style={styles.container}>
-      <Food />
+      {/* <Food/> */}
+      <MapInfoPage></MapInfoPage>
     </View>
   );
 }

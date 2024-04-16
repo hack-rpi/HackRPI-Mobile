@@ -1,4 +1,6 @@
 import React, { useState, useRef } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import {
   View,
   Image,
@@ -101,7 +103,7 @@ const ImageSlideshow = () => {
               setModalVisible(false);
             }}
           >
-            <Image style = {styles.exitButtonImage} source = {require('./x.svg')}/>
+            <FontAwesomeIcon icon={["fa", "times"]} style={styles.exitButtonIcon} />
           </TouchableOpacity>
           
           {/* Use ImageZoom to enable zooming and rotating */}
