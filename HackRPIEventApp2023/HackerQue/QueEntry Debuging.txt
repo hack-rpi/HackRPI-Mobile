@@ -1,0 +1,11 @@
+Not sure entirely what went wrong here; This page was working earlier in the semester,
+but a later commit seems to have broken it. I first was looking into fixing the mentor queue,
+because all the elements within the page where so smushed together that I couldn't even 
+tell what page it was and just accepted the text at the top, but after some exploration
+i realized that changes to the mentor queue elements didn't change the page, not matter
+how extreme. After looking back into the QueEntry page, I assumed something had
+gone wrong with the containers, and spent time messing with different orders of
+containers wrapping around each other, but it seemed to all be in order. Eventually
+I found the issue was fixed by just making the main container larger, and slightly shifting
+things around with padding till it looked normal again. I'm really not sure how this could have
+broken in this manner naturally, but it should work now.

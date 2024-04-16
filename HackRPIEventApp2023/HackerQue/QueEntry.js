@@ -90,7 +90,7 @@ const QueEntry = ({ name, roomNumber, problemType }) => {
       </View>
       <View style={{flex: 1, justifyContent: 'flex-start', marginTop:250}}>
       <TouchableOpacity style={styles.button} onPress={submitForm}>
-        <Text style={styles.interfaceText}>{inQue ? "Exit Queue" : "Join in the Queue"}</Text>
+        <Text style={styles.interfaceText}>{inQue ? "Exit Queue" : "Join Queue"}</Text>
       </TouchableOpacity>
       </View>
     </View>
@@ -121,6 +121,7 @@ const styles = StyleSheet.create({
     margin: 20,
     marginTop: 90, 
     marginBottom: 30,
+    height: 400,
   },
   input: {
     height: 60,
@@ -157,12 +158,11 @@ const styles = StyleSheet.create({
     color: "black",
   },
   largeInput: {
-    height: 180, 
+    height: 160, 
     width: 300,
     backgroundColor: "white",
     borderColor: "white",
     borderWidth: 2,
-    marginBottom: 10,
     paddingHorizontal: 10,
     borderRadius: 8,
     color: "black",
@@ -190,6 +190,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 10,
   },
   thumbIcon: {
     borderRadius: 100,
