@@ -8,12 +8,18 @@ import Calander from "./Box/Calander";
 import { globalStyles } from "./styles";
 import InfoButtonWrapper from "./Components/InfoButtonWrapper";
 import { faQuestion, faDollarSign, faBook, faMap, faUtensils } from "@fortawesome/free-solid-svg-icons";
+import FoodPage from "./information/FoodPage";
 
 const Tab = createBottomTabNavigator();
 
 const { width, height } = Dimensions.get('window');
 
 function InfoScreen() {
+  // Define expandSection function within InfoScreen component
+  const expandSection = () => {
+    console.log("cool beans");
+  };
+
   return (
     <View style={styles.info}>
       <View flex={20} style={styles.titleBlock}>
@@ -25,36 +31,29 @@ function InfoScreen() {
       </View>
       <View flexDirection="row" flex={75}>
         <View style={styles.buttonGrid} flex={1}>
-
-            <InfoButtonWrapper circleColor="#EF3B41" text="Food" icon={faUtensils} onPress={() => expandSection()} />
-            <InfoButtonWrapper circleColor="#F8A13A" text="Maps" icon={faMap} onPress={() => expandSection()} />
-            <InfoButtonWrapper circleColor="#05A55C" text="FAQ" icon={faQuestion} onPress={() => expandSection()} />
-            <InfoButtonWrapper circleColor="#0158A9" text="Sponsors" icon={faDollarSign} onPress={() => expandSection()} />
-            <InfoButtonWrapper circleColor="#B43D96" text="Hacker Handbook" icon={faBook} onPress={() => expandSection()} />
+          <InfoButtonWrapper circleColor="#EF3B41" text="Food" icon={faUtensils} onPress={() => expandSection()} />
+          <InfoButtonWrapper circleColor="#F8A13A" text="Maps" icon={faMap} onPress={() => expandSection()} />
+          <InfoButtonWrapper circleColor="#05A55C" text="FAQ" icon={faQuestion} onPress={() => expandSection()} />
+          <InfoButtonWrapper circleColor="#0158A9" text="Sponsors" icon={faDollarSign} onPress={() => expandSection()} />
+          <InfoButtonWrapper circleColor="#B43D96" text="Hacker Handbook" icon={faBook} onPress={() => expandSection()} />
         </View>
-
       </View>
     </View>
   );
 }
 
-function FoodPage() {
+function Food() {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Food Page</Text>
+      <FoodPage />
     </View>
   );
-}
-
-function expandSection() {
-  console.log("cool beans");
 }
 
 function HomeScreen() {
   return (
     <View style={styles.container}>
       <Calander />
-
       <StatusBar style="auto" />
     </View>
   );
@@ -105,7 +104,7 @@ export default function App() {
         <Tab.Screen name="Info" component={InfoScreen} />
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Queue" component={QueueScreen} />
-        <Tab.Screen name="FoodPage" component={FoodPage} />
+        <Tab.Screen name="Food" component={Food} />
       </Tab.Navigator>
     </NavigationContainer>
   );
@@ -137,21 +136,15 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     gap: 0,
   },
-  buttonRow: {
-    flex: 1,
-    flexDirection: "row",
-    gap: height*0.05,
-    justifyContent: "center",
-  },
   titleBlock: {
     width: "100%",
   },
   title: {
-    fontSize: width*.15,
+    fontSize: width * .15,
     fontWeight: "bold",
     color: "#FFFFFF",
-    marginTop: height*.05,
-    marginLeft: width*0.1,
+    marginTop: height * .05,
+    marginLeft: width * 0.1,
   },
   subtitle: {
     fontSize: 30,
@@ -167,31 +160,28 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     height: "120%",
-
-},
-stop: {
+  },
+  stop: {
     width: width * 0.07,
     height: width * 0.07,
     borderRadius: width * 0.07,
     backgroundColor: "#74B7EF",
     alignItems: "center",
     justifyContent: "center",
-},
-inner: {
+  },
+  inner: {
     width: width * 0.04,
     height: width * 0.04,
     borderRadius: width * 0.04,
     backgroundColor: "#25303C",
-},
-bordertest: {
+  },
+  bordertest: {
     borderColor: "#fcfdfb",
     borderWidth: 2,
-},
-borderline: {
-  borderTopWidth: width*0.025,
-  borderColor: "#74B7EF",
-  transform: [{rotate: '45deg'},{translateY: width*0.052},{translateX: -width*0.053}],
-}
+  },
+  borderline: {
+    borderTopWidth: width * 0.025,
+    borderColor: "#74B7EF",
+    transform: [{ rotate: '45deg' }, { translateY: width * 0.052 }, { translateX: -width * 0.053 }],
+  }
 });
-
-
