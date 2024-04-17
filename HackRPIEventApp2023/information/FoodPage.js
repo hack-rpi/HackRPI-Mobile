@@ -1,5 +1,5 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import { View, Text, StyleSheet } from "react-native";
 import { Feather } from "@expo/vector-icons";
 
 const HeaderContainer = ({ title }) => {
@@ -14,28 +14,48 @@ const EmptyContainer = () => {
   return <View style={styles.emptyContainer} />;
 };
 
-const MealContainer = ({ meal, onPress, isActive }) => {
+const MealContainer = ({ meal }) => {
+  const [expanded, setExpanded] = useState(false);
+  const [isBellActive, setIsBellActive] = useState(false);
+
+  const toggleBell = () => {
+    setIsBellActive(!isBellActive);
+  };
+
   return (
-    <TouchableOpacity style={[styles.container, isActive && styles.active]} onPress={onPress}>
-      <Text style={[styles.text, isActive && styles.whiteText]}>{meal}</Text>
-      <Feather name={isActive ? "bell-off" : "bell"} size={30} color={isActive ? "red" : "black"} />
-    </TouchableOpacity>
+    <View style={styles.container}>
+      <View style={styles.mealHeader}>
+        <Text style={styles.text}>{meal}</Text>
+        <Feather
+          name={expanded ? "chevron-up" : "chevron-down"}
+          size={24}
+          color="black"
+          onPress={() => setExpanded(!expanded)}
+        />
+      </View>
+      {expanded && (
+        <View style={styles.additionalInfoContainer}>
+          <Text style={styles.additionalInfo}>Additional Info</Text>
+          <Feather
+            name={isBellActive ? "bell" : "bell-off"}
+            size={24}
+            color={isBellActive ? "red" : "black"}
+            onPress={toggleBell}
+          />
+        </View>
+      )}
+    </View>
   );
 };
 
 const MealSelector = () => {
-  const handleMealSelection = (meal) => {
-    console.log(`Selected ${meal}`);
-    // Add your logic for handling the meal selection here
-  };
-
   return (
     <View style={styles.mealContainer}>
       <HeaderContainer title="Meals" />
       <EmptyContainer />
-      <MealContainer meal="Breakfast" onPress={() => handleMealSelection("Breakfast")} />
-      <MealContainer meal="Lunch" onPress={() => handleMealSelection("Lunch")} />
-      <MealContainer meal="Dinner" onPress={() => handleMealSelection("Dinner")} />
+      <MealContainer meal="Breakfast" />
+      <MealContainer meal="Lunch" />
+      <MealContainer meal="Dinner" />
     </View>
   );
 };
@@ -60,24 +80,29 @@ const styles = StyleSheet.create({
     height: 20, // Adjust height as needed
   },
   container: {
-    width: 100,
-    height: 100,
+    width: 300, // Adjust width as needed
     borderWidth: 3,
     borderRadius: 20,
     padding: 10,
+    marginBottom: 10,
+  },
+  mealHeader: {
+    flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 10,
   },
   text: {
     fontSize: 16,
     fontWeight: "bold",
   },
-  whiteText: {
-    color: "white", // Change text color to white
+  additionalInfoContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: 10,
   },
-  active: {
-    backgroundColor: "lightgray", // Change to your desired active background color
+  additionalInfo: {
+    fontSize: 16,
   },
 });
 
