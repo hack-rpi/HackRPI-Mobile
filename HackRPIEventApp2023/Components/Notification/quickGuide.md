@@ -281,3 +281,48 @@ Include media attachments for a more engaging experience. Use the `mutable-conte
 ### **Notification Priority**
 
 Set the priority to high for urgent notifications. Lower priority can be used for less critical updates to conserve battery on user devices.
+
+## **Troubleshooting Push Notifications**
+
+Common issues and tips for troubleshooting:
+
+- **Notification Delivery Issues**
+  - Verify the device token and ensure it matches the intended device.
+  - Check the APNs environment settings (development or production) to align with your certificate.
+- **Notifications Not Displaying**
+  - Ensure that notification settings are configured to display alerts and banners.
+  - Confirm that the notification payload is correct and includes an alert or sound.
+
+## **Monitoring and Analytics**
+
+Use Apple's Push Notification service logs or third-party services to analyze notification delivery and engagement.
+
+## **Android Development with Expo**
+
+### **Setup with EAS Build**
+
+Use Expo Application Services for a simplified setup and build process compatible with both simulators and physical devices.
+
+### **Installation and Configuration**
+
+- Install EAS CLI and log into your Expo account. Configure the project with `eas build:configure` and proceed to build.
+- For Android, integrate FCM by modifying the `google-services.json` and set up necessary credentials.
+
+### **Expo Notifications Library**
+
+- Install `expo-notifications` along with required dependencies like `expo-device` and `expo-constants`.
+- Use the installed libraries to manage and send notifications efficiently across platforms.
+
+### **Testing and Deployment**
+
+- Test the notification functionality extensively on various devices.
+- Use `expo start` to launch the project and follow the provided instructions to test different notification features.
+
+### **Additional Tools**
+
+- **Android Studio Setup**: Install and configure Android Studio to create virtual devices and test apps directly.
+- **Using Virtual Devices**: Test apps on a range of Android virtual devices using Android Studio's AVD Manager.
+
+## **Conclusion**
+
+This guide provides a robust foundation for setting up push notifications on iOS and developing cross-platform apps using Expo. By following these detailed steps, developers can enhance app engagement and ensure a smooth user experience across both iOS and Android platforms. Always keep your tools updated and test extensively to adapt to new OS releases and technological changes.
