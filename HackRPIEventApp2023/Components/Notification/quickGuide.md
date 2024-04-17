@@ -249,3 +249,35 @@ If you need to install and configure Android Studio for development, follow thes
    - Follow the prompts to create the virtual device.
 
 By completing these setups, you can start developing and testing applications using Expo's notification capabilities on your local machine.
+
+## **Handling Notifications in iOS**
+
+Once your app is set up to receive notifications, you need to ensure they are handled correctly:
+
+- **Set the Badge Number**: Typically, you might want to clear the notification badge once a notification is read:
+  ```objc
+  application.applicationIconBadgeNumber = 0;
+  ```
+- **Process Incoming Notifications**: Use the `didReceiveRemoteNotification:` method to manage the data received in notifications:
+  ```swift
+  func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
+      // Handle the notification data
+      print("Received notification: \(userInfo)")
+  }
+  ```
+
+## **Advanced Notification Features**
+
+Enhance the functionality of your notifications with these advanced features:
+
+### **Content-Available Notifications**
+
+Ideal for applications that require fresh data even when in the background. Useful for news apps or any service that needs timely updates.
+
+### **Rich Notifications**
+
+Include media attachments for a more engaging experience. Use the `mutable-content` flag and modify the notification in a service extension.
+
+### **Notification Priority**
+
+Set the priority to high for urgent notifications. Lower priority can be used for less critical updates to conserve battery on user devices.
