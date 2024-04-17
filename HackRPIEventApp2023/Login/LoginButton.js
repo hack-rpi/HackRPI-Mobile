@@ -4,8 +4,10 @@ import { View } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack'; // Import createStackNavigator from React Navigation
 import Login from './Login';
 
+// Create a stack navigator
 const Stack = createStackNavigator();
 
+// Parent component
 const ParentComponent = () => {
   return (
     <Stack.Navigator>
@@ -15,6 +17,7 @@ const ParentComponent = () => {
   );
 };
 
+// Home screen component
 const HomeScreen = ({ navigation }) => {
   return (
     <View style={{ flex: 20, justifyContent: 'center', alignItems: 'center' }}>

@@ -2,13 +2,16 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, Alert, ScrollView } from 'react-native';
 import {CheckUser} from './Backend';
 
+// Login component
 const Login = () => {
+  // State variables
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [verificationCode, setVerificationCode] = useState('');
   const [generatedCode, setGeneratedCode] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
 
+  // Function to generate a random 6-character code
   const generateRandomCode = () => {
     const chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     let code = '';
@@ -18,6 +21,7 @@ const Login = () => {
     setGeneratedCode(code);
   };
 
+  // Function to handle the login process
   const handleLogin = () => {
     if (verificationCode != generatedCode) {
       Alert.alert('Invalid verification code');
@@ -42,11 +46,13 @@ const Login = () => {
     }
   };
 
+  // Function to reload the verification code
   const handleReloadVerificationCode = () => {
     generateRandomCode();
     setVerificationCode('');
   };
 
+  // Function to handle the logout process
   const handleLogout = () => {
     Alert.alert(
       'Confirm Logout',
@@ -74,6 +80,7 @@ const Login = () => {
     generateRandomCode();
   }, []);
 
+  // Render the login form
   return (
     <ScrollView style={{ flex: 1}}>
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 20,

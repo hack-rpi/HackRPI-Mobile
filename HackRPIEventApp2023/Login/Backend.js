@@ -1,5 +1,4 @@
 import { initializeApp } from "firebase/app";
-import { getAuth} from "firebase/auth";
 import { initializeAuth, getReactNativePersistence } from 'firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {getFirestore, collection, getDocs } from "firebase/firestore";
@@ -21,23 +20,16 @@ const auth = initializeAuth(app, {
 });
 const db = getFirestore(app);
 
+// Check if the user exists in the database
 const CheckUser = async (username, password) => {
-  console.log("Username:", username);
-  console.log("Password:", password);
-
+  // Get a snapshot of the users collection
   const usersCollection = collection(db, "users");
   const userSnapshot = await getDocs(usersCollection);
-  console.log("User snapshot:", userSnapshot.docs.map(doc => doc.data()));
-
   const matchFound = userSnapshot.docs.some(doc => {
     const userData = doc.data();
-    console.log("Checking user:", userData);
     const isMatch = userData.Uid === username && userData.Pass === password;
-    console.log("Match found:", isMatch);
     return isMatch;
   });
-
-  console.log("Match found:", matchFound);
   return matchFound;
 }
 
