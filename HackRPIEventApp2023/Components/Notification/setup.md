@@ -32,5 +32,4 @@ For run on iOS (need an Apple developer account before running)
 ```
 expo start
 ```
-
 ## FYI: comments in the "useEffect(() => {}" function in "CalanderObject.js" provide a comprehensive understanding on how the push notification works, as well as customizing notification text and style for further . 
