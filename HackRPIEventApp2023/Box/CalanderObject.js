@@ -87,6 +87,7 @@ const CalanderObject = ({
 
   const [notificationId, setNotificationId] = useState(null); // record the scheduled notification id
 
+  // Function to toggle the isActive state
   const handleClick =async() => {
     setIsActive(!isActive);
 
@@ -103,6 +104,7 @@ const CalanderObject = ({
       console.log(response);
     });
 
+    // parsing the dateAndTime String
     const notiTime = dateAndTime;
     const [dateString, timeString] = notiTime.split(' ');
     const [year, month, day] = dateString.split('-');
@@ -113,7 +115,9 @@ const CalanderObject = ({
 
     const currentTime = new Date(); // get current time
 
-    if (!isActive) {
+
+    const notiPush = !isActive; // notiPush represents the status of notification need to push or not.
+    if (notiPush) {
       const scheduleNotification = async () => {
         try {
           console.log('Current Time: ', currentTime, 'Trigger Time: ', triggerTime);
@@ -121,7 +125,7 @@ const CalanderObject = ({
           console.log('Workshop Title: ', workshop_Title, 'Date and Time: ', dateAndTime, 'Delay: ', delay);
 
 
-          if (delay > 0) {
+          if (delay > 0) {  // when the workshop is in the future
             const notificationId = await Notifications.scheduleNotificationAsync({
               content: {
                 title: 'Workshop Reminder', // notification title can be changed here!
@@ -134,10 +138,10 @@ const CalanderObject = ({
             setNotificationId(notificationId);
             console.log(`Notification scheduled with ID: ${notificationId}`);
           } else {
-            console.log(isActive);
+            console.log(isActive);  // console log the error when not in the future, because the passed workshop will not display in the page.
             console.log('The workshop has passed. Notification not scheduled.');
           }
-        } catch (error){
+        } catch (error){  // one possibility to cause this error would be the push notification environment is not properly set up.
           console.error('Failed to schedule notification:', error);
           // Handle the error, e.g., show an error message to the user
           alert('Failed to schedule notification. Please try again.');
@@ -145,7 +149,7 @@ const CalanderObject = ({
       };
 
       scheduleNotification();
-    }else{
+    }else{  // if the "bell-off" icon is active, cancel the scheduled notification
       if (notificationId) {
         console.log('Cancelling notification with ID: ', notificationId);
         Notifications.cancelScheduledNotificationAsync(notificationId);
