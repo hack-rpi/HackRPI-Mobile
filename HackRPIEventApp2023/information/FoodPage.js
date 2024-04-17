@@ -1,25 +1,30 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-import InfoButtonWrapper from "./Components/InfoButtonWrapper";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
 const FoodPage = () => {
+  const handleMealSelection = (meal) => {
+    console.log(`Selected ${meal}`);
+    // Add your logic for handling the meal selection here
+  };
+
   return (
     <View style={styles.outerContainer}>
       <View style={styles.innerContainer}>
         <Text style={styles.text}>Meals</Text>
         <View style={styles.bubbleContainer}>
-          <InfoButtonWrapper circleColor="red" text="Breakfast" onPress={() => handleMealSelection("Breakfast")} />
-          <InfoButtonWrapper circleColor="red" text="Lunch" onPress={() => handleMealSelection("Lunch")} />
-          <InfoButtonWrapper circleColor="red" text="Dinner" onPress={() => handleMealSelection("Dinner")} />
+          <TouchableOpacity style={styles.mealButton} onPress={() => handleMealSelection("Breakfast")}>
+            <Text style={styles.mealText}>Breakfast</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.mealButton} onPress={() => handleMealSelection("Lunch")}>
+            <Text style={styles.mealText}>Lunch</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.mealButton} onPress={() => handleMealSelection("Dinner")}>
+            <Text style={styles.mealText}>Dinner</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
   );
-};
-
-const handleMealSelection = (meal) => {
-  console.log(`Selected ${meal}`);
-  // Add your logic for handling the meal selection here
 };
 
 const styles = StyleSheet.create({
@@ -42,6 +47,17 @@ const styles = StyleSheet.create({
   bubbleContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
+  },
+  mealButton: {
+    backgroundColor: "red",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+  },
+  mealText: {
+    fontSize: 16,
+    color: "#fff",
+    fontWeight: "bold",
   },
 });
 
