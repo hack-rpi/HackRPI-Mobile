@@ -124,3 +124,74 @@ eas build --platform all
 Or, to build for a specific platform:
 
 - For Android:
+
+  ```bash
+  eas build --platform android
+  ```
+
+- For iOS:
+
+  ```bash
+  eas build --platform ios
+  ```
+
+To monitor the build process, use:
+
+```bash
+eas build:list
+```
+
+### Method 2: Using expo-notifications Library
+
+This method is suited for physical devices. Ensure your device is connected to your development machine.
+
+#### Step 1: Install Required Libraries
+
+```bash
+npx expo install expo-notifications expo-device expo-constants
+```
+
+#### Step 2: Setup for Android
+
+Modify the `google-services.json` file to connect to your Google account and set up your FCM server credentials:
+
+- Follow the instructions [here to add Android FCM V1 credentials](https://docs.expo.dev/push-notifications/fcm-credentials).
+
+#### Step 3: Setup for iOS
+
+You need an active Apple Developer account to proceed:
+
+```bash
+eas build
+```
+
+### Testing Push Notifications
+
+Start your Expo project:
+
+```bash
+expo start
+```
+
+Follow the testing instructions detailed in the comments within the `handleClick` function in `CalendarObject.js`.
+
+### Additional Setup: Android Studio
+
+If you need to install and configure Android Studio for development, follow these steps:
+
+1. **Download and Install:**
+
+   - Go to the [Android Studio download page](https://developer.android.com/studio) and download the installer for your operating system.
+   - Run the installer and follow the on-screen instructions to install Android Studio.
+
+2. **Configure Android Studio:**
+
+   - Open Android Studio.
+   - Go through the 'Android Studio Setup Wizard'. This includes downloading Android SDK components that are required for development.
+
+3. **Create a Virtual Device:**
+   - In Android Studio, open the AVD Manager by navigating to `Tools > AVD Manager`.
+   - Click on "Create Virtual Device", select your preferred device definition, and then select a system image (e.g., a recent Android OS version).
+   - Follow the prompts to create the virtual device.
+
+By completing these setups, you can start developing and testing applications using Expo's notification capabilities on your local machine.
