@@ -1,110 +1,72 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { Feather } from "@expo/vector-icons";
+import React from "react";
+import { View, StyleSheet, TouchableOpacity, Text, Image } from "react-native";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import FoodMenu from "./FoodMenu"; // Import the FoodMenu component
+import { ScrollView } from "react-native-gesture-handler";
 
-const HeaderContainer = ({ title }) => {
-  return (
-    <View style={styles.headerContainer}>
-      <Text style={styles.headerText}>{title}</Text>
-    </View>
-  );
-};
-
-const EmptyContainer = () => {
-  return <View style={styles.emptyContainer} />;
-};
-
-const MealContainer = ({ meal }) => {
-  const [expanded, setExpanded] = useState(false);
-  const [isBellActive, setIsBellActive] = useState(false);
-
-  const toggleBell = () => {
-    setIsBellActive(!isBellActive);
-  };
+const FoodPage = ({ onClose }) => {
+  // Define the menu items
+  const menuItems = [
+    { name: "Breakfast", image: require("./assets/breakfast.png") },
+    { name: "Lunch", image: require("./assets/lunch.png") },
+    { name: "Dinner", image: require("./assets/dinner.png") },
+  ];
 
   return (
     <View style={styles.container}>
-      <View style={styles.mealHeader}>
-        <Text style={[styles.text, { color: "white" }]}>{meal}</Text>
-        <Feather
-          name={expanded ? "chevron-up" : "chevron-down"}
-          size={24}
-          color="white"
-          onPress={() => setExpanded(!expanded)}
-        />
+      {/* Close button */}
+      <TouchableOpacity style={styles.closeButton} onPress={onClose}>
+        <FontAwesomeIcon icon={faTimes} size={24} color="white" />
+      </TouchableOpacity>
+      {/* Header */}
+      <View style={styles.header}>
+        <Text style={styles.headerText}>Food</Text>
       </View>
-      {expanded && (
-        <View style={styles.additionalInfoContainer}>
-          <Text style={[styles.additionalInfo, { color: "white" }]}>Additional Info</Text>
-          <Feather
-            name={isBellActive ? "bell" : "bell-off"}
-            size={24}
-            color={isBellActive ? "red" : "white"}
-            onPress={toggleBell}
-          />
-        </View>
-      )}
-    </View>
-  );
-};
-
-const MealSelector = () => {
-  return (
-    <View style={styles.mealContainer}>
-      <HeaderContainer title="Meals" />
-      <EmptyContainer />
-      <MealContainer meal="Breakfast" />
-      <MealContainer meal="Lunch" />
-      <MealContainer meal="Dinner" />
+      {/* Menu items */}
+      <ScrollView contentContainerStyle={styles.menuContainer} horizontal={true}>
+        {menuItems.map((item, index) => (
+          <FoodMenu key={index} name={item.name} image={item.image} />
+        ))}
+      </ScrollView>
+      {/* Bottom line */}
+      <View style={styles.bottomLine} />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  mealContainer: {
-    flexDirection: "column",
-    alignItems: "center",
-    backgroundColor: "transparent",
-    padding: 10,
-    borderRadius: 10,
-    marginBottom: 0,
+  container: {
+    flex: 1,
+    backgroundColor: "black",
   },
-  headerContainer: {
-    marginBottom: 10,
+  closeButton: {
+    position: "absolute",
+    top: 20,
+    right: 20,
+    zIndex: 1,
+  },
+  header: {
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 50,
   },
   headerText: {
-    fontSize: 20,
-    fontWeight: "bold",
+    fontSize: 24,
     color: "white",
   },
-  emptyContainer: {
-    height: 20, // Adjust height as needed
+  menuContainer: {
+    marginTop: 30,
+    paddingHorizontal: 20,
   },
-  container: {
-    width: 300, // Adjust width as needed
-    borderWidth: 3,
-    borderRadius: 20,
-    padding: 10,
-    marginBottom: 10,
-  },
-  mealHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  text: {
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-  additionalInfoContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginTop: 10,
-  },
-  additionalInfo: {
-    fontSize: 16,
+  bottomLine: {
+    height: 2,
+    backgroundColor: "white",
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
   },
 });
 
-export default MealSelector;
+export default FoodPage;
