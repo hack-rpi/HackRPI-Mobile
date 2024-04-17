@@ -4,13 +4,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import FoodMenu from "./FoodMenu"; // Import the FoodMenu component
 import { ScrollView } from "react-native-gesture-handler";
+import Bubble from "./Bubble"; // Import the Bubble component
 
 const FoodPage = ({ onClose }) => {
   // Define the menu items
   const menuItems = [
-    { name: "Breakfast", image: require("./assets/breakfast.png") },
-    { name: "Lunch", image: require("./assets/lunch.png") },
-    { name: "Dinner", image: require("./assets/dinner.png") },
+    { name: "Breakfast", image: require("./assets/breakfast.png"), circleColor: "#EF3B41" },
+    { name: "Lunch", image: require("./assets/lunch.png"), circleColor: "#F8A13A" },
+    { name: "Dinner", image: require("./assets/dinner.png"), circleColor: "#05A55C" },
   ];
 
   return (
@@ -26,7 +27,11 @@ const FoodPage = ({ onClose }) => {
       {/* Menu items */}
       <ScrollView contentContainerStyle={styles.menuContainer} horizontal={true}>
         {menuItems.map((item, index) => (
-          <FoodMenu key={index} name={item.name} image={item.image} />
+          <View key={index}>
+            <Bubble circleColor={item.circleColor}>
+              <FoodMenu name={item.name} image={item.image} />
+            </Bubble>
+          </View>
         ))}
       </ScrollView>
       {/* Bottom line */}
