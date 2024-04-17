@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, Button } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Feather } from "@expo/vector-icons";
@@ -7,33 +7,56 @@ import { StatusBar } from "expo-status-bar";
 import Calander from "./Box/Calander";
 import Food from "./information/Food";
 import HackerQue from "./HackerQue/QueEntry.js";
-// import { colors } from './colors';
 import { globalStyles } from "./styles";
+import Login from "./Login/Login";
 
 const Tab = createBottomTabNavigator();
 
 function InfoScreen() {
+  const goToLogin = () => {
+    navigation.navigate("Login");
+  };
+
   return (
     <View style={styles.container}>
       <Food />
+      <Button title="Login" onPress={goToLogin} />
+      <StatusBar style="auto" />
     </View>
   );
 }
 
-function HomeScreen() {
+function HomeScreen({ navigation }) {
+  const goToLogin = () => {
+    navigation.navigate("Login");
+  };
+
   return (
     <View style={styles.container}>
       <Calander />
-
+      <Button title="Login" onPress={goToLogin} />
       <StatusBar style="auto" />
     </View>
   );
 }
 
 function QueueScreen() {
+  const goToLogin = () => {
+    navigation.navigate("Login");
+  };
   return (
     <View style={styles.container}>
-      <HackerQue></HackerQue>
+      <HackerQue />
+      <Button title="Login" onPress={goToLogin} />
+      <StatusBar style="auto" />
+    </View>
+  );
+}
+
+function LoginScreen() {
+  return (
+    <View style={styles.container}>
+      <Login/>
     </View>
   );
 }
@@ -44,7 +67,6 @@ export default function App() {
       <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
-            //adding icons
             let iconName;
             if (route.name === "Info") {
               iconName = "info";
@@ -52,6 +74,9 @@ export default function App() {
               iconName = "home";
             } else if (route.name === "Queue") {
               iconName = "user";
+            }
+            else if (route.name === "Login") {
+              iconName = "log-in";
             }
             return (
               <Feather
@@ -65,15 +90,17 @@ export default function App() {
             fontSize: 12,
           },
           tabBarStyle: {
-            backgroundColor: globalStyles.primary, // should this be transparent?
-            borderTopWidth: 0, // Hide top border of the tab bar
+            backgroundColor: globalStyles.primary,
+            borderTopWidth: 0,
           },
           tabBarActiveTintColor: globalStyles.accent,
           tabBarInactiveTintColor: "white",
-        })}>
-        <Tab.Screen name="Info" component={InfoScreen} />
+        })}
+      >
         <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Info" component={InfoScreen} />
         <Tab.Screen name="Queue" component={QueueScreen} />
+        <Tab.Screen name="Login" component={LoginScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
@@ -85,19 +112,5 @@ const styles = StyleSheet.create({
     backgroundColor: globalStyles.primary,
     alignItems: "center",
     justifyContent: "center",
-  },
-  text: {
-    fontSize: globalStyles.fontSize,
-    fontWeight: globalStyles.fontWeight,
-    color: globalStyles.text,
-  },
-  circleContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-around",
-  },
-  circle: {
-    borderRadius: 50,
-    overflow: "hidden",
   },
 });
