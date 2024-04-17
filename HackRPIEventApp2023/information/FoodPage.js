@@ -25,21 +25,21 @@ const MealContainer = ({ meal }) => {
   return (
     <View style={styles.container}>
       <View style={styles.mealHeader}>
-        <Text style={styles.text}>{meal}</Text>
+        <Text style={[styles.text, { color: "white" }]}>{meal}</Text>
         <Feather
           name={expanded ? "chevron-up" : "chevron-down"}
           size={24}
-          color="black"
+          color="white"
           onPress={() => setExpanded(!expanded)}
         />
       </View>
       {expanded && (
         <View style={styles.additionalInfoContainer}>
-          <Text style={styles.additionalInfo}>Additional Info</Text>
+          <Text style={[styles.additionalInfo, { color: "white" }]}>Additional Info</Text>
           <Feather
             name={isBellActive ? "bell" : "bell-off"}
             size={24}
-            color={isBellActive ? "red" : "black"}
+            color={isBellActive ? "red" : "white"}
             onPress={toggleBell}
           />
         </View>
@@ -75,6 +75,7 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 20,
     fontWeight: "bold",
+    color: "white",
   },
   emptyContainer: {
     height: 20, // Adjust height as needed
