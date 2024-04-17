@@ -111,6 +111,7 @@ A/B Testing: Implementing controlled experiments to compare different notificati
 User Segmentation
 Demographic Segmentation:
 Tailoring notifications based on user demographics to increase relevance and engagement.
+Behavioral Segmentation: Delivering personalized notifications based on past user actions and preferences.
 Enhancing User Experience
 
 Notification Priority and Management
