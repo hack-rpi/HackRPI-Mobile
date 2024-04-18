@@ -39,11 +39,11 @@ function QueCard() {
       </View>
       <View style={[styles.subBox2,{alignItems: 'center'}]}>
       <View style={[styles.subBox, styles.textBox ,{alignItems: 'center'}]}>
-      <Text style={[styles.textBody, { textAlign: 'center' }]}>Your queue position: {'\n'}500 </Text>
+      <Text style={[styles.textBody, { textAlign: 'center',fontSize: 24 }]}>Your queue position: {'\n'}{'\n'}500 </Text>
         </View>
         <Text> {'\n'}</Text>
         <View style={[styles.subBox1, styles.textBox ,{alignItems: 'center'}]}>
-      <Text style={[styles.textBody, { textAlign: 'center' }]}>Time in Queue: {'\n'}{Time_In_Queue}</Text>
+      <Text style={[styles.textBody, { textAlign: 'center',color: '#25303C', fontSize: 24  }]}>Time in Queue: {'\n'}{Time_In_Queue}</Text>
         </View>
       </View>
       <View style={[styles.row, {alignItems: 'center'}]}>
