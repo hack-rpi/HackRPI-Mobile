@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import CircleProgress from "../Components/CircleProgress";
 import calculateTimeDifference from "../HackerQue/Time_Dif";
 
+// Working with the timer
 function QueCard() {
   const Start_Time = "2024-11-10T10:00:00Z";
   const Position = 20;
@@ -33,10 +34,12 @@ function QueCard() {
   };
 
   return (
+    //creating enough soace for the boxes
     <View style={[styles.textHeader,{alignItems: 'center'}]} >
       <View>
         <Text>{'\n'}{'\n'}{'\n'}{'\n'}</Text>
       </View>
+      
       <View style={[styles.subBox2,{alignItems: 'center'}]}>
       <View style={[styles.subBox, styles.textBox ,{alignItems: 'center'}]}>
       <Text style={[styles.textBody, { textAlign: 'center',fontSize: 25 }]}>Your queue position: {'\n'}{'\n'}500 </Text>
@@ -46,90 +49,55 @@ function QueCard() {
       <Text style={[styles.textBody, { textAlign: 'center',color: '#25303C', fontSize: 25  }]}>Time in Queue: {'\n'}{Time_In_Queue}</Text>
         </View>
       </View>
+
+      {/* the below section is to separate the two boxes with the two buttons */}
       <View style={[styles.row, {alignItems: 'center'}]}>
         <View>
           <Text style={styles.textBody}> </Text>
         </View>
       </View>
-      {/* Add a button to pause the timer */}
+      
+      {/* leave queue and pause position button below */}
       <View style={{ alignItems: "center" }}>
+      {/* Leave Queue */}
       <TouchableOpacity style={[styles.button, {backgroundColor: '#BE1313', width: 330, padding: 14}]} onPress={handleLeaveQueue}>
         <Text style={styles.buttonText}>Leave Queue</Text>
       </TouchableOpacity>
-      
+      {/* Pause position and Resume */}
       <TouchableOpacity style={[styles.button, {backgroundColor: '#74B7EF', width: 330, alignItems: 'center' }]} onPress={handlePause}>
          <Text style={[styles.buttonText, {color: 'black', padding: 5,  width: 140, alignItems: 'center'}]}>
          {isPaused ? 'Resume' : 'Pause Position'}
          </Text>
       </TouchableOpacity>
       </View>
-
-
-
-      {/* Add a button to leave the queue */}
-      
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  box: {
-    width: 300,
-    height: 400,
-    borderRadius: 13,
-    marginBottom: 10,
-    backgroundColor: "#191919",
-  },
-  row: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    width: 300,
-  },
   subBox: {
     width: 150,
     height: 200,
     alignContent: "center",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#05A55C",
+    backgroundColor: "#05A55C", //green colour
   },
   subBox1: {
-    width: 160,
+    width: 150,
     height: 200,
     alignContent: "center",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#F8A13A",
-  },
-  heading: {
-    width: 300,
-    height: 50,
-    backgroundColor: "#910307",
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 1,
-    borderWidth: 3,
-    borderColor: "#FFFFFF",
-  },
-  circleTemp: {
-    width: 130,
-    height: 130,
-    borderRadius: 100,
-    margin: 40,
-    backgroundColor: "#FFFFFF",
-  },
-  textHeader: {
-    color: "#ffffff",
-    fontSize: 20,
-    fontWeight: "bold",
+    backgroundColor: "#F8A13A",//orange colour
   },
   textBody: {
     color: "#ffffff",
     fontWeight: "bold",
-    fontSize: 30,
+    fontSize: 20,
   },
   button: {
-    backgroundColor: "#FF0000", // Red color
+    backgroundColor: "#FF0000", 
     padding: 10,
     borderRadius: 5,
     alignItems: "center",
@@ -150,7 +118,7 @@ const styles = StyleSheet.create({
     padding: 20,
     alignItems: "center",
     justifyContent: "center",
-    borderColor: '#fff', // Add your desired color for the border
+    borderColor: '#fff',
   },
   
 });
