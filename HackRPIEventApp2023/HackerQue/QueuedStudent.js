@@ -33,21 +33,21 @@ function QueCard() {
   };
 
   return (
-    <View style={styles.box}>
+    <View style={styles.textHeader}>
       <View style={styles.heading}>
         <Text style={styles.textHeader}>Your Position in Queue</Text>
       </View>
       <View style={styles.row}>
         
-        <View style={styles.subBox}>
-          <Text style={styles.textHeader}> Time in Queue: {Time_In_Queue}</Text>
+      <View style={[styles.subBox, {alignItems: 'center'}]}>
+          <Text style={styles.textBody}> Time in Queue: {Time_In_Queue}</Text>
         </View>
       </View>
-      <View style={styles.row}>
+      <View style={[styles.row, {alignItems: 'center'}]}>
         <View style={styles.subBox}>
           <Text style={styles.textBody}> </Text>
         </View>
-        <View style={styles.subBox}>
+        <View style={[styles.subBox, {alignItems: 'center'}]}>
           <Text style={styles.textBody}> Position: {Position}</Text>
         </View>
       </View>
