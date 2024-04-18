@@ -49,6 +49,7 @@ const Calander = () => {
               Location={event.WorkShop_Location}
               Description={event.WorkShop_Description}
               isRed={Active}
+              dateAndTime={event.WorkShop_Date + " " + event.WorkShop_StartTime}
             />
           );
         })}
