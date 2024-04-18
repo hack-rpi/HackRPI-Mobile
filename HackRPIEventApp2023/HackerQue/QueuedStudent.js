@@ -39,11 +39,11 @@ function QueCard() {
       </View>
       <View style={[styles.subBox2,{alignItems: 'center'}]}>
       <View style={[styles.subBox, styles.textBox ,{alignItems: 'center'}]}>
-      <Text style={[styles.textBody, { textAlign: 'center',fontSize: 24 }]}>Your queue position: {'\n'}{'\n'}500 </Text>
+      <Text style={[styles.textBody, { textAlign: 'center',fontSize: 25 }]}>Your queue position: {'\n'}{'\n'}500 </Text>
         </View>
         <Text> {'\n'}</Text>
         <View style={[styles.subBox1, styles.textBox ,{alignItems: 'center'}]}>
-      <Text style={[styles.textBody, { textAlign: 'center',color: '#25303C', fontSize: 24  }]}>Time in Queue: {'\n'}{Time_In_Queue}</Text>
+      <Text style={[styles.textBody, { textAlign: 'center',color: '#25303C', fontSize: 25  }]}>Time in Queue: {'\n'}{Time_In_Queue}</Text>
         </View>
       </View>
       <View style={[styles.row, {alignItems: 'center'}]}>
@@ -125,7 +125,8 @@ const styles = StyleSheet.create({
   },
   textBody: {
     color: "#ffffff",
-    fontSize: 20,
+    fontWeight: "bold",
+    fontSize: 30,
   },
   button: {
     backgroundColor: "#FF0000", // Red color
