@@ -33,14 +33,13 @@ function QueCard() {
   };
 
   return (
-    <View style={styles.textHeader}>
+    <View style={[styles.textHeader,{alignItems: 'center'}]} >
       <View style={styles.heading}>
         <Text style={styles.textHeader}>Your Position in Queue</Text>
       </View>
-      <View style={styles.row}>
-        
-      <View style={[styles.subBox, {alignItems: 'center'}]}>
-          <Text style={styles.textBody}> Time in Queue: {Time_In_Queue}</Text>
+      <View style={[styles.subBox,{alignItems: 'center'}]}>
+      <View style={[styles.subBox, styles.textBox ,{alignItems: 'center'}]}>
+      <Text style={[styles.textBody, { textAlign: 'center' }]}>Time in Queue: {Time_In_Queue}</Text>
         </View>
       </View>
       <View style={[styles.row, {alignItems: 'center'}]}>
@@ -130,6 +129,16 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
   },
+  textBox: {
+    width: 200,
+    height: 130,
+    borderWidth: 5,
+    borderRadius: 30,
+    padding: 10,
+    alignItems: "center",
+    borderColor: '#fff', // Add your desired color for the border
+  },
+  
 });
 
 export default QueCard;
