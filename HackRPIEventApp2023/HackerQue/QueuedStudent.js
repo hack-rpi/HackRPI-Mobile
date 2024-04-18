@@ -53,11 +53,11 @@ function QueCard() {
       </View>
       {/* Add a button to pause the timer */}
       <View style={{ alignItems: "center" }}>
-      <TouchableOpacity style={[styles.button, {backgroundColor: '#BE1313', width: 350, padding: 14}]} onPress={handleLeaveQueue}>
+      <TouchableOpacity style={[styles.button, {backgroundColor: '#BE1313', width: 330, padding: 14}]} onPress={handleLeaveQueue}>
         <Text style={styles.buttonText}>Leave Queue</Text>
       </TouchableOpacity>
       
-      <TouchableOpacity style={[styles.button, {backgroundColor: '#74B7EF', width: 350, alignItems: 'center' }]} onPress={handlePause}>
+      <TouchableOpacity style={[styles.button, {backgroundColor: '#74B7EF', width: 330, alignItems: 'center' }]} onPress={handlePause}>
          <Text style={[styles.buttonText, {color: 'black', padding: 5,  width: 140, alignItems: 'center'}]}>
          {isPaused ? 'Resume' : 'Pause Position'}
          </Text>
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#910307",
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 15,
+    borderRadius: 1,
     borderWidth: 3,
     borderColor: "#FFFFFF",
   },
@@ -142,9 +142,9 @@ const styles = StyleSheet.create({
   textBox: {
     width: 300,
     height: 130,
-    borderWidth: 5,
-    borderRadius: 30,
-    padding: 10,
+    borderWidth: 1,
+    borderRadius: 15,
+    padding: 20,
     alignItems: "center",
     borderColor: '#fff', // Add your desired color for the border
   },
