@@ -34,20 +34,21 @@ function QueCard() {
 
   return (
     <View style={[styles.textHeader,{alignItems: 'center'}]} >
-      <View style={styles.heading}>
-        <Text style={styles.textHeader}>Your Position in Queue</Text>
+      <View>
+        <Text>{'\n'}{'\n'}{'\n'}{'\n'}</Text>
       </View>
-      <View style={[styles.subBox,{alignItems: 'center'}]}>
+      <View style={[styles.subBox2,{alignItems: 'center'}]}>
       <View style={[styles.subBox, styles.textBox ,{alignItems: 'center'}]}>
-      <Text style={[styles.textBody, { textAlign: 'center' }]}>Time in Queue: {Time_In_Queue}</Text>
+      <Text style={[styles.textBody, { textAlign: 'center' }]}>Your queue position: {'\n'}500 </Text>
+        </View>
+        <Text> {'\n'}</Text>
+        <View style={[styles.subBox1, styles.textBox ,{alignItems: 'center'}]}>
+      <Text style={[styles.textBody, { textAlign: 'center' }]}>Time in Queue: {'\n'}{Time_In_Queue}</Text>
         </View>
       </View>
       <View style={[styles.row, {alignItems: 'center'}]}>
-        <View style={styles.subBox}>
+        <View>
           <Text style={styles.textBody}> </Text>
-        </View>
-        <View style={[styles.subBox, {alignItems: 'center'}]}>
-          <Text style={styles.textBody}> Position: {Position}</Text>
         </View>
       </View>
       {/* Add a button to pause the timer */}
@@ -90,6 +91,15 @@ const styles = StyleSheet.create({
     alignContent: "center",
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "#05A55C",
+  },
+  subBox1: {
+    width: 150,
+    height: 200,
+    alignContent: "center",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#F8A13A",
   },
   heading: {
     width: 300,
@@ -130,7 +140,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   textBox: {
-    width: 200,
+    width: 300,
     height: 130,
     borderWidth: 5,
     borderRadius: 30,
