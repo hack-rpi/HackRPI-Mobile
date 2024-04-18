@@ -76,8 +76,8 @@ const styles = StyleSheet.create({
   box: {
     width: 300,
     height: 400,
-    borderRadius: 15,
-    marginBottom: 20,
+    borderRadius: 13,
+    marginBottom: 10,
     backgroundColor: "#191919",
   },
   row: {
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#05A55C",
   },
   subBox1: {
-    width: 150,
+    width: 160,
     height: 200,
     alignContent: "center",
     alignItems: "center",
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     width: 130,
     height: 130,
     borderRadius: 100,
-    margin: 20,
+    margin: 40,
     backgroundColor: "#FFFFFF",
   },
   textHeader: {
@@ -134,19 +134,22 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignItems: "center",
     marginTop: 20,
+    justifyContent: "center",
   },
   buttonText: {
     color: "#FFFFFF", // White color
     fontSize: 18,
     fontWeight: "bold",
+    justifyContent: "center",
   },
   textBox: {
-    width: 300,
+    width: 330,
     height: 130,
-    borderWidth: 1,
+    borderWidth: 0.5,
     borderRadius: 15,
     padding: 20,
     alignItems: "center",
+    justifyContent: "center",
     borderColor: '#fff', // Add your desired color for the border
   },
   
