@@ -20,4 +20,31 @@ const LoginPage = ({ navigation }) => {
   );
 };
 
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: 20,
+    },
+    welcomeText: {
+      fontSize: 24,
+      fontWeight: 'bold',
+      marginBottom: 30,
+    },
+    button: {
+      backgroundColor: 'green',
+      padding: 15,
+      borderRadius: 5,
+      marginTop: 10,
+      width: '100%',
+      alignItems: 'center',
+    },
+    buttonText: {
+      color: 'white',
+      fontSize: 18,
+    },
+  });
+
 export default LoginPage;
