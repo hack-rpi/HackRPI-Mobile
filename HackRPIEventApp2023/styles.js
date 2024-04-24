@@ -11,36 +11,40 @@ export const globalStyles = {
   fontWeight: "bold",
 
   container: {
-    flex: 1,
-    backgroundColor: '#333',
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    padding: 20,
-    backgroundColor: '#222',
-  },
-  headerText: {
-    fontSize: 24,
-    color: 'white',
-  },
-  faqItem: {
-    margin: 10,
-    padding: 10,
-    backgroundColor: '#444',
-    borderRadius: 5,
-  },
-  question: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    padding: 10,
-    alignItems: 'center',
-  },
-  questionText: {
-    color: 'white',
-  },
-  answer: {
-    padding: 10,
-    color: 'white',
-  },
-}
+      flex: 1,
+      backgroundColor: '#1E1E1E',
+    },
+    header: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      padding: 20,
+      backgroundColor: '#121212',
+      borderBottomWidth: 1,
+      borderBottomColor: '#333',
+    },
+    headerText: {
+      fontSize: 24,
+      fontWeight: 'bold',
+      color: 'white',
+    },
+    faqItem: {
+      backgroundColor: '#252525',
+      margin: 8,
+      padding: 16,
+      borderRadius: 8,
+      overflow: 'hidden',
+    },
+    question: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+    },
+    questionText: {
+      fontWeight: '500',
+      color: 'white',
+      flex: 1,
+    },
+    answer: {
+      paddingTop: 10,
+    },
+  };
