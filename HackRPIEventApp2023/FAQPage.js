@@ -1,26 +1,35 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
-import { useNavigation } from '@react-navigation/native'; // make sure you have @react-navigation/native installed
-import { FontAwesome } from '@expo/vector-icons'; // make sure you have @expo/vector-icons installed
+import { View, Text, TouchableOpacity, Animated, ScrollView, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { FontAwesome } from '@expo/vector-icons';
 
 const FAQPage = () => {
   const [faqs, setFaqs] = useState([]);
   const navigation = useNavigation();
 
   useEffect(() => {
-    // Replace 'faq-data.json' with the path to your FAQ data or URL if fetching from an API
+    // fetch your FAQs from a local file or an API
     const fetchFAQs = async () => {
-      try {
-        const response = await fetch('faq-data.json');
-        const data = await response.json();
-        setFaqs(data);
-      } catch (error) {
-        console.error('Error fetching FAQ data:', error);
-      }
+      // Your fetch logic here
     };
-
+    
     fetchFAQs();
   }, []);
+
+  const toggleExpanded = (index) => {
+    setFaqs(faqs.map((faq, i) => {
+      if (i === index) {
+        faq.expanded = !faq.expanded;
+        faq.animation.setValue(faq.expanded ? 0 : 1);
+        Animated.timing(faq.animation, {
+          toValue: faq.expanded ? 1 : 0,
+          duration: 300,
+          useNativeDriver: true,
+        }).start();
+      }
+      return faq;
+    }));
+  };
 
   return (
     <ScrollView style={styles.container}>
@@ -31,25 +40,41 @@ const FAQPage = () => {
         </TouchableOpacity>
       </View>
       {faqs.map((faq, index) => (
-        <View key={index} style={styles.faqItem}>
+        <Animated.View key={index} style={[
+          styles.faqItem,
+          {
+            maxHeight: faq.animation.interpolate({
+              inputRange: [0, 1],
+              outputRange: [0, 300], // You might need to adjust this value
+            }),
+          },
+        ]}>
           <TouchableOpacity
             style={styles.question}
-            onPress={() => setFaqs(faqs.map((f, i) => 
-              i === index ? {...f, expanded: !f.expanded} : f
-            ))}
+            onPress={() => toggleExpanded(index)}
           >
             <Text style={styles.questionText}>{faq.question}</Text>
             <FontAwesome name={faq.expanded ? 'chevron-up' : 'chevron-down'} size={18} color="#FFF" />
           </TouchableOpacity>
-          {faq.expanded && <Text style={styles.answer}>{faq.answer}</Text>}
-        </View>
+          <Animated.View style={[
+            styles.answer,
+            {
+              opacity: faq.animation,
+              transform: [{
+                scaleY: faq.animation,
+              }],
+            },
+          ]}>
+            <Text>{faq.answer}</Text>
+          </Animated.View>
+        </Animated.View>
       ))}
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  // Add your styles here
+  // Your styles here with improvements
 });
 
 export default FAQPage;
