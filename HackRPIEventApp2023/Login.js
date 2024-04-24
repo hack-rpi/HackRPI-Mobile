@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       padding: 20,
     },
-    welcomeText: {
+    text: {
       fontSize: 24,
       fontWeight: 'bold',
       marginBottom: 30,
@@ -72,5 +72,5 @@ const styles = StyleSheet.create({
       fontSize: 18,
     },
   });
-
-export default LoginPage;
+  
+  export default LoginPage;
